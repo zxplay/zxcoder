@@ -242,11 +242,13 @@ export class UIController extends EventEmitter {
         container.appendChild(this.appContainer);
         this.appContainer.style.position = 'relative';
 
+        //k
         this.menuBar = new MenuBar(this.appContainer);
         this.appContainer.appendChild(this.canvas);
         this.canvas.style.objectFit = 'contain';
         this.canvas.style.display = 'block';
 
+        //k
         this.toolbar = new Toolbar(this.appContainer);
 
         this.startButton = document.createElement('button');
@@ -255,10 +257,10 @@ export class UIController extends EventEmitter {
         this.startButton.style.position = 'absolute';
         this.startButton.style.top = '50%';
         this.startButton.style.left = '50%';
-        this.startButton.style.width = '96px';
-        this.startButton.style.height = '64px';
-        this.startButton.style.marginLeft = '-48px';
-        this.startButton.style.marginTop = '-32px';
+        this.startButton.style.width = '192px';
+        this.startButton.style.height = '128px';
+        this.startButton.style.marginLeft = '-96px';
+        this.startButton.style.marginTop = '-64px';
         this.startButton.style.backgroundColor = 'rgba(160, 160, 160, 0.7)';
         this.startButton.style.border = 'none';
         this.startButton.style.borderRadius = '4px';
@@ -369,6 +371,8 @@ export class UIController extends EventEmitter {
                 ev.preventDefault();
             });
         }
+
+        //this.hideUI();
     }
 
     setZoom(factor) {

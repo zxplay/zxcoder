@@ -12,22 +12,22 @@ export class CanvasRenderer {
         this.palette = new Uint32Array([
             /* RGBA dark */
             0x000000ff,
-            0x2030c0ff,
-            0xc04010ff,
-            0xc040c0ff,
-            0x40b010ff,
-            0x50c0b0ff,
-            0xe0c010ff,
+            0x0000c0ff,
+            0xc00000ff,
+            0xc000c0ff,
+            0x00c000ff,
+            0x00c0c0ff,
+            0xc0c000ff,
             0xc0c0c0ff,
             /* RGBA bright */
             0x000000ff,
-            0x3040ffff,
-            0xff4030ff,
-            0xff70f0ff,
-            0x50e010ff,
-            0x50e0ffff,
-            0xffe850ff,
-            0xffffffff
+            0x0000ffff,
+            0xff0000ff,
+            0xff00ffff,
+            0x00ff00ff,
+            0x00ffffff,
+            0xffff00ff,
+            0xffffffff,
         ]);
 
         const testUint8 = new Uint8Array(new Uint16Array([0x8000]).buffer);
