@@ -29,9 +29,11 @@ export class MenuBar {
     }
     show() {
         this.elem.style.visibility = 'visible';
+        this.elem.style.display = 'block';
     }
     hide() {
         this.elem.style.visibility = 'hidden';
+        this.elem.style.display = 'none';
     }
     onmouseenter(e) {
         if (this.currentMouseenterEvent) {
@@ -164,9 +166,11 @@ export class Toolbar {
     }
     show() {
         this.elem.style.visibility = 'visible';
+        this.elem.style.display = 'block';
     }
     hide() {
         this.elem.style.visibility = 'hidden';
+        this.elem.style.display = 'none';
     }
     onmouseenter(e) {
         if (this.currentMouseenterEvent) {
@@ -372,7 +376,7 @@ export class UIController extends EventEmitter {
             });
         }
 
-        //this.hideUI();
+        this.hideUI();
     }
 
     setZoom(factor) {

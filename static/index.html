@@ -17,7 +17,12 @@
             #jsspeccy, #guiparent {
                 width: 960px;
                 margin: auto;
-                background-color: white;
+            }
+            #jsspeccy {
+                background-color: #FFF;
+            }
+            #guiparent {
+                background-color: 444;
             }
             canvas {
                 image-rendering: -moz-crisp-edges;
@@ -32,9 +37,7 @@
     </head>
     <body onload="onBodyLoad()">
         <div id="jsspeccy"></div>
-        <div id="guiparent">
-            <canvas id=virtkeys width=960></canvas>
-        </div>
+        <div id="guiparent"><canvas id=virtkeys width=960></canvas></div>
     </body>
 
     <script src="canvasgui/PointerEventHandler.js"></script>
@@ -50,10 +53,13 @@ const onBodyLoad = function()
         sandbox: true,
         autoLoadTapes: true,
         openUrl: 'https://davidprograma.github.io/ytc/09-ZxSpectrum/snake-1.01.tap',
+        // openUrl: 'https://archive.org/download/ZXSpectrumTOSECSetV20171101LadyEklipse/Games/%5BZ80%5D/Manic%20Miner%20%281983%29%28Bug-Byte%29.zip/Manic%20Miner%20%281983%29%28Bug-Byte%29.z80',
     });
     window.emu = emu;
 
-    let win = new SingleWindow('virtkeys');
+    const keystr = ''
+
+    const win = new SingleWindow('virtkeys');
     win.setTargetSize(960, 576);
 
     new ImageButton(win, 0, 0, 240, 240, 'img/keyNONE.png', 'img/keyNONE.png');
@@ -80,18 +86,16 @@ const onBodyLoad = function()
     win._onload();
 }
 
-function emulateKey(keyCode, isDown)
-{
-    const target = document.getElementById('jsspeccy');
-    var ee = {};
-    ee.target = target;
-    ee.keyCode = keyCode;
-    ee.metaKey = ee.altKey = ee.shiftKey = ee.ctrlKey = false;
-    ee.preventDefault = function() {}
-    ee.matches = function() { return false; }
-    if (isDown) { ee.type = "keydown"; target.onkeydown(ee); }
-    else        { ee.type = "keyup";   target.onkeyup  (ee); }
-}
+const keyCodes = {
+    A: 65, B: 66, C: 67, D: 68, E: 69,
+    F: 70, G: 71, H: 72, I: 73, J: 74,
+    K: 75, L: 76, M: 77, N: 78, O: 79,
+    P: 80, Q: 81, R: 82, S: 83, T: 84,
+    U: 85, V: 86, W: 87, X: 88, Y: 89,
+    Z: 90, _: 32, e: 13, c: 16, s: 17
+};
+
+// thanks @GlauberF for this gist: https://gist.github.com/GlauberF/d8278ce3aa592389e6e3d4e758e6a0c2
 
 /**
  * Simulate a key event.
@@ -130,7 +134,6 @@ document.addEventListener("keypress", onKeyEvent, false);
 document.addEventListener("keydown", onKeyEvent, false);
 document.addEventListener("keyup", onKeyEvent, false);
 
-
 class MyImageButton extends ImageButton
 {
     constructor(parent, x, y, w, h, suffix, keyCode)
@@ -140,11 +143,9 @@ class MyImageButton extends ImageButton
 
         let that = this;
         this.on_begin = this.on_enter = function() {
-            //emulateKey(that.keyCode, true);
             simulateKey(keyCode, 'down');
         }
         this.on_end = this.on_leave = function() {
-            //emulateKey(that.keyCode, false);
             simulateKey(keyCode, 'up');
         }
     }

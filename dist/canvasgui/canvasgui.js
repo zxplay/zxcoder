@@ -187,7 +187,7 @@ class SingleWindow extends Group
         this.ctx = null;
 
         this.outerColor = '#000';
-        this.bgColor = '#CCC';
+        this.bgColor = '#000';
 
         // window dimensions
         this.wi = {w:0, h:0};
@@ -239,49 +239,23 @@ class SingleWindow extends Group
     {
         if (this.dolog) console.log("SingleWindow._onresize");
 
-        this.wi.w = window.innerWidth;
-        this.wi.h = window.innerHeight;
+        this.wi.w = this.dst.w;
+        this.wi.h = this.dst.h;
 
         if (this.dolog) console.log("window size: " + this.wi.w + ' x ' + this.wi.h);
 
         this.canvas.width = this.wi.w;
         this.canvas.height = this.wi.h;
 
-        if (this.dst.w <= 0 && this.dst.h <= 0)
-        {
-            this.wo.x = 0;
-            this.wo.y = 0;
-            this.wo.w = this.wi.w;
-            this.wo.h = this.wi.h;
-        }
-        else if (this.dst.w <= 0)
-        {
-            this.woh = this.dsth;
+        this.wo.x = 0;
+        this.wo.y = 0;
+        this.wo.w = this.wi.w;
+        this.wo.h = this.wi.h;
 
-        }
-        else if (this.dst.h <= 0)
-        {
-            this.wo.w = this.dst.w;
-            this.wo.h = -this.dst.h;
-
-            this.xf.x = 0;
-            this.xf.y = 0;
-            this.xf.w = this.wi.w / this.wo.w;
-            this.xf.h = this.wi.h / this.wo.h;
-        
-            this.xf.h = this.xf.w;
-            this.xf.y = 0;
-       }
-        else
-        {
-            this.wo.w = this.dst.w;
-            this.wo.h = this.dst.h;
-
-            this.xf.x = 0;
-            this.xf.y = 0;
-            this.xf.w = 1;
-            this.xf.h = 1;
-        }
+        this.xf.x = 0;
+        this.xf.y = 0;
+        this.xf.w = 1;
+        this.xf.h = 1;
         
         this._ondraw();
     }
