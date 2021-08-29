@@ -33,11 +33,23 @@
             canvas#virtkeys {
                 image-rendering: auto;
             }
+            #bottombar {
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                font-family: Arial, Helvetica, sans-serif;
+                background-color: #cef;
+                text-align: center;
+                font-size: 50px;
+                padding: 10px 0px;
+            }
+
         </style>
     </head>
     <body onload="onBodyLoad()">
         <div id="jsspeccy"></div>
         <div id="guiparent"><canvas id=virtkeys width=960></canvas></div>
+        <div id="bottombar"><a href="https://github.com/dcrespo3d/jsspeccy3-mobile">about jsspeccy3-mobile</a></div>
     </body>
 
     <script src="canvasgui/PointerEventHandler.js"></script>
@@ -52,12 +64,17 @@ const onBodyLoad = function()
         zoom: 3,
         sandbox: true,
         autoLoadTapes: true,
-        openUrl: 'https://davidprograma.github.io/ytc/09-ZxSpectrum/snake-1.01.tap',
+        // openUrl: 'https://davidprograma.github.io/ytc/09-ZxSpectrum/snake-1.01.tap',
         // openUrl: 'https://archive.org/download/ZXSpectrumTOSECSetV20171101LadyEklipse/Games/%5BZ80%5D/Manic%20Miner%20%281983%29%28Bug-Byte%29.zip/Manic%20Miner%20%281983%29%28Bug-Byte%29.z80',
     };
 
-    let keystr = '-W-P,ASDe,123456789M';    // snake
+    const defkeystr = '1234567890,QWERTYUIOP,ASDFGHJKLe,cZXCVBNMs_';
+    let keystr = defkeystr;
+    // let keystr = '-W-P,ASDe,123456789M';    // snake
     // let keystr = 'GH-e,OP-Z';    // manic miner
+    // let keystr = 'OPeZ'; // manic miner simple
+
+    let doFilter = false;
 
     const url = new URL(window.location.href);
     for (const [key, value] of url.searchParams)
@@ -72,11 +89,18 @@ const onBodyLoad = function()
         else if (key == 'u') {
             emuParams.openUrl = value;
         }
+        else if (key == 'f') {
+            if (value && value != 0)
+                doFilter = true;
+        }
         // console.log(key, value);
     }
 
     const emu = JSSpeccy(document.getElementById('jsspeccy'), emuParams);
     window.emu = emu;
+    if (doFilter)
+        document.getElementsByTagName('canvas')[0].style.imageRendering = "auto";
+
 
     const width = 960;
     let height = 0;
