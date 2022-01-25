@@ -12,13 +12,13 @@ export class CanvasRenderer {
         this.palette = new Uint32Array([
             /* RGBA dark */
             0x000000ff,
-            0x0000c0ff,
-            0xc00000ff,
-            0xc000c0ff,
-            0x00c000ff,
-            0x00c0c0ff,
-            0xc0c000ff,
-            0xc0c0c0ff,
+            0x0000ddff,
+            0xdd0000ff,
+            0xdd00ddff,
+            0x00dd00ff,
+            0x00ddddff,
+            0xdddd00ff,
+            0xddddddff,
             /* RGBA bright */
             0x000000ff,
             0x0000ffff,
