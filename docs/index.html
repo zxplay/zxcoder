@@ -33,31 +33,19 @@
             canvas#virtkeys {
                 image-rendering: auto;
             }
-            #bottombar {
-                position: absolute;
-                bottom: 0;
-                width: 100%;
-                font-family: Arial, Helvetica, sans-serif;
-                background-color: #cef;
-                text-align: center;
-                font-size: 50px;
-                padding: 10px 0px;
-            }
-
         </style>
     </head>
     <body onload="onBodyLoad()">
         <div id="jsspeccy"></div>
         <div id="guiparent"><canvas id=virtkeys width=960></canvas></div>
-        <div id="bottombar"><a href="https://github.com/dcrespo3d/jsspeccy3-mobile">about jsspeccy3-mobile</a></div>
     </body>
 
     <script src="canvasgui/PointerEventHandler.js"></script>
     <script src="canvasgui/canvasgui.js"></script>
-    
+
     <script>
 "use strict";
-/*****************************************************************************/        
+/*****************************************************************************/
 const onBodyLoad = function()
 {
     const emuParams = {
@@ -162,7 +150,7 @@ const onBodyLoad = function()
 // e: [enter]        enter
 // c: [caps   shift] shift
 // s: [symbol shift] ctrl
-// 
+//
 const keyCodes = {
     '0': 48, '1': 49, '2': 50, '3': 51, '4': 52,
     '5': 53, '6': 54, '7': 55, '8': 56, '9': 57,
@@ -207,13 +195,13 @@ class MyImageButton extends ImageButton
  * @param {Object} modifiers (optional) An object which contains modifiers keys { ctrlKey: true, altKey: false, ...}
  */
 function simulateKey (keyCode, type, modifiers) {
-	var evtName = (typeof(type) === "string") ? "key" + type : "keydown";	
+	var evtName = (typeof(type) === "string") ? "key" + type : "keydown";
 	var modifier = (typeof(modifiers) === "object") ? modifier : {};
 
 	var event = document.createEvent("HTMLEvents");
 	event.initEvent(evtName, true, false);
 	event.keyCode = keyCode;
-	
+
 	for (var i in modifiers) {
 		event[i] = modifiers[i];
 	}
@@ -225,11 +213,11 @@ function simulateKey (keyCode, type, modifiers) {
 /*
 var onKeyEvent = function (event) {
 	var state = "pressed";
-	
+
 	if (event.type !== "keypress") {
 		state = event.type.replace("key", "");
 	}
-	
+
 	console.log("Key with keyCode " + event.keyCode + " is " + state);
 };
 
@@ -237,6 +225,6 @@ document.addEventListener("keypress", onKeyEvent, false);
 document.addEventListener("keydown", onKeyEvent, false);
 document.addEventListener("keyup", onKeyEvent, false);
 */
-/*****************************************************************************/        
+/*****************************************************************************/
     </script>
 </html>
