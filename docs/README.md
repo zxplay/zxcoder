@@ -115,12 +115,12 @@ Configured using URL parameters.
 
 ### Example URL
 
-[https://dcrespo3d.github.io/jsspeccy3-mobile/?k=-W-P,ASDe,123456789M&m=48&u=https://davidprograma.github.io/ytc/09-ZxSpectrum/snake-1.01.tap](https://dcrespo3d.github.io/jsspeccy3-mobile/?k=-W-P,ASDe,123456789M&m=48&u=https://davidprograma.github.io/ytc/09-ZxSpectrum/snake-1.01.tap)
+https://stever.github.io/jsspeccy3/?k=-W-P,ASDe,123456789M&m=48&u=https://davidprograma.github.io/ytc/09-ZxSpectrum/snake-1.01.tap
 
 The URL can be decomposed in these parts:
 - Main part:
 ```
-https://dcrespo3d.github.io/jsspeccy3-mobile/
+https://stever.github.io/jsspeccy3/
 ```
 - Soft keys:
 ```
