@@ -120,7 +120,7 @@ Configured using URL parameters.
 The URL can be decomposed in these parts:
 - Main part:
 ```
-https://dcrespo3d.github.io/jsspeccy3-mobile/
+https://stever.github.io/jsspeccy3/
 ```
 - Soft keys:
 ```
