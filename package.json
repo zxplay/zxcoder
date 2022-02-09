@@ -8,9 +8,9 @@
     "build:wasm:debug": "asc build/core.ts --target debug",
     "build:wasm:release": "asc build/core.ts --target release",
     "build:js": "mkdir -p dist/jsspeccy && cross-env NODE_OPTIONS=--openssl-legacy-provider webpack",
-    "build:static": "mkdir -p dist/jsspeccy && cp static/index.html dist/ && cp static/favicon.ico dist/ && cp README.md dist/ && cp COPYING dist/ && cp CHANGELOG.md dist/ && cp -r static/roms dist/jsspeccy && cp -r static/tapeloaders dist/jsspeccy && cp -r static/canvasgui dist && cp -r static/img dist",
-    "build": "npm run build:core && npm run build:wasm:debug && npm run build:js && npm run build:static",
-    "build:release": "npm run build:core && npm run build:wasm:release && npm run build:js && npm run build:static",
+    "build:public": "mkdir -p dist/jsspeccy && cp public/index.html dist/ && cp public/favicon.ico dist/ && cp README.md dist/ && cp COPYING dist/ && cp CHANGELOG.md dist/ && cp -r public/roms dist/jsspeccy && cp -r public/tapeloaders dist/jsspeccy && cp -r public/canvasgui dist && cp -r public/img dist",
+    "build": "npm run build:core && npm run build:wasm:debug && npm run build:js && npm run build:public",
+    "build:release": "npm run build:core && npm run build:wasm:release && npm run build:js && npm run build:public",
     "watch": "npm-watch"
   },
   "dependencies": {
@@ -54,10 +54,10 @@
         "svg"
       ]
     },
-    "build:static": {
+    "build:public": {
       "patterns": [
-        "static/*.html",
-        "static/*.rom"
+        "public/*.html",
+        "public/*.rom"
       ],
       "extensions": [
         "html",
