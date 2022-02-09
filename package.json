@@ -1,9 +1,7 @@
 {
-  "name": "jsspeccy",
-  "version": "3.1.0",
-  "description": "a ZX Spectrum emulator in the browser",
-  "main": "jsspeccy.js",
-  "type": "module",
+  "name": "zxspectrum",
+  "version": "1.0.0",
+  "private": true,
   "scripts": {
     "test": "npm run build && node --experimental-wasm-modules test/test.js test/tests.in test/tests.expected",
     "build:core": "node generator/gencore.js generator/core.ts.in build/core.ts",
@@ -14,6 +12,19 @@
     "build": "npm run build:core && npm run build:wasm:debug && npm run build:js && npm run build:static",
     "build:release": "npm run build:core && npm run build:wasm:release && npm run build:js && npm run build:static",
     "watch": "npm-watch"
+  },
+  "dependencies": {
+    "file-dialog": "^0.0.8",
+    "jszip": "^3.7.1",
+    "pako": "^2.0.4"
+  },
+  "devDependencies": {
+    "assemblyscript": "^0.19.6",
+    "cross-env": "^7.0.3",
+    "npm-watch": "^0.10.0",
+    "svg-inline-loader": "^0.8.2",
+    "webpack": "^5.44.0",
+    "webpack-cli": "^4.7.2"
   },
   "watch": {
     "build:core": {
@@ -54,19 +65,23 @@
       ]
     }
   },
-  "author": "Matt Westcott",
-  "license": "ISC",
-  "devDependencies": {
-    "assemblyscript": "^0.19.6",
-    "cross-env": "^7.0.3",
-    "npm-watch": "^0.10.0",
-    "svg-inline-loader": "^0.8.2",
-    "webpack": "^5.44.0",
-    "webpack-cli": "^4.7.2"
+  "jest": {
+    "testEnvironment": "jsdom",
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest",
+      ".+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)(\\?inline)?$": "jest-transform-stub"
+    },
+    "globals": {
+      "STAGING_ENV": "prod"
+    }
   },
-  "dependencies": {
-    "file-dialog": "^0.0.8",
-    "jszip": "^3.7.1",
-    "pako": "^2.0.4"
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ],
+    "plugins": [
+      "@babel/plugin-transform-runtime"
+    ]
   }
 }
