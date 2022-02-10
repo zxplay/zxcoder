@@ -1,7 +1,8 @@
-export default [
+module.exports = [
     {
         output: {
-            filename: 'jsspeccy/jsspeccy.js',
+            path: __dirname + '/public/dist',
+            filename: 'jsspeccy.js',
         },
         name: 'jsspeccy',
         entry: './runtime/jsspeccy.js',
@@ -17,7 +18,8 @@ export default [
     },
     {
         output: {
-            filename: 'jsspeccy/jsspeccy-worker.js',
+            path: __dirname + '/public/dist',
+            filename: 'jsspeccy-worker.js',
         },
         name: 'worker',
         entry: './runtime/worker.js',

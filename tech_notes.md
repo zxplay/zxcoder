@@ -18,13 +18,13 @@ On the real machine, generating video and audio output happens in parallel with 
 Building the core
 -----------------
 
-To build jsspeccy-core.wasm, we run the script generator/gencore.js, which runs a preprocessing pass over the input file generator/core.ts.in, to generate the [AssemblyScript](https://www.assemblyscript.org/) source file build/core.ts. This is then passed to the AssemblyScript compiler to produce the final dist/jsspeccy-core.wasm module.
+To build jsspeccy-core.wasm, we run the script generator/gencore.mjs, which runs a preprocessing pass over the input file generator/core.ts.in, to generate the [AssemblyScript](https://www.assemblyscript.org/) source file build/core.ts. This is then passed to the AssemblyScript compiler to produce the final dist/jsspeccy-core.wasm module.
 
-The preprocessor step serves two purposes: firstly, it allows us to programmatically build the large repetitive `switch` statements that form the Z80 core. Secondly, it allows us to use conventional array syntax to access our statically-defined arrays. Currently, AssemblyScript does not appear to have any native support for static arrays - any use of array syntax causes it to immediately pull in a `malloc` implementation and a higher-level array construct with bounds checking, all of which is unwanted overhead for our purposes. The gencore.js processor rewrites array syntax into direct memory access [`load` / `store` instructions](https://www.assemblyscript.org/stdlib/builtins.html#memory).
+The preprocessor step serves two purposes: firstly, it allows us to programmatically build the large repetitive `switch` statements that form the Z80 core. Secondly, it allows us to use conventional array syntax to access our statically-defined arrays. Currently, AssemblyScript does not appear to have any native support for static arrays - any use of array syntax causes it to immediately pull in a `malloc` implementation and a higher-level array construct with bounds checking, all of which is unwanted overhead for our purposes. The gencore.mjs processor rewrites array syntax into direct memory access [`load` / `store` instructions](https://www.assemblyscript.org/stdlib/builtins.html#memory).
 
 All statically-defined arrays are allocated at the start of the module's memory map, from address 0 onward. Currently a 512Kb block is allocated for these - if you need more, increase `memoryBase` in asconfig.json.
 
-The gencore.js preprocessor recognises the following directives:
+The gencore.mjs preprocessor recognises the following directives:
 
 * `#alloc` - allocates an array of the given size and type. For example, if `#alloc frameBuffer[0x6600]: u8` is the first line of the file, then 0x6600 bytes from address 0 will be allocated to an array named `frameBuffer`. This will then rewrite subsequent lines as follows:
   * An assignment such as `frameBuffer = [0x00, 0x01, 0x02];` will be rewritten as a sequence of `store<u8>(0, 0x00);`, `store<u8>(1, 0x01);` lines
@@ -40,7 +40,7 @@ The gencore.js preprocessor recognises the following directives:
   * `B = result;` is rewritten to `store<u8>(0x1001, result);`
   * `val = C;` is rewritten to `val = load<u8>(0x1000);`
   * `C = result;` is rewritten to `store<u8>(0x1000, result);`
-* `#optable` - generates the sequence of `case` statements that decode an opcode byte. The subroutine bodies for each class of instruction are defined in generator/instructions.js, and these are pattern-matched to the actual instruction lists in generator/opcodes_*.txt.
+* `#optable` - generates the sequence of `case` statements that decode an opcode byte. The subroutine bodies for each class of instruction are defined in generator/instructions.mjs, and these are pattern-matched to the actual instruction lists in generator/opcodes_*.txt.
 
 
 Frame buffer format

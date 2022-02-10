@@ -2,7 +2,7 @@ import { argv, exit } from 'process';
 import * as fs from 'fs';
 import * as readline from 'readline';
 
-import instructionTable from './instructions.js';
+import instructionTable from './instructions.mjs';
 
 if (argv.length != 4) {
     console.log("Usage: node gencore.js path/to/input.ts.in path/to/output.ts");

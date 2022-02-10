@@ -153,11 +153,11 @@ class Emulator extends EventEmitter {
     }
 
     async loadRoms() {
-        await this.loadRom('roms/128-0.rom', 8);
-        await this.loadRom('roms/128-1.rom', 9);
-        await this.loadRom('roms/48.rom', 10);
-        await this.loadRom('roms/pentagon-0.rom', 12);
-        await this.loadRom('roms/trdos.rom', 13);
+        await this.loadRom('../roms/128-0.rom', 8);
+        await this.loadRom('../roms/128-1.rom', 9);
+        await this.loadRom('../roms/48.rom', 10);
+        await this.loadRom('../roms/pentagon-0.rom', 12);
+        await this.loadRom('../roms/trdos.rom', 13);
     }
 
 

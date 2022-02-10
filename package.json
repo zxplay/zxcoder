@@ -4,13 +4,12 @@
   "private": true,
   "scripts": {
     "test": "npm run build && node --experimental-wasm-modules test/test.js test/tests.in test/tests.expected",
-    "build:core": "node generator/gencore.js generator/core.ts.in build/core.ts",
+    "build:core": "node generator/gencore.mjs generator/core.ts.in build/core.ts",
     "build:wasm:debug": "asc build/core.ts --target debug",
     "build:wasm:release": "asc build/core.ts --target release",
-    "build:js": "mkdir -p dist/jsspeccy && cross-env NODE_OPTIONS=--openssl-legacy-provider webpack",
-    "build:public": "mkdir -p dist/jsspeccy && cp public/index.html dist/ && cp public/favicon.ico dist/ && cp README.md dist/ && cp COPYING dist/ && cp CHANGELOG.md dist/ && cp -r public/roms dist/jsspeccy && cp -r public/tapeloaders dist/jsspeccy && cp -r public/canvasgui dist && cp -r public/img dist",
-    "build": "npm run build:core && npm run build:wasm:debug && npm run build:js && npm run build:public",
-    "build:release": "npm run build:core && npm run build:wasm:release && npm run build:js && npm run build:public",
+    "build:js": "cross-env NODE_OPTIONS=--openssl-legacy-provider webpack",
+    "build": "npm run build:core && npm run build:wasm:debug && npm run build:js",
+    "build:release": "npm run build:core && npm run build:wasm:release && npm run build:js",
     "watch": "npm-watch"
   },
   "dependencies": {
@@ -52,16 +51,6 @@
       "extensions": [
         "js",
         "svg"
-      ]
-    },
-    "build:public": {
-      "patterns": [
-        "public/*.html",
-        "public/*.rom"
-      ],
-      "extensions": [
-        "html",
-        "rom"
       ]
     }
   },
