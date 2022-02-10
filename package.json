@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "test": "npm run build && node --experimental-wasm-modules test/test.js test/tests.in test/tests.expected",
-    "build:core": "node generator/gencore.mjs generator/core.ts.in build/core.ts",
+    "build:core": "node src/generator/gencore.mjs src/generator/core.ts.in build/core.ts",
     "build:wasm:debug": "asc build/core.ts --target debug",
     "build:wasm:release": "asc build/core.ts --target release",
     "build:js": "cross-env NODE_OPTIONS=--openssl-legacy-provider webpack",
@@ -28,8 +28,8 @@
   "watch": {
     "build:core": {
       "patterns": [
-        "generator/*.js",
-        "generator/*.ts.in"
+        "src/generator/*.js",
+        "src/generator/*.ts.in"
       ],
       "extensions": [
         "js",
@@ -44,8 +44,8 @@
     },
     "build:js": {
       "patterns": [
-        "runtime/*.js",
-        "runtime/icons/*.svg",
+        "src/runtime/*.js",
+        "src/runtime/icons/*.svg",
         "build/*.js"
       ],
       "extensions": [

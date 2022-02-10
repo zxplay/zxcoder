@@ -32,17 +32,17 @@ const loadOpcodeTable = (filename, table, altTable) => {
 }
 
 const baseOpcodes = {};
-loadOpcodeTable('generator/opcodes_base.txt', baseOpcodes);
+loadOpcodeTable('src/generator/opcodes_base.txt', baseOpcodes);
 const cbOpcodes = {};
-loadOpcodeTable('generator/opcodes_cb.txt', cbOpcodes);
+loadOpcodeTable('src/generator/opcodes_cb.txt', cbOpcodes);
 const ddOpcodes = {};
 const fdOpcodes = {};
-loadOpcodeTable('generator/opcodes_dd.txt', ddOpcodes, fdOpcodes);
+loadOpcodeTable('src/generator/opcodes_dd.txt', ddOpcodes, fdOpcodes);
 const ddcbOpcodes = {};
 const fdcbOpcodes = {};
-loadOpcodeTable('generator/opcodes_ddcb.txt', ddcbOpcodes, fdcbOpcodes);
+loadOpcodeTable('src/generator/opcodes_ddcb.txt', ddcbOpcodes, fdcbOpcodes);
 const edOpcodes = {};
-loadOpcodeTable('generator/opcodes_ed.txt', edOpcodes);
+loadOpcodeTable('src/generator/opcodes_ed.txt', edOpcodes);
 
 class Variable {
     getter() {

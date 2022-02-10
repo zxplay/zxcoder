@@ -5,7 +5,7 @@ module.exports = [
             filename: 'jsspeccy.js',
         },
         name: 'jsspeccy',
-        entry: './runtime/jsspeccy.js',
+        entry: './src/runtime/jsspeccy.js',
         mode: 'production',
         module: {
             rules: [
@@ -22,7 +22,7 @@ module.exports = [
             filename: 'jsspeccy-worker.js',
         },
         name: 'worker',
-        entry: './runtime/worker.js',
+        entry: './src/runtime/worker.js',
         mode: 'production',
     },
 ];
