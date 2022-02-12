@@ -11,7 +11,7 @@ import exitFullscreenIcon from './ui/icons/exitfullscreen.svg';
 import tapePlayIcon from './ui/icons/tape_play.svg';
 import tapePauseIcon from './ui/icons/tape_pause.svg';
 
-import { Emulator } from "./emulator";
+import { Emulator } from "./Emulator";
 
 export const JSSpeccy = (container, opts) => {
     // let benchmarkRunCount = 0;
