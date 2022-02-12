@@ -2,30 +2,13 @@ const webpack = require("webpack");
 
 module.exports = [
     {
-        output: {
-            path: __dirname + '/public/dist',
-            filename: 'jsspeccy.js',
-        },
-        name: 'jsspeccy',
-        entry: './src/runtime/jsspeccy.js',
+        name: 'worker',
         mode: 'production',
-        module: {
-            rules: [
-                {
-                    test: /\.svg$/,
-                    loader: 'svg-inline-loader',
-                }
-            ],
-        }
-    },
-    {
         output: {
             path: __dirname + '/public/dist',
             filename: 'jsspeccy-worker.js',
         },
-        name: 'worker',
-        entry: './src/runtime/worker.js',
-        mode: 'production',
+        entry: './src/runtime/worker.js'
     },
     {
         mode: 'production',
@@ -43,7 +26,7 @@ module.exports = [
                 },
                 {
                     test: /\.svg/,
-                    type: 'asset/inline'
+                    use: 'svg-inline-loader'
                 }
             ]
         },

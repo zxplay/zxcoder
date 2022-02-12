@@ -3,7 +3,6 @@ import EventEmitter from 'events';
 import playIcon from './icons/play.svg';
 import closeIcon from './icons/close.svg';
 
-
 export class MenuBar {
     constructor(container) {
         this.elem = document.createElement('div');

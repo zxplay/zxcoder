@@ -370,6 +370,8 @@ class Emulator extends EventEmitter {
 }
 
 window.JSSpeccy = (container, opts) => {
+    console.log({container, opts});
+
     // let benchmarkRunCount = 0;
     // let benchmarkRenderCount = 0;
     opts = opts || {};
@@ -386,6 +388,7 @@ window.JSSpeccy = (container, opts) => {
         openUrl: opts.openUrl,
         tapeTrapsEnabled: ('tapeTrapsEnabled' in opts) ? opts.tapeTrapsEnabled : true,
     });
+
     const ui = new UIController(container, emu, {zoom: opts.zoom || 1, sandbox: opts.sandbox});
 
     const fileMenu = ui.menuBar.addMenu('File');

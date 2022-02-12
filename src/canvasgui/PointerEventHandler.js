@@ -1,4 +1,4 @@
-class PointerEventHandler
+export class PointerEventHandler
 {
     constructor(element)
     {
@@ -85,7 +85,7 @@ class PointerEventHandler
 
         if (e.preventDefault())
             e.preventDefault();
-        
+
         return true;
     }
 

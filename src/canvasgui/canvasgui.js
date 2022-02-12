@@ -1,4 +1,6 @@
-class Widget
+import {PointerEventHandler} from "./PointerEventHandler";
+
+export class Widget
 {
     constructor(parent, x, y, w, h)
     {
@@ -37,7 +39,7 @@ class Widget
     }
 }
 
-class Group extends Widget
+export class Group extends Widget
 {
     constructor(win, parent, x, y, w, h)
     {
@@ -146,7 +148,7 @@ class Group extends Widget
 
 }
 
-class ImageManager
+export class ImageManager
 {
     constructor(win)
     {
@@ -173,7 +175,7 @@ class ImageManager
     }
 }
 
-class SingleWindow extends Group
+export class SingleWindow extends Group
 {
     constructor(canvasId)
     {
@@ -256,7 +258,7 @@ class SingleWindow extends Group
         this.xf.y = 0;
         this.xf.w = 1;
         this.xf.h = 1;
-        
+
         this._ondraw();
     }
 
@@ -308,7 +310,7 @@ class SingleWindow extends Group
     }
 }
 
-class Control extends Widget
+export class Control extends Widget
 {
     constructor(parent, x, y, w, h)
     {
@@ -354,11 +356,11 @@ class Control extends Widget
                 return;
             }
         }
-        
+
     }
 }
 
-class TextButton extends Control
+export class TextButton extends Control
 {
     constructor(parent, x, y, w, h, text)
     {
@@ -384,7 +386,7 @@ class TextButton extends Control
             grd.addColorStop(0, "#FFF");    // gradient with transparent color: not supported
             grd.addColorStop(1, "#000");
         }
-        
+
         ctx.fillStyle = '#E42';
         ctx.roundRect(x, y, w, h, 2*d).fill();
 
@@ -411,7 +413,7 @@ class TextButton extends Control
     }
 }
 
-class ImageButton extends Control
+export class ImageButton extends Control
 {
     constructor(parent, x, y, w, h, imgup, imgdown)
     {
@@ -466,4 +468,3 @@ CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
     this.closePath();
     return this;
 }
-
