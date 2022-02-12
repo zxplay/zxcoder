@@ -1,7 +1,7 @@
 import EventEmitter from 'events';
 import JSZip from 'jszip';
 
-import { DisplayHandler } from './render.js';
+import { DisplayHandler } from './DisplayHandler.js';
 import { parseSNAFile, parseZ80File, parseSZXFile } from './snapshot.js';
 import { TAPFile, TZXFile } from './tape.js';
 import { KeyboardHandler } from './KeyboardHandler.js';
