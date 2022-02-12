@@ -1,15 +1,15 @@
 import fileDialog from 'file-dialog';
 
-import { UIController } from './ui.js';
+import { UIController } from './ui';
 
-import openIcon from './icons/open.svg';
-import resetIcon from './icons/reset.svg';
-import playIcon from './icons/play.svg';
-import pauseIcon from './icons/pause.svg';
-import fullscreenIcon from './icons/fullscreen.svg';
-import exitFullscreenIcon from './icons/exitfullscreen.svg';
-import tapePlayIcon from './icons/tape_play.svg';
-import tapePauseIcon from './icons/tape_pause.svg';
+import openIcon from './ui/icons/open.svg';
+import resetIcon from './ui/icons/reset.svg';
+import playIcon from './ui/icons/play.svg';
+import pauseIcon from './ui/icons/pause.svg';
+import fullscreenIcon from './ui/icons/fullscreen.svg';
+import exitFullscreenIcon from './ui/icons/exitfullscreen.svg';
+import tapePlayIcon from './ui/icons/tape_play.svg';
+import tapePauseIcon from './ui/icons/tape_pause.svg';
 
 import { Emulator } from "./emulator";
 
