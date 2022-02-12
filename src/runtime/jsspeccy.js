@@ -369,7 +369,7 @@ class Emulator extends EventEmitter {
     }
 }
 
-window.JSSpeccy = (container, opts) => {
+export const JSSpeccy = (container, opts) => {
     console.log({container, opts});
 
     // let benchmarkRunCount = 0;

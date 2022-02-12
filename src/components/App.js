@@ -1,5 +1,5 @@
 import React, {Fragment, useEffect} from "react";
-import "../runtime/jsspeccy";
+import {JSSpeccy} from "../runtime/jsspeccy";
 import {ImageButton, SingleWindow} from "../canvasgui/canvasgui";
 
 export default function App() {
@@ -90,7 +90,7 @@ export default function App() {
             // console.log(key, value);
         }
 
-        window.emu = JSSpeccy(document.getElementById('jsspeccy'), emuParams);
+        JSSpeccy(document.getElementById('jsspeccy'), emuParams);
         if (doFilter) {
             document.getElementsByTagName('canvas')[0].style.imageRendering = "auto";
         }
