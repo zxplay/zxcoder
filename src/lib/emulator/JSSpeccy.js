@@ -334,13 +334,15 @@ export const JSSpeccy = (container, opts) => {
     */
 
     return {
-        setZoom: (zoom) => {ui.setZoom(zoom)},
-        toggleFullscreen: () => {ui.toggleFullscreen()},
-        enterFullscreen: () => {ui.enterFullscreen()},
-        exitFullscreen: () => {ui.exitFullscreen()},
-        setMachine: (model) => {emu.setMachine(model)},
-        openFileDialog: () => {openFileDialog()},
-        openUrl: (url) => {emu.openUrl(url).catch((err) => {alert(err)})},
-        exit: () => {exit()},
+        setZoom: (zoom) => ui.setZoom(zoom),
+        toggleFullscreen: () => ui.toggleFullscreen(),
+        enterFullscreen: () => ui.enterFullscreen(),
+        exitFullscreen: () => ui.exitFullscreen(),
+        setMachine: (model) => emu.setMachine(model),
+        openFileDialog: () => openFileDialog(),
+        openUrl: (url) => emu.openUrl(url).catch((err) => {alert(err)}),
+        exit: () => exit(),
+        hideUI: () => ui.hideUI(),
+        showUI: () => ui.showUI(),
     };
 };

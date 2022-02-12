@@ -167,8 +167,6 @@ export class UIController extends EventEmitter {
                 ev.preventDefault();
             });
         }
-
-        this.hideUI();
     }
 
     setZoom(factor) {
