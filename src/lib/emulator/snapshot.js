@@ -138,7 +138,6 @@ export function parseZ80File(data) {
     return snapshot;
 }
 
-
 export function parseSNAFile(data) {
     let mode128 = false;
     let snapshot = null;
@@ -216,7 +215,6 @@ export function parseSNAFile(data) {
 
     return snapshot;
 }
-
 
 function getSZXIDString(file, offset) {
     const dword = file.getUint32(offset, true);
