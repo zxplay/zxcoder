@@ -36,16 +36,21 @@ export const JSSpeccy = (container, opts) => {
     const ui = new UIController(container, emu, {zoom: opts.zoom || 1, sandbox: opts.sandbox});
 
     const fileMenu = ui.menuBar.addMenu('File');
+
     if (!opts.sandbox) {
+
         fileMenu.addItem('Open...', () => {
             openFileDialog();
         });
+
         fileMenu.addItem('Find games...', () => {
             openGameBrowser();
         });
+
         const autoLoadTapesMenuItem = fileMenu.addItem('Auto-load tapes', () => {
             emu.setAutoLoadTapes(!emu.autoLoadTapes);
         });
+
         const updateAutoLoadTapesCheckbox = () => {
             if (emu.autoLoadTapes) {
                 autoLoadTapesMenuItem.setCheckbox();
@@ -53,7 +58,9 @@ export const JSSpeccy = (container, opts) => {
                 autoLoadTapesMenuItem.unsetCheckbox();
             }
         }
+
         emu.on('setAutoLoadTapes', updateAutoLoadTapesCheckbox);
+
         updateAutoLoadTapesCheckbox();
     }
 
@@ -68,19 +75,24 @@ export const JSSpeccy = (container, opts) => {
             tapeTrapsMenuItem.unsetCheckbox();
         }
     }
+
     emu.on('setTapeTraps', updateTapeTrapsCheckbox);
     updateTapeTrapsCheckbox();
 
     const machineMenu = ui.menuBar.addMenu('Machine');
+
     const machine48Item = machineMenu.addItem('Spectrum 48K', () => {
         emu.setMachine(48);
     });
+
     const machine128Item = machineMenu.addItem('Spectrum 128K', () => {
         emu.setMachine(128);
     });
+
     const machinePentagonItem = machineMenu.addItem('Pentagon 128', () => {
         emu.setMachine(5);
     });
+
     const displayMenu = ui.menuBar.addMenu('Display');
 
     const zoomItemsBySize = {
@@ -88,9 +100,11 @@ export const JSSpeccy = (container, opts) => {
         2: displayMenu.addItem('200%', () => ui.setZoom(2)),
         3: displayMenu.addItem('300%', () => ui.setZoom(3)),
     }
+
     const fullscreenItem = displayMenu.addItem('Fullscreen', () => {
         ui.enterFullscreen();
     })
+
     const setZoomCheckbox = (factor) => {
         if (factor == 'fullscreen') {
             fullscreenItem.setBullet();
@@ -133,9 +147,11 @@ export const JSSpeccy = (container, opts) => {
             openFileDialog();
         });
     }
+
     ui.toolbar.addButton(resetIcon, {label: 'Reset'}, () => {
         emu.reset();
     });
+
     const pauseButton = ui.toolbar.addButton(playIcon, {label: 'Unpause'}, () => {
         if (emu.isRunning) {
             emu.pause();
@@ -143,14 +159,17 @@ export const JSSpeccy = (container, opts) => {
             emu.start();
         }
     });
+
     emu.on('pause', () => {
         pauseButton.setIcon(playIcon);
         pauseButton.setLabel('Unpause');
     });
+
     emu.on('start', () => {
         pauseButton.setIcon(pauseIcon);
         pauseButton.setLabel('Pause');
     });
+
     const tapeButton = ui.toolbar.addButton(tapePlayIcon, {label: 'Start tape'}, () => {
         if (emu.tapeIsPlaying) {
             emu.stopTape();
@@ -158,14 +177,18 @@ export const JSSpeccy = (container, opts) => {
             emu.playTape();
         }
     });
+
     tapeButton.disable();
+
     emu.on('openedTapeFile', () => {
         tapeButton.enable();
     });
+
     emu.on('playingTape', () => {
         tapeButton.setIcon(tapePauseIcon);
         tapeButton.setLabel('Stop tape');
     });
+
     emu.on('stoppedTape', () => {
         tapeButton.setIcon(tapePlayIcon);
         tapeButton.setLabel('Start tape');
@@ -200,7 +223,9 @@ export const JSSpeccy = (container, opts) => {
 
     const openGameBrowser = () => {
         emu.pause();
+
         const body = ui.showDialog();
+
         body.innerHTML = `
             <label>Find games</label>
             <form>
@@ -210,6 +235,7 @@ export const JSSpeccy = (container, opts) => {
             <div class="results">
             </div>
         `;
+
         const input = body.querySelector('input');
         const searchButton = body.querySelector('button');
         const searchForm = body.querySelector('form');
@@ -234,34 +260,44 @@ export const JSSpeccy = (container, opts) => {
                 + '&' + encodeParam('page', '1')
                 + '&' + encodeParam('output', 'json')
             )
+
             fetch(searchUrl).then(response => {
                 searchButton.innerText = 'Search';
                 return response.json();
             }).then(data => {
                 resultsContainer.innerHTML = '<ul></ul><p>- powered by <a href="https://archive.org/">Internet Archive</a></p>';
                 const ul = resultsContainer.querySelector('ul');
+
                 const results = data.response.docs;
+
                 results.forEach(result => {
                     const li = document.createElement('li');
                     ul.appendChild(li);
+
                     const resultLink = document.createElement('a');
                     resultLink.href = '#';
                     resultLink.innerText = result.title;
+
                     const creator = document.createTextNode(' - ' + result.creator)
+
                     li.appendChild(resultLink);
                     li.appendChild(creator);
+
                     resultLink.addEventListener('click', (e) => {
                         e.preventDefault();
+
                         fetch(
                             'https://archive.org/metadata/' + result.identifier
                         ).then(response => response.json()).then(data => {
                             let chosenFilename = null;
+
                             data.files.forEach(file => {
                                 const ext = file.name.split('.').pop().toLowerCase();
                                 if (ext == 'z80' || ext == 'sna' || ext == 'tap' || ext == 'tzx' || ext == 'szx') {
                                     chosenFilename = file.name;
                                 }
                             });
+
                             if (!chosenFilename) {
                                 alert('No loadable file found');
                             } else {
@@ -278,6 +314,7 @@ export const JSSpeccy = (container, opts) => {
                 })
             })
         })
+
         input.focus();
     }
 
@@ -287,27 +324,25 @@ export const JSSpeccy = (container, opts) => {
     }
 
     /*
-        const benchmarkElement = document.getElementById('benchmark');
-        setInterval(() => {
-            benchmarkElement.innerText = (
-                "Running at " + benchmarkRunCount + "fps, rendering at "
-                + benchmarkRenderCount + "fps"
-            );
-            benchmarkRunCount = 0;
-            benchmarkRenderCount = 0;
-        }, 1000)
+    const benchmarkElement = document.getElementById('benchmark');
+    setInterval(() => {
+        benchmarkElement.innerText = (
+            "Running at " + benchmarkRunCount + "fps, rendering at "
+            + benchmarkRenderCount + "fps"
+        );
+        benchmarkRunCount = 0;
+        benchmarkRenderCount = 0;
+    }, 1000)
     */
 
     return {
-        setZoom: (zoom) => {ui.setZoom(zoom);},
-        toggleFullscreen: () => {ui.toggleFullscreen();},
-        enterFullscreen: () => {ui.enterFullscreen();},
-        exitFullscreen: () => {ui.exitFullscreen();},
-        setMachine: (model) => {emu.setMachine(model);},
-        openFileDialog: () => {openFileDialog();},
-        openUrl: (url) => {
-            emu.openUrl(url).catch((err) => {alert(err);});
-        },
-        exit: () => {exit();},
+        setZoom: (zoom) => {ui.setZoom(zoom)},
+        toggleFullscreen: () => {ui.toggleFullscreen()},
+        enterFullscreen: () => {ui.enterFullscreen()},
+        exitFullscreen: () => {ui.exitFullscreen()},
+        setMachine: (model) => {emu.setMachine(model)},
+        openFileDialog: () => {openFileDialog()},
+        openUrl: (url) => {emu.openUrl(url).catch((err) => {alert(err)})},
+        exit: () => {exit()},
     };
 };
