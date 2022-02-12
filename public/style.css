@@ -1,0 +1,32 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #444;
+}
+
+#jsspeccy, #guiparent {
+    width: 960px;
+    margin: auto;
+}
+
+#jsspeccy {
+    background-color: #FFF;
+}
+
+#guiparent {
+    background-color: #444;
+}
+
+canvas {
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-crisp-edges;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+canvas#virtkeys {
+    image-rendering: auto;
+}
