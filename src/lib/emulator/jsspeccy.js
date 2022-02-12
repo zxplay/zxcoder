@@ -14,8 +14,6 @@ import tapePauseIcon from './icons/tape_pause.svg';
 import { Emulator } from "./emulator";
 
 export const JSSpeccy = (container, opts) => {
-    console.log({container, opts});
-
     // let benchmarkRunCount = 0;
     // let benchmarkRenderCount = 0;
     opts = opts || {};
