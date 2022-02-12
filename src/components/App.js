@@ -26,11 +26,6 @@ function renderEmulator() {
         autoLoadTapes: true,
     };
 
-    let keystr = '1234567890,QWERTYUIOP,ASDFGHJKLe,cZXCVBNMs_';
-    // let keystr = '-W-P,ASDe,123456789M';    // snake
-    // let keystr = 'GH-e,OP-Z';    // manic miner
-    // let keystr = 'OPeZ'; // manic miner simple
-
     let doFilter = false;
 
     const url = new URL(window.location.href);
@@ -39,8 +34,6 @@ function renderEmulator() {
             if (value === '48' || value === '128' || value === '5') {
                 emuParams.machine = value;
             }
-        } else if (key === 'k') {
-            keystr = value;
         } else if (key === 'u') {
             emuParams.openUrl = value;
         } else if (key === 'f') {
@@ -48,7 +41,6 @@ function renderEmulator() {
                 doFilter = true;
             }
         }
-        // console.log(key, value);
     }
 
     JSSpeccy(document.getElementById('jsspeccy'), emuParams);
