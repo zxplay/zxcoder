@@ -10,7 +10,7 @@
     "build:clean": "del-cli build es5",
     "build:clean:all": "del-cli build es5 public/dist",
     "build:copyfiles": "copyfiles \"src/**/*\" -u 1 es5",
-    "build:core": "mkdir build && node src/emulator/generator/gencore.mjs src/emulator/generator/core.ts.in build/core.ts",
+    "build:core": "mkdir build && node src/lib/emulator/generator/gencore.mjs src/lib/emulator/generator/core.ts.in build/core.ts",
     "build:wasm:debug": "npm run build:core && asc build/core.ts --target debug",
     "build:wasm:release": "npm run build:core && asc build/core.ts --target release",
     "build:js:debug": "cross-env NODE_OPTIONS=--openssl-legacy-provider webpack --config webpack.dev.config.js",
@@ -55,8 +55,8 @@
   "watch": {
     "build:core": {
       "patterns": [
-        "src/emulator/generator/*.js",
-        "src/emulator/generator/*.ts.in"
+        "src/lib/emulator/generator/*.js",
+        "src/lib/emulator/generator/*.ts.in"
       ],
       "extensions": [
         "js",
@@ -71,8 +71,8 @@
     },
     "build:js": {
       "patterns": [
-        "src/emulator/*.js",
-        "src/emulator/icons/*.svg",
+        "src/lib/emulator/*.js",
+        "src/lib/emulator/icons/*.svg",
         "build/*.js"
       ],
       "extensions": [
