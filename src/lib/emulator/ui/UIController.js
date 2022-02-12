@@ -23,6 +23,7 @@ export class UIController extends EventEmitter {
         dialogCloseButton.addEventListener('click', () => {
             this.hideDialog();
         })
+
         this.dialogBody = document.createElement('div');
         this.dialogBody.style.clear = 'both';
         this.dialog.appendChild(this.dialogBody);
@@ -31,13 +32,11 @@ export class UIController extends EventEmitter {
         container.appendChild(this.appContainer);
         this.appContainer.style.position = 'relative';
 
-        //k
         this.menuBar = new MenuBar(this.appContainer);
         this.appContainer.appendChild(this.canvas);
         this.canvas.style.objectFit = 'contain';
         this.canvas.style.display = 'block';
 
-        //k
         this.toolbar = new Toolbar(this.appContainer);
 
         this.startButton = document.createElement('button');
@@ -55,18 +54,23 @@ export class UIController extends EventEmitter {
         this.startButton.style.borderRadius = '4px';
         this.startButton.firstChild.style.height = '56px';
         this.startButton.firstChild.style.verticalAlign = 'middle';
+
         this.startButton.addEventListener('mouseenter', () => {
             this.startButton.style.backgroundColor = 'rgba(128, 128, 128, 0.7)';
         });
+
         this.startButton.addEventListener('mouseleave', () => {
             this.startButton.style.backgroundColor = 'rgba(160, 160, 160, 0.7)';
         });
+
         this.startButton.addEventListener('click', (e) => {
             emulator.start();
         });
+
         emulator.on('start', () => {
             this.startButton.style.display = 'none';
         });
+
         emulator.on('pause', () => {
             this.startButton.style.display = 'block';
         });
@@ -85,10 +89,13 @@ export class UIController extends EventEmitter {
                 this.ignoreNextMouseMove = false;
                 return;
             }
+
             this.showUI();
+
             if (this.hideUITimeout) clearTimeout(this.hideUITimeout);
             this.hideUITimeout = setTimeout(() => {this.hideUI();}, 3000);
         }
+
         this.appContainer.addEventListener('fullscreenchange', () => {
             if (document.fullscreenElement) {
                 this.isFullscreen = true;
@@ -166,10 +173,12 @@ export class UIController extends EventEmitter {
 
     setZoom(factor) {
         this.zoom = factor;
+
         if (this.isFullscreen) {
             document.exitFullscreen();
             return;  // setZoom will be retriggered once fullscreen has exited
         }
+
         const displayWidth = 320 * this.zoom;
         const displayHeight = 240 * this.zoom;
         this.canvas.style.width = '' + displayWidth + 'px';
@@ -181,11 +190,13 @@ export class UIController extends EventEmitter {
     enterFullscreen() {
         this.appContainer.requestFullscreen();
     }
+
     exitFullscreen() {
         if (this.isFullscreen) {
             document.exitFullscreen();
         }
     }
+
     toggleFullscreen() {
         if (this.isFullscreen) {
             this.exitFullscreen();
@@ -202,6 +213,7 @@ export class UIController extends EventEmitter {
             this.toolbar.hide();
         }
     }
+
     showUI() {
         if (this.uiIsHidden) {
             this.uiIsHidden = false;
@@ -210,6 +222,7 @@ export class UIController extends EventEmitter {
             this.toolbar.show();
         }
     }
+
     showDialog() {
         this.dialog.style.display = 'block';
         this.dialog.style.position = 'absolute';
@@ -223,13 +236,14 @@ export class UIController extends EventEmitter {
         this.dialogBody.style.paddingLeft = '8px';
         this.dialogBody.style.paddingRight = '8px';
         this.dialogBody.style.paddingBottom = '8px';
-
         return this.dialogBody;
     }
+
     hideDialog() {
         this.dialog.style.display = 'none';
         this.dialogBody.innerHTML = '';
     }
+
     unload() {
         this.dialog.remove();
         this.appContainer.remove();

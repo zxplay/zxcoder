@@ -28,6 +28,7 @@ export class Menu {
                 this.open();
             }
         })
+
         document.addEventListener('click', (e) => {
             if (e.target != button && this.isOpen()) this.close();
         })
@@ -56,17 +57,20 @@ export class Menu {
         button.style.paddingTop = '4px';
         button.style.paddingBottom = '4px';
 
-        // eww.
         button.addEventListener('mouseenter', () => {
             button.style.backgroundColor = '#ddd';
         });
+
         button.addEventListener('mouseout', () => {
             button.style.backgroundColor = 'inherit';
         });
+
         if (onClick) {
             button.addEventListener('click', onClick);
         }
+
         li.appendChild(button);
+
         return {
             setBullet: () => {
                 button.innerText = String.fromCharCode(0x2022) + ' ' + title;
@@ -79,7 +83,7 @@ export class Menu {
             },
             unsetCheckbox: () => {
                 button.innerText = title;
-            },
+            }
         }
     }
 }

@@ -20,33 +20,42 @@ export class MenuBar {
     enterFullscreen() {
         this.elem.style.position = 'absolute';
     }
+
     exitFullscreen() {
         this.elem.style.position = 'static';
     }
+
     show() {
         this.elem.style.visibility = 'visible';
         this.elem.style.display = 'block';
     }
+
     hide() {
         this.elem.style.visibility = 'hidden';
         this.elem.style.display = 'none';
     }
+
     onmouseenter(e) {
         if (this.currentMouseenterEvent) {
             this.elem.removeEventListener('mouseenter', this.currentMouseenterEvent);
         }
+
         if (e) {
             this.elem.addEventListener('mouseenter', e);
         }
+
         this.currentMouseenterEvent = e;
     }
+
     onmouseout(e) {
         if (this.currentMouseoutEvent) {
             this.elem.removeEventListener('mouseleave', this.currentMouseoutEvent);
         }
+
         if (e) {
             this.elem.addEventListener('mouseleave', e);
         }
+
         this.currentMouseoutEvent = e;
     }
 }
