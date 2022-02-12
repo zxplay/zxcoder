@@ -1,5 +1,5 @@
 import { FRAME_BUFFER_SIZE } from './constants.js';
-import { TAPFile, TZXFile } from './tape.js';
+import { TAPFile, TZXFile } from './tape';
 
 let core = null;
 let memory = null;
@@ -230,7 +230,7 @@ onmessage = (e) => {
                 mediaType: 'tape',
             });
             break;
-        
+
         case 'playTape':
             if (tape && !tapeIsPlaying) {
                 tapeIsPlaying = true;

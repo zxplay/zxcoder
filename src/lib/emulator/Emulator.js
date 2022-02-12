@@ -3,7 +3,7 @@ import JSZip from 'jszip';
 
 import { DisplayHandler } from './DisplayHandler.js';
 import { parseSNAFile, parseZ80File, parseSZXFile } from './snapshot.js';
-import { TAPFile, TZXFile } from './tape.js';
+import { TAPFile, TZXFile } from './tape';
 import { KeyboardHandler } from './KeyboardHandler.js';
 import { AudioHandler } from './AudioHandler.js';
 
