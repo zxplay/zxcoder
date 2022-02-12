@@ -42,11 +42,13 @@
     </style>
 </head>
 <body onload="onBodyLoad()">
+<div id="root"></div>
+<script src="/dist/bundle.js"></script>
+
 <div id="jsspeccy"></div>
 <div id="guiparent">
     <canvas id="virtkeys" width="960"></canvas>
 </div>
-</body>
 <script src="canvasgui/PointerEventHandler.js"></script>
 <script src="canvasgui/canvasgui.js"></script>
 <script>
@@ -215,4 +217,6 @@
     document.addEventListener("keyup", onKeyEvent, false);
     */
 </script>
+
+</body>
 </html>
