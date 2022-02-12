@@ -1,7 +1,5 @@
-export class Widget
-{
-    constructor(parent, x, y, w, h)
-    {
+export class Widget {
+    constructor(parent, x, y, w, h) {
         this.parent = parent;
         this.x = x;
         this.y = y;
@@ -12,23 +10,12 @@ export class Widget
             this.parent._add(this);
     }
 
-    // onDraw(ctx)
-    // {
-    // }
-
-    // onPointerEvent(type, x, y)
-    // {
-
-    // }
-
-    requestRedraw()
-    {
+    requestRedraw() {
         if (this.parent != null)
             this.parent.requestRedraw();
     }
 
-    isPointerInside(x, y)
-    {
+    isPointerInside(x, y) {
         if (x < this.x) return false;
         if (y < this.y) return false;
         if (x > this.x + this.w) return false;
