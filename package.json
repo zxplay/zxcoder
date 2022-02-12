@@ -71,8 +71,8 @@
     },
     "build:js": {
       "patterns": [
-        "src/runtime/*.js",
-        "src/runtime/icons/*.svg",
+        "src/emulator/*.js",
+        "src/emulator/icons/*.svg",
         "build/*.js"
       ],
       "extensions": [

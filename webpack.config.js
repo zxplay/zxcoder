@@ -8,7 +8,7 @@ module.exports = [
             path: __dirname + '/public/dist',
             filename: 'jsspeccy-worker.js',
         },
-        entry: './src/runtime/worker.js'
+        entry: './src/emulator/worker.js'
     },
     {
         mode: 'production',
