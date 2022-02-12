@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import {JSSpeccy} from "../lib/emulator/jsspeccy";
+import {JSSpeccy} from "../lib/emulator/JSSpeccy";
 
 export function Emulator() {
     useEffect(() => {
