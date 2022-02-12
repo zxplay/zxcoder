@@ -208,7 +208,6 @@ export class UIController extends EventEmitter {
     hideUI() {
         if (this.allowUIHiding && !this.uiIsHidden) {
             this.uiIsHidden = true;
-            this.appContainer.style.cursor = 'none';
             this.menuBar.hide();
             this.toolbar.hide();
         }
@@ -217,7 +216,6 @@ export class UIController extends EventEmitter {
     showUI() {
         if (this.uiIsHidden) {
             this.uiIsHidden = false;
-            this.appContainer.style.cursor = 'default';
             this.menuBar.show();
             this.toolbar.show();
         }
