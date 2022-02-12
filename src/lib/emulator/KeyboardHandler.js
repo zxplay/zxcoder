@@ -52,7 +52,6 @@ const KEY_CODES = {
     40: {row: 4, mask: 0x10, caps: true}, /* down arrow => caps + 6 */
 };
 
-
 export class KeyboardHandler {
     constructor(worker) {
         this.worker = worker;

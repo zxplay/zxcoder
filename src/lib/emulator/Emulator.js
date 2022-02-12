@@ -4,7 +4,7 @@ import JSZip from 'jszip';
 import { DisplayHandler } from './render.js';
 import { parseSNAFile, parseZ80File, parseSZXFile } from './snapshot.js';
 import { TAPFile, TZXFile } from './tape.js';
-import { KeyboardHandler } from './keyboard.js';
+import { KeyboardHandler } from './KeyboardHandler.js';
 import { AudioHandler } from './AudioHandler.js';
 
 const scriptUrl = document.currentScript.src;
