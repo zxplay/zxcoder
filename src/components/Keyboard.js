@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import {ImageButton, SingleWindow} from "../canvasgui/canvasgui";
+import {ImageButton, SingleWindow} from "../canvasgui";
 
 export function Keyboard() {
     useEffect(() => {
