@@ -14,7 +14,7 @@ export function Emulator() {
 function renderEmulator() {
     const emuParams = {
         zoom: 3,
-        sandbox: true,
+        sandbox: false,
         autoLoadTapes: true,
     };
 
@@ -35,7 +35,8 @@ function renderEmulator() {
         }
     }
 
-    JSSpeccy(document.getElementById('jsspeccy'), emuParams);
+    const jsspeccy = JSSpeccy(document.getElementById('jsspeccy'), emuParams);
+    jsspeccy.hideUI();
 
     if (doFilter) {
         document.getElementsByTagName('canvas')[0].style.imageRendering = "auto";
