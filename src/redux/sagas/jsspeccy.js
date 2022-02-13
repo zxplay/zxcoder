@@ -24,13 +24,8 @@ export function* watchForClickEvents() {
 
 function getClickEventChannel() {
     return eventChannel(emit => {
-
-        const emitter = (e) => {
-            emit(e);
-        };
-
+        const emitter = (e) => emit(e);
         window.addEventListener('click', emitter);
-
         return () => {
             // Must return an unsubscribe function.
             window.removeEventListener('click', emitter);

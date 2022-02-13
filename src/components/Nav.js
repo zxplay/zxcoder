@@ -2,7 +2,7 @@ import React from "react";
 import {useDispatch} from "react-redux";
 import {InputText} from "primereact/inputtext";
 import {Menubar} from "primereact/menubar";
-import {reset, pause} from "../redux/actions/jsspeccy";
+import {reset, showOpenFileDialog} from "../redux/actions/jsspeccy";
 
 export function Nav() {
     const dispatch = useDispatch();
@@ -17,7 +17,8 @@ export function Nav() {
             items: [
                 {
                     label: 'Open',
-                    icon: 'pi pi-fw pi-folder-open'
+                    icon: 'pi pi-fw pi-folder-open',
+                    command: () => dispatch(showOpenFileDialog())
                 }
             ]
         },

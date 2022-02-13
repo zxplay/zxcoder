@@ -2,7 +2,7 @@
 const stagingEnv = STAGING_ENV;
 
 const isDev = stagingEnv !== 'prod';
-const devLogging = true;
+const devLogging = false;
 
 export default {
     logActions: isDev && devLogging,

@@ -84,6 +84,11 @@ function exit(state, _) {
     return {...state};
 }
 
+function showOpenFileDialog(state, _) {
+    try {state.jsspeccy.openFileDialog();} catch {};
+    return {...state};
+}
+
 // -----------------------------------------------------------------------------
 // Reducer
 // -----------------------------------------------------------------------------
@@ -94,6 +99,7 @@ const actionsMap = {
     [actionTypes.reset]: reset,
     [actionTypes.pause]: pause,
     [actionTypes.exit]: exit,
+    [actionTypes.showOpenFileDialog]: showOpenFileDialog,
 };
 
 export default function reducer(state = initialState, action) {
