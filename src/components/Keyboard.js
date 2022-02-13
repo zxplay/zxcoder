@@ -69,7 +69,7 @@ function simulateKey(keyCode, type) {
 
 class MyImageButton extends ImageButton {
     constructor(parent, x, y, w, h, suffix, keyCode) {
-        super(parent, x, y, w, h, 'img/key' + suffix + '.png', 'img/keyNONE.png');
+        super(parent, x, y, w, h, 'img/keys/key' + suffix + '.png', 'img/keys/keyNONE.png');
         this.keyCode = keyCode;
 
         this.on_begin = this.on_enter = function () {
