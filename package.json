@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "start": "run-s build:clean:all build:wasm:debug build:clean && cross-env NODE_OPTIONS=--openssl-legacy-provider npx webpack serve --config webpack.dev.config.js --open",
-    "test": "node run test:jsspeccy && jest",
+    "test": "run-s test:jsspeccy test:bas2tap && jest",
     "test:jsspeccy": "node --experimental-wasm-modules test/jsspeccy/test.mjs test/jsspeccy/tests.in test/jsspeccy/tests.expected",
+    "test:bas2tap": "node test/bas2tap/test.mjs",
     "build:all:debug": "run-s build:clean:all build:copyfiles build:babel build:wasm:debug build:js:debug build:clean",
     "build:all:release": "run-s build:clean:all build:copyfiles build:babel build:wasm:release build:js:release build:clean",
     "build:clean": "del-cli build es5",
@@ -21,6 +22,7 @@
   },
   "dependencies": {
     "@babel/runtime-corejs2": "^7.15.4",
+    "bas2tap": "^0.0.1-alpha.1",
     "codemirror": "^5.65.1",
     "connected-react-router": "^6.9.2",
     "file-dialog": "^0.0.8",
