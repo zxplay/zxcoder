@@ -13,7 +13,8 @@ export function Keyboard(props) {
         <div id="guiparent" style={{
             width: `${width}px`,
             margin: "auto",
-            backgroundColor: "#444"
+            backgroundColor: "#444",
+            padding: 0
         }}>
             <canvas
                 id="virtkeys"
