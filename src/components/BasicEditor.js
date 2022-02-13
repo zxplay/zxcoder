@@ -2,8 +2,12 @@ import React, {Fragment} from "react";
 import PropTypes from "prop-types";
 import {Button} from "primereact/button";
 import CodeMirror from "./CodeMirror";
+import {useDispatch} from "react-redux";
+import {runBasic} from "../redux/actions/jsspeccy";
 
 export function BasicEditor(props) {
+    const dispatch = useDispatch();
+
     const options = {
         lineWrapping: true,
         readOnly: false,
@@ -31,6 +35,7 @@ export function BasicEditor(props) {
                 label="Run"
                 icon="pi pi-play"
                 style={{marginTop: "8px"}}
+                onClick={() => dispatch(runBasic('10 PRINT "Hello"'))}
             />
         </Fragment>
     )

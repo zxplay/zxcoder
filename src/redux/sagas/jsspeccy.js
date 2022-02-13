@@ -3,6 +3,7 @@ import {eventChannel} from "redux-saga";
 import {handleClick} from "../actions/jsspeccy";
 import {JSSpeccy} from "../../lib/emulator/JSSpeccy";
 import {actionTypes} from "../actions/jsspeccy";
+import {bas2tap} from "../../lib/bas2tap";
 
 // -----------------------------------------------------------------------------
 // Action watchers
@@ -46,6 +47,10 @@ export function* watchForOpenFileDialogActions() {
 
 export function* watchForShowGameBrowserActions() {
     yield takeLatest(actionTypes.showGameBrowser, handleShowGameBrowserActions);
+}
+
+export function* watchForRunBasicActions() {
+    yield takeLatest(actionTypes.runBasic, handleRunBasicActions);
 }
 
 // -----------------------------------------------------------------------------
@@ -121,6 +126,13 @@ function* handleOpenFileDialogActions(_) {
 
 function* handleShowGameBrowserActions(_) {
     jsspeccy.openGameBrowser();
+}
+
+function* handleRunBasicActions(action) {
+    const basic = action.basic;
+    console.log('basic', basic);
+    const tap = bas2tap(basic);
+    console.log('tap', tap);
 }
 
 // -----------------------------------------------------------------------------
