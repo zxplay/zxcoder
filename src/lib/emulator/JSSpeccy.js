@@ -215,8 +215,10 @@ export const JSSpeccy = (container, opts) => {
         fileDialog().then(files => {
             const file = files[0];
             emu.openFile(file).then(() => {
-                if (emu.isInitiallyPaused) emu.start();
-            }).catch((err) => {alert(err);});
+                emu.start();
+            }).catch((err) => {
+                alert(err);
+            });
         });
     }
 

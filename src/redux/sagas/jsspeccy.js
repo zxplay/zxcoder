@@ -76,7 +76,7 @@ function* handleRenderEmulatorActions(action) {
     }
 
     jsspeccy = JSSpeccy(target, emuParams);
-    // jsspeccy.hideUI();
+    jsspeccy.hideUI();
 
     if (doFilter) {
         // TODO: Investigate this option, and narrow the element selector.
