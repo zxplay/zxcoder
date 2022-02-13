@@ -20,8 +20,10 @@
   },
   "dependencies": {
     "@babel/runtime-corejs2": "^7.15.4",
+    "codemirror": "^5.65.1",
     "file-dialog": "^0.0.8",
     "jszip": "^3.7.1",
+    "lodash.debounce": "^4.0.8",
     "pako": "^2.0.4",
     "primeflex": "^3.1.2",
     "primeicons": "^5.0.0",

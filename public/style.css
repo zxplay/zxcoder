@@ -11,3 +11,37 @@ body {
 canvas {
     display: block;
 }
+
+@font-face {
+    font-family: 'ZX Spectrum';
+    font-style: normal;
+    font-weight: 400;
+    src: local('ZX Spectrum'), local('ZX-Spectrum-Regular'),
+    url(/fonts/zx/zxSpectrumStrict.woff2) format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+    url(/fonts/zx/zxSpectrumStrict.woff) format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+    font-smooth: never;
+    -webkit-font-smoothing : none;
+}
+
+.CodeMirror {
+    font-family: 'ZX Spectrum', monospace !important;
+    font-size: 32px;
+    height: auto !important;
+    border: 1px solid #a9a9ae;
+    border-radius: 2px;
+    padding: 1px;
+}
+
+.CodeMirror:hover {
+    border-color: #525257;
+}
+
+.CodeMirror-focused {
+    border-color: #F96F43 !important;
+    outline: 0 none;
+    -webkit-box-shadow: 0 0 0 0.1em #FDA78B;
+    -moz-box-shadow: 0 0 0 0.1em #FDA78B;
+    box-shadow: 0 0 0 0.1em #FDA78B;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    border-radius: 2px;
+}
