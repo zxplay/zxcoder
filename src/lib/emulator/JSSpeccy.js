@@ -343,6 +343,7 @@ export const JSSpeccy = (container, opts) => {
         exitFullscreen: () => ui.exitFullscreen(),
         setMachine: (model) => emu.setMachine(model),
         openFileDialog: () => openFileDialog(),
+        openGameBrowser: () => openGameBrowser(),
         openUrl: (url) => emu.openUrl(url).catch((err) => {alert(err)}),
         exit: () => exit(),
         hideUI: () => ui.hideUI(),

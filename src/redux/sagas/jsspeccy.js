@@ -44,6 +44,10 @@ export function* watchForOpenFileDialogActions() {
     yield takeLatest(actionTypes.showOpenFileDialog, handleOpenFileDialogActions);
 }
 
+export function* watchForShowGameBrowserActions() {
+    yield takeLatest(actionTypes.showGameBrowser, handleShowGameBrowserActions);
+}
+
 // -----------------------------------------------------------------------------
 // Action handlers
 // -----------------------------------------------------------------------------
@@ -113,6 +117,10 @@ function* handleExitActions(_) {
 
 function* handleOpenFileDialogActions(_) {
     jsspeccy.openFileDialog();
+}
+
+function* handleShowGameBrowserActions(_) {
+    jsspeccy.openGameBrowser();
 }
 
 // -----------------------------------------------------------------------------
