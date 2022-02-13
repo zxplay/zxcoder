@@ -1,15 +1,20 @@
-import React, {Fragment} from "react";
+import React, {Fragment, useState} from "react";
 import "primereact/resources/themes/md-dark-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import "primeflex/primeflex.css";
+import {TabPanel, TabView} from "primereact/tabview";
 import {Nav} from "./Nav";
 import {Emulator} from "./Emulator";
 import {BasicEditor} from "./BasicEditor";
 
 export default function App() {
+    const [activeIndex, setActiveIndex] = useState(0);
+
     const zoom = 2;
     const width = zoom * 320;
+
+    const exampleCode = '10 PRINT "Hello"\n20 GO TO 10';
 
     return (
         <Fragment>
@@ -17,7 +22,11 @@ export default function App() {
             <div className="grid"
                  style={{width: "100%", padding: "4px", margin: 0}}>
                 <div className="col" style={{padding: "4px"}}>
-                    <BasicEditor/>
+                    <TabView activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
+                        <TabPanel header="Sinclair Basic">
+                            <BasicEditor code={exampleCode}/>
+                        </TabPanel>
+                    </TabView>
                 </div>
                 <div className="col-fixed"
                      style={{width: `${width + 8}px`, padding: "4px"}}>

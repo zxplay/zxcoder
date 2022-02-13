@@ -24,12 +24,13 @@ canvas {
 }
 
 .CodeMirror {
-    font-family: 'ZX Spectrum', monospace !important;
-    font-size: 32px;
+    font-family: /*'ZX Spectrum',*/ monospace !important;
+    font-size: 20px;
     height: auto !important;
     border: 1px solid #a9a9ae;
     border-radius: 2px;
     padding: 1px;
+    background-color: #ddd !important;
 }
 
 .CodeMirror:hover {
@@ -44,4 +45,8 @@ canvas {
     box-shadow: 0 0 0 0.1em #FDA78B;
     transition: border-color 0.2s, box-shadow 0.2s;
     border-radius: 2px;
+}
+
+.p-tabview-panels {
+    padding: 8px 0 0 0 !important;
 }
