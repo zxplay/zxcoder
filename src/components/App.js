@@ -4,7 +4,6 @@ import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import "primeflex/primeflex.css";
 import {Emulator} from "./Emulator";
-import {Keyboard} from "./Keyboard";
 import {BasicEditor} from "./BasicEditor";
 
 export default function App() {
@@ -16,8 +15,7 @@ export default function App() {
                 <BasicEditor/>
             </div>
             <div className="col-fixed" style={{width: `${width + 8}px`, padding: "4px"}}>
-                <Emulator zoom={zoom}/>
-                <Keyboard width={width}/>
+                <Emulator zoom={zoom} width={width}/>
             </div>
         </div>
     )

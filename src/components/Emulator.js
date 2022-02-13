@@ -1,17 +1,19 @@
-import React, {useEffect} from "react";
+import React, {Fragment, useEffect} from "react";
 import PropTypes from "prop-types";
 import {JSSpeccy} from "../lib/emulator/JSSpeccy";
+import {Keyboard} from "./Keyboard";
 
 export function Emulator(props) {
     const zoom = props.zoom || 3;
-    const width = zoom * 320;
+    const width = props.width || zoom * 320;
 
     useEffect(() => {
         const jsspeccy = renderEmulator(zoom);
 
         document.addEventListener('click', e => {
-            const elem = document.querySelector('#jsspeccy');
-            if (!elem.contains(e.target)) {
+            const emuElem = document.querySelector('#jsspeccy');
+            const keybElem = document.querySelector('#guiparent');
+            if (!emuElem.contains(e.target) && !keybElem.contains(e.target)) {
                 jsspeccy.pause();
             }
         });
@@ -22,16 +24,20 @@ export function Emulator(props) {
     }, []);
 
     return (
-        <div id="jsspeccy" style={{
-            width: `${width}px`,
-            margin: "auto",
-            backgroundColor: "#FFF"
-        }}/>
+        <Fragment>
+            <div id="jsspeccy" style={{
+                width: `${width}px`,
+                margin: "auto",
+                backgroundColor: "#FFF"
+            }}/>
+            <Keyboard width={width}/>
+        </Fragment>
     )
 }
 
 Emulator.propTypes = {
-    zoom: PropTypes.number
+    zoom: PropTypes.number,
+    width: PropTypes.number
 }
 
 function renderEmulator(zoom) {
