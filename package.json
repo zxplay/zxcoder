@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "run-s build:clean:all build:wasm:debug build:clean && cross-env NODE_OPTIONS=--openssl-legacy-provider npx webpack serve --config webpack.dev.config.js --open",
-    "test": "node --experimental-wasm-modules test/test.js test/tests.in test/tests.expected && jest",
+    "test": "node --experimental-wasm-modules test/test.mjs test/tests.in test/tests.expected && jest",
     "build:all:debug": "run-s build:clean:all build:copyfiles build:babel build:wasm:debug build:js:debug build:clean",
     "build:all:release": "run-s build:clean:all build:copyfiles build:babel build:wasm:release build:js:release build:clean",
     "build:clean": "del-cli build es5",
