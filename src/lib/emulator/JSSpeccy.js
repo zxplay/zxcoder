@@ -345,6 +345,7 @@ export const JSSpeccy = (container, opts) => {
         openFileDialog: () => openFileDialog(),
         openGameBrowser: () => openGameBrowser(),
         openUrl: (url) => emu.openUrl(url).catch((err) => {alert(err)}),
+        openTAPFile: (data) => emu.openTAPFile(data),
         exit: () => exit(),
         hideUI: () => ui.hideUI(),
         showUI: () => ui.showUI(),

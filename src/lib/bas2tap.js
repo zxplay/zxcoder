@@ -5,7 +5,7 @@ export function bas2tap(input) {
         Module({
             'input': input,
             'resolve': resolve,
-            'arguments': ['input.bas', 'output.tap', '-a', '-sbas2tap']
+            'arguments': ['input.bas', 'output.tap', '-a']
         });
     });
 }

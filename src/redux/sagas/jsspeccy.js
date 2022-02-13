@@ -130,9 +130,9 @@ function* handleShowGameBrowserActions(_) {
 
 function* handleRunBasicActions(action) {
     const basic = action.basic;
-    console.log('basic', basic);
-    const tap = bas2tap(basic);
-    console.log('tap', tap);
+    const tap = yield bas2tap(basic);
+    jsspeccy.start();
+    jsspeccy.openTAPFile(tap.buffer);
 }
 
 // -----------------------------------------------------------------------------

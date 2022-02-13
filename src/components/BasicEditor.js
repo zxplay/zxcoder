@@ -1,4 +1,4 @@
-import React, {Fragment} from "react";
+import React, {Fragment, useState, useEffect, useRef} from "react";
 import PropTypes from "prop-types";
 import {Button} from "primereact/button";
 import CodeMirror from "./CodeMirror";
@@ -6,7 +6,9 @@ import {useDispatch} from "react-redux";
 import {runBasic} from "../redux/actions/jsspeccy";
 
 export function BasicEditor(props) {
+    const [code, setCode] = useState(props.code || '');
     const dispatch = useDispatch();
+    const cmRef = useRef(null);
 
     const options = {
         lineWrapping: true,
@@ -25,17 +27,23 @@ export function BasicEditor(props) {
         }
     };
 
+    useEffect(() => {
+        const cm = cmRef.current.getCodeMirror();
+        cm.setValue(props.code || '');
+    }, []);
+
     return (
         <Fragment>
             <CodeMirror
+                ref={cmRef}
                 options={options}
-                value={props.code || ''}
+                onChange={(cm, _) => setCode(cm.getValue())}
             />
             <Button
                 label="Run"
                 icon="pi pi-play"
                 style={{marginTop: "8px"}}
-                onClick={() => dispatch(runBasic('10 PRINT "Hello"'))}
+                onClick={() => dispatch(runBasic(code))}
             />
         </Fragment>
     )
