@@ -11,7 +11,7 @@ import {
 export function Nav() {
     const dispatch = useDispatch();
 
-    const start = <img alt="logo" src="/img/logo.png" height="40" className="mr-2"/>;
+    const start = <img alt="logo" src="img/logo.png" height="40" className="mr-2"/>;
     const end = <InputText placeholder="Search" type="text" onClick={() => {
         dispatch(showGameBrowser())
     }}/>;
