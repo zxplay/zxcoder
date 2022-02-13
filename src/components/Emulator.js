@@ -7,7 +7,18 @@ export function Emulator(props) {
     const width = zoom * 320;
 
     useEffect(() => {
-        renderEmulator(zoom);
+        const jsspeccy = renderEmulator(zoom);
+
+        document.addEventListener('click', e => {
+            const elem = document.querySelector('#jsspeccy');
+            if (!elem.contains(e.target)) {
+                jsspeccy.pause();
+            }
+        });
+
+        return () => {
+            jsspeccy.exit();
+        }
     }, []);
 
     return (
@@ -48,9 +59,11 @@ function renderEmulator(zoom) {
     }
 
     const jsspeccy = JSSpeccy(document.getElementById('jsspeccy'), emuParams);
-    jsspeccy.hideUI();
+    // jsspeccy.hideUI();
 
     if (doFilter) {
         document.getElementsByTagName('canvas')[0].style.imageRendering = "auto";
     }
+
+    return jsspeccy;
 }
