@@ -346,6 +346,7 @@ export const JSSpeccy = (container, opts) => {
         hideUI: () => ui.hideUI(),
         showUI: () => ui.showUI(),
         pause: () => emu.pause(),
-        start: () => emu.start()
+        start: () => emu.start(),
+        reset: () => emu.reset()
     };
 };

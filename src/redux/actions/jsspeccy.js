@@ -1,6 +1,8 @@
 export const actionTypes = {
     renderEmulator: 'jsspeccy/renderEmulator',
     handleClick: 'jsspeccy/handleClick',
+    reset: 'jsspeccy/reset',
+    pause: 'jsspeccy/pause',
     exit: 'jsspeccy/exit',
 };
 
@@ -13,6 +15,14 @@ export const handleClick = (e) => ({
     type: actionTypes.handleClick,
     e
 });
+
+export const reset = () => ({
+    type: actionTypes.reset
+})
+
+export const pause = () => ({
+    type: actionTypes.pause
+})
 
 export const exit = () => ({
     type: actionTypes.exit

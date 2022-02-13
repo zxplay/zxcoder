@@ -1,6 +1,6 @@
 import React, {Fragment, useEffect} from "react";
 import PropTypes from "prop-types";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {Keyboard} from "./Keyboard";
 import {exit, renderEmulator} from "../redux/actions/jsspeccy";
 

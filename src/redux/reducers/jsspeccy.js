@@ -52,20 +52,35 @@ function renderEmulator(state, action) {
 }
 
 function handleClick(state, action) {
-    const emuElem = document.querySelector('#jsspeccy');
-    const keybElem = document.querySelector('#guiparent');
-    if (!emuElem.contains(action.e.target) && !keybElem.contains(action.e.target)) {
-        state.jsspeccy.pause();
+    const target = action.e.target;
+    if (target instanceof Element) {
+        if (target instanceof HTMLInputElement ||
+            target instanceof HTMLTextAreaElement ||
+            target.classList.contains('CodeMirror-lines') ||
+            target.classList.contains('CodeMirror-line') ||
+            target.classList.contains('CodeMirror-sizer') ||
+            target.classList.contains('CodeMirror')) {
+            state.jsspeccy.pause();
+        }
     }
 
     // There's no change to state here.
     return {...state};
 }
 
+function reset(state, _) {
+    state.jsspeccy.start();
+    state.jsspeccy.reset();
+    return {...state};
+}
+
+function pause(state, _) {
+    state.jsspeccy.pause();
+    return {...state};
+}
+
 function exit(state, _) {
     state.jsspeccy.exit();
-
-    // There's no change to state here.
     return {...state};
 }
 
@@ -76,6 +91,8 @@ function exit(state, _) {
 const actionsMap = {
     [actionTypes.renderEmulator]: renderEmulator,
     [actionTypes.handleClick]: handleClick,
+    [actionTypes.reset]: reset,
+    [actionTypes.pause]: pause,
     [actionTypes.exit]: exit,
 };
 
