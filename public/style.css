@@ -6,24 +6,3 @@
 body {
     background-color: #444;
 }
-
-#jsspeccy, #guiparent {
-    width: 960px;
-    margin: auto;
-}
-
-#jsspeccy {
-    background-color: #FFF;
-}
-
-#guiparent {
-    background-color: #444;
-}
-
-canvas {
-    image-rendering: pixelated;
-}
-
-canvas#virtkeys {
-    image-rendering: auto;
-}

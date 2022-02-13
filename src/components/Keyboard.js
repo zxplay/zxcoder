@@ -1,16 +1,31 @@
 import React, {useEffect} from "react";
+import PropTypes from "prop-types";
 import {ImageButton, SingleWindow} from "../lib/canvasgui";
 
-export function Keyboard() {
+export function Keyboard(props) {
+    const width = props.width || 960;
+
     useEffect(() => {
-        renderKeyboard();
+        renderKeyboard(width);
     }, []);
 
     return (
-        <div id="guiparent">
-            <canvas id="virtkeys" width="960"/>
+        <div id="guiparent" style={{
+            width: `${width}px`,
+            margin: "auto",
+            backgroundColor: "#444"
+        }}>
+            <canvas
+                id="virtkeys"
+                width={width}
+                style={{imageRendering: "auto"}}
+            />
         </div>
     )
+}
+
+Keyboard.propTypes = {
+    width: PropTypes.number
 }
 
 // _: [space]        space
@@ -66,7 +81,7 @@ class MyImageButton extends ImageButton {
     }
 }
 
-function renderKeyboard() {
+function renderKeyboard(width) {
     let keystr = '1234567890,QWERTYUIOP,ASDFGHJKLe,cZXCVBNMs_';
     // let keystr = '-W-P,ASDe,123456789M';    // snake
     // let keystr = 'GH-e,OP-Z';    // manic miner
@@ -79,7 +94,6 @@ function renderKeyboard() {
         }
     }
 
-    const width = 960;
     let height = 0;
 
     const btnrows = [];

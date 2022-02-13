@@ -1,19 +1,31 @@
 import React, {useEffect} from "react";
+import PropTypes from "prop-types";
 import {JSSpeccy} from "../lib/emulator/JSSpeccy";
 
-export function Emulator() {
+export function Emulator(props) {
+    const zoom = props.zoom || 3;
+    const width = zoom * 320;
+
     useEffect(() => {
-        renderEmulator();
+        renderEmulator(zoom);
     }, []);
 
     return (
-        <div id="jsspeccy"/>
+        <div id="jsspeccy" style={{
+            width: `${width}px`,
+            margin: "auto",
+            backgroundColor: "#FFF"
+        }}/>
     )
 }
 
-function renderEmulator() {
+Emulator.propTypes = {
+    zoom: PropTypes.number
+}
+
+function renderEmulator(zoom) {
     const emuParams = {
-        zoom: 3,
+        zoom,
         sandbox: false,
         autoLoadTapes: true,
     };
