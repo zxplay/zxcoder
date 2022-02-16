@@ -32,9 +32,6 @@ export default function App() {
                      style={{width: `${width + 8}px`, padding: "4px"}}>
                     <Emulator zoom={zoom} width={width}/>
                 </div>
-                <div className="col" style={{padding: "4px"}}>
-
-                </div>
             </div>
         </Fragment>
     )
