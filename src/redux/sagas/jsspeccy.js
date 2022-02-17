@@ -150,9 +150,7 @@ function* handleRunBasicActions(action) {
 
 function* handleRunAssemblyActions(action) {
     const asm = action.asm;
-    console.log('asm', asm);
     const tap = yield pasmo(asm);
-    console.log('tap', tap);
     jsspeccy.start();
     jsspeccy.openTAPFile(tap.buffer);
 }
