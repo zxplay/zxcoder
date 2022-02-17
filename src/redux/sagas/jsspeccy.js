@@ -4,6 +4,7 @@ import {handleClick} from "../actions/jsspeccy";
 import {JSSpeccy} from "../../lib/emulator/JSSpeccy";
 import {actionTypes} from "../actions/jsspeccy";
 import bas2tap from "bas2tap";
+import pasmo from "pasmo";
 
 // -----------------------------------------------------------------------------
 // Action watchers
@@ -51,6 +52,10 @@ export function* watchForShowGameBrowserActions() {
 
 export function* watchForRunBasicActions() {
     yield takeLatest(actionTypes.runBasic, handleRunBasicActions);
+}
+
+export function* watchForRunAssemblyActions() {
+    yield takeLatest(actionTypes.runAssembly, handleRunAssemblyActions);
 }
 
 // -----------------------------------------------------------------------------
@@ -139,6 +144,15 @@ function* handleShowGameBrowserActions(_) {
 function* handleRunBasicActions(action) {
     const basic = action.basic;
     const tap = yield bas2tap(basic);
+    jsspeccy.start();
+    jsspeccy.openTAPFile(tap.buffer);
+}
+
+function* handleRunAssemblyActions(action) {
+    const asm = action.asm;
+    console.log('asm', asm);
+    const tap = yield pasmo(asm);
+    console.log('tap', tap);
     jsspeccy.start();
     jsspeccy.openTAPFile(tap.buffer);
 }

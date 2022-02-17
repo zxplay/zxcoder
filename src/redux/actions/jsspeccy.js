@@ -7,6 +7,7 @@ export const actionTypes = {
     showOpenFileDialog: 'jsspeccy/openFileDialog',
     showGameBrowser: 'jsspeccy/showGameBrowser',
     runBasic: 'jsspeccy/runBasic',
+    runAssembly: 'jsspeccy/runAssembly',
 };
 
 export const renderEmulator = (target, zoom) => ({
@@ -42,4 +43,9 @@ export const showGameBrowser = () => ({
 export const runBasic = (basic) => ({
     type: actionTypes.runBasic,
     basic
+})
+
+export const runAssembly = (asm) => ({
+    type: actionTypes.runAssembly,
+    asm
 })
