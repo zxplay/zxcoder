@@ -29,6 +29,28 @@ export function Nav() {
             ]
         },
         {
+            label: 'View',
+            icon: 'pi pi-fw pi-eye',
+            items: [
+                {
+                    label: 'Full screen',
+                    icon: 'pi pi-fw pi-window-maximize',
+                    command: () => {/* TODO */}
+                }
+            ]
+        },
+        {
+            label: 'Help',
+            icon: 'pi pi-fw pi-question-circle',
+            items: [
+                {
+                    label: 'About',
+                    icon: 'pi pi-fw pi-info-circle',
+                    command: () => {/* TODO */}
+                }
+            ]
+        },
+        {
             label: 'Reset',
             icon: 'pi pi-fw pi-power-off',
             command: () => dispatch(reset())
