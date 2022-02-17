@@ -1,12 +1,14 @@
-# JSSpeccy 3
+# ZX Play
 
-A ZX Spectrum emulator for the browser.
+A ZX Spectrum emulator & programming environment for the browser.
+
+## JSSpeccy3 Core
+
+Based on [JSSpeccy3](https://github.com/gasman/jsspeccy3).
 
 This is a personal fork for some customisation also using mods from other forks.
 
-Original version: https://github.com/gasman/jsspeccy3
-
-## Features
+### Features
 
 * Emulates the Spectrum 48K, Spectrum 128K and Pentagon machines
 * Handles all Z80 instructions, documented and undocumented
@@ -17,7 +19,7 @@ Original version: https://github.com/gasman/jsspeccy3
 * Loads any of the above files from inside a ZIP file
 * 100% / 200% / 300% and fullscreen display modes
 
-## Implementation notes
+### Implementation notes
 
 JSSpeccy 3 is a complete rewrite of JSSpeccy to make full use of the web technologies 
 and APIs available as of 2021 for high-performance web apps. The emulation runs in a 
@@ -27,7 +29,7 @@ that are likely to interrupt its execution multiple times per frame, such as con
 the video output, reading the keyboard and generating audio) running in WebAssembly, 
 compiled from AssemblyScript (with a custom preprocessor).
 
-## Embedding
+### Embedding
 
 JSSpeccy 3 is designed with embedding in mind. To include it in your own site, download
 [a release archive](https://github.com/gasman/jsspeccy3/releases) and copy the contents 
@@ -37,15 +39,15 @@ files and the subdirectories in the same place relative to jsspeccy.js.
 In the `<head>` of your HTML page, include the tag
 
 ```html
-    <script src="/path/to/jsspeccy.js"></script>
+<script src="/path/to/jsspeccy.js"></script>
 ```
 
 replacing `/path/to/jsspeccy.js` with (yes!) the path to jsspeccy.js. At the point
 in the page where you want the emulator to show, place the code:
 
 ```html
-    <div id="jsspeccy"></div>
-    <script>JSSpeccy(document.getElementById('jsspeccy'))</script>
+<div id="jsspeccy"></div>
+<script>JSSpeccy(document.getElementById('jsspeccy'))</script>
 ```
 
 If you're suitably confident with JavaScript, you can put the call to `JSSpeccy` 
@@ -54,7 +56,7 @@ anywhere else that runs on page load, or in response to any user action.
 You can also pass configuration options as a second argument to `JSSpeccy`:
 
 ```html
-    <script>JSSpeccy(document.getElementById('jsspeccy'), {zoom: 2, machine: 48})</script>
+<script>JSSpeccy(document.getElementById('jsspeccy'), {zoom: 2, machine: 48})</script>
 ```
 
 The available configuration options are:
@@ -90,10 +92,10 @@ For additional JavaScript hackery, the return value of the JSSpeccy function cal
 is an object exposing a number of functions for controlling the running emulator:
 
 ```html
-    <script>
-        let emu = JSSpeccy(document.getElementById('jsspeccy'));
-        emu.openFileDialog();
-    </script>
+<script>
+    let emu = JSSpeccy(document.getElementById('jsspeccy'));
+    emu.openFileDialog();
+</script>
 ```
 
 * `emu.setZoom(zoomLevel)` - set the zoom level of the emulator
@@ -105,7 +107,7 @@ is an object exposing a number of functions for controlling the running emulator
 * `emu.openUrl(url)` - open the file at the given URL
 * `emu.exit()` - immediately stop the emulator and remove it from the document
 
-## JSSpeccy 3 mobile mod
+### JSSpeccy 3 mobile mod
 
 Source: https://github.com/dcrespo3d/jsspeccy3-mobile
 
@@ -113,7 +115,7 @@ Designed for mobile browsers with per-game customizable soft keys.
 
 Configured using URL parameters.
 
-### Example URL
+#### Example URL
 
 https://stever.github.io/jsspeccy3/?k=-W-P,ASDe,123456789M&m=48&u=https://davidprograma.github.io/ytc/09-ZxSpectrum/snake-1.01.tap
 
@@ -145,7 +147,7 @@ URL (*) for a Z80, SNA, SZX, TZX or TAP file containing the desired game or prog
 &f=1
 ```
 
-### Soft key syntax
+#### Soft key syntax
 
 The syntax is simple: keys are arranged as rows, and rows are separated by commas. 
 So, the previous strings has 3 rows:
@@ -164,7 +166,7 @@ The exceptions are:
 - Symbol shift: s (lowercase s)
 - Space: _ (underscore)
 
-## Palette mod
+### Palette mod
 
 Source: https://github.com/cronomantic/jsspeccy3
 
@@ -173,9 +175,9 @@ are most likely calculated by measuring voltages on the RGB output of the 128k m
 those systems generate RGBI signals that later are encoded to composite by the TEA2000 IC.
 Those are the colors that most emulators use and most people are used to.
 
-## Tech notes
+### Tech notes
 
-### Architecture
+#### Architecture
 
 The browser UI thread (starting point in runtime/jsspeccy.js) is kept as lightweight 
 as possible, only performing tasks that are directly related to communication with 
@@ -215,7 +217,7 @@ These are called immediately before any state change (which means, for audio, a
 write to any AY register or the beeper port; and for video, a write to video memory,
 change of border colour or a write to the memory paging port).
 
-### Building the core
+#### Building the core
 
 To build jsspeccy-core.wasm, we run the script generator/gencore.mjs, which runs 
 a preprocessing pass over the input file generator/core.ts.in, to generate the
@@ -253,7 +255,7 @@ The gencore.mjs preprocessor recognises the following directives:
    * `C = result;` is rewritten to `store<u8>(0x1000, result);`
 * `#optable` - generates the sequence of `case` statements that decode an opcode byte. The subroutine bodies for each class of instruction are defined in generator/instructions.mjs, and these are pattern-matched to the actual instruction lists in generator/opcodes_*.txt.
 
-### Frame buffer format
+#### Frame buffer format
 
 The frame buffer data structure (as written by the WebAssembly core and passed to
 the UI thread in the `frameCompleted` message) is essentially a log of all border, 
@@ -282,19 +284,19 @@ screen, and 32px right border), and 24 lines of lower border. This results in a
 * ...
 * 0x6560..0x65ff: line 23 of the lower border
 
-## Change log
+### Change log
 
-### 3.1 (2021-08-26)
+#### 3.1 (2021-08-26)
 
 * Real-time tape loading, including turbo loaders (except for direct recording, CSW and generalized data TZX blocks)
 * Emulate floating bus behaviour
 * Fix typo in docs (`openURL` -> `openUrl`)
 
-### 3.0.1 (2021-08-16)
+#### 3.0.1 (2021-08-16)
 
 * Fix relative jump instructions to not treat +0x7f as -0x81 (which broke the Protracker 3 player)
 
-### 3.0 (2021-08-14)
+#### 3.0 (2021-08-14)
 
 Initial release of JSSpeccy 3.
 
@@ -306,6 +308,6 @@ Initial release of JSSpeccy 3.
 * Fullscreen mode
 * Browsing games from Internet Archive
 
-## Licence
+### Licence
 
 JSSpeccy 3 is licensed under the GPL version 3 - see COPYING.
