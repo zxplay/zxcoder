@@ -15,23 +15,18 @@ canvas {
 .CodeMirror {
     font-family: monospace !important;
     font-size: 20px;
-    height: auto !important;
-    border: 1px solid #a9a9ae;
-    border-radius: 2px;
+    height: calc(100vh - 87px - 49px - 16px - 42px - 16px) !important;
     padding: 1px;
-    background-color: #ddd !important;
-}
-
-.CodeMirror:hover {
-    border-color: #525257;
+    background-color: #DDD !important;
+    border-radius: 4px;
 }
 
 .CodeMirror-focused {
-    border-color: #F96F43 !important;
+    border-color: #FFF !important;
     outline: 0 none;
-    -webkit-box-shadow: 0 0 0 0.1em #FDA78B;
-    -moz-box-shadow: 0 0 0 0.1em #FDA78B;
-    box-shadow: 0 0 0 0.1em #FDA78B;
+    -webkit-box-shadow: 0 0 0 0.1em #FFF;
+    -moz-box-shadow: 0 0 0 0.1em #FFF;
+    box-shadow: 0 0 0 0.1em #FFF;
     transition: border-color 0.2s, box-shadow 0.2s;
     border-radius: 2px;
 }
