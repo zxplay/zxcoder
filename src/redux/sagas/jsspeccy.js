@@ -3,7 +3,7 @@ import {eventChannel} from "redux-saga";
 import {handleClick} from "../actions/jsspeccy";
 import {JSSpeccy} from "../../lib/emulator/JSSpeccy";
 import {actionTypes} from "../actions/jsspeccy";
-import {bas2tap} from "../../lib/bas2tap";
+import bas2tap from "bas2tap";
 
 // -----------------------------------------------------------------------------
 // Action watchers
