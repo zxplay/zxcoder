@@ -26,6 +26,12 @@ export default function App() {
                         <TabPanel header="Sinclair Basic">
                             <BasicEditor code={exampleCode}/>
                         </TabPanel>
+                        <TabPanel header="Assembler">
+
+                        </TabPanel>
+                        <TabPanel header="C">
+
+                        </TabPanel>
                     </TabView>
                 </div>
                 <div className="col-fixed"
