@@ -11,8 +11,10 @@ export function BasicEditor(props) {
     const cmRef = useRef(null);
 
     const options = {
+        lineWrapping: true,
         readOnly: false,
         theme: 'default',
+        lineNumbers: true,
         matchBrackets: true
     };
 

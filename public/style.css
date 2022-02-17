@@ -14,10 +14,8 @@ canvas {
 
 .CodeMirror {
     font-family: monospace !important;
-    font-size: 20px;
+    font-size: 16px;
     height: calc(100vh - 87px - 49px - 16px - 42px - 16px) !important;
-    padding: 1px;
-    background-color: #DDD !important;
     border-radius: 4px;
 }
 
