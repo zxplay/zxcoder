@@ -26,12 +26,14 @@ export default function App() {
                         <TabPanel header="Sinclair Basic">
                             <BasicEditor code={'10 PRINT "Hello"\n20 GO TO 10'}/>
                         </TabPanel>
-                        <TabPanel header="Assembler">
+                        <TabPanel header="Z80 Assembler">
                             <AssemblyEditor code={asm}/>
                         </TabPanel>
+{/*
                         <TabPanel header="C">
                             <CEditor code={''}/>
                         </TabPanel>
+*/}
                     </TabView>
                 </div>
                 <div className="col-fixed"
