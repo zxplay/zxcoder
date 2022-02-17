@@ -7,14 +7,14 @@ import {TabPanel, TabView} from "primereact/tabview";
 import {Nav} from "./Nav";
 import {Emulator} from "./Emulator";
 import {BasicEditor} from "./BasicEditor";
+import {AssemblyEditor} from "./AssemblyEditor";
+import {CEditor} from "./CEditor";
 
 export default function App() {
     const [activeIndex, setActiveIndex] = useState(0);
 
     const zoom = 2;
     const width = zoom * 320;
-
-    const exampleCode = '10 PRINT "Hello"\n20 GO TO 10';
 
     return (
         <Fragment>
@@ -24,13 +24,13 @@ export default function App() {
                 <div className="col" style={{padding: "4px"}}>
                     <TabView activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
                         <TabPanel header="Sinclair Basic">
-                            <BasicEditor code={exampleCode}/>
+                            <BasicEditor code={'10 PRINT "Hello"\n20 GO TO 10'}/>
                         </TabPanel>
                         <TabPanel header="Assembler">
-
+                            <AssemblyEditor code={''}/>
                         </TabPanel>
                         <TabPanel header="C">
-
+                            <CEditor code={''}/>
                         </TabPanel>
                     </TabView>
                 </div>
