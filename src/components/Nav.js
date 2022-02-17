@@ -18,6 +18,10 @@ export function Nav() {
 
     const items = [
         {
+            label: 'ZX Play',
+            disabled: true
+        },
+        {
             label: 'File',
             icon: 'pi pi-fw pi-file',
             items: [
