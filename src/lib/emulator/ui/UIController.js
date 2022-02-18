@@ -214,8 +214,8 @@ export class UIController extends EventEmitter {
     showUI() {
         if (this.uiIsHidden) {
             this.uiIsHidden = false;
-            this.menuBar.show();
-            this.toolbar.show();
+            // this.menuBar.show();
+            // this.toolbar.show();
         }
     }
 

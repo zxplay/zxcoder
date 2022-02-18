@@ -6,7 +6,8 @@ import {Menubar} from "primereact/menubar";
 import {
     reset,
     showGameBrowser,
-    showOpenFileDialog
+    showOpenFileDialog,
+    viewFullScreen
 } from "../redux/actions/jsspeccy";
 
 export function Nav() {
@@ -41,7 +42,7 @@ export function Nav() {
                 {
                     label: 'Full screen',
                     icon: 'pi pi-fw pi-window-maximize',
-                    command: () => {/* TODO */}
+                    command: () => dispatch(viewFullScreen())
                 }
             ]
         },

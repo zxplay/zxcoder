@@ -8,6 +8,7 @@ export const actionTypes = {
     showGameBrowser: 'jsspeccy/showGameBrowser',
     runBasic: 'jsspeccy/runBasic',
     runAssembly: 'jsspeccy/runAssembly',
+    viewFullScreen: 'jsspeccy/viewFullScreen',
 };
 
 export const renderEmulator = (target, zoom) => ({
@@ -48,4 +49,8 @@ export const runBasic = (basic) => ({
 export const runAssembly = (asm) => ({
     type: actionTypes.runAssembly,
     asm
+})
+
+export const viewFullScreen = () => ({
+    type: actionTypes.viewFullScreen
 })

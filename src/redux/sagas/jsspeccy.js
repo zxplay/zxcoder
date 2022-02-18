@@ -58,6 +58,10 @@ export function* watchForRunAssemblyActions() {
     yield takeLatest(actionTypes.runAssembly, handleRunAssemblyActions);
 }
 
+export function* watchForViewFullScreenActions() {
+    yield takeLatest(actionTypes.viewFullScreen, handleViewFullScreenActions);
+}
+
 // -----------------------------------------------------------------------------
 // Action handlers
 // -----------------------------------------------------------------------------
@@ -153,6 +157,11 @@ function* handleRunAssemblyActions(action) {
     const tap = yield pasmo(asm);
     jsspeccy.start();
     jsspeccy.openTAPFile(tap.buffer);
+}
+
+function* handleViewFullScreenActions(action) {
+    jsspeccy.start();
+    jsspeccy.enterFullscreen();
 }
 
 // -----------------------------------------------------------------------------
