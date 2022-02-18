@@ -12,7 +12,11 @@ canvas {
     display: block;
 }
 
-h1, h2, h3, h4, h5 {
+.p-card h1,
+.p-card h2,
+.p-card h3,
+.p-card h4,
+.p-card h5 {
     margin: 30px 0 20px 0;
 }
 
@@ -20,17 +24,17 @@ h1, h2, h3, h4, h5 {
     margin-top: 0;
 }
 
-p {
+.p-card p {
     margin-bottom: 0.75em;
 }
 
-a,
-a:active,
-a:visited {
+.p-card a,
+.p-card a:active,
+.p-card a:visited {
     color: #fff;
 }
 
-blockquote {
+.p-card blockquote {
     font-style: italic;
 }
 
