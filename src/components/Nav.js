@@ -1,5 +1,6 @@
 import React from "react";
 import {useDispatch} from "react-redux";
+import {useNavigate} from "react-router-dom";
 import {InputText} from "primereact/inputtext";
 import {Menubar} from "primereact/menubar";
 import {
@@ -10,6 +11,7 @@ import {
 
 export function Nav() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const start = <img alt="logo" src="img/logo.png" height="40" className="mr-2"/>;
     const end = <InputText placeholder="Search" type="text" onClick={() => {
@@ -19,7 +21,7 @@ export function Nav() {
     const items = [
         {
             label: 'ZX Play',
-            disabled: true
+            command: () => navigate('/')
         },
         {
             label: 'File',
@@ -50,7 +52,7 @@ export function Nav() {
                 {
                     label: 'About',
                     icon: 'pi pi-fw pi-info-circle',
-                    command: () => {/* TODO */}
+                    command: () => navigate('/about')
                 }
             ]
         },
