@@ -2,6 +2,7 @@ import React, {Fragment, useState, useEffect, useRef} from "react";
 import PropTypes from "prop-types";
 import {Button} from "primereact/button";
 import CodeMirror from "./CodeMirror";
+import "codemirror/mode/z80/z80";
 import {useDispatch} from "react-redux";
 import {runAssembly} from "../redux/actions/jsspeccy";
 
@@ -15,7 +16,8 @@ export function AssemblyEditor(props) {
         readOnly: false,
         theme: 'default',
         lineNumbers: true,
-        matchBrackets: true
+        matchBrackets: true,
+        mode: 'z80'
     };
 
     useEffect(() => {

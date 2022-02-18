@@ -15,7 +15,8 @@ export function BasicEditor(props) {
         readOnly: false,
         theme: 'default',
         lineNumbers: true,
-        matchBrackets: true
+        matchBrackets: true,
+        mode: null
     };
 
     useEffect(() => {
