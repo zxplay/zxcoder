@@ -1,4 +1,4 @@
-import React, {Fragment} from "react";
+import React from "react";
 import {Card} from "primereact/card";
 
 export function About() {

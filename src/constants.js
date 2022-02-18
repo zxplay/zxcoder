@@ -5,5 +5,6 @@ const isDev = stagingEnv !== 'prod';
 const devLogging = false;
 
 export default {
+    isDev,
     logActions: isDev && devLogging,
 }
