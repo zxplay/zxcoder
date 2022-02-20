@@ -1,6 +1,7 @@
 import {take, takeLatest, put, call} from "redux-saga/effects";
 import {eventChannel} from "redux-saga";
-import {handleClick} from "../actions/jsspeccy";
+import {store} from "../store";
+import {handleClick, setSelectedTabIndex} from "../actions/jsspeccy";
 import {JSSpeccy} from "../../lib/emulator/JSSpeccy";
 import {actionTypes} from "../actions/jsspeccy";
 
@@ -154,6 +155,7 @@ function* handleClickActions(action) {
 }
 
 function* handleResetActions(_) {
+    store.dispatch(setSelectedTabIndex(0));
     jsspeccy.start();
     jsspeccy.reset();
 }

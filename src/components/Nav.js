@@ -60,7 +60,10 @@ export function Nav() {
         {
             label: 'Reset',
             icon: 'pi pi-fw pi-power-off',
-            command: () => dispatch(reset())
+            command: () => {
+                dispatch(reset());
+                navigate('/');
+            }
         }
     ];
 
