@@ -1,6 +1,6 @@
 import React from "react";
 import {useDispatch} from "react-redux";
-import {useNavigate} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import {InputText} from "primereact/inputtext";
 import {Menubar} from "primereact/menubar";
 import {
@@ -12,17 +12,19 @@ import {
 
 export function Nav() {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
+    const history = useHistory();
 
     const start = <img alt="logo" src="img/logo.png" height="40" className="mr-2"/>;
-    const end = <InputText placeholder="Search" type="text" onClick={() => {
-        dispatch(showGameBrowser())
-    }}/>;
+    const end = (
+        <InputText placeholder="Search" type="text" onClick={() => {
+            dispatch(showGameBrowser())
+        }}/>
+    );
 
     const items = [
         {
             label: 'ZX Play',
-            command: () => navigate('/')
+            command: () => history.push('/')
         },
         {
             label: 'File',
@@ -53,7 +55,7 @@ export function Nav() {
                 {
                     label: 'About',
                     icon: 'pi pi-fw pi-info-circle',
-                    command: () => navigate('/about')
+                    command: () => history.push('/about')
                 }
             ]
         },
@@ -62,7 +64,7 @@ export function Nav() {
             icon: 'pi pi-fw pi-power-off',
             command: () => {
                 dispatch(reset());
-                navigate('/');
+                history.push('/');
             }
         }
     ];

@@ -1,5 +1,5 @@
 import React, {Fragment, useEffect} from "react";
-import {Routes, Route} from "react-router-dom";
+import {Switch, Route} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import "primereact/resources/themes/md-dark-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
@@ -16,10 +16,14 @@ export default function App() {
             <RenderEmulator/>
             <Nav/>
             <div style={{maxWidth: '1024px', margin: 'auto'}}>
-                <Routes>
-                    <Route path="/" element={<MainCode/>} />
-                    <Route path="/about" element={<About/>} />
-                </Routes>
+                <Switch>
+                    <Route exact path="/">
+                        <MainCode/>
+                    </Route>
+                    <Route exact path="/about">
+                        <About/>
+                    </Route>
+                </Switch>
             </div>
         </Fragment>
     )

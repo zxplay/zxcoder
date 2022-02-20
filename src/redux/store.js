@@ -1,6 +1,7 @@
 import {createStore, combineReducers, applyMiddleware} from "redux";
 import createSagaMiddleware from "redux-saga";
 import {all} from "redux-saga/effects";
+import {connectRouter, routerMiddleware} from "connected-react-router";
 import {createBrowserHistory} from "history";
 import Constants from "../constants";
 
@@ -44,6 +45,7 @@ export const history = createBrowserHistory();
 const sagaMiddleware = createSagaMiddleware();
 
 const rootReducer = combineReducers({
+    router: connectRouter(history),
     asm: asmReducer,
     basic: basicReducer,
     jsspeccy: jsspeccyReducer,
@@ -52,6 +54,7 @@ const rootReducer = combineReducers({
 export const store = createStore(
     rootReducer,
     applyMiddleware(
+        routerMiddleware(history),
         loggingMiddleware,
         sagaMiddleware));
 
