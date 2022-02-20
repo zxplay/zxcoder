@@ -6,7 +6,7 @@ import {setSelectedTabIndex} from "../redux/actions/jsspeccy";
 import {setAssemblyCode, runAssembly} from "../redux/actions/asm";
 import "codemirror/mode/z80/z80";
 
-export function AssemblyEditor(props) {
+export function AssemblyEditor() {
     const dispatch = useDispatch();
     const cmRef = useRef(null);
     const asmCode = useSelector(state => state?.asm.asmCode);
