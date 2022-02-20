@@ -5,6 +5,7 @@ const isDev = stagingEnv !== 'prod';
 const devLogging = true;
 
 export default {
-    isDev,
+    authEndpoint: isDev ? 'http://localhost:5003' : '/auth',
     logActions: isDev && devLogging,
+    isDev,
 }

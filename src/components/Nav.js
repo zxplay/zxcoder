@@ -9,6 +9,7 @@ import {
     showOpenFileDialog,
     viewFullScreen
 } from "../redux/actions/jsspeccy";
+import Constants from "../constants";
 
 export function Nav() {
     const dispatch = useDispatch();
@@ -69,6 +70,11 @@ export function Nav() {
                 dispatch(reset());
                 history.push('/');
             }
+        },
+        {
+            label: 'Sign-in',
+            icon: 'pi pi-fw pi-sign-in',
+            command: () => window.location = Constants.authEndpoint
         }
     ];
 
