@@ -12,6 +12,11 @@ canvas {
     display: block;
 }
 
+.maincode-body {
+    max-width: 1328px;
+    margin: auto;
+}
+
 .p-card h1,
 .p-card h2,
 .p-card h3,

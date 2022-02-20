@@ -11,21 +11,23 @@ export function MainCode() {
     const width = zoom * 320;
 
     return (
-        <div className="grid"
-             style={{width: "100%", padding: "4px", margin: 0}}>
-            <div className="col" style={{padding: "4px"}}>
-                <TabView activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
-                    <TabPanel header="Sinclair Basic">
-                        <BasicEditor code={'10 PRINT "Hello"\n20 GO TO 10'}/>
-                    </TabPanel>
-                    <TabPanel header="Z80 Assembler">
-                        <AssemblyEditor code={asm}/>
-                    </TabPanel>
-                </TabView>
-            </div>
-            <div className="col-fixed"
-                 style={{width: `${width + 8}px`, padding: "4px"}}>
-                <Emulator zoom={zoom} width={width}/>
+        <div className="maincode-body">
+            <div className="grid"
+                 style={{width: "100%", padding: "4px", margin: 0}}>
+                <div className="col" style={{padding: "4px"}}>
+                    <TabView activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
+                        <TabPanel header="Sinclair Basic">
+                            <BasicEditor code={'10 PRINT "Hello"\n20 GO TO 10'}/>
+                        </TabPanel>
+                        <TabPanel header="Z80 Assembler">
+                            <AssemblyEditor code={asm}/>
+                        </TabPanel>
+                    </TabView>
+                </div>
+                <div className="col-fixed"
+                     style={{width: `${width + 8}px`, padding: "4px"}}>
+                    <Emulator zoom={zoom} width={width}/>
+                </div>
             </div>
         </div>
     )
