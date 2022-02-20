@@ -22,8 +22,8 @@ canvas {
     image-rendering: crisp-edges;
 }
 
-.maincode-body {
-    margin: auto;
+.main-content {
+    color-scheme: light;
 }
 
 .p-card h1,
