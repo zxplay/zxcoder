@@ -16,7 +16,6 @@ export function AssemblyEditor() {
         readOnly: false,
         theme: 'default',
         lineNumbers: true,
-        matchBrackets: true,
         mode: 'z80'
     };
 

@@ -15,7 +15,6 @@ export function BasicEditor() {
         readOnly: false,
         theme: 'default',
         lineNumbers: true,
-        matchBrackets: true,
         mode: null
     };
 
