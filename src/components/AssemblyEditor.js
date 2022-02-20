@@ -2,9 +2,9 @@ import React, {Fragment, useEffect, useRef} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Button} from "primereact/button";
 import CodeMirror from "./CodeMirror";
-import "codemirror/mode/z80/z80";
 import {setSelectedTabIndex} from "../redux/actions/jsspeccy";
 import {setAssemblyCode, runAssembly} from "../redux/actions/asm";
+import "codemirror/mode/z80/z80";
 
 export function AssemblyEditor(props) {
     const dispatch = useDispatch();
@@ -12,7 +12,7 @@ export function AssemblyEditor(props) {
     const asmCode = useSelector(state => state?.asm.asmCode);
 
     const options = {
-        lineWrapping: true,
+        lineWrapping: false,
         readOnly: false,
         theme: 'default',
         lineNumbers: true,

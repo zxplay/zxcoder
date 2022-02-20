@@ -11,6 +11,7 @@
 body {
     background-color: #444;
     overflow-y: scroll;
+    height: 100vh;
 }
 
 canvas {
@@ -54,19 +55,8 @@ canvas {
 .CodeMirror {
     font-family: monospace !important;
     font-size: 16px !important;
-    height: calc(100vh - 87px - 49px - 16px - 42px - 16px) !important;
-    /*height: calc(736px - 256px) !important;*/
-    /*border-radius: 4px;*/
-}
-
-.CodeMirror-focused {
-    /*border-color: #FFF !important;*/
-    /*outline: 0 none;*/
-    /*-webkit-box-shadow: 0 0 0 0.1em #FFF;*/
-    /*-moz-box-shadow: 0 0 0 0.1em #FFF;*/
-    /*box-shadow: 0 0 0 0.1em #FFF;*/
-    /*transition: border-color 0.2s, box-shadow 0.2s;*/
-    /*border-radius: 2px;*/
+    /*height: calc(100vh - 87px - 49px - 16px - 42px - 16px) !important;*/
+    height: calc(736px - 256px) !important;
 }
 
 .p-tabview-panels {

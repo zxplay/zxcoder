@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {Button} from "primereact/button";
 import CodeMirror from "./CodeMirror";
 import {setSelectedTabIndex} from "../redux/actions/jsspeccy";
-import {runBasic, setBasicCode} from "../redux/actions/basic";
+import {setBasicCode, runBasic} from "../redux/actions/basic";
 
 export function BasicEditor() {
     const dispatch = useDispatch();
@@ -11,7 +11,7 @@ export function BasicEditor() {
     const basicCode = useSelector(state => state?.basic.basicCode);
 
     const options = {
-        lineWrapping: true,
+        lineWrapping: false,
         readOnly: false,
         theme: 'default',
         lineNumbers: true,
