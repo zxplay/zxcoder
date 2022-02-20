@@ -1,14 +1,14 @@
-import React, {Fragment, useState, useEffect, useRef} from "react";
-import PropTypes from "prop-types";
-import {useDispatch} from "react-redux";
+import React, {Fragment, useEffect, useRef} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import {Button} from "primereact/button";
 import CodeMirror from "./CodeMirror";
-import {runBasic, setSelectedTabIndex} from "../redux/actions/jsspeccy";
+import {setSelectedTabIndex} from "../redux/actions/jsspeccy";
+import {runBasic, setBasicCode} from "../redux/actions/basic";
 
-export function BasicEditor(props) {
-    const [code, setCode] = useState(props.code || '');
+export function BasicEditor() {
     const dispatch = useDispatch();
     const cmRef = useRef(null);
+    const basicCode = useSelector(state => state?.basic.basicCode);
 
     const options = {
         lineWrapping: true,
@@ -21,7 +21,8 @@ export function BasicEditor(props) {
 
     useEffect(() => {
         const cm = cmRef.current.getCodeMirror();
-        cm.setValue(props.code || '');
+        cm.setValue(basicCode || '');
+        dispatch(setBasicCode(cm.getValue()))
     }, []);
 
     return (
@@ -29,7 +30,7 @@ export function BasicEditor(props) {
             <CodeMirror
                 ref={cmRef}
                 options={options}
-                onChange={(cm, _) => setCode(cm.getValue())}
+                onChange={(cm, _) => dispatch(setBasicCode(cm.getValue()))}
             />
             <Button
                 label="Run"
@@ -37,13 +38,9 @@ export function BasicEditor(props) {
                 style={{marginTop: "8px"}}
                 onClick={() => {
                     dispatch(setSelectedTabIndex(0));
-                    dispatch(runBasic(code));
+                    dispatch(runBasic());
                 }}
             />
         </Fragment>
     )
-}
-
-BasicEditor.propTypes = {
-    code: PropTypes.string
 }

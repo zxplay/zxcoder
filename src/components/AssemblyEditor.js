@@ -1,15 +1,15 @@
-import React, {Fragment, useState, useEffect, useRef} from "react";
-import PropTypes from "prop-types";
-import {useDispatch} from "react-redux";
+import React, {Fragment, useEffect, useRef} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import {Button} from "primereact/button";
 import CodeMirror from "./CodeMirror";
 import "codemirror/mode/z80/z80";
-import {runAssembly, setSelectedTabIndex} from "../redux/actions/jsspeccy";
+import {setSelectedTabIndex} from "../redux/actions/jsspeccy";
+import {setAssemblyCode, runAssembly} from "../redux/actions/asm";
 
 export function AssemblyEditor(props) {
-    const [code, setCode] = useState(props.code || '');
     const dispatch = useDispatch();
     const cmRef = useRef(null);
+    const asmCode = useSelector(state => state?.asm.asmCode);
 
     const options = {
         lineWrapping: true,
@@ -22,7 +22,8 @@ export function AssemblyEditor(props) {
 
     useEffect(() => {
         const cm = cmRef.current.getCodeMirror();
-        cm.setValue(props.code || '');
+        cm.setValue(asmCode || '');
+        dispatch(setAssemblyCode(cm.getValue()))
     }, []);
 
     return (
@@ -30,7 +31,7 @@ export function AssemblyEditor(props) {
             <CodeMirror
                 ref={cmRef}
                 options={options}
-                onChange={(cm, _) => setCode(cm.getValue())}
+                onChange={(cm, _) => dispatch(setAssemblyCode(cm.getValue()))}
             />
             <Button
                 label="Run"
@@ -38,13 +39,9 @@ export function AssemblyEditor(props) {
                 style={{marginTop: "8px"}}
                 onClick={() => {
                     dispatch(setSelectedTabIndex(0));
-                    dispatch(runAssembly(code));
+                    dispatch(runAssembly());
                 }}
             />
         </Fragment>
     )
-}
-
-AssemblyEditor.propTypes = {
-    code: PropTypes.string
 }

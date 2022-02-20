@@ -5,9 +5,13 @@ import {createBrowserHistory} from "history";
 import Constants from "../constants";
 
 // Reducers
+import asmReducer from "./reducers/asm";
+import basicReducer from "./reducers/basic";
 import jsspeccyReducer from "./reducers/jsspeccy";
 
 // Sagas
+import * as asmSagas from "./sagas/asm";
+import * as basicSagas from "./sagas/basic";
 import * as jsspeccySagas from "./sagas/jsspeccy";
 
 const loggingMiddleware = (store) => {
@@ -40,6 +44,8 @@ export const history = createBrowserHistory();
 const sagaMiddleware = createSagaMiddleware();
 
 const rootReducer = combineReducers({
+    asm: asmReducer,
+    basic: basicReducer,
     jsspeccy: jsspeccyReducer,
 });
 
@@ -59,6 +65,8 @@ function collectSagas(file) {
     }
 }
 
+collectSagas(asmSagas);
+collectSagas(basicSagas);
 collectSagas(jsspeccySagas);
 
 function* rootSaga() {

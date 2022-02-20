@@ -13,7 +13,6 @@ export function Emulator(props) {
     useEffect(() => {
         const elem = document.getElementById('jsspeccy-screen');
         dispatch(loadEmulator(elem));
-        return () => {}
     }, []);
 
     return (

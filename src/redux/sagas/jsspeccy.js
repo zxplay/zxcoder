@@ -3,8 +3,6 @@ import {eventChannel} from "redux-saga";
 import {handleClick} from "../actions/jsspeccy";
 import {JSSpeccy} from "../../lib/emulator/JSSpeccy";
 import {actionTypes} from "../actions/jsspeccy";
-import bas2tap from "bas2tap";
-import pasmo from "pasmo";
 
 // -----------------------------------------------------------------------------
 // Action watchers
@@ -18,6 +16,11 @@ export function* watchForRenderEmulatorActions() {
 // noinspection JSUnusedGlobalSymbols
 export function* watchForLoadEmulatorActions() {
     yield takeLatest(actionTypes.loadEmulator, handleLoadEmulatorActions);
+}
+
+// noinspection JSUnusedGlobalSymbols
+export function* watchForLoadTapeActions() {
+    yield takeLatest(actionTypes.loadTape, handleLoadTapeActions);
 }
 
 // noinspection JSUnusedGlobalSymbols
@@ -61,16 +64,6 @@ export function* watchForOpenFileDialogActions() {
 // noinspection JSUnusedGlobalSymbols
 export function* watchForShowGameBrowserActions() {
     yield takeLatest(actionTypes.showGameBrowser, handleShowGameBrowserActions);
-}
-
-// noinspection JSUnusedGlobalSymbols
-export function* watchForRunBasicActions() {
-    yield takeLatest(actionTypes.runBasic, handleRunBasicActions);
-}
-
-// noinspection JSUnusedGlobalSymbols
-export function* watchForRunAssemblyActions() {
-    yield takeLatest(actionTypes.runAssembly, handleRunAssemblyActions);
 }
 
 // noinspection JSUnusedGlobalSymbols
@@ -133,6 +126,11 @@ function* handleLoadEmulatorActions(action) {
     action.target.appendChild(fragment);
 }
 
+function* handleLoadTapeActions(action) {
+    jsspeccy.start();
+    jsspeccy.openTAPFile(action.tap.buffer);
+}
+
 function* handleClickActions(action) {
     const target = action.e.target;
 
@@ -174,20 +172,6 @@ function* handleOpenFileDialogActions(_) {
 
 function* handleShowGameBrowserActions(_) {
     jsspeccy.openGameBrowser();
-}
-
-function* handleRunBasicActions(action) {
-    const basic = action.basic;
-    const tap = yield bas2tap(basic);
-    jsspeccy.start();
-    jsspeccy.openTAPFile(tap.buffer);
-}
-
-function* handleRunAssemblyActions(action) {
-    const asm = action.asm;
-    const tap = yield pasmo(asm);
-    jsspeccy.start();
-    jsspeccy.openTAPFile(tap.buffer);
 }
 
 function* handleViewFullScreenActions(_) {

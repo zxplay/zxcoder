@@ -1,14 +1,13 @@
 export const actionTypes = {
     renderEmulator: 'jsspeccy/renderEmulator',
     loadEmulator: 'jsspeccy/loadEmulator',
+    loadTape: 'jsspeccy/loadTape',
     handleClick: 'jsspeccy/handleClick',
     reset: 'jsspeccy/reset',
     pause: 'jsspeccy/pause',
     exit: 'jsspeccy/exit',
     showOpenFileDialog: 'jsspeccy/openFileDialog',
     showGameBrowser: 'jsspeccy/showGameBrowser',
-    runBasic: 'jsspeccy/runBasic',
-    runAssembly: 'jsspeccy/runAssembly',
     viewFullScreen: 'jsspeccy/viewFullScreen',
     setSelectedTabIndex: 'jsspeccy/setSelectedTabIndex',
 };
@@ -21,6 +20,11 @@ export const renderEmulator = (zoom) => ({
 export const loadEmulator = (target) => ({
     type: actionTypes.loadEmulator,
     target
+});
+
+export const loadTape = (tap) => ({
+    type: actionTypes.loadTape,
+    tap
 });
 
 export const handleClick = (e) => ({
@@ -46,16 +50,6 @@ export const showOpenFileDialog = () => ({
 
 export const showGameBrowser = () => ({
     type: actionTypes.showGameBrowser
-})
-
-export const runBasic = (basic) => ({
-    type: actionTypes.runBasic,
-    basic
-})
-
-export const runAssembly = (asm) => ({
-    type: actionTypes.runAssembly,
-    asm
 })
 
 export const viewFullScreen = () => ({
