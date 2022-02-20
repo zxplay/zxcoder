@@ -5,8 +5,7 @@ FROM node:16 AS npmbuild
 WORKDIR /project
 COPY . .
 RUN npm install
-RUN npm run sass
-RUN npm run build
+RUN npm run build:all:release
 
 FROM base AS final
 COPY --from=npmbuild /project/public /srv
