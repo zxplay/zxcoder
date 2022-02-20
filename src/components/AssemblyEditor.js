@@ -1,10 +1,10 @@
 import React, {Fragment, useState, useEffect, useRef} from "react";
 import PropTypes from "prop-types";
+import {useDispatch} from "react-redux";
 import {Button} from "primereact/button";
 import CodeMirror from "./CodeMirror";
 import "codemirror/mode/z80/z80";
-import {useDispatch} from "react-redux";
-import {runAssembly} from "../redux/actions/jsspeccy";
+import {runAssembly, setSelectedTabIndex} from "../redux/actions/jsspeccy";
 
 export function AssemblyEditor(props) {
     const [code, setCode] = useState(props.code || '');
@@ -36,7 +36,10 @@ export function AssemblyEditor(props) {
                 label="Run"
                 icon="pi pi-play"
                 style={{marginTop: "8px"}}
-                onClick={() => dispatch(runAssembly(code))}
+                onClick={() => {
+                    dispatch(setSelectedTabIndex(0));
+                    dispatch(runAssembly(code));
+                }}
             />
         </Fragment>
     )

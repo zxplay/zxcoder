@@ -1,9 +1,9 @@
 import React, {Fragment, useState, useEffect, useRef} from "react";
 import PropTypes from "prop-types";
+import {useDispatch} from "react-redux";
 import {Button} from "primereact/button";
 import CodeMirror from "./CodeMirror";
-import {useDispatch} from "react-redux";
-import {runBasic} from "../redux/actions/jsspeccy";
+import {runBasic, setSelectedTabIndex} from "../redux/actions/jsspeccy";
 
 export function BasicEditor(props) {
     const [code, setCode] = useState(props.code || '');
@@ -35,7 +35,10 @@ export function BasicEditor(props) {
                 label="Run"
                 icon="pi pi-play"
                 style={{marginTop: "8px"}}
-                onClick={() => dispatch(runBasic(code))}
+                onClick={() => {
+                    dispatch(setSelectedTabIndex(0));
+                    dispatch(runBasic(code));
+                }}
             />
         </Fragment>
     )

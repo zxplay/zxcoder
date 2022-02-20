@@ -1,3 +1,7 @@
+:root {
+    color-scheme: dark;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -6,14 +10,18 @@
 
 body {
     background-color: #444;
+    overflow-y: scroll;
 }
 
 canvas {
     display: block;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-crisp-edges;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
 }
 
 .maincode-body {
-    max-width: 1328px;
     margin: auto;
 }
 
@@ -45,19 +53,20 @@ canvas {
 
 .CodeMirror {
     font-family: monospace !important;
-    font-size: 16px;
+    font-size: 16px !important;
     height: calc(100vh - 87px - 49px - 16px - 42px - 16px) !important;
-    border-radius: 4px;
+    /*height: calc(736px - 256px) !important;*/
+    /*border-radius: 4px;*/
 }
 
 .CodeMirror-focused {
-    border-color: #FFF !important;
-    outline: 0 none;
-    -webkit-box-shadow: 0 0 0 0.1em #FFF;
-    -moz-box-shadow: 0 0 0 0.1em #FFF;
-    box-shadow: 0 0 0 0.1em #FFF;
-    transition: border-color 0.2s, box-shadow 0.2s;
-    border-radius: 2px;
+    /*border-color: #FFF !important;*/
+    /*outline: 0 none;*/
+    /*-webkit-box-shadow: 0 0 0 0.1em #FFF;*/
+    /*-moz-box-shadow: 0 0 0 0.1em #FFF;*/
+    /*box-shadow: 0 0 0 0.1em #FFF;*/
+    /*transition: border-color 0.2s, box-shadow 0.2s;*/
+    /*border-radius: 2px;*/
 }
 
 .p-tabview-panels {

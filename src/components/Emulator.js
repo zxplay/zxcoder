@@ -2,7 +2,7 @@ import React, {Fragment, useEffect} from "react";
 import PropTypes from "prop-types";
 import {useDispatch} from "react-redux";
 import {Keyboard} from "./Keyboard";
-import {exit, renderEmulator} from "../redux/actions/jsspeccy";
+import {loadEmulator} from "../redux/actions/jsspeccy";
 
 export function Emulator(props) {
     const dispatch = useDispatch();
@@ -11,20 +11,14 @@ export function Emulator(props) {
     const width = props.width || zoom * 320;
 
     useEffect(() => {
-        const target = document.getElementById('jsspeccy');
-        dispatch(renderEmulator(target, zoom));
-        return () => {
-            dispatch(exit());
-        }
+        const elem = document.getElementById('jsspeccy-screen');
+        dispatch(loadEmulator(elem));
+        return () => {}
     }, []);
 
     return (
         <Fragment>
-            <div id="jsspeccy" style={{
-                width: `${width}px`,
-                margin: "auto",
-                backgroundColor: "#FFF"
-            }}/>
+            <div id="jsspeccy-screen"/>
             <Keyboard width={width}/>
         </Fragment>
     )

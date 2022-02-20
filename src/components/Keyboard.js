@@ -12,7 +12,7 @@ export function Keyboard(props) {
     return (
         <div id="guiparent" style={{
             width: `${width}px`,
-            margin: "auto",
+            margin: 0,
             backgroundColor: "#444",
             padding: 0
         }}>

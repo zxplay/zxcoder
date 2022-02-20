@@ -1,5 +1,6 @@
 export const actionTypes = {
     renderEmulator: 'jsspeccy/renderEmulator',
+    loadEmulator: 'jsspeccy/loadEmulator',
     handleClick: 'jsspeccy/handleClick',
     reset: 'jsspeccy/reset',
     pause: 'jsspeccy/pause',
@@ -9,11 +10,17 @@ export const actionTypes = {
     runBasic: 'jsspeccy/runBasic',
     runAssembly: 'jsspeccy/runAssembly',
     viewFullScreen: 'jsspeccy/viewFullScreen',
+    setSelectedTabIndex: 'jsspeccy/setSelectedTabIndex',
 };
 
-export const renderEmulator = (target, zoom) => ({
+export const renderEmulator = (zoom) => ({
     type: actionTypes.renderEmulator,
-    target, zoom
+    zoom
+});
+
+export const loadEmulator = (target) => ({
+    type: actionTypes.loadEmulator,
+    target
 });
 
 export const handleClick = (e) => ({
@@ -53,4 +60,9 @@ export const runAssembly = (asm) => ({
 
 export const viewFullScreen = () => ({
     type: actionTypes.viewFullScreen
+})
+
+export const setSelectedTabIndex = (index) => ({
+    type: actionTypes.setSelectedTabIndex,
+    index
 })

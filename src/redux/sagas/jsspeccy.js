@@ -10,10 +10,17 @@ import pasmo from "pasmo";
 // Action watchers
 // -----------------------------------------------------------------------------
 
+// noinspection JSUnusedGlobalSymbols
 export function* watchForRenderEmulatorActions() {
     yield takeLatest(actionTypes.renderEmulator, handleRenderEmulatorActions);
 }
 
+// noinspection JSUnusedGlobalSymbols
+export function* watchForLoadEmulatorActions() {
+    yield takeLatest(actionTypes.loadEmulator, handleLoadEmulatorActions);
+}
+
+// noinspection JSUnusedGlobalSymbols
 export function* watchForClickEvents() {
     const chan = yield call(getClickEventChannel);
     try {
@@ -26,38 +33,47 @@ export function* watchForClickEvents() {
     }
 }
 
+// noinspection JSUnusedGlobalSymbols
 export function* watchForHandleClickActions() {
     yield takeLatest(actionTypes.handleClick, handleClickActions);
 }
 
+// noinspection JSUnusedGlobalSymbols
 export function* watchForResetActions() {
     yield takeLatest(actionTypes.reset, handleResetActions);
 }
 
+// noinspection JSUnusedGlobalSymbols
 export function* watchForPauseActions() {
     yield takeLatest(actionTypes.pause, handlePauseActions);
 }
 
+// noinspection JSUnusedGlobalSymbols
 export function* watchForExitActions() {
     yield takeLatest(actionTypes.exit, handleExitActions);
 }
 
+// noinspection JSUnusedGlobalSymbols
 export function* watchForOpenFileDialogActions() {
     yield takeLatest(actionTypes.showOpenFileDialog, handleOpenFileDialogActions);
 }
 
+// noinspection JSUnusedGlobalSymbols
 export function* watchForShowGameBrowserActions() {
     yield takeLatest(actionTypes.showGameBrowser, handleShowGameBrowserActions);
 }
 
+// noinspection JSUnusedGlobalSymbols
 export function* watchForRunBasicActions() {
     yield takeLatest(actionTypes.runBasic, handleRunBasicActions);
 }
 
+// noinspection JSUnusedGlobalSymbols
 export function* watchForRunAssemblyActions() {
     yield takeLatest(actionTypes.runAssembly, handleRunAssemblyActions);
 }
 
+// noinspection JSUnusedGlobalSymbols
 export function* watchForViewFullScreenActions() {
     yield takeLatest(actionTypes.viewFullScreen, handleViewFullScreenActions);
 }
@@ -68,7 +84,13 @@ export function* watchForViewFullScreenActions() {
 
 function* handleRenderEmulatorActions(action) {
     const zoom = action.zoom || 2;
-    const target = action.target || document.getElementById('jsspeccy');
+    const width = zoom * 320;
+
+    console.assert(target === undefined);
+    target = document.createElement('div');
+    target.style.width = `${width}px`;
+    target.style.margin = '0px';
+    target.style.backgroundColor = '#fff';
 
     const emuParams = {
         zoom,
@@ -93,6 +115,7 @@ function* handleRenderEmulatorActions(action) {
         }
     }
 
+    console.assert(jsspeccy === undefined);
     jsspeccy = JSSpeccy(target, emuParams);
     jsspeccy.hideUI();
 
@@ -100,6 +123,14 @@ function* handleRenderEmulatorActions(action) {
         // TODO: Investigate this option, and narrow the element selector.
         document.getElementsByTagName('canvas')[0].style.imageRendering = "auto";
     }
+}
+
+function* handleLoadEmulatorActions(action) {
+    console.assert(action.target, 'no action target to append fragment to');
+    console.assert(target, 'no target to append to fragment');
+    const fragment = document.createDocumentFragment();
+    fragment.appendChild(target);
+    action.target.appendChild(fragment);
 }
 
 function* handleClickActions(action) {
@@ -159,7 +190,7 @@ function* handleRunAssemblyActions(action) {
     jsspeccy.openTAPFile(tap.buffer);
 }
 
-function* handleViewFullScreenActions(action) {
+function* handleViewFullScreenActions(_) {
     jsspeccy.start();
     jsspeccy.enterFullscreen();
 }
@@ -168,6 +199,7 @@ function* handleViewFullScreenActions(action) {
 // Supporting code
 // -----------------------------------------------------------------------------
 
+let target = undefined;
 let jsspeccy = undefined;
 
 function getClickEventChannel() {

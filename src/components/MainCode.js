@@ -1,33 +1,41 @@
-import React, {useState} from "react";
+import React from "react";
+import {useDispatch, useSelector} from "react-redux";
 import {TabPanel, TabView} from "primereact/tabview";
 import {BasicEditor} from "./BasicEditor";
 import {AssemblyEditor} from "./AssemblyEditor";
 import {Emulator} from "./Emulator";
+import {setSelectedTabIndex} from "../redux/actions/jsspeccy";
 
 export function MainCode() {
-    const [activeIndex, setActiveIndex] = useState(0);
-
+    const dispatch = useDispatch();
+    const activeIndex = useSelector(state => state?.jsspeccy.selectedTabIndex);
     const zoom = 2;
     const width = zoom * 320;
 
     return (
-        <div className="maincode-body">
-            <div className="grid"
-                 style={{width: "100%", padding: "4px", margin: 0}}>
-                <div className="col" style={{padding: "4px"}}>
-                    <TabView activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
-                        <TabPanel header="Sinclair Basic">
-                            <BasicEditor code={'10 PRINT "Hello"\n20 GO TO 10'}/>
-                        </TabPanel>
-                        <TabPanel header="Z80 Assembler">
-                            <AssemblyEditor code={asm}/>
-                        </TabPanel>
-                    </TabView>
-                </div>
-                <div className="col-fixed"
-                     style={{width: `${width + 8}px`, padding: "4px"}}>
-                    <Emulator zoom={zoom} width={width}/>
-                </div>
+        <div className="grid"
+             style={{width: "100%", padding: 0, margin: 0}}>
+            <div className="col" style={{padding: 0}}>
+
+            </div>
+            <div className="col-fixed"
+                 style={{width: `${width}px`, padding: '4px 0 0 0'}}>
+                <TabView
+                    activeIndex={activeIndex}
+                    onTabChange={(e) => dispatch(setSelectedTabIndex(e.index))}>
+                    <TabPanel header="Emulator">
+                        <Emulator zoom={zoom} width={width}/>
+                    </TabPanel>
+                    <TabPanel header="Sinclair Basic">
+                        <BasicEditor code={'10 PRINT "Hello"\n20 GO TO 10'}/>
+                    </TabPanel>
+                    <TabPanel header="Z80 Assembler">
+                        <AssemblyEditor code={asm}/>
+                    </TabPanel>
+                </TabView>
+            </div>
+            <div className="col" style={{padding: 0}}>
+
             </div>
         </div>
     )
