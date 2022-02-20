@@ -27,11 +27,11 @@ export function Nav() {
             command: () => history.push('/')
         },
         {
-            label: 'File',
+            label: 'Project',
             icon: 'pi pi-fw pi-file',
             items: [
                 {
-                    label: 'Open',
+                    label: 'Open Tape File',
                     icon: 'pi pi-fw pi-folder-open',
                     command: () => dispatch(showOpenFileDialog())
                 }
@@ -44,17 +44,18 @@ export function Nav() {
                 {
                     label: 'Full screen',
                     icon: 'pi pi-fw pi-window-maximize',
+                    disabled: false, // TODO: Disable if not on root page with first tab.
                     command: () => dispatch(viewFullScreen())
                 }
             ]
         },
         {
-            label: 'Help',
-            icon: 'pi pi-fw pi-question-circle',
+            label: 'Info',
+            icon: 'pi pi-fw pi-info-circle',
             items: [
                 {
                     label: 'About',
-                    icon: 'pi pi-fw pi-info-circle',
+                    icon: 'pi pi-fw pi-question-circle',
                     command: () => history.push('/about')
                 }
             ]
