@@ -1,5 +1,5 @@
 import React from "react";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
 import {InputText} from "primereact/inputtext";
 import {Menubar} from "primereact/menubar";
@@ -13,6 +13,8 @@ import {
 export function Nav() {
     const dispatch = useDispatch();
     const history = useHistory();
+    const pathname = useSelector(state => state?.router.location.pathname);
+    const selectedTabIndex = useSelector(state => state?.jsspeccy.selectedTabIndex);
 
     const start = <img alt="logo" src="img/logo.png" height="40" className="mr-2"/>;
     const end = (
@@ -44,7 +46,7 @@ export function Nav() {
                 {
                     label: 'Full screen',
                     icon: 'pi pi-fw pi-window-maximize',
-                    disabled: false, // TODO: Disable if not on root page with first tab.
+                    disabled: !(pathname === '/' && selectedTabIndex === 0),
                     command: () => dispatch(viewFullScreen())
                 }
             ]
