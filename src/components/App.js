@@ -15,7 +15,7 @@ export default function App() {
         <Fragment>
             <RenderEmulator/>
             <Nav/>
-            <div style={{maxWidth: '1024px', margin: 'auto'}}>
+            <div className="main-content" style={{maxWidth: '1024px', margin: 'auto'}}>
                 <Switch>
                     <Route exact path="/">
                         <MainCode/>
