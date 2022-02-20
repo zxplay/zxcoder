@@ -14,7 +14,7 @@ export function BasicEditor() {
         lineWrapping: false,
         readOnly: false,
         theme: 'default',
-        lineNumbers: true,
+        lineNumbers: false,
         mode: null
     };
 
