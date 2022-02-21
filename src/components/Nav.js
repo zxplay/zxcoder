@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
 import {InputText} from "primereact/inputtext";
@@ -9,13 +9,15 @@ import {
     showOpenFileDialog,
     viewFullScreen
 } from "../redux/actions/jsspeccy";
-import Constants from "../constants";
+import {getUserInfo} from "../redux/actions/identity";
+import {login, logout} from "../auth";
 
 export function Nav() {
     const dispatch = useDispatch();
     const history = useHistory();
     const pathname = useSelector(state => state?.router.location.pathname);
     const selectedTabIndex = useSelector(state => state?.jsspeccy.selectedTabIndex);
+    const userId = useSelector(state => state?.identity.userId);
 
     const start = <img alt="logo" src="img/logo.png" height="40" className="mr-2"/>;
     const end = (
@@ -23,6 +25,10 @@ export function Nav() {
             dispatch(showGameBrowser())
         }}/>
     );
+
+    useEffect(() => {
+        dispatch(getUserInfo());
+    }, []);
 
     const items = [
         {
@@ -72,9 +78,9 @@ export function Nav() {
             }
         },
         {
-            label: 'Sign-in',
-            icon: 'pi pi-fw pi-sign-in',
-            command: () => window.location = Constants.authBase
+            label: userId ? 'Sign-out' : 'Sign-in',
+            icon: userId ? 'pi pi-fw pi-sign-out' : 'pi pi-fw pi-sign-in',
+            command: () => userId ? logout() : login()
         }
     ];
 

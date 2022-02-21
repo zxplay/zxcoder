@@ -32,6 +32,8 @@ export default function App() {
 function RenderEmulator() {
     const dispatch = useDispatch();
 
+    // NOTE: Using simple component function so emulator is rendered early.
+
     useEffect(() => {
         dispatch(renderEmulator(2));
         return () => {dispatch(exit())}

@@ -27,7 +27,7 @@ function* handleGetUserInfo() {
 
     } catch (e) {
         if (e.response && e.response.status === 401) {
-            login();
+            // login();
         } else {
             handleRequestException(e);
         }
