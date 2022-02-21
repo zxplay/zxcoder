@@ -1,5 +1,6 @@
-import {take, takeLatest, put, call} from "redux-saga/effects";
+import {take, takeLatest, put, call, select} from "redux-saga/effects";
 import {eventChannel} from "redux-saga";
+import {push} from "connected-react-router";
 import {store} from "../store";
 import {handleClick, setSelectedTabIndex} from "../actions/jsspeccy";
 import {JSSpeccy} from "../../lib/emulator/JSSpeccy";
@@ -22,6 +23,11 @@ export function* watchForLoadEmulatorActions() {
 // noinspection JSUnusedGlobalSymbols
 export function* watchForLoadTapeActions() {
     yield takeLatest(actionTypes.loadTape, handleLoadTapeActions);
+}
+
+// noinspection JSUnusedGlobalSymbols
+export function* watchForLoadUrlActions() {
+    yield takeLatest(actionTypes.loadUrl, handleLoadUrlActions);
 }
 
 // noinspection JSUnusedGlobalSymbols
@@ -63,13 +69,18 @@ export function* watchForOpenFileDialogActions() {
 }
 
 // noinspection JSUnusedGlobalSymbols
-export function* watchForShowGameBrowserActions() {
-    yield takeLatest(actionTypes.showGameBrowser, handleShowGameBrowserActions);
+export function* watchForViewFullScreenActions() {
+    yield takeLatest(actionTypes.viewFullScreen, handleViewFullScreenActions);
 }
 
 // noinspection JSUnusedGlobalSymbols
-export function* watchForViewFullScreenActions() {
-    yield takeLatest(actionTypes.viewFullScreen, handleViewFullScreenActions);
+export function* watchForLocationChanges() {
+    yield takeLatest('@@router/LOCATION_CHANGE', handleLocationChanges);
+}
+
+// noinspection JSUnusedGlobalSymbols
+export function* watchForSetSelectedTabIndexActions() {
+    yield takeLatest(actionTypes.setSelectedTabIndex, handleSetSelectedTabIndexActions);
 }
 
 // -----------------------------------------------------------------------------
@@ -128,8 +139,18 @@ function* handleLoadEmulatorActions(action) {
 }
 
 function* handleLoadTapeActions(action) {
+    yield put(setSelectedTabIndex(0));
+    jsspeccy.reset();
     jsspeccy.start();
     jsspeccy.openTAPFile(action.tap.buffer);
+}
+
+function* handleLoadUrlActions(action) {
+    yield put(setSelectedTabIndex(0));
+    jsspeccy.reset();
+    jsspeccy.openUrl(action.url);
+    jsspeccy.start();
+    yield put(push('/'));
 }
 
 function* handleClickActions(action) {
@@ -156,8 +177,8 @@ function* handleClickActions(action) {
 
 function* handleResetActions(_) {
     store.dispatch(setSelectedTabIndex(0));
-    jsspeccy.start();
     jsspeccy.reset();
+    jsspeccy.start();
 }
 
 function* handlePauseActions(_) {
@@ -172,13 +193,18 @@ function* handleOpenFileDialogActions(_) {
     jsspeccy.openFileDialog();
 }
 
-function* handleShowGameBrowserActions(_) {
-    jsspeccy.openGameBrowser();
-}
-
 function* handleViewFullScreenActions(_) {
     jsspeccy.start();
     jsspeccy.enterFullscreen();
+}
+
+function* handleLocationChanges(action) {
+    const path = action.payload.location.pathname;
+    if (path !== '/') jsspeccy?.pause();
+}
+
+function* handleSetSelectedTabIndexActions(action) {
+    if (action.index !== 0) jsspeccy?.pause();
 }
 
 // -----------------------------------------------------------------------------

@@ -2,12 +2,12 @@ export const actionTypes = {
     renderEmulator: 'jsspeccy/renderEmulator',
     loadEmulator: 'jsspeccy/loadEmulator',
     loadTape: 'jsspeccy/loadTape',
+    loadUrl: 'jsspeccy/loadUrl',
     handleClick: 'jsspeccy/handleClick',
     reset: 'jsspeccy/reset',
     pause: 'jsspeccy/pause',
     exit: 'jsspeccy/exit',
     showOpenFileDialog: 'jsspeccy/openFileDialog',
-    showGameBrowser: 'jsspeccy/showGameBrowser',
     viewFullScreen: 'jsspeccy/viewFullScreen',
     setSelectedTabIndex: 'jsspeccy/setSelectedTabIndex',
 };
@@ -25,6 +25,11 @@ export const loadEmulator = (target) => ({
 export const loadTape = (tap) => ({
     type: actionTypes.loadTape,
     tap
+});
+
+export const loadUrl = (url) => ({
+    type: actionTypes.loadUrl,
+    url
 });
 
 export const handleClick = (e) => ({
@@ -46,10 +51,6 @@ export const exit = () => ({
 
 export const showOpenFileDialog = () => ({
     type: actionTypes.showOpenFileDialog
-})
-
-export const showGameBrowser = () => ({
-    type: actionTypes.showGameBrowser
 })
 
 export const viewFullScreen = () => ({

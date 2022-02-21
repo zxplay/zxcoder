@@ -6,7 +6,7 @@ import {AssemblyEditor} from "./AssemblyEditor";
 import {Emulator} from "./Emulator";
 import {setSelectedTabIndex} from "../redux/actions/jsspeccy";
 
-export function MainCode() {
+export default function MainCode() {
     const dispatch = useDispatch();
     const activeIndex = useSelector(state => state?.jsspeccy.selectedTabIndex);
     const zoom = 2;

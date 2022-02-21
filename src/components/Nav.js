@@ -1,18 +1,18 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
 import {InputText} from "primereact/inputtext";
 import {Menubar} from "primereact/menubar";
 import {
     reset,
-    showGameBrowser,
     showOpenFileDialog,
     viewFullScreen
 } from "../redux/actions/jsspeccy";
 import {getUserInfo} from "../redux/actions/identity";
 import {login, logout} from "../auth";
 
-export function Nav() {
+export default function Nav() {
+    const [searchInput, setSearchInput] = useState([]);
     const dispatch = useDispatch();
     const history = useHistory();
     const pathname = useSelector(state => state?.router.location.pathname);
@@ -21,8 +21,14 @@ export function Nav() {
 
     const start = <img alt="logo" src="img/logo.png" height="40" className="mr-2"/>;
     const end = (
-        <InputText placeholder="Search" type="text" onClick={() => {
-            dispatch(showGameBrowser())
+        <InputText
+            placeholder="Search"
+            type="text"
+            onChange={(e) => setSearchInput(e.target.value)}
+            onKeyDown={(e) => {
+                if (e.key === 'Enter' && searchInput) {
+                    history.push(`/search?q=${searchInput}`);
+                }
         }}/>
     );
 
@@ -42,7 +48,10 @@ export function Nav() {
                 {
                     label: 'Open Tape File',
                     icon: 'pi pi-fw pi-folder-open',
-                    command: () => dispatch(showOpenFileDialog())
+                    command: () => {
+                        dispatch(showOpenFileDialog());
+                        history.push('/');
+                    }
                 }
             ]
         },

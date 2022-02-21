@@ -1,7 +1,7 @@
 import React from "react";
 import {Card} from "primereact/card";
 
-export function About() {
+export default function About() {
     return (
         <Card className="m-2">
             <h1>About This Website</h1>

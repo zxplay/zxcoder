@@ -222,103 +222,6 @@ export const JSSpeccy = (container, opts) => {
         });
     }
 
-    const openGameBrowser = () => {
-        emu.pause();
-
-        const body = ui.showDialog();
-
-        body.innerHTML = `
-            <label>Find games</label>
-            <form>
-                <input type="search">
-                <button type="submit">Search</button>
-            </form>
-            <div class="results">
-            </div>
-        `;
-
-        const input = body.querySelector('input');
-        const searchButton = body.querySelector('button');
-        const searchForm = body.querySelector('form');
-        const resultsContainer = body.querySelector('.results');
-
-        searchForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            searchButton.innerText = 'Searching...';
-            const searchTerm = input.value.replace(/[^\w\s\-\']/, '');
-
-            const encodeParam = (key, val) => {
-                return encodeURIComponent(key) + '=' + encodeURIComponent(val);
-            }
-
-            const searchUrl = (
-                'https://archive.org/advancedsearch.php?'
-                + encodeParam('q', 'collection:softwarelibrary_zx_spectrum title:"' + searchTerm + '"')
-                + '&' + encodeParam('fl[]', 'creator')
-                + '&' + encodeParam('fl[]', 'identifier')
-                + '&' + encodeParam('fl[]', 'title')
-                + '&' + encodeParam('rows', '50')
-                + '&' + encodeParam('page', '1')
-                + '&' + encodeParam('output', 'json')
-            )
-
-            fetch(searchUrl).then(response => {
-                searchButton.innerText = 'Search';
-                return response.json();
-            }).then(data => {
-                resultsContainer.innerHTML = '<ul></ul><p>- powered by <a href="https://archive.org/">Internet Archive</a></p>';
-                const ul = resultsContainer.querySelector('ul');
-
-                const results = data.response.docs;
-
-                results.forEach(result => {
-                    const li = document.createElement('li');
-                    ul.appendChild(li);
-
-                    const resultLink = document.createElement('a');
-                    resultLink.href = '#';
-                    resultLink.innerText = result.title;
-
-                    const creator = document.createTextNode(' - ' + result.creator)
-
-                    li.appendChild(resultLink);
-                    li.appendChild(creator);
-
-                    resultLink.addEventListener('click', (e) => {
-                        e.preventDefault();
-
-                        fetch(
-                            'https://archive.org/metadata/' + result.identifier
-                        ).then(response => response.json()).then(data => {
-                            let chosenFilename = null;
-
-                            data.files.forEach(file => {
-                                const ext = file.name.split('.').pop().toLowerCase();
-                                if (ext == 'z80' || ext == 'sna' || ext == 'tap' || ext == 'tzx' || ext == 'szx') {
-                                    chosenFilename = file.name;
-                                }
-                            });
-
-                            if (!chosenFilename) {
-                                alert('No loadable file found');
-                            } else {
-                                const finalUrl = 'https://cors.archive.org/cors/' + result.identifier + '/' + chosenFilename;
-                                emu.openUrl(finalUrl).catch((err) => {
-                                    alert(err);
-                                }).then(() => {
-                                    ui.hideDialog();
-                                    emu.start();
-                                });
-                            }
-                        })
-                    })
-                })
-            })
-        })
-
-        input.focus();
-    }
-
     const exit = () => {
         emu.exit();
         ui.unload();
@@ -343,7 +246,6 @@ export const JSSpeccy = (container, opts) => {
         exitFullscreen: () => ui.exitFullscreen(),
         setMachine: (model) => emu.setMachine(model),
         openFileDialog: () => openFileDialog(),
-        openGameBrowser: () => openGameBrowser(),
         openUrl: (url) => emu.openUrl(url).catch((err) => {alert(err)}),
         openTAPFile: (data) => emu.openTAPFile(data),
         exit: () => exit(),

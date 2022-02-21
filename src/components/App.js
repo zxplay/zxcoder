@@ -5,9 +5,11 @@ import "primereact/resources/themes/md-dark-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import "primeflex/primeflex.css";
-import {Nav} from "./Nav";
-import {MainCode} from "./MainCode";
-import {About} from "./About";
+import Nav from "./Nav";
+import MainCode from "./MainCode";
+import About from "./About";
+import Search from "./Search";
+import NotFound from "./NotFound";
 import {exit, renderEmulator} from "../redux/actions/jsspeccy";
 
 export default function App() {
@@ -22,6 +24,12 @@ export default function App() {
                     </Route>
                     <Route exact path="/about">
                         <About/>
+                    </Route>
+                    <Route path="/search">
+                        <Search/>
+                    </Route>
+                    <Route>
+                        <NotFound/>
                     </Route>
                 </Switch>
             </div>
