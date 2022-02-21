@@ -9,3 +9,4 @@ RUN npm run build:all:release
 
 FROM base AS final
 COPY --from=npmbuild /project/public /srv
+RUN sed -i "s|ver=0|"ver=`date +"%s"`"|g" /srv/index.html
