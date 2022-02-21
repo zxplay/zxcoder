@@ -1,3 +1,5 @@
 {
-    "domain": "zxplay.org"
+    "domain": "zxplay.org",
+    "authBase": "https://zxplay.org/auth",
+    "hasuraBase": "zxplay.org/api"
 }

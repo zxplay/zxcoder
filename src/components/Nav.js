@@ -74,7 +74,7 @@ export function Nav() {
         {
             label: 'Sign-in',
             icon: 'pi pi-fw pi-sign-in',
-            command: () => window.location = Constants.authEndpoint
+            command: () => window.location = Constants.authBase
         }
     ];
 

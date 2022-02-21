@@ -1,4 +1,5 @@
 const webpack = require("webpack");
+const Config = require("./config.json");
 
 module.exports = [
     {
@@ -32,6 +33,7 @@ module.exports = [
         },
         plugins: [
             new webpack.DefinePlugin({
+                AUTH_BASE: JSON.stringify(Config.authBase),
                 STAGING_ENV: JSON.stringify('prod')
             })
         ],

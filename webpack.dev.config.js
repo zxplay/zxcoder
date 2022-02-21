@@ -56,6 +56,7 @@ module.exports = [
         },
         plugins: [
             new webpack.DefinePlugin({
+                AUTH_BASE: JSON.stringify('http://localhost:5003'),
                 STAGING_ENV: JSON.stringify('dev')
             })
         ],
