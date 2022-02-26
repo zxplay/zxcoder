@@ -3,12 +3,12 @@ import {useDispatch, useSelector} from "react-redux";
 import {Button} from "primereact/button";
 import CodeMirror from "./CodeMirror";
 import {setSelectedTabIndex} from "../redux/actions/jsspeccy";
-import {setBasicCode, runBasic} from "../redux/actions/basic";
+import {setBasicCode, runBasic} from "../redux/actions/zxbasic";
 
-export function BasicEditor() {
+export function ZXBasicEditor() {
     const dispatch = useDispatch();
     const cmRef = useRef(null);
-    const basicCode = useSelector(state => state?.basic.basicCode);
+    const basicCode = useSelector(state => state?.zxbasic.basicCode);
 
     const options = {
         lineWrapping: false,

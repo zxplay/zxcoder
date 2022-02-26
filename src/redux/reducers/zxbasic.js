@@ -1,4 +1,4 @@
-import {actionTypes} from "../actions/basic";
+import {actionTypes} from "../actions/zxbasic";
 
 // -----------------------------------------------------------------------------
 // Initial state
@@ -6,8 +6,8 @@ import {actionTypes} from "../actions/basic";
 
 const initialState = {
     basicCode:
-        '10 PRINT "Hello"\n' +
-        '20 GO TO 10'
+        '10 CLS\n' +
+        '20 PRINT "HELLO WORLD!"\n'
 };
 
 // -----------------------------------------------------------------------------

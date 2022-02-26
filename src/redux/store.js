@@ -11,12 +11,14 @@ import basicReducer from "./reducers/basic";
 import errorReducer from "./reducers/error";
 import identityReducer from "./reducers/identity";
 import jsspeccyReducer from "./reducers/jsspeccy";
+import zxbasicReducer from "./reducers/zxbasic";
 
 // Sagas
 import * as asmSagas from "./sagas/asm";
 import * as basicSagas from "./sagas/basic";
 import * as identitySagas from "./sagas/identity";
 import * as jsspeccySagas from "./sagas/jsspeccy";
+import * as zxbasicSagas from "./sagas/zxbasic";
 
 const loggingMiddleware = (store) => {
     return (next) => {
@@ -54,6 +56,7 @@ const rootReducer = combineReducers({
     error: errorReducer,
     identity: identityReducer,
     jsspeccy: jsspeccyReducer,
+    zxbasic: zxbasicReducer,
 });
 
 export const store = createStore(
@@ -77,6 +80,7 @@ collectSagas(asmSagas);
 collectSagas(basicSagas);
 collectSagas(identitySagas);
 collectSagas(jsspeccySagas);
+collectSagas(zxbasicSagas);
 
 function* rootSaga() {
     yield all(sagas);

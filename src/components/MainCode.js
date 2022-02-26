@@ -1,8 +1,9 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {TabPanel, TabView} from "primereact/tabview";
-import {BasicEditor} from "./BasicEditor";
+import {SinclairBasicEditor} from "./SinclairBasicEditor";
 import {AssemblyEditor} from "./AssemblyEditor";
+import {ZXBasicEditor} from "./ZXBasicEditor";
 import {Emulator} from "./Emulator";
 import {setSelectedTabIndex} from "../redux/actions/jsspeccy";
 
@@ -27,10 +28,13 @@ export default function MainCode() {
                         <Emulator zoom={zoom} width={width}/>
                     </TabPanel>
                     <TabPanel header="Sinclair Basic">
-                        <BasicEditor/>
+                        <SinclairBasicEditor/>
                     </TabPanel>
                     <TabPanel header="Z80 Assembler">
                         <AssemblyEditor/>
+                    </TabPanel>
+                    <TabPanel header="ZX Basic">
+                        <ZXBasicEditor/>
                     </TabPanel>
                 </TabView>
             </div>
