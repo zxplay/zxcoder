@@ -42,10 +42,6 @@ export const JSSpeccy = (container, opts) => {
             openFileDialog();
         });
 
-        fileMenu.addItem('Find games...', () => {
-            openGameBrowser();
-        });
-
         const autoLoadTapesMenuItem = fileMenu.addItem('Auto-load tapes', () => {
             emu.setAutoLoadTapes(!emu.autoLoadTapes);
         });
