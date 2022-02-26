@@ -10,10 +10,11 @@ export default function About() {
             </p>
             <p>
                 This site is a work in progress.
-                Source available <a href="https://github.com/stever/zxplay" target="_blank">here</a>.
+                Source available <a href="https://github.com/zxplay/zxplay" target="_blank">here</a>.
             </p>
             <p>
-                Based on <a href="https://github.com/gasman/jsspeccy3" target="_blank">JSSpeccy3</a>.
+                Based on <a href="https://github.com/gasman/jsspeccy3" target="_blank">JSSpeccy3</a>
+                <span> and</span> <a href="https://github.com/dcrespo3d/jsspeccy3-mobile" target="_blank">JSSpeccy3-mobile</a>.
             </p>
             <h2>Sinclair ROM Copyright Permission</h2>
             <blockquote>
