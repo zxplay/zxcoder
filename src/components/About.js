@@ -12,9 +12,23 @@ export default function About() {
                 This site is a work in progress.
                 Source available <a href="https://github.com/zxplay/zxplay" target="_blank">here</a>.
             </p>
+            <h2>Acknowledgements</h2>
             <p>
                 Based on <a href="https://github.com/gasman/jsspeccy3" target="_blank">JSSpeccy3</a>
-                <span> and</span> <a href="https://github.com/dcrespo3d/jsspeccy3-mobile" target="_blank">JSSpeccy3-mobile</a>.
+                <span> &amp; </span>
+                <a href="https://github.com/dcrespo3d/jsspeccy3-mobile" target="_blank">JSSpeccy3-mobile</a>.
+                These are licensed under terms of the GPL version 3 -
+                see <a href="https://github.com/gasman/jsspeccy3/blob/main/COPYING" target="_blank">COPYING</a>.
+            </p>
+            <p>
+                Uses <a href="https://github.com/zxplay/zmakebas" target="_blank">zmakebas</a> to
+                convert Sinclair BASIC to tape file sent to the ZX Spectrum emulator.
+                This is public domain by Russell Marks.
+            </p>
+            <p>
+                Uses <a href="" target="_blank">Pasmo</a> by Julián Albo, to compile assembly.
+                Licensed under terms of the GPL version 2 -
+                see <a href="https://github.com/zxplay/pasmo/blob/main/COPYING" target="_blank">COPYING</a>.
             </p>
             <h2>Sinclair ROM Copyright Permission</h2>
             <blockquote>
