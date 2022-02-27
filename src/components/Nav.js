@@ -8,6 +8,13 @@ import {
     showOpenFileDialog,
     viewFullScreen
 } from "../redux/actions/jsspeccy";
+import {
+    newZXBasicProject,
+    newSinclairBasicProject,
+    newAssemblyProject,
+    showProjectIndex,
+    downloadTape
+} from "../redux/actions/project";
 import {getUserInfo} from "../redux/actions/identity";
 import {login, logout} from "../auth";
 
@@ -53,19 +60,19 @@ export default function Nav() {
                         {
                             label: 'Boriel ZX BASIC',
                             command: () => {
-                                // TODO
+                                dispatch(newZXBasicProject());
                             }
                         },
                         {
                             label: 'Sinclair BASIC',
                             command: () => {
-                                // TODO
+                                dispatch(newSinclairBasicProject());
                             }
                         },
                         {
                             label: 'Z80 Assembly',
                             command: () => {
-                                // TODO
+                                dispatch(newAssemblyProject());
                             }
                         }
                     ]
@@ -74,7 +81,7 @@ export default function Nav() {
                     label: 'Open Project',
                     icon: 'pi pi-fw pi-folder-open',
                     command: () => {
-                        // TODO
+                        dispatch(showProjectIndex());
                     }
                 },
                 {
@@ -93,7 +100,7 @@ export default function Nav() {
                     icon: 'pi pi-fw pi-download',
                     disabled: true,
                     command: () => {
-                        // TODO
+                        dispatch(downloadTape());
                     }
                 }
             ]
