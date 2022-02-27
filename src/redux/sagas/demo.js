@@ -1,7 +1,7 @@
-import {takeLatest, select} from "redux-saga/effects";
+import {takeLatest, select, put} from "redux-saga/effects";
 import {actionTypes} from "../actions/demo";
 import {store} from "../store";
-import {loadTape} from "../actions/jsspeccy";
+import {loadTape, pause} from "../actions/jsspeccy";
 import pasmo from "pasmo";
 import zmakebas from "zmakebas";
 import gql from "graphql-tag";
@@ -10,6 +10,11 @@ import {gqlFetch} from "../../graphql_fetch";
 // -----------------------------------------------------------------------------
 // Action watchers
 // -----------------------------------------------------------------------------
+
+// noinspection JSUnusedGlobalSymbols
+export function* watchForSetSelectedTabIndexActions() {
+    yield takeLatest(actionTypes.setSelectedTabIndex, handleSetSelectedTabIndexActions);
+}
 
 // noinspection JSUnusedGlobalSymbols
 export function* watchForRunAssemblyActions() {
@@ -29,6 +34,10 @@ export function* watchForRunZXBasicActions() {
 // -----------------------------------------------------------------------------
 // Action handlers
 // -----------------------------------------------------------------------------
+
+function* handleSetSelectedTabIndexActions(_) {
+    yield put(pause())
+}
 
 function* handleRunAssemblyActions(_) {
     const asm = yield select((state) => state.demo.asmCode);

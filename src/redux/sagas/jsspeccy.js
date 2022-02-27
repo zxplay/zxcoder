@@ -1,13 +1,9 @@
 import {take, takeLatest, put, call} from "redux-saga/effects";
 import {eventChannel} from "redux-saga";
 import {push} from "connected-react-router";
-import {store} from "../store";
 import {handleClick} from "../actions/jsspeccy";
-import {setSelectedTabIndex} from "../actions/demo";
 import {JSSpeccy} from "../../lib/emulator/JSSpeccy";
 import {actionTypes} from "../actions/jsspeccy";
-import {actionTypes as demoActionTypes} from "../actions/demo";
-import {actionTypes as projectActionTypes} from "../actions/project";
 
 // -----------------------------------------------------------------------------
 // Action watchers
@@ -81,16 +77,6 @@ export function* watchForLocationChanges() {
     yield takeLatest('@@router/LOCATION_CHANGE', handleLocationChanges);
 }
 
-// noinspection JSUnusedGlobalSymbols
-export function* watchForSetDemoSelectedTabIndexActions() {
-    yield takeLatest(demoActionTypes.setSelectedTabIndex, handleSetSelectedTabIndexActions);
-}
-
-// noinspection JSUnusedGlobalSymbols
-export function* watchForSetProjectSelectedTabIndexActions() {
-    yield takeLatest(projectActionTypes.setSelectedTabIndex, handleSetSelectedTabIndexActions);
-}
-
 // -----------------------------------------------------------------------------
 // Action handlers
 // -----------------------------------------------------------------------------
@@ -147,14 +133,12 @@ function* handleLoadEmulatorActions(action) {
 }
 
 function* handleLoadTapeActions(action) {
-    yield put(setSelectedTabIndex(0));
     jsspeccy.reset();
     jsspeccy.start();
     jsspeccy.openTAPFile(action.tap.buffer);
 }
 
 function* handleLoadUrlActions(action) {
-    yield put(setSelectedTabIndex(0));
     jsspeccy.reset();
     jsspeccy.openUrl(action.url);
     jsspeccy.start();
@@ -184,7 +168,6 @@ function* handleClickActions(action) {
 }
 
 function* handleResetActions(_) {
-    store.dispatch(setSelectedTabIndex(0));
     jsspeccy.reset();
     jsspeccy.start();
 }
@@ -209,10 +192,6 @@ function* handleViewFullScreenActions(_) {
 function* handleLocationChanges(action) {
     const path = action.payload.location.pathname;
     if (path !== '/') jsspeccy?.pause();
-}
-
-function* handleSetSelectedTabIndexActions(action) {
-    if (action.index !== 0) jsspeccy?.pause();
 }
 
 // -----------------------------------------------------------------------------

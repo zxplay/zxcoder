@@ -19,6 +19,7 @@ import {exit, renderEmulator} from "../redux/actions/jsspeccy";
 export default function App() {
     const projectType = useSelector(state => state?.project.type);
     const projectReady = useSelector(state => state?.project.ready);
+
     return (
         <Fragment>
             <RenderEmulator/>

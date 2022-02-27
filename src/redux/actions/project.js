@@ -4,6 +4,8 @@ export const actionTypes = {
     createNewProject: 'project/createNewProject',
     setReady: 'project/setReady',
     downloadTape: 'project/downloadTape',
+    setCode: 'project/setCode',
+    runCode: 'project/runCode',
 };
 
 export const setSelectedTabIndex = (index) => ({
@@ -28,4 +30,13 @@ export const setReady = (ready) => ({
 
 export const downloadTape = () => ({
     type: actionTypes.downloadTape
+});
+
+export const setCode = (code) => ({
+    type: actionTypes.setCode,
+    code
+});
+
+export const runCode = () => ({
+    type: actionTypes.runCode
 });

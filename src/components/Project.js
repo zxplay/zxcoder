@@ -1,11 +1,9 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {TabPanel, TabView} from "primereact/tabview";
-import {DemoSinclairBasicEditor} from "./DemoSinclairBasicEditor";
-import {DemoAssemblyEditor} from "./DemoAssemblyEditor";
-import {DemoZXBasicEditor} from "./DemoZXBasicEditor";
 import {Emulator} from "./Emulator";
 import {setSelectedTabIndex} from "../redux/actions/project";
+import {ProjectEditor} from "./ProjectEditor";
 
 export default function Project() {
     const dispatch = useDispatch();
@@ -13,7 +11,6 @@ export default function Project() {
     const projectType = useSelector(state => state?.project.type);
     const zoom = 2;
     const width = zoom * 320;
-
     return (
         <div className="grid"
              style={{width: "100%", padding: 0, margin: 0}}>
@@ -27,17 +24,17 @@ export default function Project() {
                     onTabChange={(e) => dispatch(setSelectedTabIndex(e.index))}>
                     {projectType === 'zxbasic' &&
                         <TabPanel header="Boriel ZX BASIC">
-                            <DemoZXBasicEditor/>
+                            <ProjectEditor/>
                         </TabPanel>
                     }
                     {projectType === 'basic' &&
                         <TabPanel header="Sinclair BASIC">
-                            <DemoSinclairBasicEditor/>
+                            <ProjectEditor/>
                         </TabPanel>
                     }
                     {projectType === 'asm' &&
                         <TabPanel header="Z80 Assembler">
-                            <DemoAssemblyEditor/>
+                            <ProjectEditor/>
                         </TabPanel>
                     }
                     <TabPanel header="Emulator">
