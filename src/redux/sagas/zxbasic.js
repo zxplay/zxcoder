@@ -1,6 +1,6 @@
 import {takeLatest, select} from "redux-saga/effects";
 import gql from "graphql-tag";
-import {fetch} from "../../graphql_fetch";
+import {gqlFetch} from "../../graphql_fetch";
 import {actionTypes} from "../actions/zxbasic";
 import {store} from "../store";
 import {loadTape} from "../actions/jsspeccy";
@@ -34,7 +34,8 @@ function* handleRunBasicActions(_) {
         'basic': basic
     };
 
-    const response = yield fetch(query, variables, false);
+    const userId = yield select((state) => state.identity.userId);
+    const response = yield gqlFetch(userId, query, variables, false);
     const base64 = response.data.compile.base64_encoded;
     const tap = Uint8Array.from(atob(base64), c => c.charCodeAt(0));
     yield store.dispatch(loadTape(tap));

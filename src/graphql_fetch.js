@@ -5,25 +5,31 @@ import Constants from "./constants";
 import {print} from "graphql";
 import {dashboardLock, dashboardUnlock} from "./dashboard_lock";
 
-export async function fetch(query, variables, lock) {
+export async function gqlFetch(userId, query, variables, lock) {
     if (lock) dashboardLock();
+
+    if (!userId) {
+        return fetchWithToken(null, query, variables, lock);
+    }
+
     const jwt = getAuthToken();
+
     if (isExpired(jwt)) {
         return refreshToken().then(jwt => fetchWithToken(jwt, query, variables, lock));
-    } else {
-        return fetchWithToken(jwt, query, variables, lock);
     }
+
+    return fetchWithToken(jwt, query, variables, lock);
 }
 
 function fetchWithToken(jwt, query, variables, lock) {
+    const headers = { 'Content-Type': 'application/json' };
+    if (jwt) headers['Authorization'] = `Bearer ${jwt}`;
+
     return axios.post(Constants.graphQlEndpoint, {
         query: query instanceof Object ? print(query) : query,
         variables,
     }, {
-        headers: {
-            'Authorization': `Bearer ${jwt}`,
-            'Content-Type': 'application/json'
-        },
+        headers
     }).then(response => {
         if (lock) dashboardUnlock();
 
