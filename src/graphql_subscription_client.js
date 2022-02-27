@@ -1,4 +1,4 @@
-// NOTE: Based on https://github.com/rob-blackbourn/jetblack-graphql-client
+// NOTE: Based on https://github.com/rob-blackbourn/jetblack-graphql-client (Apache License 2.0)
 
 import Constants from "./constants";
 
