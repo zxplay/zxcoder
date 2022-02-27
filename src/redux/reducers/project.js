@@ -12,10 +12,24 @@ const initialState = {
 // Actions
 // -----------------------------------------------------------------------------
 
-function setType(state, action) {
+function newZXBasicProject(state, _) {
     return {
         ...state,
-        type: action.type,
+        type: 'zxbasic',
+    };
+}
+
+function newSinclairBasicProject(state, _) {
+    return {
+        ...state,
+        type: 'basic',
+    };
+}
+
+function newAssemblyProject(state, _) {
+    return {
+        ...state,
+        type: 'asm',
     };
 }
 
@@ -24,7 +38,9 @@ function setType(state, action) {
 // -----------------------------------------------------------------------------
 
 const actionsMap = {
-    [actionTypes.setType]: setType,
+    [actionTypes.newZXBasicProject]: newZXBasicProject,
+    [actionTypes.newSinclairBasicProject]: newSinclairBasicProject,
+    [actionTypes.newAssemblyProject]: newAssemblyProject,
 };
 
 export default function reducer(state = initialState, action) {
