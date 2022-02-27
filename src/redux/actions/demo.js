@@ -10,26 +10,26 @@ export const actionTypes = {
 export const setAssemblyCode = (asm) => ({
     type: actionTypes.setAssemblyCode,
     asm
-})
+});
 
 export const setSinclairBasicCode = (basic) => ({
     type: actionTypes.setSinclairBasicCode,
     basic
-})
+});
 
 export const setZXBasicCode = (basic) => ({
     type: actionTypes.setZXBasicCode,
     basic
-})
+});
 
 export const runAssembly = () => ({
     type: actionTypes.runAssembly
-})
+});
 
 export const runSinclairBasic = () => ({
     type: actionTypes.runSinclairBasic
-})
+});
 
 export const runZXBasic = () => ({
     type: actionTypes.runZXBasic
-})
+});
