@@ -63,3 +63,7 @@ canvas {
 .p-tabview-panels {
     padding: 8px 0 0 0 !important;
 }
+
+.p-tabview .p-tabview-nav .p-tabview-ink-bar {
+    z-index: unset !important;
+}
