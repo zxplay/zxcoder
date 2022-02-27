@@ -5,12 +5,20 @@ import {actionTypes} from "../actions/project";
 // -----------------------------------------------------------------------------
 
 const initialState = {
+    selectedTabIndex: 0,
     type: undefined,
 };
 
 // -----------------------------------------------------------------------------
 // Actions
 // -----------------------------------------------------------------------------
+
+function setSelectedTabIndex(state, action) {
+    return {
+        ...state,
+        selectedTabIndex: action.index
+    }
+}
 
 function newZXBasicProject(state, _) {
     return {
@@ -38,6 +46,7 @@ function newAssemblyProject(state, _) {
 // -----------------------------------------------------------------------------
 
 const actionsMap = {
+    [actionTypes.setSelectedTabIndex]: setSelectedTabIndex,
     [actionTypes.newZXBasicProject]: newZXBasicProject,
     [actionTypes.newSinclairBasicProject]: newSinclairBasicProject,
     [actionTypes.newAssemblyProject]: newAssemblyProject,

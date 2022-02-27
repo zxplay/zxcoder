@@ -5,6 +5,7 @@ import {actionTypes} from "../actions/demo";
 // -----------------------------------------------------------------------------
 
 const initialState = {
+    selectedTabIndex: 0,
     asmCode: `    org 30000
 
 tv_flag    equ 5C3Ch
@@ -142,6 +143,13 @@ PAPER 7: INK 0: BRIGHT 0`
 // Actions
 // -----------------------------------------------------------------------------
 
+function setSelectedTabIndex(state, action) {
+    return {
+        ...state,
+        selectedTabIndex: action.index
+    }
+}
+
 function setAssemblyCode(state, action) {
     return {
         ...state,
@@ -168,6 +176,7 @@ function setZXBasicCode(state, action) {
 // -----------------------------------------------------------------------------
 
 const actionsMap = {
+    [actionTypes.setSelectedTabIndex]: setSelectedTabIndex,
     [actionTypes.setAssemblyCode]: setAssemblyCode,
     [actionTypes.setSinclairBasicCode]: setSinclairBasicCode,
     [actionTypes.setZXBasicCode]: setZXBasicCode,

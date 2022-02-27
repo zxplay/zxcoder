@@ -2,7 +2,7 @@ import React, {Fragment, useEffect, useRef} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Button} from "primereact/button";
 import CodeMirror from "./CodeMirror";
-import {setSelectedTabIndex} from "../redux/actions/jsspeccy";
+import {setSelectedTabIndex} from "../redux/actions/demo";
 import {setAssemblyCode, runAssembly} from "../redux/actions/demo";
 import "codemirror/mode/z80/z80";
 

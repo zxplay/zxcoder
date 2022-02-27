@@ -1,10 +1,13 @@
-import {take, takeLatest, put, call, select} from "redux-saga/effects";
+import {take, takeLatest, put, call} from "redux-saga/effects";
 import {eventChannel} from "redux-saga";
 import {push} from "connected-react-router";
 import {store} from "../store";
-import {handleClick, setSelectedTabIndex} from "../actions/jsspeccy";
+import {handleClick} from "../actions/jsspeccy";
+import {setSelectedTabIndex} from "../actions/demo";
 import {JSSpeccy} from "../../lib/emulator/JSSpeccy";
 import {actionTypes} from "../actions/jsspeccy";
+import {actionTypes as demoActionTypes} from "../actions/demo";
+import {actionTypes as projectActionTypes} from "../actions/project";
 
 // -----------------------------------------------------------------------------
 // Action watchers
@@ -79,8 +82,13 @@ export function* watchForLocationChanges() {
 }
 
 // noinspection JSUnusedGlobalSymbols
-export function* watchForSetSelectedTabIndexActions() {
-    yield takeLatest(actionTypes.setSelectedTabIndex, handleSetSelectedTabIndexActions);
+export function* watchForSetDemoSelectedTabIndexActions() {
+    yield takeLatest(demoActionTypes.setSelectedTabIndex, handleSetSelectedTabIndexActions);
+}
+
+// noinspection JSUnusedGlobalSymbols
+export function* watchForSetProjectSelectedTabIndexActions() {
+    yield takeLatest(projectActionTypes.setSelectedTabIndex, handleSetSelectedTabIndexActions);
 }
 
 // -----------------------------------------------------------------------------

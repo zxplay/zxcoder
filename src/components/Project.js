@@ -5,11 +5,11 @@ import {DemoSinclairBasicEditor} from "./DemoSinclairBasicEditor";
 import {DemoAssemblyEditor} from "./DemoAssemblyEditor";
 import {DemoZXBasicEditor} from "./DemoZXBasicEditor";
 import {Emulator} from "./Emulator";
-import {setSelectedTabIndex} from "../redux/actions/jsspeccy";
+import {setSelectedTabIndex} from "../redux/actions/project";
 
 export default function Project() {
     const dispatch = useDispatch();
-    const activeIndex = useSelector(state => state?.jsspeccy.selectedTabIndex);
+    const activeIndex = useSelector(state => state?.project.selectedTabIndex);
     const projectType = useSelector(state => state?.project.type);
     const zoom = 2;
     const width = zoom * 320;

@@ -23,7 +23,8 @@ export default function Nav() {
     const dispatch = useDispatch();
     const history = useHistory();
     const pathname = useSelector(state => state?.router.location.pathname);
-    const selectedTabIndex = useSelector(state => state?.jsspeccy.selectedTabIndex);
+    const selectedDemoTab = useSelector(state => state?.demo.selectedTabIndex);
+    const selectedProjectTab = useSelector(state => state?.project.selectedTabIndex);
     const userId = useSelector(state => state?.identity.userId);
 
     const start = <img alt="logo" src="img/logo.png" height="40" className="mr-2"/>;
@@ -112,7 +113,7 @@ export default function Nav() {
                 {
                     label: 'Full screen',
                     icon: 'pi pi-fw pi-window-maximize',
-                    disabled: !(pathname === '/' && selectedTabIndex === 0),
+                    disabled: !(pathname === '/' && selectedDemoTab === 0),
                     command: () => dispatch(viewFullScreen())
                 },
                 {

@@ -1,4 +1,5 @@
 export const actionTypes = {
+    setSelectedTabIndex: 'demo/setSelectedTabIndex',
     setAssemblyCode: 'demo/setAssemblyCode',
     setSinclairBasicCode: 'demo/setSinclairBasicCode',
     setZXBasicCode: 'demo/setZXBasicCode',
@@ -6,6 +7,11 @@ export const actionTypes = {
     runSinclairBasic: 'demo/runSinclairBasic',
     runZXBasic: 'demo/runZXBasic',
 };
+
+export const setSelectedTabIndex = (index) => ({
+    type: actionTypes.setSelectedTabIndex,
+    index
+})
 
 export const setAssemblyCode = (asm) => ({
     type: actionTypes.setAssemblyCode,

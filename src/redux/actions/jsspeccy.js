@@ -9,7 +9,6 @@ export const actionTypes = {
     exit: 'jsspeccy/exit',
     showOpenFileDialog: 'jsspeccy/openFileDialog',
     viewFullScreen: 'jsspeccy/viewFullScreen',
-    setSelectedTabIndex: 'jsspeccy/setSelectedTabIndex',
 };
 
 export const renderEmulator = (zoom) => ({
@@ -55,9 +54,4 @@ export const showOpenFileDialog = () => ({
 
 export const viewFullScreen = () => ({
     type: actionTypes.viewFullScreen
-})
-
-export const setSelectedTabIndex = (index) => ({
-    type: actionTypes.setSelectedTabIndex,
-    index
 })
