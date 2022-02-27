@@ -9,6 +9,7 @@ const initialState = {
     type: undefined,
     ready: false,
     code: '',
+    title: undefined
 };
 
 // -----------------------------------------------------------------------------
@@ -26,6 +27,27 @@ function showNewProjectForm(state, action) {
     return {
         ...initialState,
         type: action.projectType,
+    };
+}
+
+function createNewProject(state, action) {
+    let selectedTabIndex = 0;
+    switch (state.type) {
+        case 'zxbasic':
+            selectedTabIndex = 0;
+            break;
+        case 'basic':
+            selectedTabIndex = 1;
+            break;
+        case 'asm':
+            selectedTabIndex = 2;
+            break;
+    }
+
+    return {
+        ...state,
+        title: action.title,
+        selectedTabIndex
     };
 }
 
@@ -50,6 +72,7 @@ function setCode(state, action) {
 const actionsMap = {
     [actionTypes.setSelectedTabIndex]: setSelectedTabIndex,
     [actionTypes.showNewProjectForm]: showNewProjectForm,
+    [actionTypes.createNewProject]: createNewProject,
     [actionTypes.setReady]: setReady,
     [actionTypes.setCode]: setCode,
 };

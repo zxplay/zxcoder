@@ -184,5 +184,14 @@ export default function Nav() {
         }
     ];
 
-    return <Menubar model={items} start={start} end={end}/>;
+    return (
+        <div className="px-2 pt-2">
+            <Menubar
+                model={items}
+                start={start}
+                end={end}
+                // style={{borderRadius: 0}}
+            />
+        </div>
+    );
 }

@@ -4,6 +4,8 @@ import gql from "graphql-tag";
 import {gqlFetch} from "../../graphql_fetch";
 import {store} from "../store";
 import {loadTape, pause} from "../actions/jsspeccy";
+import zmakebas from "zmakebas";
+import pasmo from "pasmo";
 
 // -----------------------------------------------------------------------------
 // Action watchers
@@ -37,10 +39,26 @@ function* handleCreateNewProjectActions(action) {
     yield put(setReady(true));
 }
 
-function* handleRunCodeActions(action) {
+function* handleRunCodeActions(_) {
+    const type = yield select((state) => state.project.type);
     const code = yield select((state) => state.project.code);
+    if (type === 'zxbasic') {
+        const userId = yield select((state) => state.identity.userId);
+        yield runZXBasic(code, userId);
+    } else if (type === 'basic') {
+        const tap = yield zmakebas(code);
+        store.dispatch(loadTape(tap));
+    } else {
+        const tap = yield pasmo(code);
+        store.dispatch(loadTape(tap));
+    }
+}
 
-    // Call the GraphQL compile action.
+// -----------------------------------------------------------------------------
+// Action handlers
+// -----------------------------------------------------------------------------
+
+async function runZXBasic(code, userId) {
     const query = gql`
         mutation ($basic: String!) {
             compile(basic: $basic) {
@@ -53,9 +71,9 @@ function* handleRunCodeActions(action) {
         'basic': code
     };
 
-    const userId = yield select((state) => state.identity.userId);
-    const response = yield gqlFetch(userId, query, variables, false);
+    const response = await gqlFetch(userId, query, variables, false);
     const base64 = response.data.compile.base64_encoded;
     const tap = Uint8Array.from(atob(base64), c => c.charCodeAt(0));
-    yield store.dispatch(loadTape(tap));
+
+    store.dispatch(loadTape(tap));
 }

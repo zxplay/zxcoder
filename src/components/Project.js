@@ -9,13 +9,14 @@ export default function Project() {
     const dispatch = useDispatch();
     const activeIndex = useSelector(state => state?.project.selectedTabIndex);
     const projectType = useSelector(state => state?.project.type);
+    const projectTitle = useSelector(state => state?.project.title);
     const zoom = 2;
     const width = zoom * 320;
     return (
         <div className="grid"
              style={{width: "100%", padding: 0, margin: 0}}>
-            <div className="col" style={{padding: 0}}>
-
+            <div className="col m-4">
+                <h3>Project: {projectTitle}</h3>
             </div>
             <div className="col-fixed"
                  style={{width: `${width}px`, padding: '4px 0 0 0'}}>

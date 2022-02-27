@@ -5,6 +5,7 @@ import "primereact/resources/themes/md-dark-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import "primeflex/primeflex.css";
+import MaxWidth from "./MaxWidth";
 import Nav from "./Nav";
 import Demo from "./Demo";
 import Project from "./Project";
@@ -24,36 +25,38 @@ export default function App() {
         <Fragment>
             <RenderEmulator/>
             <Nav/>
-            <div className="main-content" style={{maxWidth: '1024px', margin: 'auto'}}>
-                <Switch>
-                    <Route exact path="/">
-                        {!projectType &&
-                            <Demo/>
-                        }
-                        {projectType && !projectReady &&
+            <Switch>
+                <Route exact path="/">
+                    {!projectType &&
+                        <Demo/>
+                    }
+                    {projectType && !projectReady &&
+                        <MaxWidth>
                             <NewProject/>
-                        }
-                        {projectType && projectReady &&
-                            <Project/>
-                        }
-                    </Route>
-                    <Route exact path="/about">
+                        </MaxWidth>
+                    }
+                    {projectType && projectReady &&
+                        <Project/>
+                    }
+                </Route>
+                <Route exact path="/about">
+                    <MaxWidth>
                         <About/>
-                    </Route>
-                    <Route exact path="/profile">
-                        <YourProfile/>
-                    </Route>
-                    <Route exact path="/projects">
-                        <YourProjects/>
-                    </Route>
-                    <Route path="/search">
-                        <Search/>
-                    </Route>
-                    <Route>
-                        <NotFound/>
-                    </Route>
-                </Switch>
-            </div>
+                    </MaxWidth>
+                </Route>
+                <Route exact path="/profile">
+                    <YourProfile/>
+                </Route>
+                <Route exact path="/projects">
+                    <YourProjects/>
+                </Route>
+                <Route path="/search">
+                    <Search/>
+                </Route>
+                <Route>
+                    <NotFound/>
+                </Route>
+            </Switch>
         </Fragment>
     )
 }

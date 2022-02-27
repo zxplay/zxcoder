@@ -18,9 +18,9 @@ export const showNewProjectForm = (projectType) => ({
     projectType
 })
 
-export const createNewProject = (projectType, name) => ({
+export const createNewProject = (title) => ({
     type: actionTypes.createNewProject,
-    projectType, name
+    title
 })
 
 export const setReady = (ready) => ({

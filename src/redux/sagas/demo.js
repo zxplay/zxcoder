@@ -39,18 +39,6 @@ function* handleSetSelectedTabIndexActions(_) {
     yield put(pause())
 }
 
-function* handleRunAssemblyActions(_) {
-    const asm = yield select((state) => state.demo.asmCode);
-    const tap = yield pasmo(asm);
-    yield store.dispatch(loadTape(tap));
-}
-
-function* handleRunSinclairBasicActions(_) {
-    const basic = yield select((state) => state.demo.sinclairBasicCode);
-    const tap = yield zmakebas(basic);
-    yield store.dispatch(loadTape(tap));
-}
-
 function* handleRunZXBasicActions(_) {
     const basic = yield select((state) => state.demo.zxBasicCode);
 
@@ -71,5 +59,17 @@ function* handleRunZXBasicActions(_) {
     const response = yield gqlFetch(userId, query, variables, false);
     const base64 = response.data.compile.base64_encoded;
     const tap = Uint8Array.from(atob(base64), c => c.charCodeAt(0));
-    yield store.dispatch(loadTape(tap));
+    store.dispatch(loadTape(tap));
+}
+
+function* handleRunSinclairBasicActions(_) {
+    const basic = yield select((state) => state.demo.sinclairBasicCode);
+    const tap = yield zmakebas(basic);
+    store.dispatch(loadTape(tap));
+}
+
+function* handleRunAssemblyActions(_) {
+    const asm = yield select((state) => state.demo.asmCode);
+    const tap = yield pasmo(asm);
+    store.dispatch(loadTape(tap));
 }

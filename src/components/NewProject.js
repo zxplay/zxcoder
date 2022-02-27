@@ -8,41 +8,41 @@ import {createNewProject} from "../redux/actions/project";
 export default function NewProject() {
     const dispatch = useDispatch();
     const projectType = useSelector(state => state?.project.type);
-    const [name, setName] = useState('');
+    const [title, setTitle] = useState('');
 
-    let title;
+    let lang;
 
     switch (projectType) {
         case 'asm':
-            title = 'Z80 Assembler';
+            lang = 'Z80 Assembler';
             break;
         case 'basic':
-            title = 'Sinclair BASIC';
+            lang = 'Sinclair BASIC';
             break;
         case 'zxbasic':
-            title = 'Boriel ZX BASIC';
+            lang = 'Boriel ZX BASIC';
             break;
     }
 
     return (
         <Card className="m-2">
-            <h1>New {title} Project</h1>
+            <h1>New {lang} Project</h1>
             <h3>Project Name</h3>
             <div className="field">
                 <InputText
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
                     autoFocus={true}
                     onKeyDown={(e) => {
                         if (e.code === 'Enter') {
-                            dispatch(createNewProject(projectType, name));
+                            dispatch(createNewProject(title));
                         }
                     }}
                 />
             </div>
             <Button
                 label="Create Project"
-                onClick={() => dispatch(createNewProject(projectType, name))}
+                onClick={() => dispatch(createNewProject(projectType, title))}
             />
         </Card>
     )
