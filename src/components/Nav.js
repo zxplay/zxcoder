@@ -46,11 +46,54 @@ export default function Nav() {
             icon: 'pi pi-fw pi-file',
             items: [
                 {
-                    label: 'Open Tape File',
+                    label: 'New Project',
+                    icon: 'pi pi-fw pi-plus',
+                    disabled: !userId,
+                    items: [
+                        {
+                            label: 'Boriel ZX BASIC',
+                            command: () => {
+                                // TODO
+                            }
+                        },
+                        {
+                            label: 'Sinclair BASIC',
+                            command: () => {
+                                // TODO
+                            }
+                        },
+                        {
+                            label: 'Z80 Assembly',
+                            command: () => {
+                                // TODO
+                            }
+                        }
+                    ]
+                },
+                {
+                    label: 'Open Project',
                     icon: 'pi pi-fw pi-folder-open',
+                    command: () => {
+                        // TODO
+                    }
+                },
+                {
+                    separator: true
+                },
+                {
+                    label: 'Upload Tape',
+                    icon: 'pi pi-fw pi-upload',
                     command: () => {
                         dispatch(showOpenFileDialog());
                         history.push('/');
+                    }
+                },
+                {
+                    label: 'Download Tape',
+                    icon: 'pi pi-fw pi-download',
+                    disabled: true,
+                    command: () => {
+                        // TODO
                     }
                 }
             ]
@@ -64,6 +107,15 @@ export default function Nav() {
                     icon: 'pi pi-fw pi-window-maximize',
                     disabled: !(pathname === '/' && selectedTabIndex === 0),
                     command: () => dispatch(viewFullScreen())
+                },
+                {
+                    separator: true
+                },
+                {
+                    label: 'Your profile',
+                    icon: 'pi pi-fw pi-user',
+                    disabled: true,
+                    command: () => {/* TODO */}
                 }
             ]
         },
