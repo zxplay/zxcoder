@@ -15,5 +15,6 @@ export function* watchForRunAssemblyActions() {
 // -----------------------------------------------------------------------------
 
 function* handleCreateNewProjectActions(action) {
+    // TODO: Use a GraphQL API mutation to create new project with given name.
     yield put(setReady(true));
 }

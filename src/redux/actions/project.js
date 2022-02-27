@@ -3,7 +3,6 @@ export const actionTypes = {
     showNewProjectForm: 'project/showNewProjectForm',
     createNewProject: 'project/createNewProject',
     setReady: 'project/setReady',
-    showProjectIndex: 'project/showProjectIndex',
     downloadTape: 'project/downloadTape',
 };
 
@@ -26,10 +25,6 @@ export const setReady = (ready) => ({
     type: actionTypes.setReady,
     ready
 })
-
-export const showProjectIndex = () => ({
-    type: actionTypes.showProjectIndex
-});
 
 export const downloadTape = () => ({
     type: actionTypes.downloadTape

@@ -25,9 +25,6 @@ export default function Project() {
                 <TabView
                     activeIndex={activeIndex}
                     onTabChange={(e) => dispatch(setSelectedTabIndex(e.index))}>
-                    <TabPanel header="Emulator">
-                        <Emulator zoom={zoom} width={width}/>
-                    </TabPanel>
                     {projectType === 'zxbasic' &&
                         <TabPanel header="Boriel ZX BASIC">
                             <DemoZXBasicEditor/>
@@ -43,6 +40,9 @@ export default function Project() {
                             <DemoAssemblyEditor/>
                         </TabPanel>
                     }
+                    <TabPanel header="Emulator">
+                        <Emulator zoom={zoom} width={width}/>
+                    </TabPanel>
                 </TabView>
             </div>
             <div className="col" style={{padding: 0}}>

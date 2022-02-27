@@ -10,7 +10,6 @@ import {
 } from "../redux/actions/jsspeccy";
 import {
     showNewProjectForm,
-    showProjectIndex,
     downloadTape
 } from "../redux/actions/project";
 import {getUserInfo} from "../redux/actions/identity";
@@ -24,6 +23,15 @@ export default function Nav() {
     const selectedDemoTab = useSelector(state => state?.demo.selectedTabIndex);
     const selectedProjectTab = useSelector(state => state?.project.selectedTabIndex);
     const userId = useSelector(state => state?.identity.userId);
+    const projectType = useSelector(state => state?.project.type);
+    const projectReady = useSelector(state => state?.project.ready);
+
+    const emuVisible =
+        pathname === '/' &&
+        (
+            (!projectType && selectedDemoTab === 0) ||
+            (projectType && projectReady && selectedProjectTab === 1)
+        );
 
     const start = <img alt="logo" src="img/logo.png" height="40" className="mr-2"/>;
     const end = (
@@ -82,9 +90,9 @@ export default function Nav() {
                 {
                     label: 'Open Project',
                     icon: 'pi pi-fw pi-folder-open',
+                    disabled: !userId,
                     command: () => {
-                        dispatch(showProjectIndex());
-                        history.push('/');
+                        history.push('/projects');
                     }
                 },
                 {
@@ -116,7 +124,7 @@ export default function Nav() {
                 {
                     label: 'Full screen',
                     icon: 'pi pi-fw pi-window-maximize',
-                    disabled: !(pathname === '/' && (selectedDemoTab === 0 || selectedProjectTab === 0)),
+                    disabled: !emuVisible,
                     command: () => {
                         dispatch(viewFullScreen());
                     }
@@ -127,9 +135,17 @@ export default function Nav() {
                 {
                     label: 'Your profile',
                     icon: 'pi pi-fw pi-user',
-                    disabled: true,
+                    disabled: !userId,
                     command: () => {
-                        // TODO
+                        history.push('/profile');
+                    }
+                },
+                {
+                    label: 'Your projects',
+                    icon: 'pi pi-fw pi-folder',
+                    disabled: !userId,
+                    command: () => {
+                        history.push('/projects');
                     }
                 }
             ]

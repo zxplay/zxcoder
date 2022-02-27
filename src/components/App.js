@@ -9,6 +9,8 @@ import Nav from "./Nav";
 import Demo from "./Demo";
 import Project from "./Project";
 import NewProject from "./NewProject";
+import YourProjects from "./YourProjects";
+import YourProfile from "./YourProfile";
 import About from "./About";
 import Search from "./Search";
 import NotFound from "./NotFound";
@@ -17,7 +19,6 @@ import {exit, renderEmulator} from "../redux/actions/jsspeccy";
 export default function App() {
     const projectType = useSelector(state => state?.project.type);
     const projectReady = useSelector(state => state?.project.ready);
-    console.log({projectType, projectReady})
     return (
         <Fragment>
             <RenderEmulator/>
@@ -37,6 +38,12 @@ export default function App() {
                     </Route>
                     <Route exact path="/about">
                         <About/>
+                    </Route>
+                    <Route exact path="/profile">
+                        <YourProfile/>
+                    </Route>
+                    <Route exact path="/projects">
+                        <YourProjects/>
                     </Route>
                     <Route path="/search">
                         <Search/>
