@@ -4,6 +4,7 @@ export const actionTypes = {
     hideNewProjectForm: 'project/hideNewProjectForm',
     createNewProject: 'project/createNewProject',
     loadProject: 'project/loadProject',
+    receiveLoadedProject: 'project/receiveLoadedProject',
     setReady: 'project/setReady',
     downloadTape: 'project/downloadTape',
     setCode: 'project/setCode',
@@ -32,6 +33,11 @@ export const createNewProject = (title) => ({
 export const loadProject = (id) => ({
     type: actionTypes.loadProject,
     id
+});
+
+export const receiveLoadedProject = (id, title, lang, code) => ({
+    type: actionTypes.receiveLoadedProject,
+    id, title, lang, code
 });
 
 export const setReady = (ready) => ({

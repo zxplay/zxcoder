@@ -24,7 +24,7 @@ export default function ProjectList() {
 
     function linkName(data) {
         return (
-            <Link onClick={() => dispatch(loadProject(data['project_id']))}>
+            <Link to="#" onClick={() => dispatch(loadProject(data['project_id']))}>
                 {data['title']}
             </Link>
         )

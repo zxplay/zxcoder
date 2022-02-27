@@ -55,6 +55,30 @@ function createNewProject(state, action) {
     };
 }
 
+function receiveLoadedProject(state, action) {
+    let selectedTabIndex = 0;
+    switch (action.lang) {
+        case 'zxbasic':
+            selectedTabIndex = 0;
+            break;
+        case 'basic':
+            selectedTabIndex = 1;
+            break;
+        case 'asm':
+            selectedTabIndex = 2;
+            break;
+    }
+
+    return {
+        ...state,
+        title: action.title,
+        type: action.lang,
+        code: action.code,
+        selectedTabIndex,
+        ready: true
+    };
+}
+
 function setReady(state, action) {
     return {
         ...state,
@@ -78,6 +102,7 @@ const actionsMap = {
     [actionTypes.showNewProjectForm]: showNewProjectForm,
     [actionTypes.hideNewProjectForm]: hideNewProjectForm,
     [actionTypes.createNewProject]: createNewProject,
+    [actionTypes.receiveLoadedProject]: receiveLoadedProject,
     [actionTypes.setReady]: setReady,
     [actionTypes.setCode]: setCode,
 };

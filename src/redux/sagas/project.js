@@ -1,11 +1,12 @@
 import {takeLatest, put, select} from "redux-saga/effects";
-import {actionTypes, setReady} from "../actions/project";
+import {push} from "connected-react-router";
 import gql from "graphql-tag";
-import {gqlFetch} from "../../graphql_fetch";
-import {store} from "../store";
-import {loadTape, pause} from "../actions/jsspeccy";
 import zmakebas from "zmakebas";
 import pasmo from "pasmo";
+import {gqlFetch} from "../../graphql_fetch";
+import {store} from "../store";
+import {actionTypes, receiveLoadedProject, setReady} from "../actions/project";
+import {loadTape, pause} from "../actions/jsspeccy";
 
 // -----------------------------------------------------------------------------
 // Action watchers
@@ -60,7 +61,26 @@ function* handleCreateNewProjectActions(action) {
 }
 
 function* handleLoadProjectActions(action) {
-    // TODO
+    const query = gql`
+        query ($project_id: uuid!) {
+            project_by_pk(project_id: $project_id) {
+                title
+                lang
+                code
+            }
+        }
+    `;
+
+    const variables = {
+        'project_id': action.id
+    };
+
+    const userId = yield select((state) => state.identity.userId);
+    const response = yield gqlFetch(userId, query, variables, false);
+    console.assert(response?.data?.project_by_pk, response);
+    const proj = response.data.project_by_pk;
+    yield put(receiveLoadedProject(action.id, proj.title, proj.lang, proj.code));
+    yield put(push('/'));
 }
 
 function* handleRunCodeActions(_) {
