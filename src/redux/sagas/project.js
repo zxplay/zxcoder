@@ -22,6 +22,11 @@ export function* watchForCreateNewProjectActions() {
 }
 
 // noinspection JSUnusedGlobalSymbols
+export function* watchForLoadProjectActions() {
+    yield takeLatest(actionTypes.loadProject, handleLoadProjectActions);
+}
+
+// noinspection JSUnusedGlobalSymbols
 export function* watchForRunCodeActions() {
     yield takeLatest(actionTypes.runCode, handleRunCodeActions);
 }
@@ -52,6 +57,10 @@ function* handleCreateNewProjectActions(action) {
     console.assert(response?.data?.insert_project_one?.project_id, response);
 
     yield put(setReady(true));
+}
+
+function* handleLoadProjectActions(action) {
+    // TODO
 }
 
 function* handleRunCodeActions(_) {

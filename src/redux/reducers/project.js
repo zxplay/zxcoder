@@ -30,6 +30,10 @@ function showNewProjectForm(state, action) {
     };
 }
 
+function hideNewProjectForm(state, _) {
+    return !state.ready ? {...initialState} : {...state};
+}
+
 function createNewProject(state, action) {
     let selectedTabIndex = 0;
     switch (state.type) {
@@ -72,6 +76,7 @@ function setCode(state, action) {
 const actionsMap = {
     [actionTypes.setSelectedTabIndex]: setSelectedTabIndex,
     [actionTypes.showNewProjectForm]: showNewProjectForm,
+    [actionTypes.hideNewProjectForm]: hideNewProjectForm,
     [actionTypes.createNewProject]: createNewProject,
     [actionTypes.setReady]: setReady,
     [actionTypes.setCode]: setCode,

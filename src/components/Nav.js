@@ -11,7 +11,8 @@ import {
 } from "../redux/actions/jsspeccy";
 import {
     showNewProjectForm,
-    downloadTape
+    downloadTape,
+    hideNewProjectForm
 } from "../redux/actions/project";
 import {getUserInfo} from "../redux/actions/identity";
 import {login, logout} from "../auth";
@@ -54,7 +55,10 @@ export default function Nav() {
     const items = [
         {
             label: 'ZX Play',
-            command: () => history.push('/')
+            command: () => {
+                dispatch(hideNewProjectForm());
+                history.push('/');
+            }
         },
         {
             label: 'Project',

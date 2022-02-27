@@ -19,8 +19,7 @@ export default function Demo() {
             <div className="col" style={{padding: 0}}>
 
             </div>
-            <div className="col-fixed"
-                 style={{width: `${width}px`, padding: '4px 0 0 0'}}>
+            <div className="col-fixed" style={{width: `${width}px`, padding: '6px 0 0 0'}}>
                 <TabView
                     activeIndex={activeIndex}
                     onTabChange={(e) => dispatch(setSelectedTabIndex(e.index))}>

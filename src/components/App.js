@@ -21,8 +21,10 @@ export default function App() {
     const projectType = useSelector(state => state?.project.type);
     const projectReady = useSelector(state => state?.project.ready);
 
+    console.log({projectType, projectReady});
+
     return (
-        <Fragment>
+        <div className="pb-1">
             <RenderEmulator/>
             <Nav/>
             <Switch>
@@ -57,7 +59,7 @@ export default function App() {
                     <NotFound/>
                 </Route>
             </Switch>
-        </Fragment>
+        </div>
     )
 }
 
