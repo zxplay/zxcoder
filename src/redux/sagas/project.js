@@ -51,23 +51,25 @@ function* handleSetSelectedTabIndexActions(_) {
 }
 
 function* handleCreateNewProjectActions(action) {
+    const type = yield select((state) => state.project.type);
+
     const query = gql`
-        mutation ($title: String) {
-            insert_project_one(object: {title: $title}) {
+        mutation ($title: String!, $lang: String!) {
+            insert_project_one(object: {title: $title, lang: $lang}) {
                 project_id
             }
         }
     `;
 
     const variables = {
-        'title': action.title
+        'title': action.title,
+        'lang': type
     };
 
     const userId = yield select((state) => state.identity.userId);
     const response = yield gqlFetch(userId, query, variables, false);
     console.assert(response?.data?.insert_project_one?.project_id, response);
 
-    const type = yield select((state) => state.project.type);
     const id = response?.data?.insert_project_one?.project_id;
     yield put(receiveLoadedProject(id, action.title, type, ''));
 }
@@ -153,7 +155,7 @@ function* handleDeleteProjectActions(_) {
     const response = yield gqlFetch(userId, query, variables, false);
     console.assert(response?.data?.delete_project_by_pk?.project_id, response);
 
-    yield put(push('/'));
+    yield put(push('/projects'));
 }
 
 // -----------------------------------------------------------------------------
