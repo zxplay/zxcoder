@@ -8,6 +8,7 @@ import "primeflex/primeflex.css";
 import Nav from "./Nav";
 import Demo from "./Demo";
 import Project from "./Project";
+import NewProject from "./NewProject";
 import About from "./About";
 import Search from "./Search";
 import NotFound from "./NotFound";
@@ -15,6 +16,8 @@ import {exit, renderEmulator} from "../redux/actions/jsspeccy";
 
 export default function App() {
     const projectType = useSelector(state => state?.project.type);
+    const projectReady = useSelector(state => state?.project.ready);
+    console.log({projectType, projectReady})
     return (
         <Fragment>
             <RenderEmulator/>
@@ -25,7 +28,10 @@ export default function App() {
                         {!projectType &&
                             <Demo/>
                         }
-                        {projectType &&
+                        {projectType && !projectReady &&
+                            <NewProject/>
+                        }
+                        {projectType && projectReady &&
                             <Project/>
                         }
                     </Route>

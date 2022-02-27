@@ -9,9 +9,7 @@ import {
     viewFullScreen
 } from "../redux/actions/jsspeccy";
 import {
-    newZXBasicProject,
-    newSinclairBasicProject,
-    newAssemblyProject,
+    showNewProjectForm,
     showProjectIndex,
     downloadTape
 } from "../redux/actions/project";
@@ -61,19 +59,22 @@ export default function Nav() {
                         {
                             label: 'Boriel ZX BASIC',
                             command: () => {
-                                dispatch(newZXBasicProject());
+                                dispatch(showNewProjectForm('zxbasic'));
+                                history.push('/');
                             }
                         },
                         {
                             label: 'Sinclair BASIC',
                             command: () => {
-                                dispatch(newSinclairBasicProject());
+                                dispatch(showNewProjectForm('basic'));
+                                history.push('/');
                             }
                         },
                         {
                             label: 'Z80 Assembly',
                             command: () => {
-                                dispatch(newAssemblyProject());
+                                dispatch(showNewProjectForm('asm'));
+                                history.push('/');
                             }
                         }
                     ]
@@ -83,6 +84,7 @@ export default function Nav() {
                     icon: 'pi pi-fw pi-folder-open',
                     command: () => {
                         dispatch(showProjectIndex());
+                        history.push('/');
                     }
                 },
                 {
@@ -102,6 +104,7 @@ export default function Nav() {
                     disabled: true,
                     command: () => {
                         dispatch(downloadTape());
+                        history.push('/');
                     }
                 }
             ]
@@ -113,8 +116,10 @@ export default function Nav() {
                 {
                     label: 'Full screen',
                     icon: 'pi pi-fw pi-window-maximize',
-                    disabled: !(pathname === '/' && selectedDemoTab === 0),
-                    command: () => dispatch(viewFullScreen())
+                    disabled: !(pathname === '/' && (selectedDemoTab === 0 || selectedProjectTab === 0)),
+                    command: () => {
+                        dispatch(viewFullScreen());
+                    }
                 },
                 {
                     separator: true
@@ -123,7 +128,9 @@ export default function Nav() {
                     label: 'Your profile',
                     icon: 'pi pi-fw pi-user',
                     disabled: true,
-                    command: () => {/* TODO */}
+                    command: () => {
+                        // TODO
+                    }
                 }
             ]
         },
@@ -134,7 +141,9 @@ export default function Nav() {
                 {
                     label: 'About',
                     icon: 'pi pi-fw pi-question-circle',
-                    command: () => history.push('/about')
+                    command: () => {
+                        history.push('/about');
+                    }
                 }
             ]
         },
@@ -149,7 +158,9 @@ export default function Nav() {
         {
             label: userId ? 'Sign-out' : 'Sign-in',
             icon: userId ? 'pi pi-fw pi-sign-out' : 'pi pi-fw pi-sign-in',
-            command: () => userId ? logout() : login()
+            command: () => {
+                userId ? logout() : login()
+            }
         }
     ];
 

@@ -7,6 +7,7 @@ import {actionTypes} from "../actions/project";
 const initialState = {
     selectedTabIndex: 0,
     type: undefined,
+    ready: false,
 };
 
 // -----------------------------------------------------------------------------
@@ -20,24 +21,17 @@ function setSelectedTabIndex(state, action) {
     }
 }
 
-function newZXBasicProject(state, _) {
+function setReady(state, action) {
     return {
         ...state,
-        type: 'zxbasic',
+        ready: action.ready,
     };
 }
 
-function newSinclairBasicProject(state, _) {
+function showNewProjectForm(state, action) {
     return {
-        ...state,
-        type: 'basic',
-    };
-}
-
-function newAssemblyProject(state, _) {
-    return {
-        ...state,
-        type: 'asm',
+        ...initialState,
+        type: action.projectType,
     };
 }
 
@@ -47,9 +41,8 @@ function newAssemblyProject(state, _) {
 
 const actionsMap = {
     [actionTypes.setSelectedTabIndex]: setSelectedTabIndex,
-    [actionTypes.newZXBasicProject]: newZXBasicProject,
-    [actionTypes.newSinclairBasicProject]: newSinclairBasicProject,
-    [actionTypes.newAssemblyProject]: newAssemblyProject,
+    [actionTypes.setReady]: setReady,
+    [actionTypes.showNewProjectForm]: showNewProjectForm,
 };
 
 export default function reducer(state = initialState, action) {

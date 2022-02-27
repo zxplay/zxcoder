@@ -1,8 +1,8 @@
 export const actionTypes = {
-    setSelectedTabIndex: 'demo/setSelectedTabIndex',
-    newZXBasicProject: 'project/newZXBasicProject',
-    newSinclairBasicProject: 'project/newSinclairBasicProject',
-    newAssemblyProject: 'project/newAssemblyProject',
+    setSelectedTabIndex: 'project/setSelectedTabIndex',
+    showNewProjectForm: 'project/showNewProjectForm',
+    createNewProject: 'project/createNewProject',
+    setReady: 'project/setReady',
     showProjectIndex: 'project/showProjectIndex',
     downloadTape: 'project/downloadTape',
 };
@@ -12,17 +12,20 @@ export const setSelectedTabIndex = (index) => ({
     index
 })
 
-export const newZXBasicProject = () => ({
-    type: actionTypes.newZXBasicProject
-});
+export const showNewProjectForm = (projectType) => ({
+    type: actionTypes.showNewProjectForm,
+    projectType
+})
 
-export const newSinclairBasicProject = () => ({
-    type: actionTypes.newSinclairBasicProject
-});
+export const createNewProject = (projectType, name) => ({
+    type: actionTypes.createNewProject,
+    projectType, name
+})
 
-export const newAssemblyProject = () => ({
-    type: actionTypes.newAssemblyProject
-});
+export const setReady = (ready) => ({
+    type: actionTypes.setReady,
+    ready
+})
 
 export const showProjectIndex = () => ({
     type: actionTypes.showProjectIndex
