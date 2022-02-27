@@ -9,6 +9,8 @@ export const actionTypes = {
     downloadTape: 'project/downloadTape',
     setCode: 'project/setCode',
     runCode: 'project/runCode',
+    saveCodeChanges: 'project/saveCodeChanges',
+    deleteProject: 'project/deleteProject',
 };
 
 export const setSelectedTabIndex = (index) => ({
@@ -56,4 +58,12 @@ export const setCode = (code) => ({
 
 export const runCode = () => ({
     type: actionTypes.runCode
+});
+
+export const saveCodeChanges = () => ({
+    type: actionTypes.saveCodeChanges
+});
+
+export const deleteProject = () => ({
+    type: actionTypes.deleteProject
 });

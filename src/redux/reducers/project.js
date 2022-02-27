@@ -6,10 +6,11 @@ import {actionTypes} from "../actions/project";
 
 const initialState = {
     selectedTabIndex: 0,
-    type: undefined,
+    type: undefined, // lang
     ready: false,
+    id: undefined,
+    title: undefined,
     code: '',
-    title: undefined
 };
 
 // -----------------------------------------------------------------------------
@@ -71,6 +72,7 @@ function receiveLoadedProject(state, action) {
 
     return {
         ...state,
+        id: action.id,
         title: action.title,
         type: action.lang,
         code: action.code,

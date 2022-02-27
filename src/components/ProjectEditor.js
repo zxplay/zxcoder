@@ -1,8 +1,13 @@
 import React, {Fragment, useEffect, useRef} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Button} from "primereact/button";
+import {confirmPopup} from "primereact/confirmpopup";
 import CodeMirror from "./CodeMirror";
-import {setSelectedTabIndex} from "../redux/actions/project";
+import {
+    deleteProject,
+    saveCodeChanges,
+    setSelectedTabIndex
+} from "../redux/actions/project";
 import {setCode, runCode} from "../redux/actions/project";
 
 export function ProjectEditor() {
@@ -24,6 +29,16 @@ export function ProjectEditor() {
         dispatch(setCode(cm.getValue()))
     }, []);
 
+    const deleteConfirm = (event) => {
+        confirmPopup({
+            target: event.currentTarget,
+            message: 'Are you sure you want to permanently remove these results?',
+            icon: 'pi pi-exclamation-triangle',
+            accept: () => dispatch(deleteProject()),
+            reject: () => {}
+        });
+    }
+
     return (
         <Fragment>
             <CodeMirror
@@ -34,10 +49,26 @@ export function ProjectEditor() {
             <Button
                 label="Run"
                 icon="pi pi-play"
-                style={{marginTop: "8px"}}
+                className="mt-2 mr-2"
                 onClick={() => {
                     dispatch(setSelectedTabIndex(3));
                     dispatch(runCode());
+                }}
+            />
+            <Button
+                label="Save"
+                icon="pi pi-save"
+                className="p-button-outlined mt-2 mr-2"
+                onClick={() => {
+                    dispatch(saveCodeChanges());
+                }}
+            />
+            <Button
+                label="Delete"
+                icon="pi pi-times"
+                className="p-button-outlined p-button-danger mt-2"
+                onClick={(e) => {
+                    deleteConfirm(e);
                 }}
             />
         </Fragment>

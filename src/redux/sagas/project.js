@@ -32,6 +32,16 @@ export function* watchForRunCodeActions() {
     yield takeLatest(actionTypes.runCode, handleRunCodeActions);
 }
 
+// noinspection JSUnusedGlobalSymbols
+export function* watchForSaveCodeChangesActions() {
+    yield takeLatest(actionTypes.saveCodeChanges, handleSaveCodeChangesActions);
+}
+
+// noinspection JSUnusedGlobalSymbols
+export function* watchForDeleteProjectActions() {
+    yield takeLatest(actionTypes.deleteProject, handleDeleteProjectActions);
+}
+
 // -----------------------------------------------------------------------------
 // Action handlers
 // -----------------------------------------------------------------------------
@@ -57,7 +67,9 @@ function* handleCreateNewProjectActions(action) {
     const response = yield gqlFetch(userId, query, variables, false);
     console.assert(response?.data?.insert_project_one?.project_id, response);
 
-    yield put(setReady(true));
+    const type = yield select((state) => state.project.type);
+    const id = response?.data?.insert_project_one?.project_id;
+    yield put(receiveLoadedProject(id, action.title, type, ''));
 }
 
 function* handleLoadProjectActions(action) {
@@ -78,6 +90,7 @@ function* handleLoadProjectActions(action) {
     const userId = yield select((state) => state.identity.userId);
     const response = yield gqlFetch(userId, query, variables, false);
     console.assert(response?.data?.project_by_pk, response);
+
     const proj = response.data.project_by_pk;
     yield put(receiveLoadedProject(action.id, proj.title, proj.lang, proj.code));
     yield put(push('/'));
@@ -86,6 +99,7 @@ function* handleLoadProjectActions(action) {
 function* handleRunCodeActions(_) {
     const type = yield select((state) => state.project.type);
     const code = yield select((state) => state.project.code);
+
     if (type === 'zxbasic') {
         const userId = yield select((state) => state.identity.userId);
         yield runZXBasic(code, userId);
@@ -96,6 +110,50 @@ function* handleRunCodeActions(_) {
         const tap = yield pasmo(code);
         store.dispatch(loadTape(tap));
     }
+}
+
+function* handleSaveCodeChangesActions(_) {
+    const id = yield select((state) => state.project.id);
+    const code = yield select((state) => state.project.code);
+
+    const query = gql`
+        mutation ($project_id: uuid!, $code: String!) {
+            update_project_by_pk(pk_columns: {project_id: $project_id}, _set: {code: $code}) {
+                project_id
+            }
+        }
+    `;
+
+    const variables = {
+        'project_id': id,
+        'code': code
+    };
+
+    const userId = yield select((state) => state.identity.userId);
+    const response = yield gqlFetch(userId, query, variables, false);
+    console.assert(response?.data?.update_project_by_pk?.project_id, response);
+}
+
+function* handleDeleteProjectActions(_) {
+    const id = yield select((state) => state.project.id);
+
+    const query = gql`
+        mutation ($project_id: uuid!) {
+            delete_project_by_pk(project_id: $project_id) {
+                project_id
+            }
+        }
+    `;
+
+    const variables = {
+        'project_id': id
+    };
+
+    const userId = yield select((state) => state.identity.userId);
+    const response = yield gqlFetch(userId, query, variables, false);
+    console.assert(response?.data?.delete_project_by_pk?.project_id, response);
+
+    yield put(push('/'));
 }
 
 // -----------------------------------------------------------------------------
@@ -116,6 +174,8 @@ async function runZXBasic(code, userId) {
     };
 
     const response = await gqlFetch(userId, query, variables, false);
+    console.assert(response?.data?.compile, response);
+
     const base64 = response.data.compile.base64_encoded;
     const tap = Uint8Array.from(atob(base64), c => c.charCodeAt(0));
 
