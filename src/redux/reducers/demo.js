@@ -1,11 +1,44 @@
-import {actionTypes} from "../actions/basic";
+import {actionTypes} from "../actions/demo";
 
 // -----------------------------------------------------------------------------
 // Initial state
 // -----------------------------------------------------------------------------
 
 const initialState = {
-    basicCode: `# this file \`demo.bas' demonstrates the features of zmakebas
+    asmCode: `    org 30000
+
+tv_flag    equ 5C3Ch
+
+start
+    ; Directs rst 10h output to main screen.
+    xor a
+    ld (tv_flag),a
+
+    ld b, 50
+
+another
+
+    push bc
+
+    ld hl,hello
+again    ld a,(hl)
+    cp 0
+    jr z, exit
+    push hl
+    rst 10h
+    pop hl
+    inc hl
+    jr again
+
+exit
+    pop bc
+    djnz another
+    ret
+
+hello    db "Hello, world.", 0Dh, 0
+
+    end start`,
+    sinclairBasicCode: `# this file \`demo.bas' demonstrates the features of zmakebas
 # (basically just the escape sequences), and gives you an example of
 # what the input can look like if you use all the bells and whistles. :-)
 
@@ -84,17 +117,49 @@ const initialState = {
 4120 print at 20,0;"And finally here's the copyright"'\\
 \t\t   "symbol (";ink 1;"\\*";ink 0;\\
 \t\t   ") and pound sign (";ink 1;"\`";ink 0;")."
-4130 return`
+4130 return`,
+    zxBasicCode: `REM From the ZX Spectrum 48K Manual
+
+DIM m, n, c AS BYTE
+
+FOR m = 0 TO 1: BRIGHT m
+FOR n = 1 TO 10
+FOR c = 0 TO 7
+PAPER c: PRINT "    ";: REM 4 coloured spaces
+NEXT c: NEXT n: NEXT m
+
+FOR m = 0 TO 1: BRIGHT m: PAPER 7
+FOR c = 0 TO 3
+INK c: PRINT c; "   ";
+NEXT c: PAPER 0
+FOR c = 4 TO 7
+INK c: PRINT c; "   ";
+NEXT c: NEXT m
+PAPER 7: INK 0: BRIGHT 0`
 };
 
 // -----------------------------------------------------------------------------
 // Actions
 // -----------------------------------------------------------------------------
 
-function setBasicCode(state, action) {
+function setAssemblyCode(state, action) {
     return {
         ...state,
-        basicCode: action.basic
+        asmCode: action.asm
+    }
+}
+
+function setSinclairBasicCode(state, action) {
+    return {
+        ...state,
+        sinclairBasicCode: action.basic
+    }
+}
+
+function setZXBasicCode(state, action) {
+    return {
+        ...state,
+        zxBasicCode: action.basic
     }
 }
 
@@ -103,7 +168,9 @@ function setBasicCode(state, action) {
 // -----------------------------------------------------------------------------
 
 const actionsMap = {
-    [actionTypes.setBasicCode]: setBasicCode,
+    [actionTypes.setAssemblyCode]: setAssemblyCode,
+    [actionTypes.setSinclairBasicCode]: setSinclairBasicCode,
+    [actionTypes.setZXBasicCode]: setZXBasicCode,
 };
 
 export default function reducer(state = initialState, action) {

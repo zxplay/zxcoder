@@ -6,19 +6,15 @@ import {createBrowserHistory} from "history";
 import Constants from "../constants";
 
 // Reducers
-import asmReducer from "./reducers/asm";
-import basicReducer from "./reducers/basic";
+import demoReducer from "./reducers/demo";
 import errorReducer from "./reducers/error";
 import identityReducer from "./reducers/identity";
 import jsspeccyReducer from "./reducers/jsspeccy";
-import zxbasicReducer from "./reducers/zxbasic";
 
 // Sagas
-import * as asmSagas from "./sagas/asm";
-import * as basicSagas from "./sagas/basic";
+import * as demoSagas from "./sagas/demo";
 import * as identitySagas from "./sagas/identity";
 import * as jsspeccySagas from "./sagas/jsspeccy";
-import * as zxbasicSagas from "./sagas/zxbasic";
 
 const loggingMiddleware = (store) => {
     return (next) => {
@@ -51,12 +47,10 @@ const sagaMiddleware = createSagaMiddleware();
 
 const rootReducer = combineReducers({
     router: connectRouter(history),
-    asm: asmReducer,
-    basic: basicReducer,
+    demo: demoReducer,
     error: errorReducer,
     identity: identityReducer,
     jsspeccy: jsspeccyReducer,
-    zxbasic: zxbasicReducer,
 });
 
 export const store = createStore(
@@ -76,11 +70,9 @@ function collectSagas(file) {
     }
 }
 
-collectSagas(asmSagas);
-collectSagas(basicSagas);
+collectSagas(demoSagas);
 collectSagas(identitySagas);
 collectSagas(jsspeccySagas);
-collectSagas(zxbasicSagas);
 
 function* rootSaga() {
     yield all(sagas);

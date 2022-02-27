@@ -3,12 +3,12 @@ import {useDispatch, useSelector} from "react-redux";
 import {Button} from "primereact/button";
 import CodeMirror from "./CodeMirror";
 import {setSelectedTabIndex} from "../redux/actions/jsspeccy";
-import {setBasicCode, runBasic} from "../redux/actions/basic";
+import {setSinclairBasicCode, runSinclairBasic} from "../redux/actions/demo";
 
-export function SinclairBasicEditor() {
+export function DemoSinclairBasicEditor() {
     const dispatch = useDispatch();
     const cmRef = useRef(null);
-    const basicCode = useSelector(state => state?.basic.basicCode);
+    const basicCode = useSelector(state => state?.demo.sinclairBasicCode);
 
     const options = {
         lineWrapping: false,
@@ -21,7 +21,7 @@ export function SinclairBasicEditor() {
     useEffect(() => {
         const cm = cmRef.current.getCodeMirror();
         cm.setValue(basicCode || '');
-        dispatch(setBasicCode(cm.getValue()))
+        dispatch(setSinclairBasicCode(cm.getValue()))
     }, []);
 
     return (
@@ -29,7 +29,7 @@ export function SinclairBasicEditor() {
             <CodeMirror
                 ref={cmRef}
                 options={options}
-                onChange={(cm, _) => dispatch(setBasicCode(cm.getValue()))}
+                onChange={(cm, _) => dispatch(setSinclairBasicCode(cm.getValue()))}
             />
             <Button
                 label="Run"
@@ -37,7 +37,7 @@ export function SinclairBasicEditor() {
                 style={{marginTop: "8px"}}
                 onClick={() => {
                     dispatch(setSelectedTabIndex(0));
-                    dispatch(runBasic());
+                    dispatch(runSinclairBasic());
                 }}
             />
         </Fragment>

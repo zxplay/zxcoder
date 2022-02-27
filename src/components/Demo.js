@@ -1,13 +1,13 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {TabPanel, TabView} from "primereact/tabview";
-import {SinclairBasicEditor} from "./SinclairBasicEditor";
-import {AssemblyEditor} from "./AssemblyEditor";
-import {ZXBasicEditor} from "./ZXBasicEditor";
+import {DemoSinclairBasicEditor} from "./DemoSinclairBasicEditor";
+import {DemoAssemblyEditor} from "./DemoAssemblyEditor";
+import {DemoZXBasicEditor} from "./DemoZXBasicEditor";
 import {Emulator} from "./Emulator";
 import {setSelectedTabIndex} from "../redux/actions/jsspeccy";
 
-export default function MainCode() {
+export default function Demo() {
     const dispatch = useDispatch();
     const activeIndex = useSelector(state => state?.jsspeccy.selectedTabIndex);
     const zoom = 2;
@@ -28,13 +28,13 @@ export default function MainCode() {
                         <Emulator zoom={zoom} width={width}/>
                     </TabPanel>
                     <TabPanel header="Boriel ZX BASIC">
-                        <ZXBasicEditor/>
+                        <DemoZXBasicEditor/>
                     </TabPanel>
                     <TabPanel header="Sinclair BASIC">
-                        <SinclairBasicEditor/>
+                        <DemoSinclairBasicEditor/>
                     </TabPanel>
                     <TabPanel header="Z80 Assembler">
-                        <AssemblyEditor/>
+                        <DemoAssemblyEditor/>
                     </TabPanel>
                 </TabView>
             </div>

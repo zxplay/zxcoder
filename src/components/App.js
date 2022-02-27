@@ -6,7 +6,7 @@ import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import "primeflex/primeflex.css";
 import Nav from "./Nav";
-import MainCode from "./MainCode";
+import Demo from "./Demo";
 import About from "./About";
 import Search from "./Search";
 import NotFound from "./NotFound";
@@ -20,7 +20,7 @@ export default function App() {
             <div className="main-content" style={{maxWidth: '1024px', margin: 'auto'}}>
                 <Switch>
                     <Route exact path="/">
-                        <MainCode/>
+                        <Demo/>
                     </Route>
                     <Route exact path="/about">
                         <About/>

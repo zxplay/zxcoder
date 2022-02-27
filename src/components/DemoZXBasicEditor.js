@@ -3,26 +3,25 @@ import {useDispatch, useSelector} from "react-redux";
 import {Button} from "primereact/button";
 import CodeMirror from "./CodeMirror";
 import {setSelectedTabIndex} from "../redux/actions/jsspeccy";
-import {setAssemblyCode, runAssembly} from "../redux/actions/asm";
-import "codemirror/mode/z80/z80";
+import {setZXBasicCode, runZXBasic} from "../redux/actions/demo";
 
-export function AssemblyEditor() {
+export function DemoZXBasicEditor() {
     const dispatch = useDispatch();
     const cmRef = useRef(null);
-    const asmCode = useSelector(state => state?.asm.asmCode);
+    const basicCode = useSelector(state => state?.demo.zxBasicCode);
 
     const options = {
         lineWrapping: false,
         readOnly: false,
         theme: 'default',
-        lineNumbers: true,
-        mode: 'z80'
+        lineNumbers: false,
+        mode: null
     };
 
     useEffect(() => {
         const cm = cmRef.current.getCodeMirror();
-        cm.setValue(asmCode || '');
-        dispatch(setAssemblyCode(cm.getValue()))
+        cm.setValue(basicCode || '');
+        dispatch(setZXBasicCode(cm.getValue()))
     }, []);
 
     return (
@@ -30,7 +29,7 @@ export function AssemblyEditor() {
             <CodeMirror
                 ref={cmRef}
                 options={options}
-                onChange={(cm, _) => dispatch(setAssemblyCode(cm.getValue()))}
+                onChange={(cm, _) => dispatch(setZXBasicCode(cm.getValue()))}
             />
             <Button
                 label="Run"
@@ -38,7 +37,7 @@ export function AssemblyEditor() {
                 style={{marginTop: "8px"}}
                 onClick={() => {
                     dispatch(setSelectedTabIndex(0));
-                    dispatch(runAssembly());
+                    dispatch(runZXBasic());
                 }}
             />
         </Fragment>
