@@ -4,6 +4,7 @@ import {useHistory} from "react-router-dom";
 import {InputText} from "primereact/inputtext";
 import {Menubar} from "primereact/menubar";
 import {
+    pause,
     reset,
     showOpenFileDialog,
     viewFullScreen
@@ -67,6 +68,7 @@ export default function Nav() {
                         {
                             label: 'Boriel ZX BASIC',
                             command: () => {
+                                dispatch(pause());
                                 dispatch(showNewProjectForm('zxbasic'));
                                 history.push('/');
                             }
@@ -74,6 +76,7 @@ export default function Nav() {
                         {
                             label: 'Sinclair BASIC',
                             command: () => {
+                                dispatch(pause());
                                 dispatch(showNewProjectForm('basic'));
                                 history.push('/');
                             }
@@ -81,6 +84,7 @@ export default function Nav() {
                         {
                             label: 'Z80 Assembly',
                             command: () => {
+                                dispatch(pause());
                                 dispatch(showNewProjectForm('asm'));
                                 history.push('/');
                             }
