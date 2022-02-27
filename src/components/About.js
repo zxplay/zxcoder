@@ -21,6 +21,11 @@ export default function About() {
                 see <a href="https://github.com/gasman/jsspeccy3/blob/main/COPYING" target="_blank">COPYING</a>.
             </p>
             <p>
+                Uses <a href="https://github.com/boriel/zxbasic" target="_blank">Boriel ZX BASIC</a> by Jose Rodriguez.
+                Licensed under terms of the GPL version 3 -
+                see <a href="https://github.com/boriel/zxbasic/blob/master/LICENSE.txt" target="_blank">LICENSE</a>.
+            </p>
+            <p>
                 Uses <a href="https://github.com/zxplay/zmakebas" target="_blank">zmakebas</a> to
                 convert Sinclair BASIC to tape file sent to the ZX Spectrum emulator.
                 This is public domain by Russell Marks.
