@@ -35,7 +35,22 @@ function* handleSetSelectedTabIndexActions(_) {
 }
 
 function* handleCreateNewProjectActions(action) {
-    // TODO: Use a GraphQL API mutation to create new project with given name.
+    const query = gql`
+        mutation ($title: String) {
+            insert_project_one(object: {title: $title}) {
+                project_id
+            }
+        }
+    `;
+
+    const variables = {
+        'title': action.title
+    };
+
+    const userId = yield select((state) => state.identity.userId);
+    const response = yield gqlFetch(userId, query, variables, false);
+    console.assert(response?.data?.insert_project_one?.project_id, response);
+
     yield put(setReady(true));
 }
 
