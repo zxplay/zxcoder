@@ -27,14 +27,14 @@ export default function MainCode() {
                     <TabPanel header="Emulator">
                         <Emulator zoom={zoom} width={width}/>
                     </TabPanel>
+                    <TabPanel header="ZX Basic">
+                        <ZXBasicEditor/>
+                    </TabPanel>
                     <TabPanel header="Sinclair Basic">
                         <SinclairBasicEditor/>
                     </TabPanel>
                     <TabPanel header="Z80 Assembler">
                         <AssemblyEditor/>
-                    </TabPanel>
-                    <TabPanel header="ZX Basic">
-                        <ZXBasicEditor/>
                     </TabPanel>
                 </TabView>
             </div>
