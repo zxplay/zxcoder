@@ -310,4 +310,4 @@ Initial release of JSSpeccy 3.
 
 ### Licence
 
-JSSpeccy 3 is licensed under the GPL version 3 - see COPYING.
+JSSpeccy 3, JSSpeccy 3 mobile, and ZX Play are licensed under the GPL version 3 - see COPYING.
