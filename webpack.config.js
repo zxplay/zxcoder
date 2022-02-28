@@ -13,7 +13,7 @@ module.exports = [
     },
     {
         mode: 'production',
-        devtool: false,
+        devtool: 'source-map',
         output: {
             path: __dirname + '/public/dist',
             filename: 'bundle.js'
