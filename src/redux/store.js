@@ -84,10 +84,10 @@ function collectSagas(file) {
 }
 
 collectSagas(demoSagas);
-collectSagas(errorSagas);
+// collectSagas(errorSagas);
 collectSagas(identitySagas);
 collectSagas(jsspeccySagas);
-collectSagas(profileSagas);
+// collectSagas(profileSagas);
 collectSagas(projectSagas);
 collectSagas(projectListSagas);
 collectSagas(subscriberSagas);
