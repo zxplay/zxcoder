@@ -67,3 +67,18 @@ canvas {
 .p-tabview .p-tabview-nav .p-tabview-ink-bar {
     z-index: unset !important;
 }
+
+.dashboard-loading-screen {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transition: opacity 350ms;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 9999999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
