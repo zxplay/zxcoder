@@ -32,7 +32,7 @@ export function ProjectEditor() {
     const deleteConfirm = (event) => {
         confirmPopup({
             target: event.currentTarget,
-            message: 'Are you sure you want to permanently remove these results?',
+            message: 'Are you sure you want to permanently remove this project?',
             icon: 'pi pi-exclamation-triangle',
             accept: () => dispatch(deleteProject()),
             reject: () => {}
