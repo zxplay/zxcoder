@@ -135,8 +135,6 @@ function* handleLoadEmulatorActions(action) {
 }
 
 function* handleLoadTapeActions(action) {
-    yield put(resetProject());
-    yield put(setSelectedTabIndex(0));
     yield put(push('/'));
     jsspeccy.reset();
     jsspeccy.start();
@@ -188,7 +186,6 @@ function* handleExitActions(_) {
 }
 
 function* handleOpenFileDialogActions(_) {
-    console.log('handleOpenFileDialogActions');
     yield put(resetProject());
     yield put(setSelectedTabIndex(0));
     jsspeccy.openFileDialog();
