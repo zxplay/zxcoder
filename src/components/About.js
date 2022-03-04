@@ -32,7 +32,7 @@ export default function About() {
             </p>
             <p>
                 Uses <a href="" target="_blank">Pasmo</a> by Julián Albo, to compile assembly.
-                Licensed under terms of the GPL version 2 -
+                Licensed under terms of the GPL version 3 -
                 see <a href="https://github.com/zxplay/pasmo/blob/main/COPYING" target="_blank">COPYING</a>.
             </p>
             <h2>Sinclair ROM Copyright Permission</h2>
