@@ -4,6 +4,8 @@ import {push} from "connected-react-router";
 import {handleClick} from "../actions/jsspeccy";
 import {JSSpeccy} from "../../lib/emulator/JSSpeccy";
 import {actionTypes} from "../actions/jsspeccy";
+import {reset as resetProject} from "../actions/project";
+import {setSelectedTabIndex} from "../actions/demo";
 
 // -----------------------------------------------------------------------------
 // Action watchers
@@ -133,16 +135,21 @@ function* handleLoadEmulatorActions(action) {
 }
 
 function* handleLoadTapeActions(action) {
+    yield put(resetProject());
+    yield put(setSelectedTabIndex(0));
+    yield put(push('/'));
     jsspeccy.reset();
     jsspeccy.start();
     jsspeccy.openTAPFile(action.tap.buffer);
 }
 
 function* handleLoadUrlActions(action) {
+    yield put(resetProject());
+    yield put(setSelectedTabIndex(0));
+    yield put(push('/'));
     jsspeccy.reset();
     jsspeccy.openUrl(action.url);
     jsspeccy.start();
-    yield put(push('/'));
 }
 
 function* handleClickActions(action) {
@@ -181,6 +188,9 @@ function* handleExitActions(_) {
 }
 
 function* handleOpenFileDialogActions(_) {
+    console.log('handleOpenFileDialogActions');
+    yield put(resetProject());
+    yield put(setSelectedTabIndex(0));
     jsspeccy.openFileDialog();
 }
 
