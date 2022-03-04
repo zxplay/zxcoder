@@ -6,6 +6,7 @@ import {Column} from "primereact/column";
 import queryString from "query-string";
 import axios from "axios";
 import {loadUrl} from "../redux/actions/jsspeccy";
+import {showLoading, hideLoading} from "../dashboard_loading";
 
 export default function Search() {
     const dispatch = useDispatch();
@@ -16,21 +17,26 @@ export default function Search() {
         const parsed = queryString.parse(search);
         const query = parsed.q;
 
-        const url = (
-            'https://archive.org/advancedsearch.php?'
-            + encodeParam('q', 'collection:softwarelibrary_zx_spectrum title:"' + query + '"')
-            + '&' + encodeParam('fl[]', 'creator')
-            + '&' + encodeParam('fl[]', 'identifier')
-            + '&' + encodeParam('fl[]', 'title')
-            + '&' + encodeParam('rows', '50')
-            + '&' + encodeParam('page', '1')
-            + '&' + encodeParam('output', 'json')
-        );
+        if (query) {
+            const url = (
+                'https://archive.org/advancedsearch.php?'
+                + encodeParam('q', 'collection:softwarelibrary_zx_spectrum title:"' + query + '"')
+                + '&' + encodeParam('fl[]', 'creator')
+                + '&' + encodeParam('fl[]', 'identifier')
+                + '&' + encodeParam('fl[]', 'title')
+                + '&' + encodeParam('rows', '50')
+                + '&' + encodeParam('page', '1')
+                + '&' + encodeParam('output', 'json')
+            );
 
-        axios.get(url).then((response) => {
-            const results = response.data.response.docs;
-            setResults(results);
-        });
+            showLoading();
+            axios.get(url).then((response) => {
+                const results = response.data.response.docs;
+                setResults(results);
+            }).finally(() => {
+                hideLoading();
+            });
+        }
 
     }, [search]);
 
