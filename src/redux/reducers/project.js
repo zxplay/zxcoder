@@ -17,11 +17,15 @@ const initialState = {
 // Actions
 // -----------------------------------------------------------------------------
 
+function reset(state, action) {
+    return {...initialState};
+}
+
 function setSelectedTabIndex(state, action) {
     return {
         ...state,
         selectedTabIndex: action.index
-    }
+    };
 }
 
 function showNewProjectForm(state, action) {
@@ -100,6 +104,7 @@ function setCode(state, action) {
 // -----------------------------------------------------------------------------
 
 const actionsMap = {
+    [actionTypes.reset]: reset,
     [actionTypes.setSelectedTabIndex]: setSelectedTabIndex,
     [actionTypes.showNewProjectForm]: showNewProjectForm,
     [actionTypes.hideNewProjectForm]: hideNewProjectForm,

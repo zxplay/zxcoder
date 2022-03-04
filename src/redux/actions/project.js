@@ -1,4 +1,5 @@
 export const actionTypes = {
+    reset: 'project/reset',
     setSelectedTabIndex: 'project/setSelectedTabIndex',
     showNewProjectForm: 'project/showNewProjectForm',
     hideNewProjectForm: 'project/hideNewProjectForm',
@@ -12,6 +13,10 @@ export const actionTypes = {
     saveCodeChanges: 'project/saveCodeChanges',
     deleteProject: 'project/deleteProject',
 };
+
+export const reset = () => ({
+    type: actionTypes.reset
+});
 
 export const setSelectedTabIndex = (index) => ({
     type: actionTypes.setSelectedTabIndex,

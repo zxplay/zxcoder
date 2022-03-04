@@ -5,8 +5,8 @@ import zmakebas from "zmakebas";
 import pasmo from "pasmo";
 import {gqlFetch} from "../../graphql_fetch";
 import {store} from "../store";
-import {actionTypes, receiveLoadedProject, setReady} from "../actions/project";
-import {loadTape, pause} from "../actions/jsspeccy";
+import {actionTypes, reset, receiveLoadedProject} from "../actions/project";
+import {loadTape, pause, reset as resetMachine} from "../actions/jsspeccy";
 
 // -----------------------------------------------------------------------------
 // Action watchers
@@ -154,6 +154,8 @@ function* handleDeleteProjectActions(_) {
     const userId = yield select((state) => state.identity.userId);
     const response = yield gqlFetch(userId, query, variables, false);
     console.assert(response?.data?.delete_project_by_pk?.project_id, response);
+    yield put(reset());
+    yield put(resetMachine());
 
     yield put(push('/projects'));
 }
