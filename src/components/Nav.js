@@ -10,10 +10,12 @@ import {
     viewFullScreen
 } from "../redux/actions/jsspeccy";
 import {
-    showNewProjectForm,
     downloadTape,
-    hideNewProjectForm
+    hideNewProjectForm,
+    setSelectedTabIndex,
+    showNewProjectForm
 } from "../redux/actions/project";
+import {setSelectedTabIndex as setDemoTabIndex} from "../redux/actions/demo";
 import {getUserInfo} from "../redux/actions/identity";
 import {login, logout} from "../auth";
 
@@ -175,6 +177,8 @@ export default function Nav() {
             label: 'Reset',
             icon: 'pi pi-fw pi-power-off',
             command: () => {
+                if (projectType) dispatch(setSelectedTabIndex(3));
+                else dispatch(setDemoTabIndex(0));
                 dispatch(reset());
                 history.push('/');
             }
