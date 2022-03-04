@@ -14,6 +14,7 @@ export function ProjectEditor() {
     const dispatch = useDispatch();
     const cmRef = useRef(null);
     const code = useSelector(state => state?.project.code);
+    const savedCode = useSelector(state => state?.project.savedCode);
 
     const options = {
         lineWrapping: false,
@@ -59,6 +60,7 @@ export function ProjectEditor() {
                 label="Save"
                 icon="pi pi-save"
                 className="p-button-outlined mt-2 mr-2"
+                disabled={code === savedCode}
                 onClick={() => {
                     dispatch(saveCodeChanges());
                 }}

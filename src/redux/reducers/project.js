@@ -11,6 +11,7 @@ const initialState = {
     id: undefined,
     title: undefined,
     code: '',
+    savedCode: ''
 };
 
 // -----------------------------------------------------------------------------
@@ -85,17 +86,17 @@ function receiveLoadedProject(state, action) {
     };
 }
 
-function setReady(state, action) {
-    return {
-        ...state,
-        ready: action.ready,
-    };
-}
-
 function setCode(state, action) {
     return {
         ...state,
         code: action.code,
+    };
+}
+
+function setSavedCode(state, action) {
+    return {
+        ...state,
+        savedCode: action.code,
     };
 }
 
@@ -110,8 +111,8 @@ const actionsMap = {
     [actionTypes.hideNewProjectForm]: hideNewProjectForm,
     [actionTypes.createNewProject]: createNewProject,
     [actionTypes.receiveLoadedProject]: receiveLoadedProject,
-    [actionTypes.setReady]: setReady,
     [actionTypes.setCode]: setCode,
+    [actionTypes.setSavedCode]: setSavedCode,
 };
 
 export default function reducer(state = initialState, action) {

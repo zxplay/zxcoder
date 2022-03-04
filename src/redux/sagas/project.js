@@ -5,7 +5,7 @@ import zmakebas from "zmakebas";
 import pasmo from "pasmo";
 import {gqlFetch} from "../../graphql_fetch";
 import {store} from "../store";
-import {actionTypes, reset, receiveLoadedProject} from "../actions/project";
+import {actionTypes, reset, receiveLoadedProject, setSavedCode} from "../actions/project";
 import {loadTape, pause, reset as resetMachine} from "../actions/jsspeccy";
 
 // -----------------------------------------------------------------------------
@@ -134,6 +134,8 @@ function* handleSaveCodeChangesActions(_) {
     const userId = yield select((state) => state.identity.userId);
     const response = yield gqlFetch(userId, query, variables, false);
     console.assert(response?.data?.update_project_by_pk?.project_id, response);
+
+    yield put(setSavedCode(code));
 }
 
 function* handleDeleteProjectActions(_) {
