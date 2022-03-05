@@ -37,7 +37,7 @@ export default function Nav() {
             (projectType && projectReady && selectedProjectTab === 1)
         );
 
-    const start = <img alt="logo" src="img/logo.png" height="40" className="mr-2"/>;
+    const start = <img alt="logo" src="/img/logo.png" height="40" className="mr-2"/>;
     const end = (
         <InputText
             placeholder="Search"
