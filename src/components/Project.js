@@ -5,6 +5,7 @@ import {TabPanel, TabView} from "primereact/tabview";
 import {Emulator} from "./Emulator";
 import {loadProject, setSelectedTabIndex} from "../redux/actions/project";
 import {ProjectEditor} from "./ProjectEditor";
+import {pause, reset} from "../redux/actions/jsspeccy";
 
 export default function Project(props) {
     const dispatch = useDispatch();
@@ -16,7 +17,10 @@ export default function Project(props) {
 
     useEffect(() => {
         dispatch(loadProject(props.id));
-        return () => {}
+        return () => {
+            dispatch(reset());
+            dispatch(pause());
+        }
     }, [props.id, userId]);
 
     if (!props.id || !type) return <Fragment/>;

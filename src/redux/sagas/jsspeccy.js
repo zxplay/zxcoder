@@ -1,4 +1,4 @@
-import {take, takeLatest, put, call} from "redux-saga/effects";
+import {take, takeLatest, put, call, select} from "redux-saga/effects";
 import {eventChannel} from "redux-saga";
 import queryString from "query-string";
 import {JSSpeccy} from "../../lib/emulator/JSSpeccy";
@@ -209,7 +209,13 @@ function* handleViewFullScreenActions(_) {
 
 function* handleLocationChanges(action) {
     const path = action.payload.location.pathname;
-    if (path !== '/') jsspeccy?.pause();
+    const match = typeof previousPath === 'undefined' || path === previousPath;
+
+    if (!match || (path !== '/' && !path.startsWith('/projects/'))) {
+        jsspeccy?.pause();
+    }
+
+    previousPath = path;
 }
 
 // -----------------------------------------------------------------------------
@@ -218,6 +224,7 @@ function* handleLocationChanges(action) {
 
 let target = undefined;
 let jsspeccy = undefined;
+let previousPath = undefined;
 
 function getClickEventChannel() {
     return eventChannel(emit => {

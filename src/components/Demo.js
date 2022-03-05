@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import queryString from "query-string";
 import {TabPanel, TabView} from "primereact/tabview";
@@ -7,10 +7,14 @@ import {DemoAssemblyEditor} from "./DemoAssemblyEditor";
 import {DemoZXBasicEditor} from "./DemoZXBasicEditor";
 import {Emulator} from "./Emulator";
 import {setSelectedTabIndex} from "../redux/actions/demo";
+import {reset as resetProject} from "../redux/actions/project";
+import {reset} from "../redux/actions/jsspeccy";
 
 export default function Demo() {
     const dispatch = useDispatch();
+
     const activeIndex = useSelector(state => state?.demo.selectedTabIndex);
+
     const zoom = 2;
     const width = zoom * 320;
 
@@ -18,6 +22,13 @@ export default function Demo() {
     const search = useSelector(state => state?.router.location.search);
     const parsed = queryString.parse(search);
     const externalLoad = typeof parsed.u !== 'undefined';
+
+    useEffect(() => {
+        dispatch(resetProject());
+        return () => {
+            dispatch(reset());
+        }
+    }, []);
 
     return (
         <div className="grid"

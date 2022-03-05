@@ -5,17 +5,13 @@ import {InputText} from "primereact/inputtext";
 import {Menubar} from "primereact/menubar";
 import {
     pause,
-    reset,
     showOpenFileDialog,
     viewFullScreen
 } from "../redux/actions/jsspeccy";
-import {
-    downloadTape,
-    setSelectedTabIndex
-} from "../redux/actions/project";
-import {setSelectedTabIndex as setDemoTabIndex} from "../redux/actions/demo";
+import {downloadTape} from "../redux/actions/project";
 import {getUserInfo} from "../redux/actions/identity";
 import {login, logout} from "../auth";
+import {resetEmulator} from "../redux/actions/app";
 
 export default function Nav() {
     const dispatch = useDispatch();
@@ -178,10 +174,7 @@ export default function Nav() {
             label: 'Reset',
             icon: 'pi pi-fw pi-power-off',
             command: () => {
-                if (projectType) dispatch(setSelectedTabIndex(3));
-                else dispatch(setDemoTabIndex(0));
-                dispatch(reset());
-                history.push('/');
+                dispatch(resetEmulator());
             }
         },
         {
