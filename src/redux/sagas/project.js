@@ -56,8 +56,6 @@ function* handleSetSelectedTabIndexActions(_) {
 }
 
 function* handleCreateNewProjectActions(action) {
-    const type = yield select((state) => state.project.type);
-
     const query = gql`
         mutation ($title: String!, $lang: String!) {
             insert_project_one(object: {title: $title, lang: $lang}) {
@@ -68,7 +66,7 @@ function* handleCreateNewProjectActions(action) {
 
     const variables = {
         'title': action.title,
-        'lang': type
+        'lang': action.projectType
     };
 
     const userId = yield select((state) => state.identity.userId);
@@ -76,7 +74,8 @@ function* handleCreateNewProjectActions(action) {
     console.assert(response?.data?.insert_project_one?.project_id, response);
 
     const id = response?.data?.insert_project_one?.project_id;
-    yield put(receiveLoadedProject(id, action.title, type, ''));
+    yield put(receiveLoadedProject(id, action.title, action.projectType, ''));
+    yield put(push(`/projects/${id}`));
 }
 
 function* handleLoadProjectActions(action) {
@@ -96,11 +95,11 @@ function* handleLoadProjectActions(action) {
 
     const userId = yield select((state) => state.identity.userId);
     const response = yield gqlFetch(userId, query, variables);
-    console.assert(response?.data?.project_by_pk, response);
+    if (!response) return;
 
+    console.assert(response?.data?.project_by_pk, response);
     const proj = response.data.project_by_pk;
     yield put(receiveLoadedProject(action.id, proj.title, proj.lang, proj.code));
-    yield put(push('/'));
 }
 
 function* handleRunCodeActions(_) {

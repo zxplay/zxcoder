@@ -1,8 +1,6 @@
 export const actionTypes = {
     reset: 'project/reset',
     setSelectedTabIndex: 'project/setSelectedTabIndex',
-    showNewProjectForm: 'project/showNewProjectForm',
-    hideNewProjectForm: 'project/hideNewProjectForm',
     createNewProject: 'project/createNewProject',
     loadProject: 'project/loadProject',
     receiveLoadedProject: 'project/receiveLoadedProject',
@@ -23,18 +21,9 @@ export const setSelectedTabIndex = (index) => ({
     index
 });
 
-export const showNewProjectForm = (projectType) => ({
-    type: actionTypes.showNewProjectForm,
-    projectType
-});
-
-export const hideNewProjectForm = () => ({
-    type: actionTypes.hideNewProjectForm
-});
-
-export const createNewProject = (title) => ({
+export const createNewProject = (projectType, title) => ({
     type: actionTypes.createNewProject,
-    title
+    projectType, title
 });
 
 export const loadProject = (id) => ({

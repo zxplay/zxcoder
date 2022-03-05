@@ -8,7 +8,6 @@ import {
     subscribeToProjectList,
     unsubscribeFromProjectList
 } from "../redux/actions/projectList";
-import {loadProject} from "../redux/actions/project";
 
 export default function ProjectList() {
     const dispatch = useDispatch();
@@ -24,7 +23,7 @@ export default function ProjectList() {
 
     function linkName(data) {
         return (
-            <Link to="#" onClick={() => dispatch(loadProject(data['project_id']))}>
+            <Link to={`/projects/${data['project_id']}`}>
                 {data['title']}
             </Link>
         )

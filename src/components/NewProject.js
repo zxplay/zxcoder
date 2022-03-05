@@ -1,18 +1,18 @@
 import React, {useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import PropTypes from "prop-types";
+import {useDispatch} from "react-redux";
 import {Card} from "primereact/card";
 import {InputText} from "primereact/inputtext";
 import {Button} from "primereact/button";
 import {createNewProject} from "../redux/actions/project";
 
-export default function NewProject() {
+export default function NewProject(props) {
     const dispatch = useDispatch();
-    const projectType = useSelector(state => state?.project.type);
     const [title, setTitle] = useState('');
 
     let lang;
 
-    switch (projectType) {
+    switch (props.type) {
         case 'asm':
             lang = 'Z80 Assembler';
             break;
@@ -35,15 +35,19 @@ export default function NewProject() {
                     autoFocus={true}
                     onKeyDown={(e) => {
                         if (e.code === 'Enter') {
-                            dispatch(createNewProject(title));
+                            dispatch(createNewProject(props.type, title));
                         }
                     }}
                 />
             </div>
             <Button
                 label="Create Project"
-                onClick={() => dispatch(createNewProject(projectType, title))}
+                onClick={() => dispatch(createNewProject(props.type, title))}
             />
         </Card>
     )
+}
+
+NewProject.propTypes = {
+    type: PropTypes.string.isRequired,
 }

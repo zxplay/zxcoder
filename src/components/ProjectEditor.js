@@ -6,7 +6,6 @@ import CodeMirror from "./CodeMirror";
 import {
     deleteProject,
     saveCodeChanges,
-    setSelectedTabIndex
 } from "../redux/actions/project";
 import {setCode, runCode} from "../redux/actions/project";
 
@@ -51,27 +50,20 @@ export function ProjectEditor() {
                 label="Run"
                 icon="pi pi-play"
                 className="mt-2 mr-2"
-                onClick={() => {
-                    dispatch(setSelectedTabIndex(3));
-                    dispatch(runCode());
-                }}
+                onClick={() => dispatch(runCode())}
             />
             <Button
                 label="Save"
                 icon="pi pi-save"
                 className="p-button-outlined mt-2 mr-2"
                 disabled={code === savedCode}
-                onClick={() => {
-                    dispatch(saveCodeChanges());
-                }}
+                onClick={() => dispatch(saveCodeChanges())}
             />
             <Button
                 label="Delete"
                 icon="pi pi-times"
                 className="p-button-outlined p-button-danger mt-2"
-                onClick={(e) => {
-                    deleteConfirm(e);
-                }}
+                onClick={(e) => deleteConfirm(e)}
             />
         </Fragment>
     )

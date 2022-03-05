@@ -11,9 +11,7 @@ import {
 } from "../redux/actions/jsspeccy";
 import {
     downloadTape,
-    hideNewProjectForm,
-    setSelectedTabIndex,
-    showNewProjectForm
+    setSelectedTabIndex
 } from "../redux/actions/project";
 import {setSelectedTabIndex as setDemoTabIndex} from "../redux/actions/demo";
 import {getUserInfo} from "../redux/actions/identity";
@@ -58,7 +56,6 @@ export default function Nav() {
         {
             label: 'ZX Play',
             command: () => {
-                dispatch(hideNewProjectForm());
                 history.push('/');
             }
         },
@@ -72,27 +69,24 @@ export default function Nav() {
                     disabled: !userId,
                     items: [
                         {
-                            label: 'Boriel ZX BASIC',
+                            label: 'Z80 Assembly',
                             command: () => {
                                 dispatch(pause());
-                                dispatch(showNewProjectForm('zxbasic'));
-                                history.push('/');
+                                history.push('/new/asm');
                             }
                         },
                         {
                             label: 'Sinclair BASIC',
                             command: () => {
                                 dispatch(pause());
-                                dispatch(showNewProjectForm('basic'));
-                                history.push('/');
+                                history.push('/new/basic');
                             }
                         },
                         {
-                            label: 'Z80 Assembly',
+                            label: 'Boriel ZX BASIC',
                             command: () => {
                                 dispatch(pause());
-                                dispatch(showNewProjectForm('asm'));
-                                history.push('/');
+                                history.push('/new/zxbasic');
                             }
                         }
                     ]

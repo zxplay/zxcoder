@@ -1,11 +1,15 @@
 import {take, takeLatest, put, call} from "redux-saga/effects";
 import {eventChannel} from "redux-saga";
-import {push} from "connected-react-router";
 import queryString from "query-string";
 import {JSSpeccy} from "../../lib/emulator/JSSpeccy";
-import {actionTypes, handleClick} from "../actions/jsspeccy";
+import {
+    actionTypes,
+    handleClick,
+    reset,
+    start
+} from "../actions/jsspeccy";
 import {reset as resetProject} from "../actions/project";
-import {setSelectedTabIndex} from "../actions/demo";
+import {showActiveEmulator} from "../actions/app";
 
 // -----------------------------------------------------------------------------
 // Action watchers
@@ -57,6 +61,11 @@ export function* watchForResetActions() {
 // noinspection JSUnusedGlobalSymbols
 export function* watchForPauseActions() {
     yield takeLatest(actionTypes.pause, handlePauseActions);
+}
+
+// noinspection JSUnusedGlobalSymbols
+export function* watchForStartActions() {
+    yield takeLatest(actionTypes.start, handleStartActions);
 }
 
 // noinspection JSUnusedGlobalSymbols
@@ -134,19 +143,18 @@ function* handleLoadEmulatorActions(action) {
 }
 
 function* handleLoadTapeActions(action) {
-    yield put(push('/'));
-    jsspeccy.reset();
-    jsspeccy.start();
+    yield put(showActiveEmulator());
+    yield put(reset());
+    yield put(start());
     jsspeccy.openTAPFile(action.tap.buffer);
 }
 
 function* handleLoadUrlActions(action) {
     yield put(resetProject());
-    yield put(setSelectedTabIndex(0));
-    yield put(push('/'));
-    jsspeccy.reset();
+    yield put(showActiveEmulator());
+    yield put(reset());
     jsspeccy.openUrl(action.url);
-    jsspeccy.start();
+    yield put(start());
 }
 
 function* handleClickActions(action) {
@@ -180,13 +188,17 @@ function* handlePauseActions(_) {
     jsspeccy.pause();
 }
 
+function* handleStartActions(_) {
+    jsspeccy.start();
+}
+
 function* handleExitActions(_) {
     jsspeccy.exit();
 }
 
 function* handleOpenFileDialogActions(_) {
     yield put(resetProject());
-    yield put(setSelectedTabIndex(0));
+    yield put(showActiveEmulator());
     jsspeccy.openFileDialog();
 }
 

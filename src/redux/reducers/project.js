@@ -1,4 +1,4 @@
-import {actionTypes} from "../actions/project";
+import {actionTypes, loadProject} from "../actions/project";
 
 // -----------------------------------------------------------------------------
 // Initial state
@@ -18,7 +18,7 @@ const initialState = {
 // Actions
 // -----------------------------------------------------------------------------
 
-function reset(state, action) {
+function reset() {
     return {...initialState};
 }
 
@@ -29,52 +29,15 @@ function setSelectedTabIndex(state, action) {
     };
 }
 
-function showNewProjectForm(state, action) {
-    return {
-        ...initialState,
-        type: action.projectType,
-    };
-}
-
-function hideNewProjectForm(state, _) {
-    return !state.ready ? {...initialState} : {...state};
-}
-
 function createNewProject(state, action) {
-    let selectedTabIndex = 0;
-    switch (state.type) {
-        case 'zxbasic':
-            selectedTabIndex = 0;
-            break;
-        case 'basic':
-            selectedTabIndex = 1;
-            break;
-        case 'asm':
-            selectedTabIndex = 2;
-            break;
-    }
-
     return {
         ...state,
         title: action.title,
-        selectedTabIndex
+        selectedTabIndex: 0
     };
 }
 
 function receiveLoadedProject(state, action) {
-    let selectedTabIndex = 0;
-    switch (action.lang) {
-        case 'zxbasic':
-            selectedTabIndex = 0;
-            break;
-        case 'basic':
-            selectedTabIndex = 1;
-            break;
-        case 'asm':
-            selectedTabIndex = 2;
-            break;
-    }
-
     return {
         ...state,
         id: action.id,
@@ -82,7 +45,7 @@ function receiveLoadedProject(state, action) {
         type: action.lang,
         code: action.code,
         savedCode: action.code,
-        selectedTabIndex,
+        selectedTabIndex: 0,
         ready: true
     };
 }
@@ -107,9 +70,8 @@ function setSavedCode(state, action) {
 
 const actionsMap = {
     [actionTypes.reset]: reset,
+    [actionTypes.loadProject]: reset,
     [actionTypes.setSelectedTabIndex]: setSelectedTabIndex,
-    [actionTypes.showNewProjectForm]: showNewProjectForm,
-    [actionTypes.hideNewProjectForm]: hideNewProjectForm,
     [actionTypes.createNewProject]: createNewProject,
     [actionTypes.receiveLoadedProject]: receiveLoadedProject,
     [actionTypes.setCode]: setCode,

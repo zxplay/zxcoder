@@ -6,6 +6,7 @@ export const actionTypes = {
     handleClick: 'jsspeccy/handleClick',
     reset: 'jsspeccy/reset',
     pause: 'jsspeccy/pause',
+    start: 'jsspeccy/start',
     exit: 'jsspeccy/exit',
     showOpenFileDialog: 'jsspeccy/openFileDialog',
     viewFullScreen: 'jsspeccy/viewFullScreen',
@@ -38,20 +39,24 @@ export const handleClick = (e) => ({
 
 export const reset = () => ({
     type: actionTypes.reset
-})
+});
 
 export const pause = () => ({
     type: actionTypes.pause
-})
+});
+
+export const start = () => ({
+    type: actionTypes.start
+});
 
 export const exit = () => ({
     type: actionTypes.exit
-})
+});
 
 export const showOpenFileDialog = () => ({
     type: actionTypes.showOpenFileDialog
-})
+});
 
 export const viewFullScreen = () => ({
     type: actionTypes.viewFullScreen
-})
+});

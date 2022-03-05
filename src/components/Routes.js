@@ -1,5 +1,4 @@
 import React from "react";
-import {useSelector} from "react-redux";
 import {Route, Switch} from "react-router-dom";
 import Demo from "./Demo";
 import MaxWidth from "./MaxWidth";
@@ -13,22 +12,10 @@ import Search from "./Search";
 import NotFound from "./NotFound";
 
 export default function Routes() {
-    const projectType = useSelector(state => state?.project.type);
-    const projectReady = useSelector(state => state?.project.ready);
     return (
         <Switch>
             <Route exact path="/">
-                {!projectType &&
-                    <Demo/>
-                }
-                {projectType && !projectReady &&
-                    <MaxWidth>
-                        <NewProject/>
-                    </MaxWidth>
-                }
-                {projectType && projectReady &&
-                    <Project/>
-                }
+                <Demo/>
             </Route>
             <Route exact path="/about">
                 <MaxWidth>
@@ -40,9 +27,29 @@ export default function Routes() {
                     <InfoLinking/>
                 </MaxWidth>
             </Route>
+            <Route exact path="/new/asm">
+                <MaxWidth>
+                    <NewProject type="asm"/>
+                </MaxWidth>
+            </Route>
+            <Route exact path="/new/basic">
+                <MaxWidth>
+                    <NewProject type="basic"/>
+                </MaxWidth>
+            </Route>
+            <Route exact path="/new/zxbasic">
+                <MaxWidth>
+                    <NewProject type="zxbasic"/>
+                </MaxWidth>
+            </Route>
             <Route exact path="/profile">
                 <YourProfile/>
             </Route>
+            <Route exact path="/projects/:id" render={(match) => {
+                return (
+                    <Project id={match?.match?.params?.id}/>
+                )
+            }}/>
             <Route exact path="/projects">
                 <YourProjects/>
             </Route>

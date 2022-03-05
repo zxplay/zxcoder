@@ -6,6 +6,7 @@ import {createBrowserHistory} from "history";
 import Constants from "../constants";
 
 // Reducers
+import appReducer from "./reducers/app";
 import demoReducer from "./reducers/demo";
 import errorReducer from "./reducers/error";
 import identityReducer from "./reducers/identity";
@@ -16,11 +17,12 @@ import projectListReducer from "./reducers/projectList";
 import subscriberReducer from "./reducers/subscriber";
 
 // Sagas
+import * as appSagas from "./sagas/app";
 import * as demoSagas from "./sagas/demo";
-import * as errorSagas from "./sagas/error";
+// import * as errorSagas from "./sagas/error";
 import * as identitySagas from "./sagas/identity";
 import * as jsspeccySagas from "./sagas/jsspeccy";
-import * as profileSagas from "./sagas/profile";
+// import * as profileSagas from "./sagas/profile";
 import * as projectSagas from "./sagas/project";
 import * as projectListSagas from "./sagas/projectList";
 import * as subscriberSagas from "./sagas/subscriber";
@@ -56,6 +58,7 @@ const sagaMiddleware = createSagaMiddleware();
 
 const rootReducer = combineReducers({
     router: connectRouter(history),
+    app: appReducer,
     demo: demoReducer,
     error: errorReducer,
     identity: identityReducer,
@@ -83,6 +86,7 @@ function collectSagas(file) {
     }
 }
 
+collectSagas(appSagas);
 collectSagas(demoSagas);
 // collectSagas(errorSagas);
 collectSagas(identitySagas);
