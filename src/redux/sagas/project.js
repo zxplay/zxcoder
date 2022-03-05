@@ -72,7 +72,7 @@ function* handleCreateNewProjectActions(action) {
     };
 
     const userId = yield select((state) => state.identity.userId);
-    const response = yield gqlFetch(userId, query, variables, false);
+    const response = yield gqlFetch(userId, query, variables);
     console.assert(response?.data?.insert_project_one?.project_id, response);
 
     const id = response?.data?.insert_project_one?.project_id;
@@ -95,7 +95,7 @@ function* handleLoadProjectActions(action) {
     };
 
     const userId = yield select((state) => state.identity.userId);
-    const response = yield gqlFetch(userId, query, variables, false);
+    const response = yield gqlFetch(userId, query, variables);
     console.assert(response?.data?.project_by_pk, response);
 
     const proj = response.data.project_by_pk;
@@ -137,7 +137,7 @@ function* handleSaveCodeChangesActions(_) {
     };
 
     const userId = yield select((state) => state.identity.userId);
-    const response = yield gqlFetch(userId, query, variables, false);
+    const response = yield gqlFetch(userId, query, variables);
     console.assert(response?.data?.update_project_by_pk?.project_id, response);
 
     yield put(setSavedCode(code));
@@ -159,7 +159,7 @@ function* handleDeleteProjectActions(_) {
     };
 
     const userId = yield select((state) => state.identity.userId);
-    const response = yield gqlFetch(userId, query, variables, false);
+    const response = yield gqlFetch(userId, query, variables);
     console.assert(response?.data?.delete_project_by_pk?.project_id, response);
     yield put(reset());
     yield put(resetMachine());
@@ -214,7 +214,7 @@ async function getZXBasicTape(code, userId) {
         'basic': code
     };
 
-    const response = await gqlFetch(userId, query, variables, false);
+    const response = await gqlFetch(userId, query, variables);
     console.assert(response?.data?.compile, response);
 
     const base64 = response.data.compile.base64_encoded;

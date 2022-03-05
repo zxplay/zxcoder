@@ -6,6 +6,8 @@ import {print} from "graphql";
 import {dashboardLock, dashboardUnlock} from "./dashboard_lock";
 
 export async function gqlFetch(userId, query, variables, lock) {
+    if (typeof lock === 'undefined') lock = true;
+
     if (lock) dashboardLock();
 
     if (!userId) {

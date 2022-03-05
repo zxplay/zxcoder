@@ -56,7 +56,7 @@ function* handleRunZXBasicActions(_) {
     };
 
     const userId = yield select((state) => state.identity.userId);
-    const response = yield gqlFetch(userId, query, variables, false);
+    const response = yield gqlFetch(userId, query, variables);
     const base64 = response.data.compile.base64_encoded;
     const tap = Uint8Array.from(atob(base64), c => c.charCodeAt(0));
     store.dispatch(loadTape(tap));
