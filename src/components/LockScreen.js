@@ -22,21 +22,21 @@ const styles = {
         margin: 0,
         padding: 0,
         zIndex: 99999,
-        width: '100vw',
+        width: '100%',
         height: '100vh',
         opacity: 0.5,
         display: 'none'
     },
     contentBlanker: {
-        position: 'absolute',
+        position: 'fixed',
         top: 0,
         left: 0,
         margin: 0,
         padding: 0,
         zIndex: 99999,
-        width: '100vw',
+        width: '100%',
         height: '100vh',
-        backgroundColor: '#fff',
+        backgroundColor: 'black',
         opacity: 0.4,
         display: 'none'
     },
@@ -47,7 +47,7 @@ const styles = {
         margin: 0,
         padding: 0,
         zIndex: 99999,
-        width: '100vw',
+        width: '100%',
         height: '100vh',
         display: 'none'
     }
