@@ -140,7 +140,7 @@ function renderKeyboard(width) {
             const ch = btnrow.chs[i];
 
             if (ch === '-') {
-                new ImageButton(win, x, y, d, d, 'img/keyNONE.png', 'img/keyNONE.png');
+                new ImageButton(win, x, y, d, d, 'img/keys/keyNONE.png', 'img/keys/keyNONE.png');
             } else {
                 let suffix = ch;
 
