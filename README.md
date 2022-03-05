@@ -117,12 +117,12 @@ Configured using URL parameters.
 
 #### Example URL
 
-https://stever.github.io/jsspeccy3/?k=-W-P,ASDe,123456789M&m=48&u=https://davidprograma.github.io/ytc/09-ZxSpectrum/snake-1.01.tap
+https://zxplay.org/?k=-W-P,ASDe,123456789M&m=48&u=https://davidprograma.github.io/ytc/09-ZxSpectrum/snake-1.01.tap
 
 The URL can be decomposed in these parts:
 - Main part:
 ```
-https://stever.github.io/jsspeccy3/
+https://zxplay.org/
 ```
 - Soft keys:
 ```
