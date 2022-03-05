@@ -47,10 +47,12 @@ export default function Project(props) {
 
     return (
         <div className="grid" style={{width: "100%", padding: 0, margin: 0}}>
-            <div className="col m-4">
-                <h3>{title}</h3>
+            <div className="col p-0">
+                <div className="m-4">
+                    <h3>{title}</h3>
+                </div>
             </div>
-            <div className="col-fixed" style={{width: `${width}px`, padding: '6px 0 0 0'}}>
+            <div className="col-fixed p-0 pt-1" style={{width: `${width}px`}}>
                 <TabView
                     activeIndex={tab}
                     onTabChange={(e) => dispatch(setSelectedTabIndex(e.index))}>
@@ -62,7 +64,7 @@ export default function Project(props) {
                     </TabPanel>
                 </TabView>
             </div>
-            <div className="col" style={{padding: 0}}>
+            <div className="col p-0">
 
             </div>
         </div>

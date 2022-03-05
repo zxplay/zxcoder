@@ -31,12 +31,11 @@ export default function Demo() {
     }, []);
 
     return (
-        <div className="grid"
-             style={{width: "100%", padding: 0, margin: 0}}>
+        <div className="grid" style={{width: "100%", padding: 0, margin: 0}}>
             <div className="col" style={{padding: 0}}>
 
             </div>
-            <div className="col-fixed" style={{width: `${width}px`, padding: '6px 0 0 0'}}>
+            <div className="col-fixed p-0 pt-1" style={{width: `${width}px`}}>
                 {externalLoad &&
                     <Emulator zoom={zoom} width={width}/>
                 }
