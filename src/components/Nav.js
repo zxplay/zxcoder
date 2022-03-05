@@ -26,7 +26,7 @@ export default function Nav() {
     const projectType = useSelector(state => state?.project.type);
 
     const emuVisible =
-        pathname === '/' &&
+        (pathname === '/' || pathname.startsWith('/projects/')) &&
         (
             (!projectType && selectedDemoTab === 0) ||
             (projectType && selectedProjectTab === 1)
