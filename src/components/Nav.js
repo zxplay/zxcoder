@@ -164,7 +164,7 @@ export default function Nav() {
             icon: 'pi pi-fw pi-info-circle',
             items: [
                 {
-                    label: 'About This Site',
+                    label: 'InfoAbout This Site',
                     icon: 'pi pi-fw pi-question-circle',
                     command: () => {
                         history.push('/about');

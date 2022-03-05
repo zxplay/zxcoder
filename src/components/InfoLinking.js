@@ -2,7 +2,7 @@ import React from "react";
 import {useHistory} from "react-router-dom";
 import {Card} from "primereact/card";
 
-export default function LinkingInfo() {
+export default function InfoLinking() {
     const history = useHistory();
 
     const domain = `${window.location.protocol}//${window.location.host}/`;
