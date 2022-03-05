@@ -42,6 +42,11 @@ export function* watchForDeleteProjectActions() {
     yield takeLatest(actionTypes.deleteProject, handleDeleteProjectActions);
 }
 
+// noinspection JSUnusedGlobalSymbols
+export function* watchForDownloadTapeActions() {
+    yield takeLatest(actionTypes.downloadTape, handleDownloadTapeActions);
+}
+
 // -----------------------------------------------------------------------------
 // Action handlers
 // -----------------------------------------------------------------------------
@@ -162,11 +167,41 @@ function* handleDeleteProjectActions(_) {
     yield put(push('/projects'));
 }
 
+function* handleDownloadTapeActions(_) {
+    const type = yield select((state) => state.project.type);
+    const code = yield select((state) => state.project.code);
+
+    // Get .tap file for download.
+    let tap;
+    if (type === 'zxbasic') {
+        const userId = yield select((state) => state.identity.userId);
+        tap = yield getZXBasicTape(code, userId);
+    } else if (type === 'basic') {
+        tap = yield zmakebas(code);
+    } else {
+        console.assert(type === 'asm', type);
+        tap = yield pasmo(code);
+    }
+
+    // Cause the download of the tap file using browser download.
+    const blob = new Blob([tap], {type: 'application/octet-stream'});
+    const objURL = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.download = 'project.tap';
+    link.href = objURL;
+    link.click();
+}
+
 // -----------------------------------------------------------------------------
 // Action handlers
 // -----------------------------------------------------------------------------
 
 async function runZXBasic(code, userId) {
+    const tap = await getZXBasicTape(code, userId);
+    store.dispatch(loadTape(tap));
+}
+
+async function getZXBasicTape(code, userId) {
     const query = gql`
         mutation ($basic: String!) {
             compile(basic: $basic) {
@@ -183,7 +218,5 @@ async function runZXBasic(code, userId) {
     console.assert(response?.data?.compile, response);
 
     const base64 = response.data.compile.base64_encoded;
-    const tap = Uint8Array.from(atob(base64), c => c.charCodeAt(0));
-
-    store.dispatch(loadTape(tap));
+    return Uint8Array.from(atob(base64), c => c.charCodeAt(0));
 }

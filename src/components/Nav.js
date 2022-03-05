@@ -119,10 +119,9 @@ export default function Nav() {
                 {
                     label: 'Download Tape',
                     icon: 'pi pi-fw pi-download',
-                    disabled: true,
+                    disabled: !projectReady,
                     command: () => {
                         dispatch(downloadTape());
-                        history.push('/');
                     }
                 }
             ]

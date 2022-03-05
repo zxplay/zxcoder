@@ -81,6 +81,7 @@ function receiveLoadedProject(state, action) {
         title: action.title,
         type: action.lang,
         code: action.code,
+        savedCode: action.code,
         selectedTabIndex,
         ready: true
     };
