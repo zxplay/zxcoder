@@ -1,9 +1,9 @@
 import {take, takeLatest, put, call} from "redux-saga/effects";
 import {eventChannel} from "redux-saga";
 import {push} from "connected-react-router";
-import {handleClick} from "../actions/jsspeccy";
+import queryString from "query-string";
 import {JSSpeccy} from "../../lib/emulator/JSSpeccy";
-import {actionTypes} from "../actions/jsspeccy";
+import {actionTypes, handleClick} from "../actions/jsspeccy";
 import {reset as resetProject} from "../actions/project";
 import {setSelectedTabIndex} from "../actions/demo";
 
@@ -101,19 +101,18 @@ function* handleRenderEmulatorActions(action) {
 
     let doFilter = false;
 
-    const url = new URL(window.location.href);
-    for (const [key, value] of url.searchParams) {
-        if (key === 'm') {
-            if (value === '48' || value === '128' || value === '5') {
-                emuParams.machine = value;
-            }
-        } else if (key === 'u') {
-            emuParams.openUrl = value;
-        } else if (key === 'f') {
-            if (value && value !== '0') {
-                doFilter = true;
-            }
-        }
+    const parsed = queryString.parse(location.search);
+
+    if (parsed.m && (parsed.m === '48' || parsed.m === '128' || parsed.m === '5')) {
+        emuParams.machine = parsed.m;
+    }
+
+    if (parsed.u) {
+        emuParams.openUrl = parsed.u;
+    }
+
+    if (parsed.f && parsed.f !== '0') {
+        doFilter = true;
     }
 
     console.assert(jsspeccy === undefined);
