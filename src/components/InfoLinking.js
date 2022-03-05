@@ -1,17 +1,12 @@
 import React from "react";
-import {useHistory} from "react-router-dom";
 import {Card} from "primereact/card";
 
 export default function InfoLinking() {
-    const history = useHistory();
-
     const domain = `${window.location.protocol}//${window.location.host}/`;
     const k = '-W-P,ASDe,123456789M';
     const m = '48';
     const u = 'https://davidprograma.github.io/ytc/09-ZxSpectrum/snake-1.01.tap';
     const href = `${domain}?k=${k}&m=${m}&u=${u}`;
-    const link = `/?k=${k}&m=${m}&u=${u}`;
-
     return (
         <Card className="m-2">
             <h1>Linking To ZX Play</h1>
@@ -20,15 +15,7 @@ export default function InfoLinking() {
                 a program or game tape image from another URL.
             </p>
             <p>Example:</p>
-            <p>
-                <a href={href} onClick={(e) => {
-                    e.preventDefault();
-                    history.push(link);
-                    return false;
-                }}>
-                    {href}
-                </a>
-            </p>
+            <p><a href={href}>{href}</a></p>
             <p>The URL can be decomposed in these parts:</p>
             <ul>
                 <li><b>Main part: </b><code>https://zxplay.org/</code></li>
