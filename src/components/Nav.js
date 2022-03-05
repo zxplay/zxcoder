@@ -18,21 +18,22 @@ import {getUserInfo} from "../redux/actions/identity";
 import {login, logout} from "../auth";
 
 export default function Nav() {
-    const [searchInput, setSearchInput] = useState([]);
     const dispatch = useDispatch();
     const history = useHistory();
+
+    const [searchInput, setSearchInput] = useState([]);
+
     const pathname = useSelector(state => state?.router.location.pathname);
     const selectedDemoTab = useSelector(state => state?.demo.selectedTabIndex);
     const selectedProjectTab = useSelector(state => state?.project.selectedTabIndex);
     const userId = useSelector(state => state?.identity.userId);
     const projectType = useSelector(state => state?.project.type);
-    const projectReady = useSelector(state => state?.project.ready);
 
     const emuVisible =
         pathname === '/' &&
         (
             (!projectType && selectedDemoTab === 0) ||
-            (projectType && projectReady && selectedProjectTab === 1)
+            (projectType && selectedProjectTab === 1)
         );
 
     const start = <img alt="logo" src="/img/logo.png" height="40" className="mr-2"/>;
@@ -113,7 +114,7 @@ export default function Nav() {
                 {
                     label: 'Download Tape',
                     icon: 'pi pi-fw pi-download',
-                    disabled: !projectReady,
+                    disabled: typeof projectType === 'undefined',
                     command: () => {
                         dispatch(downloadTape());
                     }

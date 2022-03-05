@@ -10,18 +10,16 @@ export default function Project(props) {
     const dispatch = useDispatch();
 
     const userId = useSelector(state => state?.identity.userId);
+    const tab = useSelector(state => state?.project.selectedTabIndex);
+    const type = useSelector(state => state?.project.type);
+    let title = useSelector(state => state?.project.title);
 
     useEffect(() => {
         dispatch(loadProject(props.id));
         return () => {}
     }, [props.id, userId]);
 
-    const tab = useSelector(state => state?.project.selectedTabIndex);
-    const type = useSelector(state => state?.project.type);
-    let title = useSelector(state => state?.project.title);
-    let ready = useSelector(state => state?.project.ready);
-
-    if (!props.id || !ready) return <Fragment/>;
+    if (!props.id || !type) return <Fragment/>;
 
     if (title) title = `Project: ${title}`;
 
