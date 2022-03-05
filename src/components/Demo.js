@@ -26,14 +26,14 @@ export default function Demo() {
                     <TabPanel header="Emulator">
                         <Emulator zoom={zoom} width={width}/>
                     </TabPanel>
-                    <TabPanel header="Boriel ZX BASIC">
-                        <DemoZXBasicEditor/>
+                    <TabPanel header="Z80 Assembler">
+                        <DemoAssemblyEditor/>
                     </TabPanel>
                     <TabPanel header="Sinclair BASIC">
                         <DemoSinclairBasicEditor/>
                     </TabPanel>
-                    <TabPanel header="Z80 Assembler">
-                        <DemoAssemblyEditor/>
+                    <TabPanel header="Boriel ZX BASIC">
+                        <DemoZXBasicEditor/>
                     </TabPanel>
                 </TabView>
             </div>
