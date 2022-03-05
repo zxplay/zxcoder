@@ -4,7 +4,7 @@ import {Card} from "primereact/card";
 export default function About() {
     return (
         <Card className="m-2">
-            <h1>About This Website</h1>
+            <h1>About This Site</h1>
             <p>
                 A ZX Spectrum emulator & programming environment for the browser.
             </p>

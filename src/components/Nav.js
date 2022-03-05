@@ -131,7 +131,7 @@ export default function Nav() {
             icon: 'pi pi-fw pi-eye',
             items: [
                 {
-                    label: 'Full screen',
+                    label: 'Full Screen',
                     icon: 'pi pi-fw pi-window-maximize',
                     disabled: !emuVisible,
                     command: () => {
@@ -142,7 +142,7 @@ export default function Nav() {
                     separator: true
                 },
                 {
-                    label: 'Your profile',
+                    label: 'Your Profile',
                     icon: 'pi pi-fw pi-user',
                     disabled: !userId,
                     command: () => {
@@ -150,7 +150,7 @@ export default function Nav() {
                     }
                 },
                 {
-                    label: 'Your projects',
+                    label: 'Your Projects',
                     icon: 'pi pi-fw pi-folder',
                     disabled: !userId,
                     command: () => {
@@ -164,7 +164,7 @@ export default function Nav() {
             icon: 'pi pi-fw pi-info-circle',
             items: [
                 {
-                    label: 'About',
+                    label: 'About This Site',
                     icon: 'pi pi-fw pi-question-circle',
                     command: () => {
                         history.push('/about');
