@@ -14,9 +14,9 @@ export default function LinkingInfo() {
 
     return (
         <Card className="m-2">
-            <h1>Linking to ZX Play</h1>
+            <h1>Linking To ZX Play</h1>
             <p>
-                You can link directly to zxplay.org using URL parameters to load
+                You can link directly to ZX Play using URL parameters to load
                 a program or game tape image from another URL.
             </p>
             <p>Example:</p>
