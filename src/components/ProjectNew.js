@@ -6,7 +6,7 @@ import {InputText} from "primereact/inputtext";
 import {Button} from "primereact/button";
 import {createNewProject} from "../redux/actions/project";
 
-export default function NewProject(props) {
+export default function ProjectNew(props) {
     const dispatch = useDispatch();
     const [title, setTitle] = useState('');
 
@@ -48,6 +48,6 @@ export default function NewProject(props) {
     )
 }
 
-NewProject.propTypes = {
+ProjectNew.propTypes = {
     type: PropTypes.string.isRequired,
 }

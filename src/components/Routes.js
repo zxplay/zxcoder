@@ -2,7 +2,7 @@ import React from "react";
 import {Route, Switch} from "react-router-dom";
 import Demo from "./Demo";
 import MaxWidth from "./MaxWidth";
-import NewProject from "./NewProject";
+import ProjectNew from "./ProjectNew";
 import Project from "./Project";
 import InfoAbout from "./InfoAbout";
 import InfoLinking from "./InfoLinking";
@@ -29,17 +29,17 @@ export default function Routes() {
             </Route>
             <Route exact path="/new/asm">
                 <MaxWidth>
-                    <NewProject type="asm"/>
+                    <ProjectNew type="asm"/>
                 </MaxWidth>
             </Route>
             <Route exact path="/new/basic">
                 <MaxWidth>
-                    <NewProject type="basic"/>
+                    <ProjectNew type="basic"/>
                 </MaxWidth>
             </Route>
             <Route exact path="/new/zxbasic">
                 <MaxWidth>
-                    <NewProject type="zxbasic"/>
+                    <ProjectNew type="zxbasic"/>
                 </MaxWidth>
             </Route>
             <Route exact path="/profile">
