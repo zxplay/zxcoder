@@ -6,6 +6,7 @@ import MaxWidth from "./MaxWidth";
 import NewProject from "./NewProject";
 import Project from "./Project";
 import About from "./About";
+import LinkingInfo from "./LinkingInfo";
 import YourProfile from "./YourProfile";
 import YourProjects from "./YourProjects";
 import Search from "./Search";
@@ -32,6 +33,11 @@ export default function Routes() {
             <Route exact path="/about">
                 <MaxWidth>
                     <About/>
+                </MaxWidth>
+            </Route>
+            <Route exact path="/info/linking">
+                <MaxWidth>
+                    <LinkingInfo/>
                 </MaxWidth>
             </Route>
             <Route exact path="/profile">

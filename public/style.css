@@ -22,6 +22,14 @@ canvas {
     image-rendering: crisp-edges;
 }
 
+ul, ol {
+    margin: 1em 2em;
+}
+
+code {
+    white-space: pre !important;
+}
+
 .main-content {
     color-scheme: light;
 }

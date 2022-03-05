@@ -169,6 +169,13 @@ export default function Nav() {
                     command: () => {
                         history.push('/about');
                     }
+                },
+                {
+                    label: 'Linking To ZX Play',
+                    icon: 'pi pi-fw pi-link',
+                    command: () => {
+                        history.push('/info/linking');
+                    }
                 }
             ]
         },

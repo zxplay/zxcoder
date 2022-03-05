@@ -137,12 +137,12 @@ https://zxplay.org/
 &u=https://davidprograma.github.io/ytc/09-ZxSpectrum/snake-1.01.tap
 ```
 
-You can build your own URL setting soft keys, machine type (defaults to 128) and a 
+You can build your own URL setting soft keys, machine type (defaults to 48) and a 
 URL (*) for a Z80, SNA, SZX, TZX or TAP file containing the desired game or program.
 
 (*) Target URL **must** be hosted in a website with CORS enabled.
 
-- Optional filtering (default is no filtered, good old pixels):
+- Optional filtering (default 0 is not filtered, good old pixels):
 ```
 &f=1
 ```
