@@ -2,6 +2,8 @@ import React from "react";
 import {Route, Switch} from "react-router-dom";
 import Demo from "./Demo";
 import MaxWidth from "./MaxWidth";
+import InfoLegalPrivacy from "./InfoLegacyPrivacy";
+import InfoLegalTerms from "./InfoLegalTerms";
 import ProjectNew from "./ProjectNew";
 import Project from "./Project";
 import InfoAbout from "./InfoAbout";
@@ -25,6 +27,16 @@ export default function Routes() {
             <Route exact path="/info/linking">
                 <MaxWidth>
                     <InfoLinking/>
+                </MaxWidth>
+            </Route>
+            <Route exact path="/legal/privacy-policy">
+                <MaxWidth>
+                    <InfoLegalPrivacy/>
+                </MaxWidth>
+            </Route>
+            <Route exact path="/legal/terms-of-use">
+                <MaxWidth>
+                    <InfoLegalTerms/>
                 </MaxWidth>
             </Route>
             <Route exact path="/new/asm">
