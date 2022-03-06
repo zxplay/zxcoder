@@ -7,7 +7,7 @@ export default function YourProfile(props) {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        // dispatch(loadProject(props.id));
+        // dispatch(loadProfile(props.id));
         // return () => {}
     }, [props.id]);
 

@@ -93,7 +93,7 @@ export default function Nav() {
                     icon: 'pi pi-fw pi-folder-open',
                     disabled: !userId,
                     command: () => {
-                        history.push('/projects');
+                        history.push(`/u/${userId}/projects`);
                     }
                 },
                 {
@@ -145,7 +145,7 @@ export default function Nav() {
                     icon: 'pi pi-fw pi-folder',
                     disabled: !userId,
                     command: () => {
-                        history.push('/projects');
+                        history.push(`/u/${userId}/projects`);
                     }
                 }
             ]
