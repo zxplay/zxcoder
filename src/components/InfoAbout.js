@@ -12,6 +12,14 @@ export default function InfoAbout() {
                 This site is a work in progress.
                 Source available <a href="https://github.com/zxplay/zxplay" target="_blank">here</a>.
             </p>
+            <h2>Create Projects</h2>
+            <p>
+                Registered users can save projects.
+            </p>
+            <p>
+                Use the Sign-In button above and look for the "Sign Up" link on
+                the proceeding page to create an account.
+            </p>
             <h2>Acknowledgements</h2>
             <p>
                 Based on <a href="https://github.com/gasman/jsspeccy3" target="_blank">JSSpeccy3</a>
