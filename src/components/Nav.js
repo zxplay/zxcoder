@@ -137,7 +137,7 @@ export default function Nav() {
                     icon: 'pi pi-fw pi-user',
                     disabled: !userId,
                     command: () => {
-                        history.push('/profile');
+                        history.push(`/u/${userId}`);
                     }
                 },
                 {

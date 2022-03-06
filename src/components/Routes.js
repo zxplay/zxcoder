@@ -42,20 +42,22 @@ export default function Routes() {
                     <ProjectNew type="zxbasic"/>
                 </MaxWidth>
             </Route>
-            <Route exact path="/profile">
-                <YourProfile/>
+            <Route exact path="/projects">
+                <YourProjects/>
             </Route>
             <Route exact path="/projects/:id" render={(match) => {
                 return (
                     <Project id={match?.match?.params?.id}/>
                 )
             }}/>
-            <Route exact path="/projects">
-                <YourProjects/>
-            </Route>
             <Route path="/search">
                 <Search/>
             </Route>
+            <Route exact path="/u/:id" render={(match) => {
+                return (
+                    <YourProfile id={match?.match?.params?.id}/>
+                )
+            }}/>
             <Route>
                 <NotFound/>
             </Route>
