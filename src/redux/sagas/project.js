@@ -163,7 +163,7 @@ function* handleDeleteProjectActions(_) {
     yield put(reset());
     yield put(resetMachine());
 
-    yield put(push('/projects'));
+    yield put(push(`/u/${userId}/projects`));
 }
 
 function* handleDownloadTapeActions(_) {
