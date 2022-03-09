@@ -29,8 +29,8 @@ export default function InfoAbout() {
                 see <a href="https://github.com/gasman/jsspeccy3/blob/main/COPYING" target="_blank">COPYING</a>.
             </p>
             <p>
-                Uses <a href="" target="_blank">Pasmo</a> by Julián Albo García, alias "NotFound", to compile assembly.
-                Licensed under terms of the GPL version 3 -
+                Uses <a href="https://pasmo.speccy.org/" target="_blank">Pasmo</a> by Julián Albo García,
+                alias "NotFound", to compile assembly. Licensed under terms of the GPL version 3 -
                 see <a href="https://github.com/zxplay/pasmo/blob/main/COPYING" target="_blank">COPYING</a>.
             </p>
             <p>
