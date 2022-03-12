@@ -12,7 +12,7 @@ export default function Project(props) {
 
     const userId = useSelector(state => state?.identity.userId);
     const tab = useSelector(state => state?.project.selectedTabIndex);
-    const type = useSelector(state => state?.project.type);
+    const lang = useSelector(state => state?.project.lang);
     let title = useSelector(state => state?.project.title);
 
     useEffect(() => {
@@ -23,7 +23,7 @@ export default function Project(props) {
         }
     }, [props.id, userId]);
 
-    if (!props.id || !type) return <Fragment/>;
+    if (!props.id || !lang) return <Fragment/>;
 
     if (title) title = `Project: ${title}`;
 
@@ -31,7 +31,7 @@ export default function Project(props) {
     const width = zoom * 320;
 
     let editorTitle;
-    switch (type) {
+    switch (lang) {
         case 'asm':
             editorTitle = 'Z80 Assembler';
             break;

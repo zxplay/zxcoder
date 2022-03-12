@@ -66,7 +66,7 @@ function* handleCreateNewProjectActions(action) {
 
     const variables = {
         'title': action.title,
-        'lang': action.projectType
+        'lang': action.lang
     };
 
     const userId = yield select((state) => state.identity.userId);
@@ -74,7 +74,7 @@ function* handleCreateNewProjectActions(action) {
     console.assert(response?.data?.insert_project_one?.project_id, response);
 
     const id = response?.data?.insert_project_one?.project_id;
-    yield put(receiveLoadedProject(id, action.title, action.projectType, ''));
+    yield put(receiveLoadedProject(id, action.title, action.lang, ''));
     yield put(push(`/projects/${id}`));
 }
 
@@ -103,13 +103,13 @@ function* handleLoadProjectActions(action) {
 }
 
 function* handleRunCodeActions(_) {
-    const type = yield select((state) => state.project.type);
+    const lang = yield select((state) => state.project.lang);
     const code = yield select((state) => state.project.code);
 
-    if (type === 'zxbasic') {
+    if (lang === 'zxbasic') {
         const userId = yield select((state) => state.identity.userId);
         yield runZXBasic(code, userId);
-    } else if (type === 'basic') {
+    } else if (lang === 'basic') {
         const tap = yield zmakebas(code);
         store.dispatch(loadTape(tap));
     } else {
@@ -167,18 +167,18 @@ function* handleDeleteProjectActions(_) {
 }
 
 function* handleDownloadTapeActions(_) {
-    const type = yield select((state) => state.project.type);
+    const lang = yield select((state) => state.project.lang);
     const code = yield select((state) => state.project.code);
 
     // Get .tap file for download.
     let tap;
-    if (type === 'zxbasic') {
+    if (lang === 'zxbasic') {
         const userId = yield select((state) => state.identity.userId);
         tap = yield getZXBasicTape(code, userId);
-    } else if (type === 'basic') {
+    } else if (lang === 'basic') {
         tap = yield zmakebas(code);
     } else {
-        console.assert(type === 'asm', type);
+        console.assert(lang === 'asm', lang);
         tap = yield pasmo(code);
     }
 

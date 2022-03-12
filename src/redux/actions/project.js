@@ -21,9 +21,9 @@ export const setSelectedTabIndex = (index) => ({
     index
 });
 
-export const createNewProject = (projectType, title) => ({
+export const createNewProject = (lang, title) => ({
     type: actionTypes.createNewProject,
-    projectType, title
+    lang, title
 });
 
 export const loadProject = (id) => ({

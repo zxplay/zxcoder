@@ -23,14 +23,11 @@ export default function Nav() {
     const selectedDemoTab = useSelector(state => state?.demo.selectedTabIndex);
     const selectedProjectTab = useSelector(state => state?.project.selectedTabIndex);
     const userId = useSelector(state => state?.identity.userId);
-    const projectType = useSelector(state => state?.project.type);
+    const lang = useSelector(state => state?.project.lang);
 
     const emuVisible =
         (pathname === '/' || pathname.startsWith('/projects/')) &&
-        (
-            (!projectType && selectedDemoTab === 0) ||
-            (projectType && selectedProjectTab === 1)
-        );
+        ((!lang && selectedDemoTab === 0) || (lang && selectedProjectTab === 1));
 
     const start = <img alt="logo" src="/img/logo.png" height="40" className="mr-2"/>;
     const end = (
@@ -110,7 +107,7 @@ export default function Nav() {
                 {
                     label: 'Download Tape',
                     icon: 'pi pi-fw pi-download',
-                    disabled: typeof projectType === 'undefined',
+                    disabled: typeof lang === 'undefined',
                     command: () => {
                         dispatch(downloadTape());
                     }
