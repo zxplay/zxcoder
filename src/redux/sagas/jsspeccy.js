@@ -153,8 +153,9 @@ function* handleLoadUrlActions(action) {
     yield put(resetProject());
     yield put(showActiveEmulator());
     yield put(reset());
-    jsspeccy.openUrl(action.url);
     yield put(start());
+    jsspeccy.openUrl(action.url);
+    yield put(start()); // NOTE: Extra call to start was required here.
 }
 
 function* handleClickActions(action) {
