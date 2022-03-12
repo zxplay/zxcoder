@@ -37,6 +37,11 @@ module.exports = [
                 STAGING_ENV: JSON.stringify('prod')
             })
         ],
-        performance: {hints: false}
+        performance: {hints: false},
+        resolve: {
+            alias: {
+                fs: false
+            }
+        }
     }
 ];

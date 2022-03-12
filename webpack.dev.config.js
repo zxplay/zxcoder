@@ -60,6 +60,11 @@ module.exports = [
                 STAGING_ENV: JSON.stringify('dev')
             })
         ],
-        performance: {hints: false}
+        performance: {hints: false},
+        resolve: {
+            alias: {
+                fs: false
+            }
+        }
     }
 ];

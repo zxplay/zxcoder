@@ -3,11 +3,15 @@ import {useDispatch, useSelector} from "react-redux";
 import {Button} from "primereact/button";
 import {confirmPopup} from "primereact/confirmpopup";
 import CodeMirror from "./CodeMirror";
+import "codemirror/mode/z80/z80";
 import {
     deleteProject,
     saveCodeChanges,
 } from "../redux/actions/project";
 import {setCode, runCode} from "../redux/actions/project";
+import "../lib/syntax/pasmo";
+import "../lib/syntax/zmakebas";
+import "../lib/syntax/zxbasic";
 
 export function ProjectEditor() {
     const dispatch = useDispatch();
@@ -20,7 +24,7 @@ export function ProjectEditor() {
         readOnly: false,
         theme: 'default',
         lineNumbers: false,
-        mode: null
+        mode: 'pasmo' // TODO: Set the apporpriate language here.
     };
 
     useEffect(() => {

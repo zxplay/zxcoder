@@ -6,12 +6,12 @@ import {store, history} from "./redux/store";
 import App from "./components/App";
 
 ReactDOM.render(
-    <React.StrictMode>
+    /*<React.StrictMode>*/
         <ReduxProvider store={store}>
             <ConnectedRouter history={history}>
                 <App/>
             </ConnectedRouter>
         </ReduxProvider>
-    </React.StrictMode>,
+    /*</React.StrictMode>*/,
     document.getElementById('root')
 );
