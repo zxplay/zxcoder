@@ -4,6 +4,7 @@ import {Button} from "primereact/button";
 import CodeMirror from "./CodeMirror";
 import {setSelectedTabIndex} from "../redux/actions/demo";
 import {setZXBasicCode, runZXBasic} from "../redux/actions/demo";
+import "../lib/syntax/zxbasic";
 
 export function DemoZXBasicEditor() {
     const dispatch = useDispatch();
@@ -15,7 +16,7 @@ export function DemoZXBasicEditor() {
         readOnly: false,
         theme: 'default',
         lineNumbers: false,
-        mode: null
+        mode: 'zxbasic'
     };
 
     useEffect(() => {

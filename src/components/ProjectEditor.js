@@ -16,15 +16,31 @@ import "../lib/syntax/zxbasic";
 export function ProjectEditor() {
     const dispatch = useDispatch();
     const cmRef = useRef(null);
+    const lang = useSelector(state => state?.project.lang);
     const code = useSelector(state => state?.project.code);
     const savedCode = useSelector(state => state?.project.savedCode);
+
+    let mode;
+    switch (lang) {
+        case 'asm':
+            mode = 'pasmo';
+            break;
+        case 'basic':
+            mode = 'zmakebas';
+            break;
+        case 'zxbasic':
+            mode = 'zxbasic';
+            break;
+        default:
+            throw 'unexpected case';
+    }
 
     const options = {
         lineWrapping: false,
         readOnly: false,
         theme: 'default',
         lineNumbers: false,
-        mode: 'pasmo' // TODO: Set the apporpriate language here.
+        mode
     };
 
     useEffect(() => {

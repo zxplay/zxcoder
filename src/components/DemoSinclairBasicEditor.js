@@ -4,6 +4,7 @@ import {Button} from "primereact/button";
 import CodeMirror from "./CodeMirror";
 import {setSelectedTabIndex} from "../redux/actions/demo";
 import {setSinclairBasicCode, runSinclairBasic} from "../redux/actions/demo";
+import "../lib/syntax/zmakebas";
 
 export function DemoSinclairBasicEditor() {
     const dispatch = useDispatch();
@@ -15,7 +16,7 @@ export function DemoSinclairBasicEditor() {
         readOnly: false,
         theme: 'default',
         lineNumbers: false,
-        mode: null
+        mode: 'zmakebas'
     };
 
     useEffect(() => {

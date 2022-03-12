@@ -4,7 +4,7 @@ import {Button} from "primereact/button";
 import CodeMirror from "./CodeMirror";
 import {setSelectedTabIndex} from "../redux/actions/demo";
 import {setAssemblyCode, runAssembly} from "../redux/actions/demo";
-import "codemirror/mode/z80/z80";
+import "../lib/syntax/pasmo";
 
 export function DemoAssemblyEditor() {
     const dispatch = useDispatch();
@@ -16,7 +16,7 @@ export function DemoAssemblyEditor() {
         readOnly: false,
         theme: 'default',
         lineNumbers: true,
-        mode: 'z80'
+        mode: 'pasmo'
     };
 
     useEffect(() => {
