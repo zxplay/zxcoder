@@ -11,6 +11,7 @@ import {
 import {setCode, runCode} from "../redux/actions/project";
 import "../lib/syntax/pasmo";
 import "../lib/syntax/zmakebas";
+import "../lib/syntax/z88dk-c";
 import "../lib/syntax/zxbasic";
 
 export function ProjectEditor() {
@@ -23,13 +24,16 @@ export function ProjectEditor() {
     let mode;
     switch (lang) {
         case 'asm':
-            mode = 'pasmo';
+            mode = 'text/x-pasmo';
             break;
         case 'basic':
-            mode = 'zmakebas';
+            mode = 'text/x-zmakebas';
+            break;
+        case 'c':
+            mode = 'text/x-z88dk-csrc';
             break;
         case 'zxbasic':
-            mode = 'zxbasic';
+            mode = 'text/x-zxbasic';
             break;
         default:
             throw 'unexpected case';

@@ -37,6 +37,10 @@ export default function ProjectList() {
                 return 'Sinclair BASIC';
             case 'asm':
                 return 'Z80 Assembly';
+            case 'c':
+                return 'C';
+            default:
+                return 'Unknown';
         }
     }
 

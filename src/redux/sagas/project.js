@@ -109,6 +109,9 @@ function* handleRunCodeActions(_) {
     if (lang === 'zxbasic') {
         const userId = yield select((state) => state.identity.userId);
         yield runZXBasic(code, userId);
+    } else if (lang === 'c') {
+        const userId = yield select((state) => state.identity.userId);
+        yield runC(code, userId);
     } else if (lang === 'basic') {
         const tap = yield zmakebas(code);
         store.dispatch(loadTape(tap));
@@ -217,5 +220,30 @@ async function getZXBasicTape(code, userId) {
     console.assert(response?.data?.compile, response);
 
     const base64 = response.data.compile.base64_encoded;
+    return Uint8Array.from(atob(base64), c => c.charCodeAt(0));
+}
+
+async function runC(code, userId) {
+    const tap = await getCTape(code, userId);
+    store.dispatch(loadTape(tap));
+}
+
+async function getCTape(code, userId) {
+    const query = gql`
+        mutation ($code: String!) {
+            compileC(code: $code) {
+                base64_encoded
+            }
+        }
+    `;
+
+    const variables = {
+        'code': code
+    };
+
+    const response = await gqlFetch(userId, query, variables);
+    console.assert(response?.data?.compileC, response);
+
+    const base64 = response.data.compileC.base64_encoded;
     return Uint8Array.from(atob(base64), c => c.charCodeAt(0));
 }

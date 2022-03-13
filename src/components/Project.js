@@ -38,6 +38,9 @@ export default function Project(props) {
         case 'basic':
             editorTitle = 'Sinclair BASIC';
             break;
+        case 'c':
+            editorTitle = 'C';
+            break;
         case 'zxbasic':
             editorTitle = 'Boriel ZX BASIC';
             break;

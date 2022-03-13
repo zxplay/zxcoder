@@ -82,6 +82,13 @@ export default function Nav() {
                                 dispatch(pause());
                                 history.push('/new/zxbasic');
                             }
+                        },
+                        {
+                            label: 'C',
+                            command: () => {
+                                dispatch(pause());
+                                history.push('/new/c');
+                            }
                         }
                     ]
                 },

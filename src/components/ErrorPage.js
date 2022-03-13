@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {Card} from "primereact/card";
 import {Button} from "primereact/button";
 
 export default function ErrorPage(props) {
@@ -13,8 +14,8 @@ export default function ErrorPage(props) {
     }
 
     return (
-        <div>
-            <div>
+        <Card className="m-2" style={{textAlign: 'center'}}>
+            <div className="m-4">
                 {msg}
             </div>
             <Button
@@ -23,7 +24,7 @@ export default function ErrorPage(props) {
                 label="GO BACK TO DASHBOARD"
                 onClick={() => window.location = '/'}
             />
-        </div>
+        </Card>
     )
 }
 

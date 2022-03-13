@@ -10,6 +10,7 @@ import LoadingScreen from "../components/LoadingScreen";
 import LockScreen from "../components/LockScreen";
 import Nav from "./Nav";
 import Routes from "./Routes";
+import ErrorBoundary from "./ErrorBoundary";
 
 export default function App() {
 
@@ -27,7 +28,9 @@ export default function App() {
                 {!externalLoad &&
                     <Nav/>
                 }
-                <Routes/>
+                <ErrorBoundary>
+                    <Routes/>
+                </ErrorBoundary>
             </div>
         </Fragment>
     )

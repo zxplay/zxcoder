@@ -49,6 +49,11 @@ export default function Routes() {
                     <ProjectNew type="basic"/>
                 </MaxWidth>
             </Route>
+            <Route exact path="/new/c">
+                <MaxWidth>
+                    <ProjectNew type="c"/>
+                </MaxWidth>
+            </Route>
             <Route exact path="/new/zxbasic">
                 <MaxWidth>
                     <ProjectNew type="zxbasic"/>

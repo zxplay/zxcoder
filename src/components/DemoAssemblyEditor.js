@@ -16,7 +16,7 @@ export function DemoAssemblyEditor() {
         readOnly: false,
         theme: 'default',
         lineNumbers: true,
-        mode: 'pasmo'
+        mode: 'text/x-pasmo'
     };
 
     useEffect(() => {
