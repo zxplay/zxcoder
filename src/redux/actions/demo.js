@@ -3,9 +3,11 @@ export const actionTypes = {
     setAssemblyCode: 'demo/setAssemblyCode',
     setSinclairBasicCode: 'demo/setSinclairBasicCode',
     setZXBasicCode: 'demo/setZXBasicCode',
+    setCCode: 'demo/setCCode',
     runAssembly: 'demo/runAssembly',
     runSinclairBasic: 'demo/runSinclairBasic',
     runZXBasic: 'demo/runZXBasic',
+    runC: 'demo/runC',
 };
 
 export const setSelectedTabIndex = (index) => ({
@@ -13,19 +15,24 @@ export const setSelectedTabIndex = (index) => ({
     index
 })
 
-export const setAssemblyCode = (asm) => ({
+export const setAssemblyCode = (code) => ({
     type: actionTypes.setAssemblyCode,
-    asm
+    code
 });
 
-export const setSinclairBasicCode = (basic) => ({
+export const setSinclairBasicCode = (code) => ({
     type: actionTypes.setSinclairBasicCode,
-    basic
+    code
 });
 
-export const setZXBasicCode = (basic) => ({
+export const setZXBasicCode = (code) => ({
     type: actionTypes.setZXBasicCode,
-    basic
+    code
+});
+
+export const setCCode = (code) => ({
+    type: actionTypes.setCCode,
+    code
 });
 
 export const runAssembly = () => ({
@@ -38,4 +45,8 @@ export const runSinclairBasic = () => ({
 
 export const runZXBasic = () => ({
     type: actionTypes.runZXBasic
+});
+
+export const runC = () => ({
+    type: actionTypes.runC
 });

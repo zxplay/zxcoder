@@ -9,19 +9,19 @@ import "../lib/syntax/zxbasic";
 export function DemoZXBasicEditor() {
     const dispatch = useDispatch();
     const cmRef = useRef(null);
-    const basicCode = useSelector(state => state?.demo.zxBasicCode);
+    const code = useSelector(state => state?.demo.zxBasicCode);
 
     const options = {
         lineWrapping: false,
         readOnly: false,
         theme: 'default',
         lineNumbers: false,
-        mode: 'zxbasic'
+        mode: 'text/x-zxbasic'
     };
 
     useEffect(() => {
         const cm = cmRef.current.getCodeMirror();
-        cm.setValue(basicCode || '');
+        cm.setValue(code || '');
         dispatch(setZXBasicCode(cm.getValue()))
     }, []);
 

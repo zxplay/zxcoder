@@ -5,6 +5,7 @@ import {TabPanel, TabView} from "primereact/tabview";
 import {DemoSinclairBasicEditor} from "./DemoSinclairBasicEditor";
 import {DemoAssemblyEditor} from "./DemoAssemblyEditor";
 import {DemoZXBasicEditor} from "./DemoZXBasicEditor";
+import {DemoCEditor} from "./DemoCEditor";
 import {Emulator} from "./Emulator";
 import {setSelectedTabIndex} from "../redux/actions/demo";
 import {reset as resetProject} from "../redux/actions/project";
@@ -46,7 +47,7 @@ export default function Demo() {
                         <TabPanel header="Emulator">
                             <Emulator zoom={zoom} width={width}/>
                         </TabPanel>
-                        <TabPanel header="Z80 Assembler">
+                        <TabPanel header="Z80 Assembly">
                             <DemoAssemblyEditor/>
                         </TabPanel>
                         <TabPanel header="Sinclair BASIC">
@@ -54,6 +55,9 @@ export default function Demo() {
                         </TabPanel>
                         <TabPanel header="Boriel ZX BASIC">
                             <DemoZXBasicEditor/>
+                        </TabPanel>
+                        <TabPanel header="C">
+                            <DemoCEditor/>
                         </TabPanel>
                     </TabView>
                 }

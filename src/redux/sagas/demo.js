@@ -31,6 +31,11 @@ export function* watchForRunZXBasicActions() {
     yield takeLatest(actionTypes.runZXBasic, handleRunZXBasicActions);
 }
 
+// noinspection JSUnusedGlobalSymbols
+export function* watchForRunCActions() {
+    yield takeLatest(actionTypes.runC, handleRunCActions);
+}
+
 // -----------------------------------------------------------------------------
 // Action handlers
 // -----------------------------------------------------------------------------
@@ -39,9 +44,22 @@ function* handleSetSelectedTabIndexActions(_) {
     yield put(pause())
 }
 
-function* handleRunZXBasicActions(_) {
-    const basic = yield select((state) => state.demo.zxBasicCode);
+function* handleRunAssemblyActions(_) {
+    const code = yield select((state) => state.demo.asmCode);
+    const tap = yield pasmo(code);
+    store.dispatch(loadTape(tap));
+}
 
+function* handleRunSinclairBasicActions(_) {
+    const code = yield select((state) => state.demo.sinclairBasicCode);
+    const tap = yield zmakebas(code);
+    store.dispatch(loadTape(tap));
+}
+
+function* handleRunZXBasicActions(_) {
+    const code = yield select((state) => state.demo.zxBasicCode);
+
+    // TODO: Rename this GraphQL action to 'compileBasic'.
     // Call the GraphQL compile action.
     const query = gql`
         mutation ($basic: String!) {
@@ -51,8 +69,9 @@ function* handleRunZXBasicActions(_) {
         }
     `;
 
+    // TODO: Rename this GraphQL variable to 'code'.
     const variables = {
-        'basic': basic
+        'basic': code
     };
 
     const userId = yield select((state) => state.identity.userId);
@@ -62,14 +81,25 @@ function* handleRunZXBasicActions(_) {
     store.dispatch(loadTape(tap));
 }
 
-function* handleRunSinclairBasicActions(_) {
-    const basic = yield select((state) => state.demo.sinclairBasicCode);
-    const tap = yield zmakebas(basic);
-    store.dispatch(loadTape(tap));
-}
+function* handleRunCActions(_) {
+    const code = yield select((state) => state.demo.cCode);
 
-function* handleRunAssemblyActions(_) {
-    const asm = yield select((state) => state.demo.asmCode);
-    const tap = yield pasmo(asm);
+    // Call the GraphQL compile action.
+    const query = gql`
+        mutation ($code: String!) {
+            compileC(code: $code) {
+                base64_encoded
+            }
+        }
+    `;
+
+    const variables = {
+        'code': code
+    };
+
+    const userId = yield select((state) => state.identity.userId);
+    const response = yield gqlFetch(userId, query, variables);
+    const base64 = response.data.compileC.base64_encoded;
+    const tap = Uint8Array.from(atob(base64), c => c.charCodeAt(0));
     store.dispatch(loadTape(tap));
 }

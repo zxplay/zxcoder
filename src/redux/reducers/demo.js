@@ -136,7 +136,16 @@ NEXT c: PAPER 0
 FOR c = 4 TO 7
 INK c: PRINT c; "   ";
 NEXT c: NEXT m
-PAPER 7: INK 0: BRIGHT 0`
+PAPER 7: INK 0: BRIGHT 0`,
+    cCode: `#include <arch/zx.h>
+#include <stdio.h>
+ 
+int main()
+{
+  zx_cls(PAPER_WHITE);
+  puts("Hello, world!");
+  return 0;
+}`
 };
 
 // -----------------------------------------------------------------------------
@@ -153,21 +162,28 @@ function setSelectedTabIndex(state, action) {
 function setAssemblyCode(state, action) {
     return {
         ...state,
-        asmCode: action.asm
+        asmCode: action.code
     }
 }
 
 function setSinclairBasicCode(state, action) {
     return {
         ...state,
-        sinclairBasicCode: action.basic
+        sinclairBasicCode: action.code
     }
 }
 
 function setZXBasicCode(state, action) {
     return {
         ...state,
-        zxBasicCode: action.basic
+        zxBasicCode: action.code
+    }
+}
+
+function setCCode(state, action) {
+    return {
+        ...state,
+        cCode: action.code
     }
 }
 
@@ -180,6 +196,7 @@ const actionsMap = {
     [actionTypes.setAssemblyCode]: setAssemblyCode,
     [actionTypes.setSinclairBasicCode]: setSinclairBasicCode,
     [actionTypes.setZXBasicCode]: setZXBasicCode,
+    [actionTypes.setCCode]: setCCode,
 };
 
 export default function reducer(state = initialState, action) {

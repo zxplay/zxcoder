@@ -3,26 +3,26 @@ import {useDispatch, useSelector} from "react-redux";
 import {Button} from "primereact/button";
 import CodeMirror from "./CodeMirror";
 import {setSelectedTabIndex} from "../redux/actions/demo";
-import {setSinclairBasicCode, runSinclairBasic} from "../redux/actions/demo";
-import "../lib/syntax/zmakebas";
+import {setCCode, runC} from "../redux/actions/demo";
+import "../lib/syntax/z88dk-c";
 
-export function DemoSinclairBasicEditor() {
+export function DemoCEditor() {
     const dispatch = useDispatch();
     const cmRef = useRef(null);
-    const code = useSelector(state => state?.demo.sinclairBasicCode);
+    const code = useSelector(state => state?.demo.cCode);
 
     const options = {
         lineWrapping: false,
         readOnly: false,
         theme: 'default',
-        lineNumbers: false,
-        mode: 'text/x-zmakebas'
+        lineNumbers: true,
+        mode: 'text/x-z88dk-csrc'
     };
 
     useEffect(() => {
         const cm = cmRef.current.getCodeMirror();
         cm.setValue(code || '');
-        dispatch(setSinclairBasicCode(cm.getValue()))
+        dispatch(setCCode(cm.getValue()))
     }, []);
 
     return (
@@ -30,7 +30,7 @@ export function DemoSinclairBasicEditor() {
             <CodeMirror
                 ref={cmRef}
                 options={options}
-                onChange={(cm, _) => dispatch(setSinclairBasicCode(cm.getValue()))}
+                onChange={(cm, _) => dispatch(setCCode(cm.getValue()))}
             />
             <Button
                 label="Run"
@@ -38,7 +38,7 @@ export function DemoSinclairBasicEditor() {
                 style={{marginTop: "8px"}}
                 onClick={() => {
                     dispatch(setSelectedTabIndex(0));
-                    dispatch(runSinclairBasic());
+                    dispatch(runC());
                 }}
             />
         </Fragment>
