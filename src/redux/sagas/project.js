@@ -178,6 +178,9 @@ function* handleDownloadTapeActions(_) {
     if (lang === 'zxbasic') {
         const userId = yield select((state) => state.identity.userId);
         tap = yield getZXBasicTape(code, userId);
+    } else if (lang === 'c') {
+        const userId = yield select((state) => state.identity.userId);
+        tap = yield getCTape(code, userId);
     } else if (lang === 'basic') {
         tap = yield zmakebas(code);
     } else {
