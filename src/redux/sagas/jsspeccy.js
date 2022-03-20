@@ -1,7 +1,7 @@
 import {take, takeLatest, put, call, select} from "redux-saga/effects";
 import {eventChannel} from "redux-saga";
 import queryString from "query-string";
-import {JSSpeccy} from "../../lib/emulator/JSSpeccy";
+import {JSSpeccy} from "../../lib/jsspeccy/JSSpeccy";
 import {
     actionTypes,
     handleClick,

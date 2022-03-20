@@ -32,17 +32,17 @@ const loadOpcodeTable = (filename, table, altTable) => {
 }
 
 const baseOpcodes = {};
-loadOpcodeTable('src/lib/emulator/generator/opcodes_base.txt', baseOpcodes);
+loadOpcodeTable('src/lib/jsspeccy/generator/opcodes_base.txt', baseOpcodes);
 const cbOpcodes = {};
-loadOpcodeTable('src/lib/emulator/generator/opcodes_cb.txt', cbOpcodes);
+loadOpcodeTable('src/lib/jsspeccy/generator/opcodes_cb.txt', cbOpcodes);
 const ddOpcodes = {};
 const fdOpcodes = {};
-loadOpcodeTable('src/lib/emulator/generator/opcodes_dd.txt', ddOpcodes, fdOpcodes);
+loadOpcodeTable('src/lib/jsspeccy/generator/opcodes_dd.txt', ddOpcodes, fdOpcodes);
 const ddcbOpcodes = {};
 const fdcbOpcodes = {};
-loadOpcodeTable('src/lib/emulator/generator/opcodes_ddcb.txt', ddcbOpcodes, fdcbOpcodes);
+loadOpcodeTable('src/lib/jsspeccy/generator/opcodes_ddcb.txt', ddcbOpcodes, fdcbOpcodes);
 const edOpcodes = {};
-loadOpcodeTable('src/lib/emulator/generator/opcodes_ed.txt', edOpcodes);
+loadOpcodeTable('src/lib/jsspeccy/generator/opcodes_ed.txt', edOpcodes);
 
 class Variable {
     getter() {
