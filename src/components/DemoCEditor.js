@@ -12,11 +12,14 @@ export function DemoCEditor() {
     const code = useSelector(state => state?.demo.cCode);
 
     const options = {
-        lineWrapping: false,
-        readOnly: false,
+        mode: 'text/x-z88dk-csrc',
         theme: 'mbo',
+        readOnly: false,
+        lineWrapping: false,
         lineNumbers: true,
-        mode: 'text/x-z88dk-csrc'
+        matchBrackets: true,
+        tabSize: 4,
+        indentAuto: true
     };
 
     useEffect(() => {

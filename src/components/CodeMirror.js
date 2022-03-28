@@ -2,7 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import debounce from "lodash.debounce";
 import * as cm from "codemirror";
+import "codemirror/addon/edit/matchbrackets";
+import "codemirror/addon/search/search";
+import "codemirror/addon/search/searchcursor";
+import "codemirror/addon/search/jump-to-line";
+import "codemirror/addon/dialog/dialog";
+import "codemirror/addon/selection/active-line";
 import "../codemirror.css";
+import "codemirror/addon/dialog/dialog.css";
 
 class CodeMirror extends React.Component {
 

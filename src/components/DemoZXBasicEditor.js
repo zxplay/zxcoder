@@ -12,11 +12,14 @@ export function DemoZXBasicEditor() {
     const code = useSelector(state => state?.demo.zxBasicCode);
 
     const options = {
-        lineWrapping: false,
-        readOnly: false,
+        mode: 'text/x-zxbasic',
         theme: 'mbo',
+        readOnly: false,
+        lineWrapping: false,
         lineNumbers: true,
-        mode: 'text/x-zxbasic'
+        matchBrackets: true,
+        tabSize: 4,
+        indentAuto: true
     };
 
     useEffect(() => {

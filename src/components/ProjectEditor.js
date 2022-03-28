@@ -21,7 +21,7 @@ export function ProjectEditor() {
     const code = useSelector(state => state?.project.code);
     const savedCode = useSelector(state => state?.project.savedCode);
 
-    let mode, lineNumbers;
+    let mode;
     switch (lang) {
         case 'asm':
             mode = 'text/x-pasmo';
@@ -40,11 +40,14 @@ export function ProjectEditor() {
     }
 
     const options = {
-        lineWrapping: false,
-        readOnly: false,
+        mode,
         theme: 'mbo',
+        readOnly: false,
+        lineWrapping: false,
         lineNumbers: true,
-        mode
+        matchBrackets: true,
+        tabSize: 4,
+        indentAuto: true
     };
 
     useEffect(() => {

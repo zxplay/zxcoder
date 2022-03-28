@@ -12,11 +12,14 @@ export function DemoAssemblyEditor() {
     const asmCode = useSelector(state => state?.demo.asmCode);
 
     const options = {
-        lineWrapping: false,
-        readOnly: false,
+        mode: 'text/x-pasmo',
         theme: 'mbo',
+        readOnly: false,
+        lineWrapping: false,
         lineNumbers: true,
-        mode: 'text/x-pasmo'
+        matchBrackets: true,
+        tabSize: 4,
+        indentAuto: true
     };
 
     useEffect(() => {

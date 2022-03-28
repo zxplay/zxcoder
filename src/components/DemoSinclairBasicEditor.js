@@ -12,11 +12,14 @@ export function DemoSinclairBasicEditor() {
     const code = useSelector(state => state?.demo.sinclairBasicCode);
 
     const options = {
-        lineWrapping: false,
-        readOnly: false,
+        mode: 'text/x-zmakebas',
         theme: 'mbo',
+        readOnly: false,
+        lineWrapping: false,
         lineNumbers: true,
-        mode: 'text/x-zmakebas'
+        matchBrackets: true,
+        tabSize: 4,
+        indentAuto: true
     };
 
     useEffect(() => {
