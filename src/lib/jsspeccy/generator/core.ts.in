@@ -52,22 +52,21 @@ halfcarrySubTable = [0, 0, FLAG_H, 0, FLAG_H, 0, FLAG_H, FLAG_H];
 
 // #alloc overflowAddTable[8]: u8
 overflowAddTable = [0, 0, 0, FLAG_V, FLAG_V, 0, 0, 0];
+
 // #alloc overflowSubTable[8]: u8
 overflowSubTable = [0, FLAG_V, 0, 0, 0, 0, FLAG_V, 0];
 
 // #alloc sz53Table[0x100]: u8
 // #alloc parityTable[0x100]: u8
 // #alloc sz53pTable[0x100]: u8
-
 // #alloc contentionTable[72000]: u8
-
 // #alloc screenEvents[36000]: u32
-
 // #alloc keyStates[8]: u8
 
 // NB needs to start at an offset that's a multiple of 4
 // #alloc audioBufferLeft[1024]: f32
 export const AUDIO_BUFFER_LEFT:usize = 0 /* (&audioBufferLeft) */;
+
 // #alloc audioBufferRight[1024]: f32
 export const AUDIO_BUFFER_RIGHT:usize = 0 /* (&audioBufferLeft) */;
 
@@ -101,6 +100,7 @@ let tapeTrapsEnabled:bool = true;
 let i:u8 = 0;
 while (true) {
     sz53Table[i] = u8(i) & ( FLAG_3 | FLAG_5 | FLAG_S );
+
     let j = i;
     let parity:u8 = 0;
     for (let k:i8 = 0; k < 8; k++) {
@@ -114,9 +114,11 @@ while (true) {
     sz53Table[0] |= FLAG_Z;
     sz53pTable[0] |= FLAG_Z;
     i++;
-    if (i == 0) break;
-}
 
+    if (i == 0) {
+        break;
+    }
+}
 
 function buildScreenEventsTable(mainScreenStartTstate:u32, tstatesPerRow:u32, borderTimeMask:u32):void {
     /* build screen events table: a list of which screen bytes should be fetched on which
@@ -175,12 +177,12 @@ function buildScreenEventsTable(mainScreenStartTstate:u32, tstatesPerRow:u32, bo
     screenEvents[screenEventPointer] = 0xffffffff;
 }
 
-
 function buildContentionTable(mainScreenStartTstate:u32, tstatesPerRow:u32, frameCycleCount:u32):void {
     let pos:u32 = 0;
     while (pos < mainScreenStartTstate) {
         contentionTable[pos++] = 0;
     }
+
     for (let y:u32 = 0; y < 192; y++) {
         for (let x:u32 = 0; x < tstatesPerRow; x++) {
             if (x < 128) {
@@ -191,18 +193,17 @@ function buildContentionTable(mainScreenStartTstate:u32, tstatesPerRow:u32, fram
             }
         }
     }
+
     while (pos < frameCycleCount) {
         contentionTable[pos++] = 0;
     }
 }
-
 
 function clearContentionTable(frameCycleCount:u32):void {
     for (let i:u32 = 0; i < frameCycleCount; i++) {
         contentionTable[i] = 0;
     }
 }
-
 
 let frameCycleCount:u32 = 69888;
 let screenPageIndex:u32 = 5;
@@ -260,8 +261,10 @@ export function setMachineType(type:u32):void {
         rom1Page = 9;
         betadiskEnabled = false;
     }
+
     reset();
 }
+
 export function reset():void {
     if (machineType == 48) {
         memoryPageReadMap = [10, 5, 2, 0];
@@ -282,9 +285,11 @@ export function reset():void {
         memoryPageWriteMap = [11, 5, 2, 0];
         pagingLocked = 0;
     }
+
     for (let i:u8 = 0; i < 14; i++) {
         writeAYRegister(i, 0);
     }
+
     screenPageIndex = 5;
     t = 0;
     pc = 0;
@@ -295,13 +300,17 @@ export function reset():void {
     opcodePrefix = 0;
     framebufferIndex = 0;
 }
+
 setMachineType(48);
 
 for (let i=0; i < 8; i++) {
     keyStates[i] = 0xff;
 }
 
-export function setRegisters(af:u16, bc:u16, de:u16, hl:u16, af_:u16, bc_:u16, de_:u16, hl_:u16, ix:u16, iy:u16, sp:u16, ir:u16):void {
+export function setRegisters(
+    af:u16, bc:u16, de:u16, hl:u16, af_:u16, bc_:u16, de_:u16, hl_:u16, ix:u16,
+    iy:u16, sp:u16, ir:u16):void {
+
     AF = af;
     BC = bc;
     DE = de;
@@ -319,39 +328,51 @@ export function setRegisters(af:u16, bc:u16, de:u16, hl:u16, af_:u16, bc_:u16, d
 export function setPC(val:u16):void {
     pc = val;
 }
+
 export function getPC():u16 {
     return pc;
 }
+
 export function setIFF1(val:bool):void {
     iff1 = val;
 }
+
 export function getIFF1():bool {
     return iff1;
 }
+
 export function setIFF2(val:bool):void {
     iff2 = val;
 }
+
 export function getIFF2():bool {
     return iff2;
 }
+
 export function setIM(val:u8):void {
     im = val;
 }
+
 export function getIM():u8 {
     return im;
 }
+
 export function setTStates(val:u32):void {
     t = val;
 }
+
 export function getTStates():u32 {
     return t;
 }
+
 export function setHalted(val:bool):void {
     halted = val;
 }
+
 export function getHalted():bool {
     return halted;
 }
+
 export function setTapeTraps(val:bool):void {
     tapeTrapsEnabled = val;
 }
@@ -368,6 +389,7 @@ export function startLog():void {
     loggingEnabled = true;
     logPtr = 0;
 }
+
 export function stopLog():void {
     log(0xffff, 0xffff, 0, 0);
     loggingEnabled = false;
@@ -376,15 +398,19 @@ export function stopLog():void {
 export function setAudioSamplesPerFrame(val:u32):void {
     requestedSamplesPerFrame = val;
 }
+
 export function getAudioSamplesPerFrame():u32 {
     return samplesPerFrame;
 }
+
 export function getTapePulseWriteIndex():u16 {
     return tapePulseWriteIndex;
 }
+
 export function getTapePulseBufferTstateCount():u32 {
     return tapePulseBufferTstateCount;
 }
+
 export function setTapePulseBufferState(writeIndex: u16, tstateCount:u32):void {
     tapePulseWriteIndex = writeIndex;
     tapePulseBufferTstateCount = tstateCount;
@@ -393,9 +419,17 @@ export function setTapePulseBufferState(writeIndex: u16, tstateCount:u32):void {
 function readMem(addr:u16):u8 {
     const page:u8 = memoryPageReadMap[addr >> 14];
     const pageOffset:u32 = u32(page) << 14;
-    if (loggingEnabled) log(t, 3, addr, 0);
-    if (pageIsContended[page]) t += contentionTable[t % frameCycleCount];
+
+    if (loggingEnabled) {
+        log(t, 3, addr, 0);
+    }
+
+    if (pageIsContended[page]) {
+        t += contentionTable[t % frameCycleCount];
+    }
+
     t += 3;
+
     if (loggingEnabled) {
         const val:u8 = machineMemory[pageOffset | (addr & 0x3fff)];
         log(t, 1, addr, val);
@@ -420,14 +454,24 @@ function readMemInternal(addr:u16):u8 {
 function writeMem(addr:u16, val:u8):void {
     const page:u8 = memoryPageWriteMap[addr >> 14];
     const pageStartPtr:u32 = u32(page) << 14;
-    if (loggingEnabled) log(t, 3, addr, 0);
-    if (pageIsContended[page]) t += contentionTable[t % frameCycleCount];
+
+    if (loggingEnabled) {
+        log(t, 3, addr, 0);
+    }
+
+    if (pageIsContended[page]) {
+        t += contentionTable[t % frameCycleCount];
+    }
+
     const pageOffset:u16 = addr & 0x3fff;
+
     if (page == screenPageIndex && pageOffset < 0x1b00) {
         updateFramebuffer();
     }
+
     machineMemory[pageStartPtr | pageOffset] = val;
     t += 3;
+
     if (loggingEnabled) {
         log(t, 2, addr, val);
     }
@@ -435,24 +479,45 @@ function writeMem(addr:u16, val:u8):void {
 
 function contendRead(addr:u16):void {
     const page:u8 = memoryPageReadMap[addr >> 14];
-    if (loggingEnabled) log(t, 3, addr, 0);
-    if (pageIsContended[page]) t += contentionTable[t % frameCycleCount];
+
+    if (loggingEnabled) {
+        log(t, 3, addr, 0);
+    }
+
+    if (pageIsContended[page]) {
+        t += contentionTable[t % frameCycleCount];
+    }
 }
+
 function contendDirtyRead(addr:u16):void {
     const page:u8 = memoryPageReadMap[addr >> 14];
-    if (loggingEnabled) log(t, 3, addr, 0);
-    if (pageIsContended[page]) t += contentionTable[t % frameCycleCount];
+
+    if (loggingEnabled) {
+        log(t, 3, addr, 0);
+    }
+
+    if (pageIsContended[page]) {
+        t += contentionTable[t % frameCycleCount];
+    }
 }
+
 function contendDirtyWrite(addr:u16):void {
     const page:u8 = memoryPageWriteMap[addr >> 14];
-    if (loggingEnabled) log(t, 3, addr, 0);
-    if (pageIsContended[page]) t += contentionTable[t % frameCycleCount];
+
+    if (loggingEnabled) {
+        log(t, 3, addr, 0);
+    }
+
+    if (pageIsContended[page]) {
+        t += contentionTable[t % frameCycleCount];
+    }
 }
 
 export function peek(addr:u16):u8 {
     const pageOffset:u32 = u32(memoryPageReadMap[addr >> 14]) << 14;
     return machineMemory[pageOffset | (addr & 0x3fff)];
 }
+
 export function poke(addr:u16, val:u8):void {
     const pageOffset:u32 = u32(memoryPageWriteMap[addr >> 14]) << 14;
     machineMemory[pageOffset | (addr & 0x3fff)] = val;
@@ -462,10 +527,12 @@ export function readPort(addr:u16):u8 {
     /* apply pre-read contention */
     const page:u8 = memoryPageReadMap[addr >> 14];
     const addressIsContended:u8 = pageIsContended[page];
+
     if (addressIsContended) {
         if (loggingEnabled) log(t, 6, addr, 0);
         t += contentionTable[t % frameCycleCount];
     }
+
     t++;
 
     let result:u8 = 0xff;
@@ -476,7 +543,6 @@ export function readPort(addr:u16):u8 {
         */
         result = u8(addr >> 8);
     } else {
-
         if (!(addr & 0x0001)) {
             /* poll keyboard */
             result = pollKeyboard(u8(addr >> 8));
@@ -493,25 +559,42 @@ export function readPort(addr:u16):u8 {
             result = floatingBusValue;
         }
     }
-    if (loggingEnabled) log(t, 4, addr, result);
+
+    if (loggingEnabled) {
+        log(t, 4, addr, result);
+    }
 
     /* apply post-read contention */
     if (addr & 0x0001) {
         if (addressIsContended) {
-            if (loggingEnabled) log(t, 6, addr, 0);
+            if (loggingEnabled) {
+                log(t, 6, addr, 0);
+            }
+
             t += contentionTable[t % frameCycleCount];
             t++;
-            if (loggingEnabled) log(t, 6, addr, 0);
+
+            if (loggingEnabled) {
+                log(t, 6, addr, 0);
+            }
+
             t += contentionTable[t % frameCycleCount];
             t++;
-            if (loggingEnabled) log(t, 6, addr, 0);
+
+            if (loggingEnabled) {
+                log(t, 6, addr, 0);
+            }
+
             t += contentionTable[t % frameCycleCount];
             t++;
         } else {
             t += 3;
         }
     } else {
-        if (loggingEnabled) log(t, 6, addr, 0);
+        if (loggingEnabled) {
+            log(t, 6, addr, 0);
+        }
+
         t += contentionTable[t % frameCycleCount];
         t += 3;
     }
@@ -523,13 +606,21 @@ export function writePort(addr:u16, val:u8):void {
     /* apply pre-write contention */
     const page:u8 = memoryPageWriteMap[addr >> 14];
     const addressIsContended:u8 = pageIsContended[page];
+
     if (addressIsContended) {
-        if (loggingEnabled) log(t, 6, addr, 0);
+        if (loggingEnabled) {
+            log(t, 6, addr, 0);
+        }
+
         t += contentionTable[t % frameCycleCount];
     }
+
     t++;
 
-    if (loggingEnabled) log(t, 5, addr, val);
+    if (loggingEnabled) {
+        log(t, 5, addr, val);
+    }
+
     if (!(addr & 0x0001)) {
         /* border colour / speaker */
         updateFramebuffer();  // apply all screen upates up to this point
@@ -558,20 +649,34 @@ export function writePort(addr:u16, val:u8):void {
     /* apply post-write contention */
     if (addr & 0x0001) {
         if (addressIsContended) {
-            if (loggingEnabled) log(t, 6, addr, 0);
+            if (loggingEnabled) {
+                log(t, 6, addr, 0);
+            }
+
             t += contentionTable[t % frameCycleCount];
             t++;
-            if (loggingEnabled) log(t, 6, addr, 0);
+
+            if (loggingEnabled) {
+                log(t, 6, addr, 0);
+            }
+
             t += contentionTable[t % frameCycleCount];
             t++;
-            if (loggingEnabled) log(t, 6, addr, 0);
+
+            if (loggingEnabled) {
+                log(t, 6, addr, 0);
+            }
+
             t += contentionTable[t % frameCycleCount];
             t++;
         } else {
             t += 3;
         }
     } else {
-        if (loggingEnabled) log(t, 6, addr, 0);
+        if (loggingEnabled) {
+            log(t, 6, addr, 0);
+        }
+
         t += contentionTable[t % frameCycleCount];
         t += 3;
     }
@@ -581,6 +686,7 @@ export function writePort(addr:u16, val:u8):void {
 let screenEventPointer:u32 = 0;
 
 function updateFramebuffer():void {
+
     /* process all of the screen bytes that are due up to the current tstate */
     const screenBaseAddr:u32 = screenPageIndex << 14;
 
@@ -593,12 +699,14 @@ function updateFramebuffer():void {
         } else {
             const screenAddr:u32 = screenBaseAddr | (addressWord & 0xffff);
             const attributeAddr:u32 = screenBaseAddr | (addressWord >> 16);
+
             frameBuffer[framebufferIndex++] = machineMemory[screenAddr];
             frameBuffer[framebufferIndex++] = machineMemory[attributeAddr];
             frameBuffer[framebufferIndex++] = machineMemory[screenAddr + 1];
             floatingBusValue = machineMemory[attributeAddr + 1];
             frameBuffer[framebufferIndex++] = floatingBusValue;
         }
+
         screenEventPointer += 2;
     }
 }
@@ -615,7 +723,9 @@ function updateAudioBufferInner(targetTime:u32):void {
     /* Fill the audio buffer up to the given target tstate number, using the current state
     of the speaker, AY and tape. targetTime is chosen to be a small enough increment that
     no changes of state (including new tape pulses) occur in this timespan. */
+
     microslicesSinceLastSample += (targetTime - lastAudioT) * samplesPerFrame;
+
     while (microslicesSinceLastSample >= frameCycleCount) {
         const speakerLevel:f32 = (speakerState ? 0.5 : 0.0) + (tapeLevel ? 0.25 : 0.0);
 
@@ -641,13 +751,17 @@ function updateAudioBufferInner(targetTime:u32):void {
         while (noiseGeneratorCounter < 0) {
             noiseGeneratorCounter += noiseGeneratorPeriod;
 
-            if ((noiseGeneratorSeed + 1) & 2)
+            if ((noiseGeneratorSeed + 1) & 2) {
                 noiseGeneratorPhase ^= 0xff;
+            }
 
             /* rng is 17-bit shift reg, bit 0 is output.
             * input is bit 0 xor bit 3.
             */
-            if (noiseGeneratorSeed & 1) noiseGeneratorSeed ^= 0x24000;
+            if (noiseGeneratorSeed & 1) {
+                noiseGeneratorSeed ^= 0x24000;
+            }
+
             noiseGeneratorSeed >>= 1;
         }
 
@@ -668,12 +782,19 @@ function updateAudioBufferInner(targetTime:u32):void {
                 /* XOR with the 'alternating' bit if on an even-numbered ramp */
                 ^ (envelopeAlternatePhase && envelopeAlternateMask)
             );
+
             /* OR with the 'hold' bit if past the first ramp */
-            if (!envelopeOnFirstRamp) envelopeValue |= envelopeHoldMask;
+            if (!envelopeOnFirstRamp) {
+                envelopeValue |= envelopeHoldMask;
+            }
+
             /* XOR with the 'attack' bit */
             envelopeValue ^= envelopeAttackMask;
+
             /* AND with the 'continue' bit if past the first ramp */
-            if (!envelopeOnFirstRamp) envelopeValue &= envelopeContinueMask;
+            if (!envelopeOnFirstRamp) {
+                envelopeValue &= envelopeContinueMask;
+            }
         }
 
         const finalVolumeA:u8 = (
@@ -681,16 +802,19 @@ function updateAudioBufferInner(targetTime:u32):void {
             & (toneGeneratorAPhase | toneChanAMask)
             & (noiseGeneratorPhase | noiseChanAMask)
         );
+
         const finalVolumeB:u8 = (
             ((volumeB & 0x10) ? envelopeValue : (volumeB & 0x0f))
             & (toneGeneratorBPhase | toneChanBMask)
             & (noiseGeneratorPhase | noiseChanBMask)
         );
+
         const finalVolumeC:u8 = (
             ((volumeC & 0x10) ? envelopeValue : (volumeC & 0x0f))
             & (toneGeneratorCPhase | toneChanCMask)
             & (noiseGeneratorPhase | noiseChanCMask)
         );
+
         const levelA:f32 = ayVolumeLevels[finalVolumeA];
         const levelB:f32 = ayVolumeLevels[finalVolumeB];
         const levelC:f32 = ayVolumeLevels[finalVolumeC];
@@ -700,6 +824,7 @@ function updateAudioBufferInner(targetTime:u32):void {
         audioBufferPointer = (audioBufferPointer + 1) & 0x03ff;
         microslicesSinceLastSample -= frameCycleCount;
     }
+
     lastAudioT = targetTime;
 }
 
@@ -713,10 +838,13 @@ function updateTapePulses(targetTime:u32): void {
         }
 
         const pulseData = tapePulses[tapePulseReadIndex];
+
         tapeLevel = u8((pulseData & 0x8000) >> 9);
+
         const pulseLength = u32(pulseData & 0x7fff);
         const remainingPulseCycles = pulseLength - tapePulseCyclesElapsed;
         const pulseEndTime = currentTapeTime + remainingPulseCycles;
+
         if (pulseEndTime <= targetTime) {
             // finish this pulse and move to next
             updateAudioBufferInner(pulseEndTime);
@@ -735,18 +863,21 @@ function updateTapePulses(targetTime:u32): void {
 export function keyDown(row:u8, mask:u8):void {
     keyStates[row] = keyStates[row] & ~mask;
 }
+
 export function keyUp(row:u8, mask:u8):void {
     keyStates[row] = keyStates[row] | mask;
 }
 
 function pollKeyboard(addr:u8):u8 {
     let result:u8 = 0xbf;
+
     for (let row:u8 = 0; row < 8; row++) {
         if (!(addr & (1<<row))) {
             /* scan this row */
             result &= keyStates[row];
         }
     }
+
     return result;
 }
 
@@ -758,7 +889,6 @@ function recalculateAYCyclesPerSample():void {
 0 = OK (end of frame)
 1 = unrecognised opcode (should never happen...)
 */
-
 
 export function runFrame():i16 {
     screenEventPointer = 0;
@@ -869,6 +999,7 @@ export function runUntil(maxT:u32):i16 {
             // tape loading trap
             return 2;
         }
+
         willTrap = true;
 
         if (betadiskEnabled) {
@@ -882,6 +1013,7 @@ export function runUntil(maxT:u32):i16 {
         }
 
         interruptible = true; // unless overridden by opcode
+
         if (opcodePrefix == 0) {
             contendRead(pc);
             t += 4;
@@ -982,7 +1114,6 @@ export function runUntil(maxT:u32):i16 {
     return 0;
 }
 
-
 /* AY chip state */
 let toneGeneratorAPhase:u8 = 0;
 let toneGeneratorAPeriod:f64 = 8;
@@ -1040,21 +1171,37 @@ function writeAYRegister(reg:u8, val:u8):void {
         case 0:
         case 1:
             toneGeneratorAPeriod = f64((((ayRegisters[1] & 0x0f) << 8) | ayRegisters[0]) * 8);
-            if (toneGeneratorAPeriod === 0) toneGeneratorAPeriod = 8;
+
+            if (toneGeneratorAPeriod === 0) {
+                toneGeneratorAPeriod = 8;
+            }
+
             break;
         case 2:
         case 3:
             toneGeneratorBPeriod = f64((((ayRegisters[3] & 0x0f) << 8) | ayRegisters[2]) * 8);
-            if (toneGeneratorBPeriod === 0) toneGeneratorBPeriod = 8;
+
+            if (toneGeneratorBPeriod === 0) {
+                toneGeneratorBPeriod = 8;
+            }
+
             break;
         case 4:
         case 5:
             toneGeneratorCPeriod = f64((((ayRegisters[5] & 0x0f) << 8) | ayRegisters[4]) * 8);
-            if (toneGeneratorCPeriod === 0) toneGeneratorCPeriod = 8;
+
+            if (toneGeneratorCPeriod === 0) {
+                toneGeneratorCPeriod = 8;
+            }
+
             break;
         case 6:
             noiseGeneratorPeriod = f64((val & 0x1f) << 4);
-            if (noiseGeneratorPeriod === 0) noiseGeneratorPeriod = 16;
+
+            if (noiseGeneratorPeriod === 0) {
+                noiseGeneratorPeriod = 16;
+            }
+
             break;
         case 7:
             toneChanAMask = (val & 0x01) ? 0xff : 0x00;
@@ -1076,7 +1223,11 @@ function writeAYRegister(reg:u8, val:u8):void {
         case 11:
         case 12:
             envelopePeriod = f64(((ayRegisters[12] << 8) | ayRegisters[11]) << 4);
-            if (envelopePeriod === 0) envelopePeriod = 16;
+
+            if (envelopePeriod === 0) {
+                envelopePeriod = 16;
+            }
+
             break;
         case 13:
             envelopeCounter = 0;
