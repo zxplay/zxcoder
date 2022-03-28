@@ -158,7 +158,7 @@ const parseExpression = (expr) => {
 
     /* address getting: (&foo) - note that parentheses are required */
     expr = expr.replaceAll(
-        /\(\&(\w+)\)/g,
+        /0 \/\* \(\&(\w+)\) \*\//g,
         (str, varName) => varName in vars ? vars[varName].address : varName
     );
 

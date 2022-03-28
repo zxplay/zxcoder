@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 // #alloc frameBuffer[0x6600]: u8
-export const FRAME_BUFFER:usize = (&frameBuffer);
+export const FRAME_BUFFER:usize = 0 /* (&frameBuffer) */;
 
 // allocate memory for 8 RAM, 8 ROM pages
 // 0..7 - 128K RAM pages;
@@ -10,18 +10,18 @@ export const FRAME_BUFFER:usize = (&frameBuffer);
 // 12 = Pentagon rom 0 (Pentagon ROM 1 is identical to 128 rom 1)
 // 13 = TRDOS rom
 // #alloc machineMemory[0x40000]: u8
-export const MACHINE_MEMORY:usize = (&machineMemory);
+export const MACHINE_MEMORY:usize = 0 /* (&machineMemory) */;
 
 // #alloc memoryPageReadMap[4]: u8
 // #alloc memoryPageWriteMap[4]: u8
-export const MEMORY_PAGE_READ_MAP:usize = (&memoryPageReadMap);
-export const MEMORY_PAGE_WRITE_MAP:usize = (&memoryPageWriteMap);
+export const MEMORY_PAGE_READ_MAP:usize = 0 /* (&memoryPageReadMap) */;
+export const MEMORY_PAGE_WRITE_MAP:usize = 0 /* (&memoryPageWriteMap) */;
 
 // #alloc pageIsContended[12]: u8
 pageIsContended = [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0];
 
 // #regpair AF A F
-export const REGISTERS:usize = (&AF);
+export const REGISTERS:usize = 0 /* (&AF) */;
 // #regpair BC B C
 // #regpair DE D E
 // #regpair HL H L
@@ -67,19 +67,19 @@ overflowSubTable = [0, FLAG_V, 0, 0, 0, 0, FLAG_V, 0];
 
 // NB needs to start at an offset that's a multiple of 4
 // #alloc audioBufferLeft[1024]: f32
-export const AUDIO_BUFFER_LEFT:usize = (&audioBufferLeft);
+export const AUDIO_BUFFER_LEFT:usize = 0 /* (&audioBufferLeft) */;
 // #alloc audioBufferRight[1024]: f32
-export const AUDIO_BUFFER_RIGHT:usize = (&audioBufferLeft);
+export const AUDIO_BUFFER_RIGHT:usize = 0 /* (&audioBufferLeft) */;
 
 // #alloc tapePulses[10000]: u16
-export const TAPE_PULSES:usize = (&tapePulses);
+export const TAPE_PULSES:usize = 0 /* (&tapePulses) */;
 export const TAPE_PULSES_LENGTH:usize = 10000;
 
 // #alloc ayVolumeLevels[16]: f32
 ayVolumeLevels = [0.0, 0.0022915, 0.0034105, 0.004842, 0.007057, 0.010307, 0.0141195, 0.0228165, 0.028188, 0.04411, 0.058784, 0.0749885, 0.0950615, 0.114544, 0.1413585, 0.166662];
 
 // #alloc logEntries[2048]: u16
-export const LOG_ENTRIES:usize = (&logEntries);
+export const LOG_ENTRIES:usize = 0 /* (&logEntries) */;
 
 // #alloc ayRegisters[14]: u8
 
