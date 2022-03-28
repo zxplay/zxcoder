@@ -25,19 +25,15 @@ export function ProjectEditor() {
     switch (lang) {
         case 'asm':
             mode = 'text/x-pasmo';
-            lineNumbers = true;
             break;
         case 'basic':
             mode = 'text/x-zmakebas';
-            lineNumbers = false;
             break;
         case 'c':
             mode = 'text/x-z88dk-csrc';
-            lineNumbers = true;
             break;
         case 'zxbasic':
             mode = 'text/x-zxbasic';
-            lineNumbers = false;
             break;
         default:
             throw 'unexpected case';
@@ -46,8 +42,8 @@ export function ProjectEditor() {
     const options = {
         lineWrapping: false,
         readOnly: false,
-        theme: 'default',
-        lineNumbers,
+        theme: 'mbo',
+        lineNumbers: true,
         mode
     };
 

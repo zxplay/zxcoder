@@ -14,7 +14,7 @@ export function DemoAssemblyEditor() {
     const options = {
         lineWrapping: false,
         readOnly: false,
-        theme: 'default',
+        theme: 'mbo',
         lineNumbers: true,
         mode: 'text/x-pasmo'
     };

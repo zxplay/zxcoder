@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import debounce from "lodash.debounce";
 import * as cm from "codemirror";
-import "codemirror/lib/codemirror.css";
+import "../codemirror.css";
 
 class CodeMirror extends React.Component {
 

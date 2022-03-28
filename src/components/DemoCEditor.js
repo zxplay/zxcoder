@@ -14,7 +14,7 @@ export function DemoCEditor() {
     const options = {
         lineWrapping: false,
         readOnly: false,
-        theme: 'default',
+        theme: 'mbo',
         lineNumbers: true,
         mode: 'text/x-z88dk-csrc'
     };

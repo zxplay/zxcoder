@@ -14,8 +14,8 @@ export function DemoSinclairBasicEditor() {
     const options = {
         lineWrapping: false,
         readOnly: false,
-        theme: 'default',
-        lineNumbers: false,
+        theme: 'mbo',
+        lineNumbers: true,
         mode: 'text/x-zmakebas'
     };
 

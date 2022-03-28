@@ -22,10 +22,6 @@ code {
     white-space: pre !important;
 }
 
-.main-content {
-    color-scheme: light;
-}
-
 .p-card h1,
 .p-card h2,
 .p-card h3,
@@ -94,7 +90,7 @@ code {
 
 #jsspeccy-screen > div > div > canvas
 {
-    background-color: #DDDDDD;
+    background-color: #1E1E1E;
     image-rendering: -moz-crisp-edges;
     image-rendering: -webkit-crisp-edges;
     image-rendering: pixelated;
@@ -107,13 +103,20 @@ code {
 
 .CodeMirror {
     border-radius: 5px;
-    color-scheme: light;
     font-family: monospace !important;
     font-size: 16px !important;
     height: calc(100vh - 216px) !important;
     max-height: 736px !important;
 }
 
+.CodeMirror-scrollbar-filler {
+    background-color: #424242 !important;
+}
+
 .p-button {
     border-radius: 5px !important;
+}
+
+.p-submenu-list {
+    z-index: 100 !important;
 }
