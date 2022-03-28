@@ -210,7 +210,10 @@ export default function Nav() {
                 model={items}
                 start={start}
                 end={end}
-                // style={{borderRadius: 0}}
+                style={{
+                    borderRadius: '5px',
+                    borderColor: '#1E1E1E'
+                }}
             />
         </div>
     );
