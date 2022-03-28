@@ -23,7 +23,8 @@
     "build:js:release": "cross-env NODE_OPTIONS=--openssl-legacy-provider webpack",
     "build:babel": "babel src --out-dir es5",
     "watch": "npm-watch",
-    "serve": "cross-env NODE_OPTIONS=--openssl-legacy-provider npx webpack serve --config webpack.dev.config.js --open"
+    "serve": "cross-env NODE_OPTIONS=--openssl-legacy-provider npx webpack serve --config webpack.dev.config.js --open",
+    "typedoc": "typedoc --entryPointStrategy expand --tsconfig ./tsconfig.json --out ./typedocs ./build/"
   },
   "dependencies": {
     "@babel/runtime-corejs2": "^7.15.4",
@@ -78,6 +79,7 @@
     "sass-loader": "^12.3.0",
     "style-loader": "^3.3.1",
     "svg-inline-loader": "^0.8.2",
+    "typedoc": "^0.22.11",
     "webpack": "^5.44.0",
     "webpack-cli": "^4.7.2",
     "webpack-dev-server": "^4.3.0"
