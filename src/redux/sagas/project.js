@@ -198,7 +198,7 @@ function* handleDownloadTapeActions(_) {
 }
 
 // -----------------------------------------------------------------------------
-// Action handlers
+// Supporting functions
 // -----------------------------------------------------------------------------
 
 async function runZXBasic(code, userId) {
