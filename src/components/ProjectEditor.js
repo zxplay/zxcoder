@@ -21,19 +21,23 @@ export function ProjectEditor() {
     const code = useSelector(state => state?.project.code);
     const savedCode = useSelector(state => state?.project.savedCode);
 
-    let mode;
+    let mode, lineNumbers;
     switch (lang) {
         case 'asm':
             mode = 'text/x-pasmo';
+            lineNumbers = true;
             break;
         case 'basic':
             mode = 'text/x-zmakebas';
+            lineNumbers = false;
             break;
         case 'c':
             mode = 'text/x-z88dk-csrc';
+            lineNumbers = true;
             break;
         case 'zxbasic':
             mode = 'text/x-zxbasic';
+            lineNumbers = false;
             break;
         default:
             throw 'unexpected case';
@@ -43,7 +47,7 @@ export function ProjectEditor() {
         lineWrapping: false,
         readOnly: false,
         theme: 'default',
-        lineNumbers: false,
+        lineNumbers,
         mode
     };
 
