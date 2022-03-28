@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "run-s build:clean:all build:wasm:debug build:clean serve",
+    "start": "run-s build:clean:all build:wasm:debug serve",
     "test": "run-s test:jsspeccy jest",
     "test:jsspeccy": "node --experimental-wasm-modules test/jsspeccy/test.mjs test/jsspeccy/tests.in test/jsspeccy/tests.expected",
     "test:jest": "jest",
