@@ -23,9 +23,13 @@ export default function Project(props) {
         }
     }, [props.id, userId]);
 
-    if (!props.id || !lang) return <Fragment/>;
+    if (!props.id || !lang) {
+        return <Fragment/>;
+    }
 
-    if (title) title = `Project: ${title}`;
+    if (title) {
+        title = `Project: ${title}`;
+    }
 
     const zoom = 2;
     const width = zoom * 320;
@@ -49,26 +53,23 @@ export default function Project(props) {
     }
 
     return (
-        <div className="grid" style={{width: "100%", padding: 0, margin: 0}}>
-            <div className="col p-0">
-                <div className="m-4">
-                    <h3>{title}</h3>
+        <div className="mx-2 my-1">
+            <div className="grid" style={{width: "100%", padding: 0, margin: 0}}>
+                <div className="col p-0 mr-2">
+                    <TabView
+                        activeIndex={tab}
+                        onTabChange={(e) => dispatch(setSelectedTabIndex(e.index))}>
+                        <TabPanel header={editorTitle}>
+                            <ProjectEditor id={props.id}/>
+                        </TabPanel>
+                    </TabView>
                 </div>
-            </div>
-            <div className="col-fixed p-0 pt-1" style={{width: `${width}px`}}>
-                <TabView
-                    activeIndex={tab}
-                    onTabChange={(e) => dispatch(setSelectedTabIndex(e.index))}>
-                    <TabPanel header={editorTitle}>
-                        <ProjectEditor id={props.id}/>
-                    </TabPanel>
-                    <TabPanel header="Emulator">
-                        <Emulator zoom={zoom} width={width}/>
-                    </TabPanel>
-                </TabView>
-            </div>
-            <div className="col p-0">
-
+                <div className="col-fixed p-0 pt-1" style={{width: `${width}px`}}>
+                    <div style={{height: '53px'}} className="pt-3 pl-1">
+                        <h3>{title}</h3>
+                    </div>
+                    <Emulator zoom={zoom} width={width}/>
+                </div>
             </div>
         </div>
     )

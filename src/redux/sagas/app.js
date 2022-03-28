@@ -44,7 +44,6 @@ function* handleShowActiveEmulatorActions(_) {
     const isProject = typeof projectId !== 'undefined';
 
     if (isProject) {
-        yield put(setSelectedTabIndex(1));
         yield put(push(`/projects/${projectId}`));
     } else {
         yield put(setDemoTabIndex(0));
