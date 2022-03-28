@@ -56,7 +56,6 @@ function* handleResetEmulatorActions(_) {
     const isProject = typeof projectId !== 'undefined';
 
     if (isProject) {
-        yield put(setSelectedTabIndex(1));
         yield put(push(`/projects/${projectId}`));
         yield put(reset());
     } else {
