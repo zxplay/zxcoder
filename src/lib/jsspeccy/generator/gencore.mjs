@@ -292,9 +292,9 @@ const inFile = fs.createReadStream(inputFilename);
 const outFile = fs.createWriteStream(outputFilename);
 
 const processLine = (line) => {
-    if (line.startsWith('#')) {
+    if (line.startsWith('// #')) {
         let match;
-        match = line.match(/^#alloc\s+(\w+)\s*\[\s*(\w+)\s*\]\s*:\s*(\w+)\s*$/);
+        match = line.match(/^\/\/ #alloc\s+(\w+)\s*\[\s*(\w+)\s*\]\s*:\s*(\w+)\s*$/);
         if (match) {
             const varName = match[1];
             const len = parseInt(match[2]);
@@ -302,14 +302,14 @@ const processLine = (line) => {
             allocateArray(varName, type, len);
             return;
         }
-        match = line.match(/^#const\s+(\w+)\s+(.+)$/);
+        match = line.match(/^\/\/ #const\s+(\w+)\s+(.+)$/);
         if (match) {
             const varName = match[1];
             const expr = match[2];
             defineConstant(varName, expr);
             return;
         }
-        match = line.match(/^#regpair\s+(\w+)\s+(\w+)\s+(\w+)\s*$/);
+        match = line.match(/^\/\/ #regpair\s+(\w+)\s+(\w+)\s+(\w+)\s*$/);
         if (match) {
             const pair = match[1];
             const hi = match[2];
@@ -317,7 +317,7 @@ const processLine = (line) => {
             allocateRegisterPair(pair, hi, lo);
             return;
         }
-        match = line.match(/^#regpair\s+(\w+)\s*$/);
+        match = line.match(/^\/\/ #regpair\s+(\w+)\s*$/);
         if (match) {
             const pair = match[1];
             allocateRegisterPair(pair);
@@ -328,7 +328,7 @@ const processLine = (line) => {
         let match;
 
         /* opcode table */
-        match = line.match(/^\s*#optable\s+(\w+)$/);
+        match = line.match(/^\s*\/\/ #optable\s+(\w+)$/);
         if (match) {
             let prefix = match[1];
             generateOpcodeTable(prefix, outFile);
@@ -336,7 +336,7 @@ const processLine = (line) => {
         }
 
         /* opcode case */
-        match = line.match(/^\s*#op\s+(\w+)\s+(.*)$/);
+        match = line.match(/^\s*\/\/ #op\s+(\w+)\s+(.*)$/);
         if (match) {
             let code = parseInt(match[1], 16);
             let instruction = match[2].trim();

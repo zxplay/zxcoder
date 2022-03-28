@@ -1,4 +1,6 @@
-#alloc frameBuffer[0x6600]: u8
+// @ts-nocheck
+
+// #alloc frameBuffer[0x6600]: u8
 export const FRAME_BUFFER:usize = (&frameBuffer);
 
 // allocate memory for 8 RAM, 8 ROM pages
@@ -7,79 +9,79 @@ export const FRAME_BUFFER:usize = (&frameBuffer);
 // 10 = 48 rom, 11 = scratch area for ROM writes
 // 12 = Pentagon rom 0 (Pentagon ROM 1 is identical to 128 rom 1)
 // 13 = TRDOS rom
-#alloc machineMemory[0x40000]: u8
+// #alloc machineMemory[0x40000]: u8
 export const MACHINE_MEMORY:usize = (&machineMemory);
 
-#alloc memoryPageReadMap[4]: u8
-#alloc memoryPageWriteMap[4]: u8
+// #alloc memoryPageReadMap[4]: u8
+// #alloc memoryPageWriteMap[4]: u8
 export const MEMORY_PAGE_READ_MAP:usize = (&memoryPageReadMap);
 export const MEMORY_PAGE_WRITE_MAP:usize = (&memoryPageWriteMap);
 
-#alloc pageIsContended[12]: u8
+// #alloc pageIsContended[12]: u8
 pageIsContended = [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0];
 
-#regpair AF A F
+// #regpair AF A F
 export const REGISTERS:usize = (&AF);
-#regpair BC B C
-#regpair DE D E
-#regpair HL H L
-#regpair AF_
-#regpair BC_
-#regpair DE_
-#regpair HL_
-#regpair IX IXH IXL
-#regpair IY IYH IYL
-#regpair SP
-#regpair IR I R
+// #regpair BC B C
+// #regpair DE D E
+// #regpair HL H L
+// #regpair AF_
+// #regpair BC_
+// #regpair DE_
+// #regpair HL_
+// #regpair IX IXH IXL
+// #regpair IY IYH IYL
+// #regpair SP
+// #regpair IR I R
 
-#const FLAG_C 0x01
-#const FLAG_N 0x02
-#const FLAG_P 0x04
-#const FLAG_V 0x04
-#const FLAG_3 0x08
-#const FLAG_H 0x10
-#const FLAG_5 0x20
-#const FLAG_Z 0x40
-#const FLAG_S 0x80
+// #const FLAG_C 0x01
+// #const FLAG_N 0x02
+// #const FLAG_P 0x04
+// #const FLAG_V 0x04
+// #const FLAG_3 0x08
+// #const FLAG_H 0x10
+// #const FLAG_5 0x20
+// #const FLAG_Z 0x40
+// #const FLAG_S 0x80
 
-#alloc halfcarryAddTable[8]: u8
+// #alloc halfcarryAddTable[8]: u8
 halfcarryAddTable = [0, FLAG_H, FLAG_H, FLAG_H, 0, 0, 0, FLAG_H];
 
-#alloc halfcarrySubTable[8]: u8
+// #alloc halfcarrySubTable[8]: u8
 halfcarrySubTable = [0, 0, FLAG_H, 0, FLAG_H, 0, FLAG_H, FLAG_H];
 
-#alloc overflowAddTable[8]: u8
+// #alloc overflowAddTable[8]: u8
 overflowAddTable = [0, 0, 0, FLAG_V, FLAG_V, 0, 0, 0];
-#alloc overflowSubTable[8]: u8
+// #alloc overflowSubTable[8]: u8
 overflowSubTable = [0, FLAG_V, 0, 0, 0, 0, FLAG_V, 0];
 
-#alloc sz53Table[0x100]: u8
-#alloc parityTable[0x100]: u8
-#alloc sz53pTable[0x100]: u8
+// #alloc sz53Table[0x100]: u8
+// #alloc parityTable[0x100]: u8
+// #alloc sz53pTable[0x100]: u8
 
-#alloc contentionTable[72000]: u8
+// #alloc contentionTable[72000]: u8
 
-#alloc screenEvents[36000]: u32
+// #alloc screenEvents[36000]: u32
 
-#alloc keyStates[8]: u8
+// #alloc keyStates[8]: u8
 
 // NB needs to start at an offset that's a multiple of 4
-#alloc audioBufferLeft[1024]: f32
+// #alloc audioBufferLeft[1024]: f32
 export const AUDIO_BUFFER_LEFT:usize = (&audioBufferLeft);
-#alloc audioBufferRight[1024]: f32
+// #alloc audioBufferRight[1024]: f32
 export const AUDIO_BUFFER_RIGHT:usize = (&audioBufferLeft);
 
-#alloc tapePulses[10000]: u16
+// #alloc tapePulses[10000]: u16
 export const TAPE_PULSES:usize = (&tapePulses);
 export const TAPE_PULSES_LENGTH:usize = 10000;
 
-#alloc ayVolumeLevels[16]: f32
+// #alloc ayVolumeLevels[16]: f32
 ayVolumeLevels = [0.0, 0.0022915, 0.0034105, 0.004842, 0.007057, 0.010307, 0.0141195, 0.0228165, 0.028188, 0.04411, 0.058784, 0.0749885, 0.0950615, 0.114544, 0.1413585, 0.166662];
 
-#alloc logEntries[2048]: u16
+// #alloc logEntries[2048]: u16
 export const LOG_ENTRIES:usize = (&logEntries);
 
-#alloc ayRegisters[14]: u8
+// #alloc ayRegisters[14]: u8
 
 let requestedSamplesPerFrame:u32 = 0;
 let samplesPerFrame:u32 = 0;
@@ -889,7 +891,7 @@ export function runUntil(maxT:u32):i16 {
             R = (r & 0x80) | ((r + 1) & 0x7f);
 
             switch (op) {
-                #optable base
+                // #optable base
 
                 default:
                     return 1;  /* unrecognised opcode */
@@ -904,7 +906,7 @@ export function runUntil(maxT:u32):i16 {
             R = (r & 0x80) | ((r + 1) & 0x7f);
 
             switch (op) {
-                #optable cb
+                // #optable cb
 
                 default:
                     return 1;  /* unrecognised opcode */
@@ -919,7 +921,7 @@ export function runUntil(maxT:u32):i16 {
             R = (r & 0x80) | ((r + 1) & 0x7f);
 
             switch (op) {
-                #optable dd
+                // #optable dd
 
                 default:
                     return 1;  /* unrecognised opcode */
@@ -929,7 +931,7 @@ export function runUntil(maxT:u32):i16 {
             const indexOffset:i8 = i8(readMem(pc++));
             let op:u8 = readMem(pc++);
             switch (op) {
-                #optable ddcb
+                // #optable ddcb
 
                 default:
                     return 1;  /* unrecognised opcode */
@@ -944,7 +946,7 @@ export function runUntil(maxT:u32):i16 {
             R = (r & 0x80) | ((r + 1) & 0x7f);
 
             switch (op) {
-                #optable ed
+                // #optable ed
 
                 default:
                     return 1;  /* unrecognised opcode */
@@ -959,7 +961,7 @@ export function runUntil(maxT:u32):i16 {
             R = (r & 0x80) | ((r + 1) & 0x7f);
 
             switch (op) {
-                #optable fd
+                // #optable fd
 
                 default:
                     return 1;  /* unrecognised opcode */
@@ -969,7 +971,7 @@ export function runUntil(maxT:u32):i16 {
             const indexOffset:i8 = i8(readMem(pc++));
             let op:u8 = readMem(pc++);
             switch (op) {
-                #optable fdcb
+                // #optable fdcb
 
                 default:
                     return 1;  /* unrecognised opcode */
