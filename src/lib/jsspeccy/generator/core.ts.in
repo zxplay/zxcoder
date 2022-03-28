@@ -1,4 +1,5 @@
 // @ts-nocheck
+// noinspection JSUnusedGlobalSymbols,JSUnusedLocalSymbols,JSBitwiseOperatorUsage
 
 // #alloc frameBuffer[0x6600]: u8
 export const FRAME_BUFFER:usize = 0 /* (&frameBuffer) */;
