@@ -37,37 +37,45 @@ export function* watchUnsubscribeFromProjectListActions() {
 // -----------------------------------------------------------------------------
 
 function* handleSubscribeToProjectList(action) {
-    const query = gql`
-        subscription {
-            project(order_by: {created_at: asc}) {
-                project_id
-                title
-                lang
-                created_at
-                updated_at
+    try {
+        const query = gql`
+            subscription {
+                project(order_by: {created_at: asc}) {
+                    project_id
+                    title
+                    lang
+                    created_at
+                    updated_at
+                }
             }
-        }
-    `;
+        `;
 
-    const variables = {};
+        const variables = {};
 
-    yield put(subscribe(action, query, variables, subscribeToProjectListCallback));
-    yield put(subscribeAction(action));
+        yield put(subscribe(action, query, variables, subscribeToProjectListCallback));
+        yield put(subscribeAction(action));
+    } catch (e) {
+        console.error(e);
+    }
 }
 
 function* handleSubscribeToProjectListCallback(action) {
-    const {error, data} = action;
+    try {
+        const {error, data} = action;
 
-    if (!error && !data) {
-        return; // Normal exit.
+        if (!error && !data) {
+            return; // Normal exit.
+        }
+
+        if (error) {
+            showError('Websocket Callback Error', error);
+            return;
+        }
+
+        yield put(receiveprojectListQueryResult(data));
+    } catch (e) {
+        console.error(e);
     }
-
-    if (error) {
-        showError('Websocket Callback Error', error);
-        return;
-    }
-
-    yield put(receiveprojectListQueryResult(data));
 }
 
 function* handleUnsubscribeFromProjectList() {

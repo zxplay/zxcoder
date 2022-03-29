@@ -3,7 +3,6 @@ import {put, takeLatest} from "redux-saga/effects";
 import {handleRequestException} from "../../errors";
 import {actionTypes, setUserInfo} from "../actions/identity";
 import Constants from "../../constants";
-import {login} from "../../auth";
 
 // -----------------------------------------------------------------------------
 // Action watchers
@@ -27,9 +26,9 @@ function* handleGetUserInfo() {
 
     } catch (e) {
         if (e.response && e.response.status === 401) {
-            // login();
-        } else {
-            handleRequestException(e);
+            return;
         }
+
+        handleRequestException(e);
     }
 }

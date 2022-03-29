@@ -45,61 +45,77 @@ function* handleSetSelectedTabIndexActions(_) {
 }
 
 function* handleRunAssemblyActions(_) {
-    const code = yield select((state) => state.demo.asmCode);
-    const tap = yield pasmo(code);
-    store.dispatch(loadTape(tap));
+    try {
+        const code = yield select((state) => state.demo.asmCode);
+        const tap = yield pasmo(code);
+        store.dispatch(loadTape(tap));
+    } catch (e) {
+        console.error(e);
+    }
 }
 
 function* handleRunSinclairBasicActions(_) {
-    const code = yield select((state) => state.demo.sinclairBasicCode);
-    const tap = yield zmakebas(code);
-    store.dispatch(loadTape(tap));
+    try {
+        const code = yield select((state) => state.demo.sinclairBasicCode);
+        const tap = yield zmakebas(code);
+        store.dispatch(loadTape(tap));
+    } catch (e) {
+        console.error(e);
+    }
 }
 
 function* handleRunZXBasicActions(_) {
-    const code = yield select((state) => state.demo.zxBasicCode);
+    try {
+        const code = yield select((state) => state.demo.zxBasicCode);
 
-    // TODO: Rename this GraphQL action to 'compileBasic'.
-    // Call the GraphQL compile action.
-    const query = gql`
-        mutation ($basic: String!) {
-            compile(basic: $basic) {
-                base64_encoded
+        // TODO: Rename this GraphQL action to 'compileBasic'.
+        // Call the GraphQL compile action.
+        const query = gql`
+            mutation ($basic: String!) {
+                compile(basic: $basic) {
+                    base64_encoded
+                }
             }
-        }
-    `;
+        `;
 
-    // TODO: Rename this GraphQL variable to 'code'.
-    const variables = {
-        'basic': code
-    };
+        // TODO: Rename this GraphQL variable to 'code'.
+        const variables = {
+            'basic': code
+        };
 
-    const userId = yield select((state) => state.identity.userId);
-    const response = yield gqlFetch(userId, query, variables);
-    const base64 = response.data.compile.base64_encoded;
-    const tap = Uint8Array.from(atob(base64), c => c.charCodeAt(0));
-    store.dispatch(loadTape(tap));
+        const userId = yield select((state) => state.identity.userId);
+        const response = yield gqlFetch(userId, query, variables);
+        const base64 = response.data.compile.base64_encoded;
+        const tap = Uint8Array.from(atob(base64), c => c.charCodeAt(0));
+        store.dispatch(loadTape(tap));
+    } catch (e) {
+        console.error(e);
+    }
 }
 
 function* handleRunCActions(_) {
-    const code = yield select((state) => state.demo.cCode);
+    try {
+        const code = yield select((state) => state.demo.cCode);
 
-    // Call the GraphQL compile action.
-    const query = gql`
-        mutation ($code: String!) {
-            compileC(code: $code) {
-                base64_encoded
+        // Call the GraphQL compile action.
+        const query = gql`
+            mutation ($code: String!) {
+                compileC(code: $code) {
+                    base64_encoded
+                }
             }
-        }
-    `;
+        `;
 
-    const variables = {
-        'code': code
-    };
+        const variables = {
+            'code': code
+        };
 
-    const userId = yield select((state) => state.identity.userId);
-    const response = yield gqlFetch(userId, query, variables);
-    const base64 = response.data.compileC.base64_encoded;
-    const tap = Uint8Array.from(atob(base64), c => c.charCodeAt(0));
-    store.dispatch(loadTape(tap));
+        const userId = yield select((state) => state.identity.userId);
+        const response = yield gqlFetch(userId, query, variables);
+        const base64 = response.data.compileC.base64_encoded;
+        const tap = Uint8Array.from(atob(base64), c => c.charCodeAt(0));
+        store.dispatch(loadTape(tap));
+    } catch (e) {
+        console.error(e);
+    }
 }

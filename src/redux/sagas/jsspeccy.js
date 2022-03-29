@@ -1,4 +1,4 @@
-import {take, takeLatest, put, call, select} from "redux-saga/effects";
+import {take, takeLatest, put, call} from "redux-saga/effects";
 import {eventChannel} from "redux-saga";
 import queryString from "query-string";
 import {JSSpeccy} from "../../lib/jsspeccy/JSSpeccy";
@@ -93,125 +93,173 @@ export function* watchForLocationChanges() {
 // -----------------------------------------------------------------------------
 
 function* handleRenderEmulatorActions(action) {
-    const zoom = action.zoom || 2;
-    const width = zoom * 320;
+    try {
+        const zoom = action.zoom || 2;
+        const width = zoom * 320;
 
-    console.assert(target === undefined);
-    target = document.createElement('div');
-    target.style.width = `${width}px`;
-    target.style.margin = '0px';
-    target.style.backgroundColor = '#fff';
+        console.assert(target === undefined);
+        target = document.createElement('div');
+        target.style.width = `${width}px`;
+        target.style.margin = '0px';
+        target.style.backgroundColor = '#fff';
 
-    const emuParams = {
-        zoom,
-        sandbox: false,
-        autoLoadTapes: true,
-    };
+        const emuParams = {
+            zoom,
+            sandbox: false,
+            autoLoadTapes: true,
+        };
 
-    let doFilter = false;
+        let doFilter = false;
 
-    const parsed = queryString.parse(location.search);
+        const parsed = queryString.parse(location.search);
 
-    if (parsed.m && (parsed.m === '48' || parsed.m === '128' || parsed.m === '5')) {
-        emuParams.machine = parsed.m;
-    }
+        if (parsed.m && (parsed.m === '48' || parsed.m === '128' || parsed.m === '5')) {
+            emuParams.machine = parsed.m;
+        }
 
-    if (parsed.u) {
-        emuParams.openUrl = parsed.u;
-    }
+        if (parsed.u) {
+            emuParams.openUrl = parsed.u;
+        }
 
-    if (parsed.f && parsed.f !== '0') {
-        doFilter = true;
-    }
+        if (parsed.f && parsed.f !== '0') {
+            doFilter = true;
+        }
 
-    console.assert(jsspeccy === undefined);
-    jsspeccy = JSSpeccy(target, emuParams);
-    jsspeccy.hideUI();
+        console.assert(jsspeccy === undefined);
+        jsspeccy = JSSpeccy(target, emuParams);
+        jsspeccy.hideUI();
 
-    if (doFilter) {
-        // TODO: Investigate this option, and narrow the element selector.
-        document.getElementsByTagName('canvas')[0].style.imageRendering = "auto";
+        if (doFilter) {
+            // TODO: Investigate this option, and narrow the element selector.
+            document.getElementsByTagName('canvas')[0].style.imageRendering = "auto";
+        }
+    } catch (e) {
+        console.error(e);
     }
 }
 
 function* handleLoadEmulatorActions(action) {
-    console.assert(action.target, 'no action target to append fragment to');
-    console.assert(target, 'no target to append to fragment');
-    const fragment = document.createDocumentFragment();
-    fragment.appendChild(target);
-    action.target.appendChild(fragment);
+    try {
+        console.assert(action.target, 'no action target to append fragment to');
+        console.assert(target, 'no target to append to fragment');
+        const fragment = document.createDocumentFragment();
+        fragment.appendChild(target);
+        action.target.appendChild(fragment);
+    } catch (e) {
+        console.error(e);
+    }
 }
 
 function* handleLoadTapeActions(action) {
-    yield put(showActiveEmulator());
-    yield put(reset());
-    yield put(start());
-    jsspeccy.openTAPFile(action.tap.buffer);
+    try {
+        yield put(showActiveEmulator());
+        yield put(reset());
+        yield put(start());
+        jsspeccy.openTAPFile(action.tap.buffer);
+    } catch (e) {
+        console.error(e);
+    }
 }
 
 function* handleLoadUrlActions(action) {
-    yield put(resetProject());
-    yield put(showActiveEmulator());
-    yield put(reset());
-    yield put(start());
-    jsspeccy.openUrl(action.url);
-    yield put(start()); // NOTE: Extra call to start was required here.
+    try {
+        yield put(resetProject());
+        yield put(showActiveEmulator());
+        yield put(reset());
+        yield put(start());
+        jsspeccy.openUrl(action.url);
+        yield put(start()); // NOTE: Extra call to start was required here.
+    } catch (e) {
+        console.error(e);
+    }
 }
 
 function* handleClickActions(action) {
-    const target = action.e.target;
+    try {
+        const target = action.e.target;
 
-    const screenElem = document.getElementById('jsspeccy-screen');
-    if (screenElem?.contains(target)) {
-        return;
+        const screenElem = document.getElementById('jsspeccy-screen');
+        if (screenElem?.contains(target)) {
+            return;
+        }
+
+        const keysElem = document.getElementById('virtkeys');
+        if (keysElem?.contains(target)) {
+            return;
+        }
+
+        // Clicks anywhere except screen or keys to pause emulator.
+        jsspeccy.pause();
+    } catch (e) {
+        console.error(e);
     }
-
-    const keysElem = document.getElementById('virtkeys');
-    if (keysElem?.contains(target)) {
-        return;
-    }
-
-    // Clicks anywhere except screen or keys to pause emulator.
-    jsspeccy.pause();
 }
 
 function* handleResetActions(_) {
-    jsspeccy.reset();
-    jsspeccy.start();
+    try {
+        jsspeccy.reset();
+        jsspeccy.start();
+    } catch (e) {
+        console.error(e);
+    }
 }
 
 function* handlePauseActions(_) {
-    jsspeccy.pause();
+    try {
+        jsspeccy.pause();
+    } catch (e) {
+        console.error(e);
+    }
 }
 
 function* handleStartActions(_) {
-    jsspeccy.start();
+    try {
+        jsspeccy.start();
+    } catch (e) {
+        console.error(e);
+    }
 }
 
 function* handleExitActions(_) {
-    jsspeccy.exit();
+    try {
+        jsspeccy.exit();
+    } catch (e) {
+        console.error(e);
+    }
 }
 
 function* handleOpenFileDialogActions(_) {
-    yield put(resetProject());
-    yield put(showActiveEmulator());
-    jsspeccy.openFileDialog();
+    try {
+        yield put(resetProject());
+        yield put(showActiveEmulator());
+        jsspeccy.openFileDialog();
+    } catch (e) {
+        console.error(e);
+    }
 }
 
 function* handleViewFullScreenActions(_) {
-    jsspeccy.start();
-    jsspeccy.enterFullscreen();
+    try {
+        jsspeccy.start();
+        jsspeccy.enterFullscreen();
+    } catch (e) {
+        console.error(e);
+    }
 }
 
 function* handleLocationChanges(action) {
-    const path = action.payload.location.pathname;
-    const match = typeof previousPath === 'undefined' || path === previousPath;
+    try {
+        const path = action.payload.location.pathname;
+        const match = typeof previousPath === 'undefined' || path === previousPath;
 
-    if (!match || (path !== '/' && !path.startsWith('/projects/'))) {
-        jsspeccy?.pause();
+        if (!match || (path !== '/' && !path.startsWith('/projects/'))) {
+            jsspeccy?.pause();
+        }
+
+        previousPath = path;
+    } catch (e) {
+        console.error(e);
     }
-
-    previousPath = path;
 }
 
 // -----------------------------------------------------------------------------
