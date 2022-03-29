@@ -161,23 +161,18 @@ function* handleLoadUrlActions(action) {
 function* handleClickActions(action) {
     const target = action.e.target;
 
-    // Pause emulator if clicking on a text input.
-    if (target instanceof Element) {
-        if (target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement) {
-            jsspeccy.pause();
-            return;
-        }
+    const screenElem = document.getElementById('jsspeccy-screen');
+    if (screenElem?.contains(target)) {
+        return;
     }
 
-    // Pause emulator if clicking on CodeMirror instance.
-    const elems = document.getElementsByClassName('CodeMirror');
-    for (let i = 0; i < elems.length; ++i) {
-        let elem = elems[i];
-        if (elem.contains(target)) {
-            jsspeccy.pause();
-            return;
-        }
+    const keysElem = document.getElementById('virtkeys');
+    if (keysElem?.contains(target)) {
+        return;
     }
+
+    // Clicks anywhere except screen or keys to pause emulator.
+    jsspeccy.pause();
 }
 
 function* handleResetActions(_) {
