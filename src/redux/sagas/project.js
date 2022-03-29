@@ -95,11 +95,14 @@ function* handleLoadProjectActions(action) {
 
     const userId = yield select((state) => state.identity.userId);
     const response = yield gqlFetch(userId, query, variables);
-    if (!response) return;
+    if (!response) {
+        return;
+    }
 
-    console.assert(response?.data?.project_by_pk, response);
     const proj = response.data.project_by_pk;
-    yield put(receiveLoadedProject(action.id, proj.title, proj.lang, proj.code));
+    if (proj) {
+        yield put(receiveLoadedProject(action.id, proj.title, proj.lang, proj.code));
+    }
 }
 
 function* handleRunCodeActions(_) {
