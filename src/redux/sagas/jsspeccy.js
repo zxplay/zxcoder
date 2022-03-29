@@ -198,7 +198,7 @@ function* handleClickActions(action) {
 function* handleResetActions(_) {
     try {
         jsspeccy.reset();
-        jsspeccy.start();
+        setTimeout(() => jsspeccy.start(), 1);
     } catch (e) {
         console.error(e);
     }
