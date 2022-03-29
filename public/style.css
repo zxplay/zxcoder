@@ -90,7 +90,7 @@ code {
 
 #jsspeccy-screen > div > div > canvas
 {
-    background-color: #DDDDDD;
+    background-color: #4E4E4E;
     image-rendering: -moz-crisp-edges;
     image-rendering: -webkit-crisp-edges;
     image-rendering: pixelated;
