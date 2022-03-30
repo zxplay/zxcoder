@@ -112,6 +112,14 @@ function* handleRunCActions(_) {
 
         const userId = yield select((state) => state.identity.userId);
         const response = yield gqlFetch(userId, query, variables);
+
+        if (!response) {
+            // TODO: Handle compile error.
+            return;
+        }
+
+        console.assert(response?.data?.compileC?.base64_encoded, response);
+
         const base64 = response.data.compileC.base64_encoded;
         const tap = Uint8Array.from(atob(base64), c => c.charCodeAt(0));
         store.dispatch(loadTape(tap));
