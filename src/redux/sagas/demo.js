@@ -1,4 +1,4 @@
-import {takeLatest, select, put} from "redux-saga/effects";
+import {takeLatest, select, put, call} from "redux-saga/effects";
 import {actionTypes} from "../actions/demo";
 import {store} from "../store";
 import {loadTape, pause} from "../actions/jsspeccy";
@@ -47,7 +47,7 @@ function* handleSetSelectedTabIndexActions(_) {
 function* handleRunAssemblyActions(_) {
     try {
         const code = yield select((state) => state.demo.asmCode);
-        const tap = yield pasmo(code);
+        const tap = yield call(pasmo, code);
         store.dispatch(loadTape(tap));
     } catch (e) {
         console.error(e);
