@@ -21,13 +21,10 @@ export default function Nav() {
 
     const pathname = useSelector(state => state?.router.location.pathname);
     const selectedDemoTab = useSelector(state => state?.demo.selectedTabIndex);
-    const selectedProjectTab = useSelector(state => state?.project.selectedTabIndex);
     const userId = useSelector(state => state?.identity.userId);
     const lang = useSelector(state => state?.project.lang);
 
-    const emuVisible =
-        (pathname === '/' || pathname.startsWith('/projects/')) &&
-        ((!lang && selectedDemoTab === 0) || (lang && selectedProjectTab === 1));
+    const emuVisible = (pathname === '/' && selectedDemoTab === 0) || pathname.startsWith('/projects/');
 
     const start = <img alt="logo" src="/img/logo.png" height="40" className="mr-2"/>;
     const end = (
