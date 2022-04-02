@@ -1,7 +1,9 @@
 {
   "name": "zxplay",
   "version": "1.0.0",
-  "private": true,
+  "author": "Steven Robertson",
+  "description": "ZX Spectrum emulator & programming environment for the browser.",
+  "license": "GPL-3.0",
   "scripts": {
     "start": "run-s build:clean:all build:wasm:debug serve",
     "test": "run-s test:jsspeccy jest",
