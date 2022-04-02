@@ -170,17 +170,17 @@ export default function Nav() {
                     }
                 },
                 {
-                    label: 'Terms of Use',
-                    icon: 'pi pi-fw pi-info-circle',
-                    command: () => {
-                        history.push('/legal/terms-of-use');
-                    }
-                },
-                {
                     label: 'Privacy Policy',
                     icon: 'pi pi-fw pi-eye',
                     command: () => {
                         history.push('/legal/privacy-policy');
+                    }
+                },
+                {
+                    label: 'Terms of Use',
+                    icon: 'pi pi-fw pi-info-circle',
+                    command: () => {
+                        history.push('/legal/terms-of-use');
                     }
                 }
             ]

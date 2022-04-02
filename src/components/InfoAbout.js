@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom";
 import {Card} from "primereact/card";
 
 export default function InfoAbout() {
@@ -11,6 +12,10 @@ export default function InfoAbout() {
             <p>
                 This site is a work in progress.
                 Source available <a href="https://github.com/zxplay/zxplay" target="_blank">here</a>.
+            </p>
+            <p>
+                Please read <Link to="/legal/privacy-policy">privacy policy</Link>
+                {' '}and <Link to="/legal/terms-of-use">terms of use</Link>.
             </p>
             <h2>Create Projects</h2>
             <p>
