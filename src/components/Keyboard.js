@@ -69,7 +69,7 @@ function simulateKey(keyCode, type) {
 
 class MyImageButton extends ImageButton {
     constructor(parent, x, y, w, h, suffix, keyCode) {
-        super(parent, x, y, w, h, '/img/keys/key' + suffix + '.png', '/img/keys/keyNONE.png');
+        super(parent, x, y, w, h, '/keys/key' + suffix + '.png', '/keys/keyNONE.png');
         this.keyCode = keyCode;
 
         this.on_begin = this.on_enter = function () {
@@ -140,7 +140,7 @@ function renderKeyboard(width) {
             const ch = btnrow.chs[i];
 
             if (ch === '-') {
-                new ImageButton(win, x, y, d, d, '/img/keys/keyNONE.png', '/img/keys/keyNONE.png');
+                new ImageButton(win, x, y, d, d, '/keys/keyNONE.png', '/keys/keyNONE.png');
             } else {
                 let suffix = ch;
 
