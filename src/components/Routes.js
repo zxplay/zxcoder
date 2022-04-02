@@ -2,16 +2,16 @@ import React from "react";
 import {Route, Switch} from "react-router-dom";
 import Demo from "./pages/Demo";
 import MaxWidth from "./MaxWidth";
-import InfoLegalPrivacy from "./pages/InfoLegacyPrivacy";
-import InfoLegalTerms from "./pages/InfoLegalTerms";
+import LegalPrivacy from "./pages/LegalPrivacy";
+import LegalTerms from "./pages/LegalTerms";
 import ProjectNew from "./pages/ProjectNew";
 import Project from "./pages/Project";
-import InfoAbout from "./pages/InfoAbout";
-import InfoLinking from "./pages/InfoLinking";
+import About from "./pages/About";
+import Linking from "./pages/Linking";
 import YourProfile from "./pages/YourProfile";
 import YourProjects from "./pages/YourProjects";
 import Search from "./pages/Search";
-import NotFound from "./pages/NotFound";
+import ErrorNotFound from "./pages/ErrorNotFound";
 
 export default function Routes() {
     return (
@@ -21,22 +21,22 @@ export default function Routes() {
             </Route>
             <Route exact path="/about">
                 <MaxWidth>
-                    <InfoAbout/>
+                    <About/>
                 </MaxWidth>
             </Route>
             <Route exact path="/info/linking">
                 <MaxWidth>
-                    <InfoLinking/>
+                    <Linking/>
                 </MaxWidth>
             </Route>
             <Route exact path="/legal/privacy-policy">
                 <MaxWidth>
-                    <InfoLegalPrivacy/>
+                    <LegalPrivacy/>
                 </MaxWidth>
             </Route>
             <Route exact path="/legal/terms-of-use">
                 <MaxWidth>
-                    <InfoLegalTerms/>
+                    <LegalTerms/>
                 </MaxWidth>
             </Route>
             <Route exact path="/new/asm">
@@ -78,7 +78,7 @@ export default function Routes() {
                 )
             }}/>
             <Route>
-                <NotFound/>
+                <ErrorNotFound/>
             </Route>
         </Switch>
     )

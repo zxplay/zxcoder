@@ -1,7 +1,7 @@
 import React from "react";
 import {Card} from "primereact/card";
 
-export default function InfoLinking() {
+export default function Linking() {
     const domain = `${window.location.protocol}//${window.location.host}/`;
     const k = '-W-P,ASDe,123456789M';
     const m = '48';

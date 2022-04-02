@@ -4,7 +4,7 @@ import ReactMarkdown from "react-markdown";
 import {Card} from "primereact/card";
 import {requestPrivacyPolicy} from "../../redux/actions/app";
 
-export default function InfoLegacyPrivacy() {
+export default function LegalPrivacy() {
     const dispatch = useDispatch();
 
     const text = useSelector(state => state?.app.privacyPolicy);
