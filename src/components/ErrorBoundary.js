@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {hideLoading} from "../dashboard_loading";
 import {error} from "../redux/actions/error";
-import ErrorPage from "./ErrorPage";
+import ErrorPage from "./pages/ErrorPage";
 
 class ErrorBoundary extends React.Component {
 

@@ -2,10 +2,10 @@ import React, {Fragment, useEffect} from "react";
 import PropTypes from "prop-types";
 import {useDispatch, useSelector} from "react-redux";
 import {TabPanel, TabView} from "primereact/tabview";
-import {Emulator} from "./Emulator";
-import {loadProject, setSelectedTabIndex} from "../redux/actions/project";
-import {ProjectEditor} from "./ProjectEditor";
-import {pause, reset} from "../redux/actions/jsspeccy";
+import {Emulator} from "../Emulator";
+import {loadProject, setSelectedTabIndex} from "../../redux/actions/project";
+import {ProjectEditor} from "../ProjectEditor";
+import {pause, reset} from "../../redux/actions/jsspeccy";
 
 export default function Project(props) {
     const dispatch = useDispatch();

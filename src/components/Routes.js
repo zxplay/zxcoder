@@ -1,17 +1,17 @@
 import React from "react";
 import {Route, Switch} from "react-router-dom";
-import Demo from "./Demo";
+import Demo from "./pages/Demo";
 import MaxWidth from "./MaxWidth";
-import InfoLegalPrivacy from "./InfoLegacyPrivacy";
-import InfoLegalTerms from "./InfoLegalTerms";
-import ProjectNew from "./ProjectNew";
-import Project from "./Project";
-import InfoAbout from "./InfoAbout";
-import InfoLinking from "./InfoLinking";
-import YourProfile from "./YourProfile";
-import YourProjects from "./YourProjects";
-import Search from "./Search";
-import NotFound from "./NotFound";
+import InfoLegalPrivacy from "./pages/InfoLegacyPrivacy";
+import InfoLegalTerms from "./pages/InfoLegalTerms";
+import ProjectNew from "./pages/ProjectNew";
+import Project from "./pages/Project";
+import InfoAbout from "./pages/InfoAbout";
+import InfoLinking from "./pages/InfoLinking";
+import YourProfile from "./pages/YourProfile";
+import YourProjects from "./pages/YourProjects";
+import Search from "./pages/Search";
+import NotFound from "./pages/NotFound";
 
 export default function Routes() {
     return (

@@ -2,14 +2,14 @@ import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import queryString from "query-string";
 import {TabPanel, TabView} from "primereact/tabview";
-import {DemoSinclairBasicEditor} from "./DemoSinclairBasicEditor";
-import {DemoAssemblyEditor} from "./DemoAssemblyEditor";
-import {DemoZXBasicEditor} from "./DemoZXBasicEditor";
-import {DemoCEditor} from "./DemoCEditor";
-import {Emulator} from "./Emulator";
-import {setSelectedTabIndex} from "../redux/actions/demo";
-import {reset as resetProject} from "../redux/actions/project";
-import {reset} from "../redux/actions/jsspeccy";
+import {DemoSinclairBasicEditor} from "../DemoSinclairBasicEditor";
+import {DemoAssemblyEditor} from "../DemoAssemblyEditor";
+import {DemoZXBasicEditor} from "../DemoZXBasicEditor";
+import {DemoCEditor} from "../DemoCEditor";
+import {Emulator} from "../Emulator";
+import {setSelectedTabIndex} from "../../redux/actions/demo";
+import {reset as resetProject} from "../../redux/actions/project";
+import {reset} from "../../redux/actions/jsspeccy";
 
 export default function Demo() {
     const dispatch = useDispatch();
