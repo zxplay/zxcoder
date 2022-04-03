@@ -10,8 +10,10 @@ import {
 } from "../redux/actions/project";
 import {setCode, runCode} from "../redux/actions/project";
 import "../lib/syntax/pasmo";
+import "../lib/syntax/zmac";
 import "../lib/syntax/zmakebas";
 import "../lib/syntax/z88dk-c";
+import "../lib/syntax/sdcc";
 import "../lib/syntax/zxbasic";
 
 export function ProjectEditor() {
@@ -32,11 +34,17 @@ export function ProjectEditor() {
         case 'c':
             mode = 'text/x-z88dk-csrc';
             break;
+        case 'sdcc':
+            mode = 'text/x-sdcc-csrc';
+            break;
+        case 'zmac':
+            mode = 'text/x-zmac';
+            break;
         case 'zxbasic':
             mode = 'text/x-zxbasic';
             break;
         default:
-            throw 'unexpected case';
+            throw `unexpected case: ${lang}`;
     }
 
     const options = {

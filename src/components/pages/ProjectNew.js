@@ -14,14 +14,25 @@ export default function ProjectNew(props) {
 
     switch (props.type) {
         case 'asm':
-            lang = 'Z80 Assembler';
+            lang = 'Z80 Assembler (Pasmo)';
             break;
         case 'basic':
-            lang = 'Sinclair BASIC';
+            lang = 'Sinclair BASIC (zmakebas)';
+            break;
+        case 'c':
+            lang = 'C (z88dk)';
+            break;
+        case 'sdcc':
+            lang = 'C (SDCC)';
+            break;
+        case 'zmac':
+            lang = 'Z80 Assembler (zmac)';
             break;
         case 'zxbasic':
             lang = 'Boriel ZX BASIC';
             break;
+        default:
+            throw `unexpected case: ${props.type}`;
     }
 
     return (

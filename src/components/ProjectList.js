@@ -31,16 +31,20 @@ export default function ProjectList() {
 
     function lang(data) {
         switch (data.lang) {
-            case 'zxbasic':
-                return 'Boriel ZX BASIC';
-            case 'basic':
-                return 'Sinclair BASIC';
             case 'asm':
-                return 'Z80 Assembly';
+                return 'Pasmo';
+            case 'basic':
+                return 'zmakebas';
             case 'c':
-                return 'C';
+                return 'z88dk zcc';
+            case 'sdcc':
+                return 'SDDC';
+            case 'zmac':
+                return 'zmac';
+            case 'zxbasic':
+                return 'Boriel ZX';
             default:
-                return 'Unknown';
+                throw `unexpected case: ${data.lang}`;
         }
     }
 
@@ -66,7 +70,7 @@ export default function ProjectList() {
             />
             <Column
                 field="lang"
-                header="Language"
+                header="Compiler"
                 body={lang}
                 style={{width: '22%'}}
             />

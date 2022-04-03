@@ -61,32 +61,63 @@ export default function Nav() {
                     items: [
                         {
                             label: 'Z80 Assembly',
-                            command: () => {
-                                dispatch(pause());
-                                history.push('/new/asm');
-                            }
+                            items: [
+                                {
+                                    label: 'Pasmo',
+                                    command: () => {
+                                        dispatch(pause());
+                                        history.push('/new/asm');
+                                    }
+                                },
+                                {
+                                    disabled: true,
+                                    label: 'zmac',
+                                    command: () => {
+                                        dispatch(pause());
+                                        history.push('/new/zmac');
+                                    }
+                                }
+                            ]
                         },
                         {
-                            label: 'Sinclair BASIC',
-                            command: () => {
-                                dispatch(pause());
-                                history.push('/new/basic');
-                            }
-                        },
-                        {
-                            label: 'Boriel ZX BASIC',
-                            command: () => {
-                                dispatch(pause());
-                                history.push('/new/zxbasic');
-                            }
+                            label: 'BASIC',
+                            items: [
+                                {
+                                    label: 'Boriel ZX',
+                                    command: () => {
+                                        dispatch(pause());
+                                        history.push('/new/zxbasic');
+                                    }
+                                },
+                                {
+                                    label: 'Sinclair (zmakebas)',
+                                    command: () => {
+                                        dispatch(pause());
+                                        history.push('/new/basic');
+                                    }
+                                }
+                            ]
                         },
                         {
                             label: 'C',
-                            command: () => {
-                                dispatch(pause());
-                                history.push('/new/c');
-                            }
-                        }
+                            items: [
+                                {
+                                    label: 'z88dk zcc',
+                                    command: () => {
+                                        dispatch(pause());
+                                        history.push('/new/c');
+                                    }
+                                },
+                                {
+                                    disabled: true,
+                                    label: 'SDCC',
+                                    command: () => {
+                                        dispatch(pause());
+                                        history.push('/new/sdcc');
+                                    }
+                                }
+                            ]
+                        },
                     ]
                 },
                 {

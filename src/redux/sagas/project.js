@@ -117,19 +117,29 @@ function* handleRunCodeActions(_) {
     try {
         const lang = yield select((state) => state.project.lang);
         const code = yield select((state) => state.project.code);
+        const userId = yield select((state) => state.identity.userId);
 
-        if (lang === 'zxbasic') {
-            const userId = yield select((state) => state.identity.userId);
-            yield runZXBasic(code, userId);
-        } else if (lang === 'c') {
-            const userId = yield select((state) => state.identity.userId);
-            yield runC(code, userId);
-        } else if (lang === 'basic') {
-            const tap = yield zmakebas(code);
-            store.dispatch(loadTape(tap));
-        } else {
-            const tap = yield pasmo(code);
-            store.dispatch(loadTape(tap));
+        switch (lang) {
+            case 'asm':
+                const pasmoTap = yield pasmo(code);
+                store.dispatch(loadTape(pasmoTap));
+                break;
+            case 'basic':
+                const basTap = yield zmakebas(code);
+                store.dispatch(loadTape(basTap));
+                break;
+            case 'c':
+                yield runC(code, userId);
+                break;
+            case 'sdcc':
+                // TODO
+                break;
+            case 'zmac':
+                // TODO
+                break;
+            case 'zxbasic':
+                yield runZXBasic(code, userId);
+                break;
         }
     } catch (e) {
         console.error(e);

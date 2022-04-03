@@ -37,19 +37,25 @@ export default function Project(props) {
     let editorTitle;
     switch (lang) {
         case 'asm':
-            editorTitle = 'Z80 Assembler';
+            editorTitle = 'Z80 (Pasmo)';
             break;
         case 'basic':
             editorTitle = 'Sinclair BASIC';
             break;
         case 'c':
-            editorTitle = 'C';
+            editorTitle = 'z88dk scc';
+            break;
+        case 'sdcc':
+            editorTitle = 'SDCC';
+            break;
+        case 'zmac':
+            editorTitle = 'Z80 (zmac)';
             break;
         case 'zxbasic':
             editorTitle = 'Boriel ZX BASIC';
             break;
         default:
-            throw 'unexpected case';
+            throw `unexpected case: ${lang}`;
     }
 
     return (
