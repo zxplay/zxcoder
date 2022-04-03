@@ -61,7 +61,7 @@ export default function Project(props) {
     return (
         <div className="mx-2 my-1">
             <div className="grid" style={{width: "100%", padding: 0, margin: 0}}>
-                <div className="col p-0 mr-2">
+                <div className="col p-0 mr-2" style={{maxWidth: `calc(100vw - ${width + 41}px`}}>
                     <TabView
                         activeIndex={tab}
                         onTabChange={(e) => dispatch(setSelectedTabIndex(e.index))}>
