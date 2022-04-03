@@ -243,13 +243,13 @@ async function getTap(userId, lang, code) {
         case 'basic':
             return await getZmakebasTap(code);
         case 'c':
-            return getZ88dkTap(code, userId);
+            return await getZ88dkTap(code, userId);
         case 'sdcc':
-            return getSdccTap(code);
+            return await getSdccTap(code);
         case 'zmac':
-            return getZmacTap(code);
+            return await getZmacTap(code);
         case 'zxbasic':
-            return getZXBasicTap(code, userId);
+            return await getZXBasicTap(code, userId);
         default:
             throw `unexpected case: ${lang}`;
     }
