@@ -57,6 +57,8 @@ function* handleSetSelectedTabIndexActions(_) {
 
 function* handleCreateNewProjectActions(action) {
     try {
+        const userId = yield select((state) => state.identity.userId);
+
         const query = gql`
             mutation ($title: String!, $lang: String!) {
                 insert_project_one(object: {title: $title, lang: $lang}) {
@@ -70,11 +72,15 @@ function* handleCreateNewProjectActions(action) {
             'lang': action.lang
         };
 
-        const userId = yield select((state) => state.identity.userId);
+        // noinspection JSCheckFunctionSignatures
         const response = yield call(gqlFetch, userId, query, variables);
+
+        // noinspection JSUnresolvedVariable
         console.assert(response?.data?.insert_project_one?.project_id, response);
 
+        // noinspection JSUnresolvedVariable
         const id = response?.data?.insert_project_one?.project_id;
+
         yield put(receiveLoadedProject(id, action.title, action.lang, ''));
         yield put(push(`/projects/${id}`));
     } catch (e) {
@@ -84,6 +90,8 @@ function* handleCreateNewProjectActions(action) {
 
 function* handleLoadProjectActions(action) {
     try {
+        const userId = yield select((state) => state.identity.userId);
+
         const query = gql`
             query ($project_id: uuid!) {
                 project_by_pk(project_id: $project_id) {
@@ -98,16 +106,21 @@ function* handleLoadProjectActions(action) {
             'project_id': action.id
         };
 
-        const userId = yield select((state) => state.identity.userId);
+        // noinspection JSCheckFunctionSignatures
         const response = yield call(gqlFetch, userId, query, variables);
+
         if (!response) {
             return;
         }
 
+        // noinspection JSUnresolvedVariable
         const proj = response.data.project_by_pk;
-        if (proj) {
-            yield put(receiveLoadedProject(action.id, proj.title, proj.lang, proj.code));
+
+        if (!proj) {
+            return;
         }
+
+        yield put(receiveLoadedProject(action.id, proj.title, proj.lang, proj.code));
     } catch (e) {
         console.error(e);
     }
@@ -153,6 +166,7 @@ function* handleSaveCodeChangesActions(_) {
     try {
         const id = yield select((state) => state.project.id);
         const code = yield select((state) => state.project.code);
+        const userId = yield select((state) => state.identity.userId);
 
         const query = gql`
             mutation ($project_id: uuid!, $code: String!) {
@@ -167,8 +181,10 @@ function* handleSaveCodeChangesActions(_) {
             'code': code
         };
 
-        const userId = yield select((state) => state.identity.userId);
+        // noinspection JSCheckFunctionSignatures
         const response = yield call(gqlFetch, userId, query, variables);
+
+        // noinspection JSUnresolvedVariable
         console.assert(response?.data?.update_project_by_pk?.project_id, response);
 
         yield put(setSavedCode(code));
@@ -180,6 +196,7 @@ function* handleSaveCodeChangesActions(_) {
 function* handleDeleteProjectActions(_) {
     try {
         const id = yield select((state) => state.project.id);
+        const userId = yield select((state) => state.identity.userId);
 
         const query = gql`
             mutation ($project_id: uuid!) {
@@ -193,12 +210,14 @@ function* handleDeleteProjectActions(_) {
             'project_id': id
         };
 
-        const userId = yield select((state) => state.identity.userId);
+        // noinspection JSCheckFunctionSignatures
         const response = yield call(gqlFetch, userId, query, variables);
+
+        // noinspection JSUnresolvedVariable
         console.assert(response?.data?.delete_project_by_pk?.project_id, response);
+
         yield put(reset());
         yield put(resetMachine());
-
         yield put(push(`/u/${userId}/projects`));
     } catch (e) {
         console.error(e);
@@ -272,7 +291,10 @@ async function getZXBasicTape(code, userId) {
     const response = await gqlFetch(userId, query, variables);
     console.assert(response?.data?.compile, response);
 
+    // noinspection JSUnresolvedVariable
     const base64 = response.data.compile.base64_encoded;
+
+    // noinspection JSDeprecatedSymbols
     return Uint8Array.from(atob(base64), c => c.charCodeAt(0));
 }
 
@@ -295,8 +317,13 @@ async function getCTape(code, userId) {
     };
 
     const response = await gqlFetch(userId, query, variables);
+
+    // noinspection JSUnresolvedVariable
     console.assert(response?.data?.compileC, response);
 
+    // noinspection JSUnresolvedVariable
     const base64 = response.data.compileC.base64_encoded;
+
+    // noinspection JSDeprecatedSymbols
     return Uint8Array.from(atob(base64), c => c.charCodeAt(0));
 }
