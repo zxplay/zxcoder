@@ -206,6 +206,12 @@ screen, and 32px right border), and 24 lines of lower border. This results in a
 * ...
 * 0x6560..0x65ff: line 23 of the lower border
 
-### Licence
+## Acknowledgements
 
-JSSpeccy 3, JSSpeccy 3 mobile, and ZX Play are licensed under the GPL version 3 - see COPYING.
+This software uses code from the following open source projects:
+
+* JSSpeccy3 & JSSpeccy3-mobile. These are licensed under terms of the GPL version 3.
+* Pasmo by Julián Albo García, alias "NotFound". Licensed under terms of the GPL version 3.
+* Boriel ZX BASIC by Jose Rodriguez. Licensed under terms of the GPL version 3.
+* zmakebas by Russell Marks. This tool is public domain.
+* 8bitworkshop by Steven Hugg. Licensed under terms of the GPL version 3.
