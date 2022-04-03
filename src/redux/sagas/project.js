@@ -206,20 +206,30 @@ function* handleDownloadTapeActions(_) {
     try {
         const lang = yield select((state) => state.project.lang);
         const code = yield select((state) => state.project.code);
+        const userId = yield select((state) => state.identity.userId);
 
         // Get .tap file for download.
         let tap;
-        if (lang === 'zxbasic') {
-            const userId = yield select((state) => state.identity.userId);
-            tap = yield call(getZXBasicTape, code, userId);
-        } else if (lang === 'c') {
-            const userId = yield select((state) => state.identity.userId);
-            tap = yield call(getCTape, code, userId);
-        } else if (lang === 'basic') {
-            tap = yield call(zmakebas, code);
-        } else {
-            console.assert(lang === 'asm', lang);
-            tap = yield call(pasmo, code);
+        switch (lang) {
+            case 'asm':
+                tap = yield call(pasmo, code);
+                break;
+            case 'basic':
+                tap = yield call(zmakebas, code);
+                break;
+            case 'c':
+                tap = yield call(getCTape, code, userId);
+                break;
+            case 'sdcc':
+                break;
+            case 'zmac':
+                break;
+            case 'zxbasic':
+                tap = yield call(getZXBasicTape, code, userId);
+                break;
+            default:
+                // noinspection ExceptionCaughtLocallyJS
+                throw `unexpected case: ${lang}`;
         }
 
         // Cause the download of the tap file using browser download.
