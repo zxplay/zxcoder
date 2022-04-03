@@ -140,6 +140,9 @@ function* handleRunCodeActions(_) {
             case 'zxbasic':
                 yield call(runZXBasic, code, userId);
                 break;
+            default:
+                // noinspection ExceptionCaughtLocallyJS
+                throw `unexpected case: ${lang}`;
         }
     } catch (e) {
         console.error(e);
