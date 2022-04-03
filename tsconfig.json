@@ -1,6 +1,26 @@
 {
-    "extends": "assemblyscript/std/assembly.json",
-    "include": [
-      "./build/core.ts"
-    ]
+  "include": [
+    "src/lib/8bitworker/**/*.ts"
+  ],
+  "compilerOptions": {
+    "outDir": "build",
+    "allowJs": false,
+    "checkJs": false,
+    "sourceMap": true,
+    "target": "es2017",
+    "lib": [
+      "es2017",
+      "dom"
+    ],
+    "module": "CommonJS",
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "noImplicitThis": false,
+    "noImplicitAny": false,
+    "preserveConstEnums": true,
+    "alwaysStrict": true,
+    "strictNullChecks": false,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+  }
 }

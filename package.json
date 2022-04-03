@@ -24,9 +24,12 @@
     "build:js:debug": "cross-env NODE_OPTIONS=--openssl-legacy-provider webpack --config webpack.dev.config.js",
     "build:js:release": "cross-env NODE_OPTIONS=--openssl-legacy-provider webpack",
     "build:babel": "babel src --out-dir es5",
+    "build:es:8bitworker": "esbuild src/lib/8bitworker/worker.ts --bundle --sourcemap --target=es2017 --outfile=./public/dist/8bitworker.js",
+    "build:ts:8bitworker": "tsc --build tsconfig.json",
     "watch": "npm-watch",
     "serve": "cross-env NODE_OPTIONS=--openssl-legacy-provider npx webpack serve --config webpack.dev.config.js --open",
-    "typedoc": "typedoc --entryPointStrategy expand --tsconfig ./tsconfig.json --out ./typedocs ./build/"
+    "typedoc:jsspeccy": "typedoc --entryPointStrategy expand --tsconfig ./tsconfig.jsspeccy.json --out ./typedocs/jsspeccy ./build/",
+    "typedoc:8bitworker": "typedoc --entryPointStrategy expand --tsconfig ./tsconfig.json --out ./typedocs/8bitworker ./src/lib/8bitworker/"
   },
   "dependencies": {
     "@babel/runtime-corejs2": "^7.15.4",
@@ -71,6 +74,7 @@
     "cross-env": "^7.0.3",
     "css-loader": "^6.5.1",
     "del-cli": "^4.0.1",
+    "esbuild": "^0.12.16",
     "jest": "^27.2.1",
     "jest-transform-stub": "^2.0.0",
     "npm-run-all": "^4.1.5",
