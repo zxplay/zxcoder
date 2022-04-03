@@ -1,4 +1,4 @@
-import {select, takeLatest, put} from "redux-saga/effects";
+import {select, takeLatest, put, call} from "redux-saga/effects";
 import {push} from "connected-react-router";
 import gql from "graphql-tag";
 import {gqlFetch} from "../../graphql_fetch";
@@ -84,7 +84,7 @@ function* handleRequestTermsOfUseActions(_) {
 
         const variables = {};
         const userId = yield select((state) => state.identity.userId);
-        const response = yield gqlFetch(userId, query, variables);
+        const response = yield call(gqlFetch, userId, query, variables);
         console.assert(response?.data?.text, response);
         console.assert(response?.data?.text.length === 1, response);
         console.assert(response?.data?.text[0].text, response);
@@ -106,7 +106,7 @@ function* handleRequestPrivacyPolicyActions(_) {
 
         const variables = {};
         const userId = yield select((state) => state.identity.userId);
-        const response = yield gqlFetch(userId, query, variables);
+        const response = yield call(gqlFetch, userId, query, variables);
         console.assert(response?.data?.text, response);
         console.assert(response?.data?.text.length === 1, response);
         console.assert(response?.data?.text[0].text, response);

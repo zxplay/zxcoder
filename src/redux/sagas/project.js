@@ -71,7 +71,7 @@ function* handleCreateNewProjectActions(action) {
         };
 
         const userId = yield select((state) => state.identity.userId);
-        const response = yield gqlFetch(userId, query, variables);
+        const response = yield call(gqlFetch, userId, query, variables);
         console.assert(response?.data?.insert_project_one?.project_id, response);
 
         const id = response?.data?.insert_project_one?.project_id;
@@ -99,7 +99,7 @@ function* handleLoadProjectActions(action) {
         };
 
         const userId = yield select((state) => state.identity.userId);
-        const response = yield gqlFetch(userId, query, variables);
+        const response = yield call(gqlFetch, userId, query, variables);
         if (!response) {
             return;
         }
@@ -121,15 +121,15 @@ function* handleRunCodeActions(_) {
 
         switch (lang) {
             case 'asm':
-                const pasmoTap = yield pasmo(code);
+                const pasmoTap = yield call(pasmo, code);
                 store.dispatch(loadTape(pasmoTap));
                 break;
             case 'basic':
-                const basTap = yield zmakebas(code);
+                const basTap = yield call(zmakebas, code);
                 store.dispatch(loadTape(basTap));
                 break;
             case 'c':
-                yield runC(code, userId);
+                yield call(runC, code, userId);
                 break;
             case 'sdcc':
                 // TODO
@@ -168,7 +168,7 @@ function* handleSaveCodeChangesActions(_) {
         };
 
         const userId = yield select((state) => state.identity.userId);
-        const response = yield gqlFetch(userId, query, variables);
+        const response = yield call(gqlFetch, userId, query, variables);
         console.assert(response?.data?.update_project_by_pk?.project_id, response);
 
         yield put(setSavedCode(code));
@@ -194,7 +194,7 @@ function* handleDeleteProjectActions(_) {
         };
 
         const userId = yield select((state) => state.identity.userId);
-        const response = yield gqlFetch(userId, query, variables);
+        const response = yield call(gqlFetch, userId, query, variables);
         console.assert(response?.data?.delete_project_by_pk?.project_id, response);
         yield put(reset());
         yield put(resetMachine());

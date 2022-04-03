@@ -84,7 +84,7 @@ function* handleRunZXBasicActions(_) {
         };
 
         const userId = yield select((state) => state.identity.userId);
-        const response = yield gqlFetch(userId, query, variables);
+        const response = yield call(gqlFetch, userId, query, variables);
         const base64 = response.data.compile.base64_encoded;
         const tap = Uint8Array.from(atob(base64), c => c.charCodeAt(0));
         store.dispatch(loadTape(tap));
@@ -111,7 +111,7 @@ function* handleRunCActions(_) {
         };
 
         const userId = yield select((state) => state.identity.userId);
-        const response = yield gqlFetch(userId, query, variables);
+        const response = yield call(gqlFetch, userId, query, variables);
 
         if (!response) {
             // TODO: Handle compile error.
