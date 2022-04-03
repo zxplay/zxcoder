@@ -1,4 +1,4 @@
-import {takeLatest, put, select} from "redux-saga/effects";
+import {takeLatest, put, select, call} from "redux-saga/effects";
 import {push} from "connected-react-router";
 import gql from "graphql-tag";
 import zmakebas from "zmakebas";
@@ -138,7 +138,7 @@ function* handleRunCodeActions(_) {
                 // TODO
                 break;
             case 'zxbasic':
-                yield runZXBasic(code, userId);
+                yield call(runZXBasic, code, userId);
                 break;
         }
     } catch (e) {
@@ -211,15 +211,15 @@ function* handleDownloadTapeActions(_) {
         let tap;
         if (lang === 'zxbasic') {
             const userId = yield select((state) => state.identity.userId);
-            tap = yield getZXBasicTape(code, userId);
+            tap = yield call(getZXBasicTape, code, userId);
         } else if (lang === 'c') {
             const userId = yield select((state) => state.identity.userId);
-            tap = yield getCTape(code, userId);
+            tap = yield call(getCTape, code, userId);
         } else if (lang === 'basic') {
-            tap = yield zmakebas(code);
+            tap = yield call(zmakebas, code);
         } else {
             console.assert(lang === 'asm', lang);
-            tap = yield pasmo(code);
+            tap = yield call(pasmo, code);
         }
 
         // Cause the download of the tap file using browser download.
