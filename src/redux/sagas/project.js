@@ -1,8 +1,8 @@
 import {takeLatest, put, select, call} from "redux-saga/effects";
 import {push} from "connected-react-router";
 import gql from "graphql-tag";
-import zmakebas from "zmakebas";
-import pasmo from "pasmo";
+import getZmakebasTap from "zmakebas";
+import getPasmoTap from "pasmo";
 import {gqlFetch} from "../../graphql_fetch";
 import {store} from "../store";
 import {actionTypes, reset, receiveLoadedProject, setSavedCode} from "../actions/project";
@@ -128,35 +128,18 @@ function* handleLoadProjectActions(action) {
 
 function* handleRunCodeActions(_) {
     try {
+        const userId = yield select((state) => state.identity.userId);
         const lang = yield select((state) => state.project.lang);
         const code = yield select((state) => state.project.code);
-        const userId = yield select((state) => state.identity.userId);
 
-        switch (lang) {
-            case 'asm':
-                const pasmoTap = yield call(pasmo, code);
-                store.dispatch(loadTape(pasmoTap));
-                break;
-            case 'basic':
-                const basTap = yield call(zmakebas, code);
-                store.dispatch(loadTape(basTap));
-                break;
-            case 'c':
-                yield call(runC, code, userId);
-                break;
-            case 'sdcc':
-                // TODO
-                break;
-            case 'zmac':
-                // TODO
-                break;
-            case 'zxbasic':
-                yield call(runZXBasic, code, userId);
-                break;
-            default:
-                // noinspection ExceptionCaughtLocallyJS
-                throw `unexpected case: ${lang}`;
+        // Get tap to load into emulator.
+        const tap = yield call(getTap, userId, lang, code);
+
+        if (!tap) {
+            return;
         }
+
+        store.dispatch(loadTape(tap));
     } catch (e) {
         console.error(e);
     }
@@ -164,9 +147,9 @@ function* handleRunCodeActions(_) {
 
 function* handleSaveCodeChangesActions(_) {
     try {
-        const id = yield select((state) => state.project.id);
-        const code = yield select((state) => state.project.code);
         const userId = yield select((state) => state.identity.userId);
+        const projectId = yield select((state) => state.project.id);
+        const code = yield select((state) => state.project.code);
 
         const query = gql`
             mutation ($project_id: uuid!, $code: String!) {
@@ -177,7 +160,7 @@ function* handleSaveCodeChangesActions(_) {
         `;
 
         const variables = {
-            'project_id': id,
+            'project_id': projectId,
             'code': code
         };
 
@@ -195,8 +178,8 @@ function* handleSaveCodeChangesActions(_) {
 
 function* handleDeleteProjectActions(_) {
     try {
-        const id = yield select((state) => state.project.id);
         const userId = yield select((state) => state.identity.userId);
+        const projectId = yield select((state) => state.project.id);
 
         const query = gql`
             mutation ($project_id: uuid!) {
@@ -207,7 +190,7 @@ function* handleDeleteProjectActions(_) {
         `;
 
         const variables = {
-            'project_id': id
+            'project_id': projectId
         };
 
         // noinspection JSCheckFunctionSignatures
@@ -226,32 +209,15 @@ function* handleDeleteProjectActions(_) {
 
 function* handleDownloadTapeActions(_) {
     try {
+        const userId = yield select((state) => state.identity.userId);
         const lang = yield select((state) => state.project.lang);
         const code = yield select((state) => state.project.code);
-        const userId = yield select((state) => state.identity.userId);
 
         // Get .tap file for download.
-        let tap;
-        switch (lang) {
-            case 'asm':
-                tap = yield call(pasmo, code);
-                break;
-            case 'basic':
-                tap = yield call(zmakebas, code);
-                break;
-            case 'c':
-                tap = yield call(getCTape, code, userId);
-                break;
-            case 'sdcc':
-                break;
-            case 'zmac':
-                break;
-            case 'zxbasic':
-                tap = yield call(getZXBasicTape, code, userId);
-                break;
-            default:
-                // noinspection ExceptionCaughtLocallyJS
-                throw `unexpected case: ${lang}`;
+        const tap = yield call(getTap, userId, lang, code);
+
+        if (!tap) {
+            return;
         }
 
         // Cause the download of the tap file using browser download.
@@ -270,12 +236,26 @@ function* handleDownloadTapeActions(_) {
 // Supporting functions
 // -----------------------------------------------------------------------------
 
-async function runZXBasic(code, userId) {
-    const tap = await getZXBasicTape(code, userId);
-    store.dispatch(loadTape(tap));
+async function getTap(userId, lang, code) {
+    switch (lang) {
+        case 'asm':
+            return await getPasmoTap(code);
+        case 'basic':
+            return await getZmakebasTap(code);
+        case 'c':
+            return getZ88dkTap(code, userId);
+        case 'sdcc':
+            return getSdccTap(code);
+        case 'zmac':
+            return getZmacTap(code);
+        case 'zxbasic':
+            return getZXBasicTap(code, userId);
+        default:
+            throw `unexpected case: ${lang}`;
+    }
 }
 
-async function getZXBasicTape(code, userId) {
+async function getZXBasicTap(code, userId) {
     const query = gql`
         mutation ($basic: String!) {
             compile(basic: $basic) {
@@ -298,12 +278,7 @@ async function getZXBasicTape(code, userId) {
     return Uint8Array.from(atob(base64), c => c.charCodeAt(0));
 }
 
-async function runC(code, userId) {
-    const tap = await getCTape(code, userId);
-    store.dispatch(loadTape(tap));
-}
-
-async function getCTape(code, userId) {
+async function getZ88dkTap(code, userId) {
     const query = gql`
         mutation ($code: String!) {
             compileC(code: $code) {
@@ -326,4 +301,12 @@ async function getCTape(code, userId) {
 
     // noinspection JSDeprecatedSymbols
     return Uint8Array.from(atob(base64), c => c.charCodeAt(0));
+}
+
+async function getZmacTap(code) {
+    // TODO
+}
+
+async function getSdccTap(code) {
+    // TODO
 }
