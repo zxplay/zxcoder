@@ -132,7 +132,7 @@ export default function Nav() {
                     separator: true
                 },
                 {
-                    label: 'Upload Tape',
+                    label: 'Upload TAP',
                     icon: 'pi pi-fw pi-upload',
                     command: () => {
                         dispatch(showOpenFileDialog());
@@ -140,7 +140,7 @@ export default function Nav() {
                     }
                 },
                 {
-                    label: 'Download Tape',
+                    label: 'Download TAP',
                     icon: 'pi pi-fw pi-download',
                     disabled: typeof lang === 'undefined',
                     command: () => {
