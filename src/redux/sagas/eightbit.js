@@ -1,8 +1,8 @@
-import {takeLatest, select, call} from "redux-saga/effects";
+import {takeLatest, select, call, put} from "redux-saga/effects";
 import gql from "graphql-tag";
 import {gqlFetch} from "../../graphql_fetch";
 import {store} from "../store";
-import {actionTypes} from "../actions/eightbit";
+import {actionTypes, browserTapeDownload} from "../actions/eightbit";
 import getZmakebasTap from "zmakebas";
 import getPasmoTap from "pasmo";
 import {loadTape} from "../actions/jsspeccy";
@@ -19,6 +19,16 @@ export function* watchForRunProjectCodeActions() {
 // noinspection JSUnusedGlobalSymbols
 export function* watchForDownloadProjectTapeActions() {
     yield takeLatest(actionTypes.downloadProjectTape, handleDownloadProjectTapeActions);
+}
+
+// noinspection JSUnusedGlobalSymbols
+export function* watchForGetProjectTapeActions() {
+    yield takeLatest(actionTypes.getProjectTape, handleGetProjectTapeActions);
+}
+
+// noinspection JSUnusedGlobalSymbols
+export function* watchForBrowserTapeDownloadActions() {
+    yield takeLatest(actionTypes.browserTapeDownload, handleBrowserTapeDownloadActions);
 }
 
 // -----------------------------------------------------------------------------
@@ -49,6 +59,7 @@ function* handleDownloadProjectTapeActions(_) {
         const userId = yield select((state) => state.identity.userId);
         const lang = yield select((state) => state.project.lang);
         const code = yield select((state) => state.project.code);
+        const title = yield select((state) => state.project.title);
 
         // Get .tap file for download.
         const tap = yield call(getTap, userId, lang, code);
@@ -57,11 +68,37 @@ function* handleDownloadProjectTapeActions(_) {
             return;
         }
 
+        yield put(browserTapeDownload(tap, title));
+    } catch (e) {
+        console.error(e);
+    }
+}
+
+function* handleGetProjectTapeActions(_) {
+    try {
+        const userId = yield select((state) => state.identity.userId);
+        const lang = yield select((state) => state.project.lang);
+        const code = yield select((state) => state.project.code);
+
+        // Get .tap file for download.
+        const tap = yield call(getTap, userId, lang, code);
+
+        if (!tap) {
+            return;
+        }
+
+    } catch (e) {
+        console.error(e);
+    }
+}
+
+function* handleBrowserTapeDownloadActions(action) {
+    try {
         // Cause the download of the tap file using browser download.
-        const blob = new Blob([tap], {type: 'application/octet-stream'});
+        const blob = new Blob([action.tap], {type: 'application/octet-stream'});
         const objURL = URL.createObjectURL(blob);
         const link = document.createElement('a');
-        link.download = 'project.tap';
+        link.download = `${action.name || 'project'}.tap`;
         link.href = objURL;
         link.click();
     } catch (e) {
