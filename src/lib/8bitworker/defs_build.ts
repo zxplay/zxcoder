@@ -42,6 +42,5 @@ export interface WorkerMessage {
     updates: WorkerFileUpdate[]
     buildsteps: WorkerBuildStep[]
     reset?: boolean
-    code?: string
     setitems?: WorkerItemUpdate[]
 }

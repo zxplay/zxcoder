@@ -10,7 +10,8 @@ import {
     getSdccTap,
     getZmacTap,
     handleWorkerMessage,
-    runTap
+    runTap,
+    setWorkerFollowAction
 } from "../actions/eightbit";
 import {loadTap} from "../actions/jsspeccy";
 import getZmakebasTap from "zmakebas";
@@ -78,26 +79,45 @@ export function* watchForRunTapActions() {
 // -----------------------------------------------------------------------------
 
 function* handleWorkerMessageActions(action) {
-    console.assert(action?.msg?.data, action);
-    console.log('handleWorkerMessageActions', action?.msg?.data);
+    const title = yield select((state) => state.project.title);
+    try {
+        console.assert(action?.msg?.data, action);
 
-    if (action?.msg?.data?.errors) {
-        const errors = action.msg.data.errors;
-        console.assert(Array.isArray(errors), errors);
-        for (let i = 0; i < errors.length; i++) {
-            const error = errors[i];
-            console.error(`${error.msg} (line: ${error.line})`, error);
+        const data = action.msg.data;
+        console.log('handleWorkerMessageActions', data);
+
+        if (data.errors) {
+            const errors = data.errors;
+            console.assert(Array.isArray(errors), errors);
+            for (let i = 0; i < errors.length; i++) {
+                const error = errors[i];
+                console.error(`${error.msg} (line: ${error.line})`, error);
+            }
         }
-    }
 
-    // TODO
+        // TODO: Remove the following temporary code.
+        // Cause the download of the bin file using browser download.
+        const blob = new Blob([data.output], {type: 'application/octet-stream'});
+        const objURL = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.download = `${title}.bin`;
+        link.href = objURL;
+        link.click();
+
+        // TODO: Pick up follow action from state.
+        // TODO: Call follow action.
+    } catch (e) {
+        console.error(e);
+    }
 }
 
 function* handleRunProjectCodeActions(_) {
+    // TODO: yield put(setWorkerFollowAction(runTap));
     yield put(getProjectTap(runTap));
 }
 
 function* handleDownloadProjectTapActions(_) {
+    // TODO: yield put(setWorkerFollowAction(browserTapDownload));
     yield put(getProjectTap(browserTapDownload));
 }
 
@@ -144,25 +164,21 @@ function* handleGetProjectTapActions(action) {
 function* handleGetSdccTapActions(action) {
     const code = yield select((state) => state.project.code);
     try {
+        // Build a WorkerMessage and post it to the worker.
+        const msg = {updates: [], buildsteps: []};
 
-        // TODO: Build a WorkerMessage and post it to the worker.
-        postMessage({
-            code,
-            tool: 'sdcc'
+        // Add main source file.
+        const mainFilename = 'source.c';
+        msg.updates.push({path: mainFilename, data: code});
+
+        msg.buildsteps.push({
+            path: mainFilename,
+            files: [mainFilename],
+            tool: 'sdcc',
+            mainfile: true
         });
 
-        /*
-        // TODO: Get tap!
-        const tap = undefined;
-
-        // noinspection PointlessBooleanExpressionJS
-        if (!tap) {
-            console.warn('no tap');
-            return;
-        }
-
-        yield put(action.followTapAction(tap));
-        */
+        postMessage(msg);
     } catch (e) {
         console.error(e);
     }
@@ -171,25 +187,21 @@ function* handleGetSdccTapActions(action) {
 function* handleGetZmacTapActions(action) {
     const code = yield select((state) => state.project.code);
     try {
+        // Build a WorkerMessage and post it to the worker.
+        const msg = {updates: [], buildsteps: []};
 
-        // TODO: Build a WorkerMessage and post it to the worker.
-        postMessage({
-            code,
-            tool: 'zmac'
+        // Add main source file.
+        const mainFilename = 'source.asm';
+        msg.updates.push({path: mainFilename, data: code});
+
+        msg.buildsteps.push({
+            path: mainFilename,
+            files: [mainFilename],
+            tool: 'zmac',
+            mainfile: true
         });
 
-        /*
-        // TODO: Get tap!
-        const tap = undefined;
-
-        // noinspection PointlessBooleanExpressionJS
-        if (!tap) {
-            console.warn('no tap');
-            return;
-        }
-
-        yield put(action.followTapAction(tap));
-        */
+        postMessage(msg);
     } catch (e) {
         console.error(e);
     }

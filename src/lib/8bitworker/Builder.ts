@@ -114,11 +114,6 @@ export class Builder {
             this.steps.push.apply(this.steps, data.buildsteps);
         }
 
-        // single-file
-        if (data.code) {
-            this.steps.push(data as BuildStep);
-        }
-
         // execute build steps
         if (this.steps.length) {
             const result = await this.executeBuildSteps();

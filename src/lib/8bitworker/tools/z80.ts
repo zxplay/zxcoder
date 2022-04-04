@@ -30,7 +30,7 @@ export function assembleZMAC(step: BuildStep): BuildStepResult {
             //logReadFiles:true,
             print: print_fn,
             printErr: makeErrorMatcher(errors, /([^( ]+)\s*[(](\d+)[)]\s*:\s*(.+)/, 2, 3, step.path),
-        });
+        } as BuildStep);
 
         const FS = ZMAC.FS;
         populateFiles(step, FS);

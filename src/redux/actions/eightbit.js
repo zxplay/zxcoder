@@ -5,6 +5,7 @@ export const actionTypes = {
     getProjectTap: 'eightbit/getProjectTap',
     getSdccTap: 'eightbit/getSdccTap',
     getZmacTap: 'eightbit/getZmacTap',
+    setWorkerFollowAction: 'eightbit/setWorkerFollowAction',
     browserTapDownload: 'eightbit/browserTapDownload',
     runTap: 'eightbit/runTap',
 };
@@ -34,6 +35,11 @@ export const getSdccTap = (followTapAction) => ({
 
 export const getZmacTap = (followTapAction) => ({
     type: actionTypes.getZmacTap,
+    followTapAction
+});
+
+export const setWorkerFollowAction = (followTapAction) => ({
+    type: actionTypes.setWorkerFollowAction,
     followTapAction
 });
 
