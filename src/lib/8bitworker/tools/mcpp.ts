@@ -1,8 +1,8 @@
-import {BuildStep, EmscriptenModule} from "../defs_misc";
-import {loadASMJS} from "../modules";
+import {EmscriptenModule, loadASMJS} from "../modules";
 import {emglobal} from "../shared_vars";
 import {populateFiles, setupFS} from "../files";
 import {errorResult, makeErrorMatcher, print_fn} from "../shared_funcs";
+import {BuildStep} from "../defs_build";
 
 export function preprocessMCPP(step: BuildStep, filesys: string) {
     loadASMJS("mcpp");

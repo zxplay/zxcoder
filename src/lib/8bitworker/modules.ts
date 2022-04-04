@@ -1,5 +1,11 @@
 import {WORKER_RELATIVE_PATH} from "./shared_vars";
 
+/// <reference types="emscripten" />
+export interface EmscriptenModule {
+    callMain?: (args: string[]) => void
+    FS: any
+}
+
 declare function importScripts(path: string);
 
 const wasmModuleCache = {};

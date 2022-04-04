@@ -1,7 +1,8 @@
-import {WorkerMessage, WorkerResult} from "./defs_misc";
+import {WorkerResult} from "./defs_build_result";
 import {Builder} from "./Builder";
 import {errorResult} from "./shared_funcs";
 import {fsLoaded, loadFilesystem, fileStore} from "./files";
+import {WorkerMessage} from "./defs_build";
 
 declare function postMessage(msg);
 
