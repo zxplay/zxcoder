@@ -1,7 +1,7 @@
 import {WORKER_RELATIVE_PATH} from "./shared_vars";
 import {FileWorkingStore} from "./FileWorkingStore";
 import {FileData, FileEntry} from "./defs_types";
-import {BuildStep} from "./defs_interfaces";
+import {BuildStep} from "./defs_misc";
 
 const fsMeta = {};
 const fsBlob = {};

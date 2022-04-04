@@ -8,7 +8,7 @@ import {
     putWorkFile,
     staleFiles
 } from "../files";
-import {BuildStep, EmscriptenModule, WorkerError} from "../defs_interfaces";
+import {BuildStep, EmscriptenModule, WorkerError} from "../defs_misc";
 import {emglobal} from "../shared_vars";
 import {loadWASM, instantiateWASM} from "../modules";
 import {setupFS} from "../files";

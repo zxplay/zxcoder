@@ -3,7 +3,7 @@ import {
     PlatformParams,
     WorkerError,
     WorkerMessage
-} from "./defs_interfaces";
+} from "./defs_misc";
 import {WorkerResult} from "./defs_types";
 import {fileStore} from "./files";
 import {errorResult} from "./shared_funcs";

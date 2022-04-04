@@ -6,7 +6,7 @@ import {
     putWorkFile,
     staleFiles
 } from "../files";
-import {BuildStep, EmscriptenModule} from "../defs_interfaces";
+import {BuildStep, EmscriptenModule} from "../defs_misc";
 import {emglobal} from "../shared_vars";
 import {loadWASM, instantiateWASM} from "../modules";
 import {parseListing} from "../parsing";

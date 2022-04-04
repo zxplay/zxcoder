@@ -1,4 +1,4 @@
-import {WorkingStore} from "./defs_interfaces";
+import {WorkingStore} from "./defs_misc";
 import {FileData, FileEntry} from "./defs_types";
 
 export class FileWorkingStore implements WorkingStore {
