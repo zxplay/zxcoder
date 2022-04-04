@@ -1,5 +1,5 @@
-import {WorkingStore} from "./misc_interfaces";
-import {FileData, FileEntry} from "./misc_types";
+import {WorkingStore} from "./defs_interfaces";
+import {FileData, FileEntry} from "./defs_types";
 
 export class FileWorkingStore implements WorkingStore {
     workfs: { [path: string]: FileEntry } = {};

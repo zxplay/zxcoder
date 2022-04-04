@@ -1,4 +1,4 @@
-import {SourceSnippet} from "./misc_interfaces";
+import {SourceSnippet} from "./defs_interfaces";
 
 export class SourceFile {
 

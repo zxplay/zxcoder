@@ -1,4 +1,4 @@
-import {BuildStep, EmscriptenModule} from "../misc_interfaces";
+import {BuildStep, EmscriptenModule} from "../defs_interfaces";
 import {loadASMJS} from "../modules";
 import {emglobal} from "../shared_vars";
 import {populateFiles, setupFS} from "../files";

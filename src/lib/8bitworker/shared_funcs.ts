@@ -1,4 +1,4 @@
-import {WorkerError, WorkerErrorResult} from "./misc_interfaces";
+import {WorkerError, WorkerErrorResult} from "./defs_interfaces";
 
 export function errorResult(msg: string): WorkerErrorResult {
     return {errors: [{line: 0, msg: msg}]};

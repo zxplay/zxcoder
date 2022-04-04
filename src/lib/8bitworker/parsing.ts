@@ -1,4 +1,4 @@
-import {SourceSnippet} from "./misc_interfaces";
+import {SourceSnippet} from "./defs_interfaces";
 
 const re_crlf = /\r?\n/;
 const re_lineoffset = /\s*(\d+)\s+[%]line\s+(\d+)\+(\d+)\s+(.+)/;
