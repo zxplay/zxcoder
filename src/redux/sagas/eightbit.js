@@ -2,10 +2,15 @@ import {takeLatest, select, call, put} from "redux-saga/effects";
 import gql from "graphql-tag";
 import {gqlFetch} from "../../graphql_fetch";
 import {store} from "../store";
-import {actionTypes, browserTapDownload} from "../actions/eightbit";
+import {
+    actionTypes,
+    browserTapDownload,
+    getProjectTap,
+    runTap
+} from "../actions/eightbit";
+import {loadTape} from "../actions/jsspeccy";
 import getZmakebasTap from "zmakebas";
 import getPasmoTap from "pasmo";
-import {loadTape} from "../actions/jsspeccy";
 
 // -----------------------------------------------------------------------------
 // Action watchers
@@ -31,74 +36,75 @@ export function* watchForBrowserTapDownloadActions() {
     yield takeLatest(actionTypes.browserTapDownload, handleBrowserTapDownloadActions);
 }
 
+// noinspection JSUnusedGlobalSymbols
+export function* watchForRunTapActions() {
+    yield takeLatest(actionTypes.runTap, handleRunTapActions);
+}
+
 // -----------------------------------------------------------------------------
 // Action handlers
 // -----------------------------------------------------------------------------
 
 function* handleRunProjectCodeActions(_) {
-    try {
-        const userId = yield select((state) => state.identity.userId);
-        const lang = yield select((state) => state.project.lang);
-        const code = yield select((state) => state.project.code);
-
-        // Get tap to load into emulator.
-        const tap = yield call(getTap, userId, lang, code);
-
-        if (!tap) {
-            return;
-        }
-
-        store.dispatch(loadTape(tap));
-    } catch (e) {
-        console.error(e);
-    }
+    yield put(getProjectTap(runTap));
 }
 
 function* handleDownloadProjectTapActions(_) {
-    try {
-        const userId = yield select((state) => state.identity.userId);
-        const lang = yield select((state) => state.project.lang);
-        const code = yield select((state) => state.project.code);
-        const title = yield select((state) => state.project.title);
-
-        // Get .tap file for download.
-        const tap = yield call(getTap, userId, lang, code);
-
-        if (!tap) {
-            return;
-        }
-
-        yield put(browserTapDownload(tap, title));
-    } catch (e) {
-        console.error(e);
-    }
+    yield put(getProjectTap(browserTapDownload));
 }
 
-function* handleGetProjectTapActions(_) {
+function* handleGetProjectTapActions(action) {
+    const userId = yield select((state) => state.identity.userId);
+    const lang = yield select((state) => state.project.lang);
+    const code = yield select((state) => state.project.code);
     try {
-        const userId = yield select((state) => state.identity.userId);
-        const lang = yield select((state) => state.project.lang);
-        const code = yield select((state) => state.project.code);
 
         // Get .tap file for download.
-        const tap = yield call(getTap, userId, lang, code);
+        let tap;
+        switch (lang) {
+            case 'asm':
+                tap = yield call(getPasmoTap, code);
+                break;
+            case 'basic':
+                tap = yield call(getZmakebasTap, code);
+                break;
+            case 'c':
+                tap = yield call(getZ88dkTap, code, userId);
+                break;
+            case 'sdcc':
+                tap = yield call(getSdccTap, code);
+                break;
+            case 'zmac':
+                tap = yield call(getZmacTap, code);
+                break;
+            case 'zxbasic':
+                tap = yield call(getZXBasicTap, code, userId);
+                break;
+            default:
+                // noinspection ExceptionCaughtLocallyJS
+                throw `unexpected case: ${lang}`;
+        }
 
         if (!tap) {
+            console.warn('no tap');
             return;
         }
 
+        yield put(action.followTapAction(tap));
     } catch (e) {
         console.error(e);
     }
 }
 
 function* handleBrowserTapDownloadActions(action) {
+    const title = yield select((state) => state.project.title);
     try {
+
         // Cause the download of the tap file using browser download.
         const blob = new Blob([action.tap], {type: 'application/octet-stream'});
         const objURL = URL.createObjectURL(blob);
         const link = document.createElement('a');
-        link.download = `${action.name || 'project'}.tap`;
+        link.download = `${title}.tap`;
         link.href = objURL;
         link.click();
     } catch (e) {
@@ -106,28 +112,13 @@ function* handleBrowserTapDownloadActions(action) {
     }
 }
 
+function* handleRunTapActions(action) {
+    store.dispatch(loadTape(action.tap));
+}
+
 // -----------------------------------------------------------------------------
 // Supporting functions
 // -----------------------------------------------------------------------------
-
-async function getTap(userId, lang, code) {
-    switch (lang) {
-        case 'asm':
-            return await getPasmoTap(code);
-        case 'basic':
-            return await getZmakebasTap(code);
-        case 'c':
-            return await getZ88dkTap(code, userId);
-        case 'sdcc':
-            return await getSdccTap(code);
-        case 'zmac':
-            return await getZmacTap(code);
-        case 'zxbasic':
-            return await getZXBasicTap(code, userId);
-        default:
-            throw `unexpected case: ${lang}`;
-    }
-}
 
 async function getZXBasicTap(code, userId) {
     const query = gql`
