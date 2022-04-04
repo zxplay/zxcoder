@@ -80,6 +80,7 @@ export function* watchForRunTapActions() {
 
 function* handleWorkerMessageActions(action) {
     const title = yield select((state) => state.project.title);
+    const followTapAction = yield select((state) => state.eightbit.followTapAction);
     try {
         console.assert(action?.msg?.data, action);
 
@@ -104,8 +105,18 @@ function* handleWorkerMessageActions(action) {
         link.href = objURL;
         link.click();
 
-        // TODO: Pick up follow action from state.
-        // TODO: Call follow action.
+        // TODO: Get tap file, possibly using Pasmo.
+        // NOTE: Start address is 23755 (0x5ccb)
+        const tap = undefined;
+
+        // noinspection PointlessBooleanExpressionJS
+        if (!tap) {
+            console.warn('no tap');
+            return;
+        }
+
+        yield put(followTapAction(tap));
+        yield put(setFollowTapAction(undefined));
     } catch (e) {
         console.error(e);
     }
@@ -132,14 +143,17 @@ function* handleGetProjectTapActions(_) {
             case 'asm':
                 tap = yield call(getPasmoTap, code);
                 yield put(followTapAction(tap));
+                yield put(setFollowTapAction(undefined));
                 break;
             case 'basic':
                 tap = yield call(getZmakebasTap, code);
                 yield put(followTapAction(tap));
+                yield put(setFollowTapAction(undefined));
                 break;
             case 'c':
                 tap = yield call(getZ88dkTap, code, userId);
                 yield put(followTapAction(tap));
+                yield put(setFollowTapAction(undefined));
                 break;
             case 'sdcc':
                 // NOTE: Call another action to get the tap using worker.
@@ -152,6 +166,7 @@ function* handleGetProjectTapActions(_) {
             case 'zxbasic':
                 tap = yield call(getZXBasicTap, code, userId);
                 yield put(followTapAction(tap));
+                yield put(setFollowTapAction(undefined));
                 break;
             default:
                 // noinspection ExceptionCaughtLocallyJS
