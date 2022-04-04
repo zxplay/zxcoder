@@ -78,7 +78,7 @@ export function* watchForRunTapActions() {
 // -----------------------------------------------------------------------------
 
 function* handleWorkerMessageActions(action) {
-    console.log('handleWorkerMessageActions', action);
+    console.log('handleWorkerMessageActions', action.msg.data);
     // TODO
 }
 
@@ -133,6 +133,14 @@ function* handleGetProjectTapActions(action) {
 function* handleGetSdccTapActions(action) {
     const code = yield select((state) => state.project.code);
     try {
+
+        // TODO: Build a WorkerMessage and post it to the worker.
+        postMessage({
+            code,
+            tool: 'sdcc'
+        });
+
+        /*
         // TODO: Get tap!
         const tap = undefined;
 
@@ -143,6 +151,7 @@ function* handleGetSdccTapActions(action) {
         }
 
         yield put(action.followTapAction(tap));
+        */
     } catch (e) {
         console.error(e);
     }
@@ -151,6 +160,14 @@ function* handleGetSdccTapActions(action) {
 function* handleGetZmacTapActions(action) {
     const code = yield select((state) => state.project.code);
     try {
+
+        // TODO: Build a WorkerMessage and post it to the worker.
+        postMessage({
+            code,
+            tool: 'zmac'
+        });
+
+        /*
         // TODO: Get tap!
         const tap = undefined;
 
@@ -161,6 +178,7 @@ function* handleGetZmacTapActions(action) {
         }
 
         yield put(action.followTapAction(tap));
+        */
     } catch (e) {
         console.error(e);
     }
@@ -193,6 +211,7 @@ function* handleRunTapActions(action) {
 const worker = new Worker('/dist/8bitworker.js');
 
 // Preload tools.
+console.log('Preloading 8bitworker tools');
 worker.postMessage({preload: 'sdcc'});
 worker.postMessage({preload: 'sdasz80'});
 worker.postMessage({preload: 'zmac'});
