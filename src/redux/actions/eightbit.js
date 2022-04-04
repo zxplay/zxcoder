@@ -1,23 +1,23 @@
 export const actionTypes = {
     runProjectCode: 'eightbit/runProjectCode',
-    downloadProjectTape: 'eightbit/downloadProjectTape',
-    getProjectTape: 'eightbit/getProjectTape',
-    browserTapeDownload: 'eightbit/browserTapeDownload',
+    downloadProjectTap: 'eightbit/downloadProjectTap',
+    getProjectTap: 'eightbit/getProjectTap',
+    browserTapDownload: 'eightbit/browserTapDownload',
 };
 
 export const runProjectCode = () => ({
     type: actionTypes.runProjectCode
 });
 
-export const downloadProjectTape = () => ({
-    type: actionTypes.downloadProjectTape
+export const downloadProjectTap = () => ({
+    type: actionTypes.downloadProjectTap
 });
 
-export const getProjectTape = () => ({
-    type: actionTypes.getProjectTape
+export const getProjectTap = () => ({
+    type: actionTypes.getProjectTap
 });
 
-export const browserTapeDownload = (tap, name) => ({
-    type: actionTypes.browserTapeDownload,
+export const browserTapDownload = (tap, name) => ({
+    type: actionTypes.browserTapDownload,
     tap, name
 });
