@@ -11,7 +11,7 @@ import {
     getZmacTap,
     handleWorkerMessage,
     runTap,
-    setWorkerFollowAction
+    setFollowTapAction
 } from "../actions/eightbit";
 import {loadTap} from "../actions/jsspeccy";
 import getZmakebasTap from "zmakebas";
@@ -112,45 +112,46 @@ function* handleWorkerMessageActions(action) {
 }
 
 function* handleRunProjectCodeActions(_) {
-    // TODO: yield put(setWorkerFollowAction(runTap));
-    yield put(getProjectTap(runTap));
+    yield put(setFollowTapAction(runTap));
+    yield put(getProjectTap());
 }
 
 function* handleDownloadProjectTapActions(_) {
-    // TODO: yield put(setWorkerFollowAction(browserTapDownload));
-    yield put(getProjectTap(browserTapDownload));
+    yield put(setFollowTapAction(browserTapDownload));
+    yield put(getProjectTap());
 }
 
-function* handleGetProjectTapActions(action) {
+function* handleGetProjectTapActions(_) {
     const userId = yield select((state) => state.identity.userId);
     const lang = yield select((state) => state.project.lang);
     const code = yield select((state) => state.project.code);
+    const followTapAction = yield select((state) => state.eightbit.followTapAction);
     try {
         let tap;
         switch (lang) {
             case 'asm':
                 tap = yield call(getPasmoTap, code);
-                yield put(action.followTapAction(tap));
+                yield put(followTapAction(tap));
                 break;
             case 'basic':
                 tap = yield call(getZmakebasTap, code);
-                yield put(action.followTapAction(tap));
+                yield put(followTapAction(tap));
                 break;
             case 'c':
                 tap = yield call(getZ88dkTap, code, userId);
-                yield put(action.followTapAction(tap));
+                yield put(followTapAction(tap));
                 break;
             case 'sdcc':
                 // NOTE: Call another action to get the tap using worker.
-                yield put(getSdccTap(action.followTapAction));
+                yield put(getSdccTap());
                 break;
             case 'zmac':
                 // NOTE: Call another action to get the tap using worker.
-                yield put(getZmacTap(action.followTapAction));
+                yield put(getZmacTap());
                 break;
             case 'zxbasic':
                 tap = yield call(getZXBasicTap, code, userId);
-                yield put(action.followTapAction(tap));
+                yield put(followTapAction(tap));
                 break;
             default:
                 // noinspection ExceptionCaughtLocallyJS
@@ -161,7 +162,7 @@ function* handleGetProjectTapActions(action) {
     }
 }
 
-function* handleGetSdccTapActions(action) {
+function* handleGetSdccTapActions(_) {
     const code = yield select((state) => state.project.code);
     try {
         // Build a WorkerMessage and post it to the worker.
@@ -184,7 +185,7 @@ function* handleGetSdccTapActions(action) {
     }
 }
 
-function* handleGetZmacTapActions(action) {
+function* handleGetZmacTapActions(_) {
     const code = yield select((state) => state.project.code);
     try {
         // Build a WorkerMessage and post it to the worker.

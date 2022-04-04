@@ -8,6 +8,7 @@ import Constants from "../constants";
 // Reducers
 import appReducer from "./reducers/app";
 import demoReducer from "./reducers/demo";
+import eightbitReducer from "./reducers/eightbit";
 import errorReducer from "./reducers/error";
 import identityReducer from "./reducers/identity";
 import projectReducer from "./reducers/project";
@@ -57,6 +58,7 @@ const rootReducer = combineReducers({
     router: connectRouter(history),
     app: appReducer,
     demo: demoReducer,
+    eightbit: eightbitReducer,
     error: errorReducer,
     identity: identityReducer,
     project: projectReducer,

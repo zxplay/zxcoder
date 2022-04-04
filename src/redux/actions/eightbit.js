@@ -1,11 +1,12 @@
 export const actionTypes = {
+    reset: 'eightbit/reset',
     handleWorkerMessage: 'eightbit/handleWorkerMessage',
     runProjectCode: 'eightbit/runProjectCode',
     downloadProjectTap: 'eightbit/downloadProjectTap',
     getProjectTap: 'eightbit/getProjectTap',
     getSdccTap: 'eightbit/getSdccTap',
     getZmacTap: 'eightbit/getZmacTap',
-    setWorkerFollowAction: 'eightbit/setWorkerFollowAction',
+    setFollowTapAction: 'eightbit/setFollowTapAction',
     browserTapDownload: 'eightbit/browserTapDownload',
     runTap: 'eightbit/runTap',
 };
@@ -23,23 +24,20 @@ export const downloadProjectTap = () => ({
     type: actionTypes.downloadProjectTap
 });
 
-export const getProjectTap = (followTapAction) => ({
-    type: actionTypes.getProjectTap,
-    followTapAction
+export const getProjectTap = () => ({
+    type: actionTypes.getProjectTap
 });
 
-export const getSdccTap = (followTapAction) => ({
-    type: actionTypes.getSdccTap,
-    followTapAction
+export const getSdccTap = () => ({
+    type: actionTypes.getSdccTap
 });
 
-export const getZmacTap = (followTapAction) => ({
-    type: actionTypes.getZmacTap,
-    followTapAction
+export const getZmacTap = () => ({
+    type: actionTypes.getZmacTap
 });
 
-export const setWorkerFollowAction = (followTapAction) => ({
-    type: actionTypes.setWorkerFollowAction,
+export const setFollowTapAction = (followTapAction) => ({
+    type: actionTypes.setFollowTapAction,
     followTapAction
 });
 
