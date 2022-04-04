@@ -8,7 +8,8 @@ import {
     deleteProject,
     saveCodeChanges,
 } from "../redux/actions/project";
-import {setCode, runCode} from "../redux/actions/project";
+import {setCode} from "../redux/actions/project";
+import {runProjectCode} from "../redux/actions/eightbit";
 import "../lib/syntax/pasmo";
 import "../lib/syntax/zmac";
 import "../lib/syntax/zmakebas";
@@ -85,7 +86,7 @@ export function ProjectEditor() {
                 label="Run"
                 icon="pi pi-play"
                 className="mt-2 mr-2"
-                onClick={() => dispatch(runCode())}
+                onClick={() => dispatch(runProjectCode())}
             />
             <Button
                 label="Save"

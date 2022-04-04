@@ -8,7 +8,7 @@ import {
     showOpenFileDialog,
     viewFullScreen
 } from "../redux/actions/jsspeccy";
-import {downloadTape} from "../redux/actions/project";
+import {downloadProjectTape} from "../redux/actions/eightbit";
 import {getUserInfo} from "../redux/actions/identity";
 import {login, logout} from "../auth";
 import {resetEmulator} from "../redux/actions/app";
@@ -144,7 +144,7 @@ export default function Nav() {
                     icon: 'pi pi-fw pi-download',
                     disabled: typeof lang === 'undefined',
                     command: () => {
-                        dispatch(downloadTape());
+                        dispatch(downloadProjectTape());
                     }
                 }
             ]

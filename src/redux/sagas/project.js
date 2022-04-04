@@ -1,12 +1,9 @@
 import {takeLatest, put, select, call} from "redux-saga/effects";
 import {push} from "connected-react-router";
 import gql from "graphql-tag";
-import getZmakebasTap from "zmakebas";
-import getPasmoTap from "pasmo";
 import {gqlFetch} from "../../graphql_fetch";
-import {store} from "../store";
 import {actionTypes, reset, receiveLoadedProject, setSavedCode} from "../actions/project";
-import {loadTape, pause, reset as resetMachine} from "../actions/jsspeccy";
+import {pause, reset as resetMachine} from "../actions/jsspeccy";
 
 // -----------------------------------------------------------------------------
 // Action watchers
@@ -28,11 +25,6 @@ export function* watchForLoadProjectActions() {
 }
 
 // noinspection JSUnusedGlobalSymbols
-export function* watchForRunCodeActions() {
-    yield takeLatest(actionTypes.runCode, handleRunCodeActions);
-}
-
-// noinspection JSUnusedGlobalSymbols
 export function* watchForSaveCodeChangesActions() {
     yield takeLatest(actionTypes.saveCodeChanges, handleSaveCodeChangesActions);
 }
@@ -40,11 +32,6 @@ export function* watchForSaveCodeChangesActions() {
 // noinspection JSUnusedGlobalSymbols
 export function* watchForDeleteProjectActions() {
     yield takeLatest(actionTypes.deleteProject, handleDeleteProjectActions);
-}
-
-// noinspection JSUnusedGlobalSymbols
-export function* watchForDownloadTapeActions() {
-    yield takeLatest(actionTypes.downloadTape, handleDownloadTapeActions);
 }
 
 // -----------------------------------------------------------------------------
@@ -126,25 +113,6 @@ function* handleLoadProjectActions(action) {
     }
 }
 
-function* handleRunCodeActions(_) {
-    try {
-        const userId = yield select((state) => state.identity.userId);
-        const lang = yield select((state) => state.project.lang);
-        const code = yield select((state) => state.project.code);
-
-        // Get tap to load into emulator.
-        const tap = yield call(getTap, userId, lang, code);
-
-        if (!tap) {
-            return;
-        }
-
-        store.dispatch(loadTape(tap));
-    } catch (e) {
-        console.error(e);
-    }
-}
-
 function* handleSaveCodeChangesActions(_) {
     try {
         const userId = yield select((state) => state.identity.userId);
@@ -205,108 +173,4 @@ function* handleDeleteProjectActions(_) {
     } catch (e) {
         console.error(e);
     }
-}
-
-function* handleDownloadTapeActions(_) {
-    try {
-        const userId = yield select((state) => state.identity.userId);
-        const lang = yield select((state) => state.project.lang);
-        const code = yield select((state) => state.project.code);
-
-        // Get .tap file for download.
-        const tap = yield call(getTap, userId, lang, code);
-
-        if (!tap) {
-            return;
-        }
-
-        // Cause the download of the tap file using browser download.
-        const blob = new Blob([tap], {type: 'application/octet-stream'});
-        const objURL = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.download = 'project.tap';
-        link.href = objURL;
-        link.click();
-    } catch (e) {
-        console.error(e);
-    }
-}
-
-// -----------------------------------------------------------------------------
-// Supporting functions
-// -----------------------------------------------------------------------------
-
-async function getTap(userId, lang, code) {
-    switch (lang) {
-        case 'asm':
-            return await getPasmoTap(code);
-        case 'basic':
-            return await getZmakebasTap(code);
-        case 'c':
-            return await getZ88dkTap(code, userId);
-        case 'sdcc':
-            return await getSdccTap(code);
-        case 'zmac':
-            return await getZmacTap(code);
-        case 'zxbasic':
-            return await getZXBasicTap(code, userId);
-        default:
-            throw `unexpected case: ${lang}`;
-    }
-}
-
-async function getZXBasicTap(code, userId) {
-    const query = gql`
-        mutation ($basic: String!) {
-            compile(basic: $basic) {
-                base64_encoded
-            }
-        }
-    `;
-
-    const variables = {
-        'basic': code
-    };
-
-    const response = await gqlFetch(userId, query, variables);
-    console.assert(response?.data?.compile, response);
-
-    // noinspection JSUnresolvedVariable
-    const base64 = response.data.compile.base64_encoded;
-
-    // noinspection JSDeprecatedSymbols
-    return Uint8Array.from(atob(base64), c => c.charCodeAt(0));
-}
-
-async function getZ88dkTap(code, userId) {
-    const query = gql`
-        mutation ($code: String!) {
-            compileC(code: $code) {
-                base64_encoded
-            }
-        }
-    `;
-
-    const variables = {
-        'code': code
-    };
-
-    const response = await gqlFetch(userId, query, variables);
-
-    // noinspection JSUnresolvedVariable
-    console.assert(response?.data?.compileC, response);
-
-    // noinspection JSUnresolvedVariable
-    const base64 = response.data.compileC.base64_encoded;
-
-    // noinspection JSDeprecatedSymbols
-    return Uint8Array.from(atob(base64), c => c.charCodeAt(0));
-}
-
-async function getZmacTap(code) {
-    // TODO
-}
-
-async function getSdccTap(code) {
-    // TODO
 }

@@ -8,6 +8,7 @@ import Constants from "../constants";
 // Reducers
 import appReducer from "./reducers/app";
 import demoReducer from "./reducers/demo";
+import eightbitReducer from "./reducers/eightbit";
 import errorReducer from "./reducers/error";
 import identityReducer from "./reducers/identity";
 import jsspeccyReducer from "./reducers/jsspeccy";
@@ -19,6 +20,7 @@ import subscriberReducer from "./reducers/subscriber";
 // Sagas
 import * as appSagas from "./sagas/app";
 import * as demoSagas from "./sagas/demo";
+import * as eightbitSagas from "./sagas/eightbit";
 import * as identitySagas from "./sagas/identity";
 import * as jsspeccySagas from "./sagas/jsspeccy";
 import * as projectSagas from "./sagas/project";
@@ -58,6 +60,7 @@ const rootReducer = combineReducers({
     router: connectRouter(history),
     app: appReducer,
     demo: demoReducer,
+    eightbit: eightbitReducer,
     error: errorReducer,
     identity: identityReducer,
     jsspeccy: jsspeccyReducer,
@@ -86,6 +89,7 @@ function collectSagas(file) {
 
 collectSagas(appSagas);
 collectSagas(demoSagas);
+collectSagas(eightbitSagas);
 collectSagas(identitySagas);
 collectSagas(jsspeccySagas);
 collectSagas(projectSagas);
