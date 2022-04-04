@@ -78,7 +78,18 @@ export function* watchForRunTapActions() {
 // -----------------------------------------------------------------------------
 
 function* handleWorkerMessageActions(action) {
-    console.log('handleWorkerMessageActions', action.msg.data);
+    console.assert(action?.msg?.data, action);
+    console.log('handleWorkerMessageActions', action?.msg?.data);
+
+    if (action?.msg?.data?.errors) {
+        const errors = action.msg.data.errors;
+        console.assert(Array.isArray(errors), errors);
+        for (let i = 0; i < errors.length; i++) {
+            const error = errors[i];
+            console.error(`${error.msg} (line: ${error.line})`, error);
+        }
+    }
+
     // TODO
 }
 
