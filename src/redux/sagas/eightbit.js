@@ -8,7 +8,7 @@ import {
     getProjectTap,
     runTap
 } from "../actions/eightbit";
-import {loadTape} from "../actions/jsspeccy";
+import {loadTap} from "../actions/jsspeccy";
 import getZmakebasTap from "zmakebas";
 import getPasmoTap from "pasmo";
 
@@ -113,7 +113,7 @@ function* handleBrowserTapDownloadActions(action) {
 }
 
 function* handleRunTapActions(action) {
-    store.dispatch(loadTape(action.tap));
+    store.dispatch(loadTap(action.tap));
 }
 
 // -----------------------------------------------------------------------------

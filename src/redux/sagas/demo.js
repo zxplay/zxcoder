@@ -1,7 +1,7 @@
 import {takeLatest, select, put, call} from "redux-saga/effects";
 import {actionTypes} from "../actions/demo";
 import {store} from "../store";
-import {loadTape, pause} from "../actions/jsspeccy";
+import {loadTap, pause} from "../actions/jsspeccy";
 import pasmo from "pasmo";
 import zmakebas from "zmakebas";
 import gql from "graphql-tag";
@@ -48,7 +48,7 @@ function* handleRunAssemblyActions(_) {
     try {
         const code = yield select((state) => state.demo.asmCode);
         const tap = yield call(pasmo, code);
-        store.dispatch(loadTape(tap));
+        store.dispatch(loadTap(tap));
     } catch (e) {
         console.error(e);
     }
@@ -58,7 +58,7 @@ function* handleRunSinclairBasicActions(_) {
     try {
         const code = yield select((state) => state.demo.sinclairBasicCode);
         const tap = yield zmakebas(code);
-        store.dispatch(loadTape(tap));
+        store.dispatch(loadTap(tap));
     } catch (e) {
         console.error(e);
     }
@@ -87,7 +87,7 @@ function* handleRunZXBasicActions(_) {
         const response = yield call(gqlFetch, userId, query, variables);
         const base64 = response.data.compile.base64_encoded;
         const tap = Uint8Array.from(atob(base64), c => c.charCodeAt(0));
-        store.dispatch(loadTape(tap));
+        store.dispatch(loadTap(tap));
     } catch (e) {
         console.error(e);
     }
@@ -122,7 +122,7 @@ function* handleRunCActions(_) {
 
         const base64 = response.data.compileC.base64_encoded;
         const tap = Uint8Array.from(atob(base64), c => c.charCodeAt(0));
-        store.dispatch(loadTape(tap));
+        store.dispatch(loadTap(tap));
     } catch (e) {
         console.error(e);
     }

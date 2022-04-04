@@ -26,8 +26,8 @@ export function* watchForLoadEmulatorActions() {
 }
 
 // noinspection JSUnusedGlobalSymbols
-export function* watchForLoadTapeActions() {
-    yield takeLatest(actionTypes.loadTape, handleLoadTapeActions);
+export function* watchForLoadTapActions() {
+    yield takeLatest(actionTypes.loadTap, handleLoadTapActions);
 }
 
 // noinspection JSUnusedGlobalSymbols
@@ -150,7 +150,7 @@ function* handleLoadEmulatorActions(action) {
     }
 }
 
-function* handleLoadTapeActions(action) {
+function* handleLoadTapActions(action) {
     try {
         yield put(showActiveEmulator());
         yield put(reset());
