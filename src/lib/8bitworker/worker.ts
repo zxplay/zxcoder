@@ -1,5 +1,4 @@
-import type {WorkerResult} from "./defs_types";
-import {WorkerMessage} from "./defs_misc";
+import {WorkerMessage, WorkerResult} from "./defs_misc";
 import {Builder} from "./Builder";
 import {errorResult} from "./shared_funcs";
 import {fsLoaded, loadFilesystem, fileStore} from "./files";

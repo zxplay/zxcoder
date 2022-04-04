@@ -1,4 +1,3 @@
-import {BuildStepResult, CodeListingMap} from "../defs_types";
 import {
     anyTargetChanged,
     gatherFiles,
@@ -6,7 +5,12 @@ import {
     putWorkFile,
     staleFiles
 } from "../files";
-import {BuildStep, EmscriptenModule} from "../defs_misc";
+import {
+    BuildStep,
+    BuildStepResult,
+    CodeListingMap,
+    EmscriptenModule
+} from "../defs_misc";
 import {emglobal} from "../shared_vars";
 import {loadWASM, instantiateWASM} from "../modules";
 import {parseListing} from "../parsing";
