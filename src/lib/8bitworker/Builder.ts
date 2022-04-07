@@ -14,8 +14,8 @@ const TOOLS = {
 
 const PLATFORM_PARAMS = {
     arch: 'z80',
-    code_start: 0x5ccb,
-    rom_size: 0xff58 - 0x5ccb,
+    code_start: 0x8000,
+    rom_size: 0xff58 - 0x8000,
     data_start: 0xf000,
     data_size: 0xfe00 - 0xf000,
     stack_end: 0xff58,
