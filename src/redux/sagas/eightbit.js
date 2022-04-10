@@ -15,7 +15,7 @@ import {
 } from "../actions/eightbit";
 import {loadTap} from "../actions/jsspeccy";
 import getZmakebasTap from "zmakebas";
-import getPasmoTap from "pasmo";
+import getPasmoTap, {bin2tap} from "pasmo";
 
 // -----------------------------------------------------------------------------
 // Action watchers
@@ -79,7 +79,7 @@ export function* watchForRunTapActions() {
 // -----------------------------------------------------------------------------
 
 function* handleWorkerMessageActions(action) {
-    const title = yield select((state) => state.project.title);
+    // const title = yield select((state) => state.project.title);
     const followTapAction = yield select((state) => state.eightbit.followTapAction);
     try {
         console.assert(action?.msg?.data, action);
@@ -96,7 +96,7 @@ function* handleWorkerMessageActions(action) {
             }
         }
 
-        // TODO: Remove the following temporary code.
+        /*
         // Cause the download of the bin file using browser download.
         const blob = new Blob([data.output], {type: 'application/octet-stream'});
         const objURL = URL.createObjectURL(blob);
@@ -104,10 +104,21 @@ function* handleWorkerMessageActions(action) {
         link.download = `${title}.bin`;
         link.href = objURL;
         link.click();
+        */
 
-        // TODO: Get tap file, possibly using Pasmo.
+        // Get tap file using Pasmo.
         // NOTE: Start address is 23755 (0x5ccb)
-        const tap = undefined;
+        const tap = yield call(bin2tap, data.output);
+
+        /*
+        // Cause the download of the tap file using browser download.
+        const blob = new Blob([tap], {type: 'application/octet-stream'});
+        const objURL = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.download = `${title}.tap`;
+        link.href = objURL;
+        link.click();
+        */
 
         // noinspection PointlessBooleanExpressionJS
         if (!tap) {
