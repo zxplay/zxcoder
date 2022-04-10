@@ -205,6 +205,7 @@ function* handleGetSdccTapActions(_) {
             mainfile: true
         });
 
+        // postMessage({reset: true});
         postMessage(msg);
     } catch (e) {
         console.error(e);
@@ -228,6 +229,7 @@ function* handleGetZmacTapActions(_) {
             mainfile: true
         });
 
+        // postMessage({reset: true});
         postMessage(msg);
     } catch (e) {
         console.error(e);

@@ -196,10 +196,12 @@ export function linkSDLDZ80(step: BuildStep) {
         putWorkFile("main.ihx", hexout);
         putWorkFile("main.noi", noiout);
 
-        // return unchanged if no files changed
+        /*
+        // TODO: return unchanged if no files changed?
         if (!anyTargetChanged(step, ["main.ihx", "main.noi"])) {
             return;
         }
+        */
 
         // parse binary file
         const binout = parseIHX(

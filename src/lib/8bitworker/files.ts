@@ -179,6 +179,7 @@ export function populateExtraFiles(step: BuildStep, fs, extrafiles) {
 }
 
 export function staleFiles(step: BuildStep, targets: string[]) {
+    /*
     if (!step.maxts) {
         throw Error("call populateFiles() first");
     }
@@ -193,6 +194,10 @@ export function staleFiles(step: BuildStep, targets: string[]) {
 
     console.log("unchanged", step.maxts, targets);
     return false;
+    */
+
+    // TODO: Uncomment code above to check for stale files.
+    return true;
 }
 
 export function anyTargetChanged(step: BuildStep, targets: string[]) {
