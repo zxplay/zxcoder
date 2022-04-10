@@ -70,7 +70,6 @@ export default function Nav() {
                                     }
                                 },
                                 {
-                                    disabled: true,
                                     label: 'zmac',
                                     command: () => {
                                         dispatch(pause());
@@ -109,7 +108,6 @@ export default function Nav() {
                                     }
                                 },
                                 {
-                                    disabled: true,
                                     label: 'SDCC',
                                     command: () => {
                                         dispatch(pause());
