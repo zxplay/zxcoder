@@ -13,7 +13,7 @@ export class Emulator extends EventEmitter {
     constructor(canvas, opts) {
         super();
         this.canvas = canvas;
-        this.worker = new Worker(new URL('jsspeccy-worker.js', scriptUrl));
+        this.worker = new Worker(new URL(`/dist/jsspeccy-worker.js?ver=${window.zxplay_ver}`, scriptUrl));
         this.keyboardHandler = new KeyboardHandler(this.worker);
         this.displayHandler = new DisplayHandler(this.canvas);
         this.audioHandler = new AudioHandler();

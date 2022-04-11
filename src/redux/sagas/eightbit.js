@@ -260,7 +260,7 @@ function* handleRunTapActions(action) {
 // -----------------------------------------------------------------------------
 
 // The 8bitworkshop worker compiles projects.
-const worker = new Worker('/dist/8bitworker.js');
+const worker = new Worker(`/dist/8bitworker.js?ver=${window.zxplay_ver}`);
 
 // Preload tools.
 console.log('Preloading 8bitworker tools');
