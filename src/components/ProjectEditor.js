@@ -4,10 +4,7 @@ import {Button} from "primereact/button";
 import {confirmPopup} from "primereact/confirmpopup";
 import CodeMirror from "./CodeMirror";
 import "codemirror/mode/z80/z80";
-import {
-    deleteProject,
-    saveCodeChanges,
-} from "../redux/actions/project";
+import {deleteProject, saveCodeChanges} from "../redux/actions/project";
 import {setCode} from "../redux/actions/project";
 import {runProjectCode} from "../redux/actions/eightbit";
 import "../lib/syntax/pasmo";
