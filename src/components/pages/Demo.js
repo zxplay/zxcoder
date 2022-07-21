@@ -53,12 +53,14 @@ export default function Demo() {
                         <TabPanel header="Sinclair BASIC">
                             <DemoSinclairBasicEditor/>
                         </TabPanel>
+{/*
                         <TabPanel header="Boriel ZX BASIC">
                             <DemoZXBasicEditor/>
                         </TabPanel>
                         <TabPanel header="C">
                             <DemoCEditor/>
                         </TabPanel>
+*/}
                     </TabView>
                 }
             </div>

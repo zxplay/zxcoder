@@ -81,13 +81,13 @@ export default function Nav() {
                         {
                             label: 'BASIC',
                             items: [
-                                {
-                                    label: 'Boriel ZX',
-                                    command: () => {
-                                        dispatch(pause());
-                                        history.push('/new/zxbasic');
-                                    }
-                                },
+                                // {
+                                //     label: 'Boriel ZX',
+                                //     command: () => {
+                                //         dispatch(pause());
+                                //         history.push('/new/zxbasic');
+                                //     }
+                                // },
                                 {
                                     label: 'Sinclair (zmakebas)',
                                     command: () => {
@@ -100,13 +100,13 @@ export default function Nav() {
                         {
                             label: 'C',
                             items: [
-                                {
-                                    label: 'z88dk zcc',
-                                    command: () => {
-                                        dispatch(pause());
-                                        history.push('/new/c');
-                                    }
-                                },
+                                // {
+                                //     label: 'z88dk zcc',
+                                //     command: () => {
+                                //         dispatch(pause());
+                                //         history.push('/new/c');
+                                //     }
+                                // },
                                 {
                                     label: 'SDCC',
                                     command: () => {

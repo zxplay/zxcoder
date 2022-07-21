@@ -41,11 +41,13 @@ export default function About() {
                     Licensed under terms of the GPL version 3 - see{' '}
                     <a href="https://github.com/zxplay/pasmo/blob/main/COPYING" target="_blank">COPYING</a>.
                 </li>
+{/*
                 <li>
                     <a href="https://github.com/boriel/zxbasic" target="_blank">Boriel ZX BASIC</a> by Jose Rodriguez.
                     Licensed under terms of the GPL version 3 - see{' '}
                     <a href="https://github.com/boriel/zxbasic/blob/master/LICENSE.txt" target="_blank">LICENSE</a>.
                 </li>
+*/}
                 <li>
                     <a href="https://github.com/zxplay/zmakebas" target="_blank">zmakebas</a> by Russell Marks.
                     This tool is public domain.
