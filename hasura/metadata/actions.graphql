@@ -1,0 +1,16 @@
+type Mutation {
+  compile(
+    basic: String!
+  ): CompileResult
+}
+
+type Mutation {
+  compileC(
+    code: String!
+  ): CompileResult
+}
+
+type CompileResult {
+  base64_encoded: String!
+}
+

@@ -1,0 +1,62 @@
+table:
+  name: project
+  schema: public
+object_relationships:
+  - name: user
+    using:
+      foreign_key_constraint_on: owner_user_id
+insert_permissions:
+  - role: zxplay-user
+    permission:
+      check: {}
+      set:
+        owner_user_id: x-hasura-User-Id
+      columns:
+        - code
+        - lang
+        - title
+select_permissions:
+  - role: public
+    permission:
+      columns:
+        - project_id
+        - title
+        - code
+        - owner_user_id
+        - updated_at
+        - created_at
+        - lang
+        - is_public
+      filter:
+        is_public:
+          _eq: true
+  - role: zxplay-user
+    permission:
+      columns:
+        - code
+        - created_at
+        - lang
+        - owner_user_id
+        - project_id
+        - title
+        - updated_at
+      filter:
+        owner_user_id:
+          _eq: X-Hasura-User-Id
+      allow_aggregations: true
+update_permissions:
+  - role: zxplay-user
+    permission:
+      columns:
+        - code
+        - title
+      filter:
+        owner_user_id:
+          _eq: X-Hasura-User-Id
+      check: null
+delete_permissions:
+  - role: zxplay-user
+    permission:
+      filter:
+        owner_user_id:
+          _eq: X-Hasura-User-Id

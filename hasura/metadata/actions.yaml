@@ -1,0 +1,22 @@
+actions:
+  - name: compile
+    definition:
+      kind: synchronous
+      handler: http://zxbasic/compile/
+    permissions:
+      - role: zxplay-user
+      - role: public
+    comment: ZX Basic Compile
+  - name: compileC
+    definition:
+      kind: synchronous
+      handler: http://z88dk/compile/
+    permissions:
+      - role: public
+      - role: zxplay-user
+custom_types:
+  enums: []
+  input_objects: []
+  objects:
+    - name: CompileResult
+  scalars: []
