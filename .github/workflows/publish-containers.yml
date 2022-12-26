@@ -1,4 +1,4 @@
-name: Build & publish zxplay container images
+name: Build & publish container images
 
 on:
   workflow_dispatch:
