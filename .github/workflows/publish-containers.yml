@@ -1,0 +1,66 @@
+name: Build & publish zxplay container images
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * SAT" # every saturday at midnight
+  push:
+    branches:
+      - "main"
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build-image:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - context: ./apps/web/
+            dockerfile: ./apps/web/Dockerfile
+            image: ghcr.io/stever/zxplay
+          # - context: ./apps/proxy/
+          #   dockerfile: ./apps/proxy/Dockerfile
+          #   image: ghcr.io/stever/zxplay-proxy
+          # - context: ./apps/auth/
+          #   dockerfile: ./apps/auth/Dockerfile
+          #   image: ghcr.io/stever/zxplay-auth
+          # - context: ./apps/funcs/
+          #   dockerfile: ./apps/funcs/Dockerfile
+          #   image: ghcr.io/stever/zxplay-funcs
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ matrix.image }}
+          tags: |
+            # Apply 'latest' tag on main branch.
+            # NOTE: This behaviour is used by default only on the 'master' branch. Otherwise branch name is used!
+            type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'main') }}
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v3
+        with:
+          context: ${{ matrix.context }}
+          file: ${{ matrix.dockerfile }}
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}

@@ -1,0 +1,12 @@
+*.DS_Store
+*.interp
+*.swp
+*.tokens
+/.graphqlconfig
+/.idea/
+/build/
+/es5/
+/node_modules/
+/public/dist/
+/schema.graphql
+/typedocs/
