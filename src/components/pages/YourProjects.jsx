@@ -1,7 +1,7 @@
 import React from "react";
 import {Card} from "primereact/card";
 import ProjectList from "../ProjectList";
-import RequireSubscriber from "../RequireSubscriber";
+import RequireSubscriber from "../common/RequireSubscriber";
 
 export default function YourProjects() {
     return (

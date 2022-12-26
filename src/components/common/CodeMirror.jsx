@@ -8,7 +8,7 @@ import "codemirror/addon/search/searchcursor";
 import "codemirror/addon/search/jump-to-line";
 import "codemirror/addon/dialog/dialog";
 import "codemirror/addon/selection/active-line";
-import "../codemirror.css";
+import "../../codemirror.css";
 import "codemirror/addon/dialog/dialog.css";
 
 class CodeMirror extends React.Component {

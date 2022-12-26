@@ -2,7 +2,7 @@ import React, {Fragment, useEffect, useRef} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Button} from "primereact/button";
 import {confirmPopup} from "primereact/confirmpopup";
-import CodeMirror from "./CodeMirror";
+import CodeMirror from "./common/CodeMirror";
 import "codemirror/mode/z80/z80";
 import {deleteProject, saveCodeChanges} from "../redux/actions/project";
 import {setCode} from "../redux/actions/project";
