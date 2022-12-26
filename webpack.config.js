@@ -39,6 +39,7 @@ module.exports = [
         ],
         performance: {hints: false},
         resolve: {
+            extensions: ['.js', '.jsx'],
             alias: {
                 fs: false
             }
