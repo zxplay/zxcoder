@@ -1,0 +1,8 @@
+{
+    "name": "auth",
+    "private": true,
+    "scripts": {
+      "dev": "dotnet run --project Auth/Auth.csproj"
+    }
+  }
+  

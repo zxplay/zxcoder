@@ -1,0 +1,13 @@
+/**/*.swp
+/**/*.user
+/**/.graphqlconfig
+/**/.graphqlrc.json
+/**/.idea/
+/**/.vs/
+/**/Generated/
+/**/_ReSharper.Caches/
+/**/bin/
+/**/obj/
+/**/schema.extensions.graphql
+/**/schema.graphql
+/.config/dotnet-tools.json
