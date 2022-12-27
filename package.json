@@ -1,5 +1,5 @@
 {
-  "name": "acctsim",
+  "name": "zxplay",
   "private": true,
   "scripts": {
     "dev": "turbo run dev",
