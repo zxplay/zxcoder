@@ -1,14 +1,12 @@
 {
   "name": "zxplay",
-  "version": "1.0.0",
-  "author": "Steven Robertson",
-  "description": "ZX Spectrum emulator & programming environment for the browser.",
-  "license": "GPL-3.0",
+  "private": true,
   "scripts": {
-    "start": "run-s build:clean:all build:8bitworker:es:debug build:wasm:debug serve",
+    "dev": "run-s build:clean:all build:8bitworker:es:debug build:wasm:debug serve",
     "test": "run-s test:jsspeccy jest",
     "test:jsspeccy": "node --experimental-wasm-modules test/jsspeccy/test.mjs test/jsspeccy/tests.in test/jsspeccy/tests.expected",
     "test:jest": "jest",
+    "build": "npm run build:all:release",
     "build:all:debug": "run-s build:clean:all build:copyfiles build:8bitworker:es:debug build:babel build:wasm:debug build:js:debug build:clean",
     "build:all:release": "run-s build:clean:all build:copyfiles build:8bitworker:es:release build:babel build:wasm:release build:js:release build:clean",
     "build:clean": "del-cli build es5",
