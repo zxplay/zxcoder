@@ -31,7 +31,6 @@
     "typedoc:8bitworker": "typedoc --entryPointStrategy expand --tsconfig ./tsconfig.json --out ./typedocs/8bitworker ./src/lib/8bitworker/"
   },
   "dependencies": {
-    "@babel/runtime-corejs2": "^7.15.4",
     "axios": "^0.26.0",
     "codemirror": "^5.65.1",
     "connected-react-router": "^6.9.2",
