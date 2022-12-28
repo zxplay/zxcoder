@@ -2,7 +2,7 @@ const webpack = require("webpack");
 const path = require("path");
 
 module.exports = (env, _) => {
-    const isProduction = false; /*env && env.production ? env.production : false;*/
+    const isProduction = env && env.production ? env.production : false;
 
     let hostname;
     let protocol;
