@@ -13,7 +13,7 @@
     "postCreateCommand": "./.devcontainer/post-create.sh",
     "hostRequirements":
     {
-        "cpus": 4
+        "cpus": 2
     },
 	"customizations": {
 		"vscode": {
