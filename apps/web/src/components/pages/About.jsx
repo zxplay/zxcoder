@@ -11,7 +11,7 @@ export default function About() {
             </p>
             <p>
                 This site is a work in progress.
-                Source available <a href="https://github.com/zxplay/zxplay" target="_blank">here</a>.
+                Source available <a href="https://github.com/stever/zxplay" target="_blank">here</a>.
             </p>
             <p>
                 Please read <Link to="/legal/privacy-policy">privacy policy</Link>
@@ -39,7 +39,7 @@ export default function About() {
                 <li>
                     <a href="https://pasmo.speccy.org/" target="_blank">Pasmo</a> by Julián Albo García, alias "NotFound".
                     Licensed under terms of the GPL version 3 - see{' '}
-                    <a href="https://github.com/zxplay/pasmo/blob/main/COPYING" target="_blank">COPYING</a>.
+                    <a href="https://github.com/stever/emscripten-pasmo/blob/main/COPYING" target="_blank">COPYING</a>.
                 </li>
 {/*
                 <li>
@@ -49,7 +49,7 @@ export default function About() {
                 </li>
 */}
                 <li>
-                    <a href="https://github.com/zxplay/zmakebas" target="_blank">zmakebas</a> by Russell Marks.
+                    <a href="https://github.com/stever/emscripten-zmakebas" target="_blank">zmakebas</a> by Russell Marks.
                     This tool is public domain.
                 </li>
                 <li>
