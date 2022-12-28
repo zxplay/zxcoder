@@ -1,15 +1,15 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import {Provider as ReduxProvider} from "react-redux";
 import {ReduxRouter as Router} from "@lagunovsky/redux-react-router";
 import {store, history} from "./redux/store";
 import App from "./components/App";
 
-ReactDOM.render(
-        <ReduxProvider store={store}>
-            <Router history={history}>
-                <App/>
-            </Router>
-        </ReduxProvider>,
-    document.getElementById('root')
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+    <ReduxProvider store={store}>
+        <Router history={history}>
+            <App/>
+        </Router>
+    </ReduxProvider>
 );
