@@ -1,0 +1,17 @@
+:8080 {
+    redir /auth /auth/
+    handle /auth/* {
+        uri strip_prefix /auth
+        reverse_proxy auth:80
+    }
+
+    redir /api /api/
+    handle /api/* {
+        uri strip_prefix /api
+        reverse_proxy hasura:8080
+    }
+
+    handle {
+        reverse_proxy web:8080
+    }
+}

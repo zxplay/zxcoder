@@ -1,0 +1,17 @@
+:8080 {
+	redir /auth /auth/
+	handle /auth/* {
+		uri strip_prefix /auth
+		reverse_proxy localhost:5000
+	}
+
+	redir /api /api/
+	handle /api/* {
+		uri strip_prefix /api
+		reverse_proxy localhost:4000
+	}
+
+	handle {
+		reverse_proxy localhost:8000
+	}
+}

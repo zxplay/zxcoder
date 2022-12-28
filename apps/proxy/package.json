@@ -1,0 +1,10 @@
+{
+  "name": "proxy",
+  "private": true,
+  "scripts": {
+    "dev": "dotenv caddy run"
+  },
+  "devDependencies": {
+    "dotenv-cli": "3.0.0"
+  }
+}

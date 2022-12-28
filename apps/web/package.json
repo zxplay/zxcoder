@@ -1,5 +1,5 @@
 {
-  "name": "zxplay",
+  "name": "web",
   "private": true,
   "scripts": {
     "dev": "run-s build:clean:all build:8bitworker:es:debug build:wasm:debug serve",
@@ -20,13 +20,13 @@
     "build:wasm:release": "run-s build:core build:as:release",
     "build:as:debug": "asc build/core.ts --target debug",
     "build:as:release": "asc build/core.ts --target release",
-    "build:js:debug": "cross-env NODE_OPTIONS=--openssl-legacy-provider webpack --config webpack.dev.config.js",
-    "build:js:release": "cross-env NODE_OPTIONS=--openssl-legacy-provider webpack",
+    "build:js:debug": "cross-env NODE_OPTIONS=--openssl-legacy-provider webpack",
+    "build:js:release": "cross-env NODE_OPTIONS=--openssl-legacy-provider webpack --env production",
     "build:8bitworker:es:debug": "esbuild src/lib/8bitworker/worker.ts --bundle --sourcemap --target=es2017 --outfile=./public/dist/8bitworker.js",
     "build:8bitworker:es:release": "esbuild src/lib/8bitworker/worker.ts --bundle --minify --sourcemap --target=es2017 --outfile=./public/dist/8bitworker.js",
     "build:8bitworker:ts": "tsc --build tsconfig.json",
     "watch": "npm-watch",
-    "serve": "cross-env NODE_OPTIONS=--openssl-legacy-provider npx webpack serve --config webpack.dev.config.js --open",
+    "serve": "cross-env NODE_OPTIONS=--openssl-legacy-provider npx webpack serve",
     "typedoc:jsspeccy": "typedoc --entryPointStrategy expand --tsconfig ./tsconfig.jsspeccy.json --out ./typedocs/jsspeccy ./build/",
     "typedoc:8bitworker": "typedoc --entryPointStrategy expand --tsconfig ./tsconfig.json --out ./typedocs/8bitworker ./src/lib/8bitworker/"
   },
@@ -85,9 +85,9 @@
     "style-loader": "^3.3.1",
     "svg-inline-loader": "^0.8.2",
     "typedoc": "^0.22.11",
-    "webpack": "^5.44.0",
-    "webpack-cli": "^4.7.2",
-    "webpack-dev-server": "^4.3.0"
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.11.1"
   },
   "watch": {
     "build:core": {

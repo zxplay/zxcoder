@@ -22,15 +22,12 @@ jobs:
           - context: ./
             dockerfile: ./apps/web/Dockerfile
             image: ghcr.io/stever/zxplay
-          # - context: ./apps/proxy/
-          #   dockerfile: ./apps/proxy/Dockerfile
-          #   image: ghcr.io/stever/zxplay-proxy
+          - context: ./apps/proxy/
+            dockerfile: ./apps/proxy/Dockerfile
+            image: ghcr.io/stever/zxplay-proxy
           - context: ./apps/auth/
             dockerfile: ./apps/auth/Dockerfile
             image: ghcr.io/stever/zxplay-auth
-          # - context: ./apps/funcs/
-          #   dockerfile: ./apps/funcs/Dockerfile
-          #   image: ghcr.io/stever/zxplay-funcs
     permissions:
       contents: read
       packages: write
