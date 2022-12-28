@@ -107,6 +107,7 @@ function* handleRenderEmulatorActions(action) {
             zoom,
             sandbox: false,
             autoLoadTapes: true,
+            tapeAutoLoadMode: 'usr0'
         };
 
         let doFilter = false;
