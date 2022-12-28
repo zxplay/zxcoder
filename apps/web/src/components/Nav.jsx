@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {useHistory} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {InputText} from "primereact/inputtext";
 import {Menubar} from "primereact/menubar";
 import {
@@ -15,7 +15,7 @@ import {resetEmulator} from "../redux/actions/app";
 
 export default function Nav() {
     const dispatch = useDispatch();
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const [searchInput, setSearchInput] = useState([]);
 
@@ -34,7 +34,7 @@ export default function Nav() {
             onChange={(e) => setSearchInput(e.target.value)}
             onKeyDown={(e) => {
                 if (e.key === 'Enter' && searchInput) {
-                    history.push(`/search?q=${searchInput}`);
+                    navigate(`/search?q=${searchInput}`);
                 }
         }}/>
     );
@@ -47,7 +47,7 @@ export default function Nav() {
         {
             label: 'ZX Play',
             command: () => {
-                history.push('/');
+                navigate('/');
             }
         },
         {
@@ -66,14 +66,14 @@ export default function Nav() {
                                     label: 'Pasmo',
                                     command: () => {
                                         dispatch(pause());
-                                        history.push('/new/asm');
+                                        navigate('/new/asm');
                                     }
                                 },
                                 {
                                     label: 'zmac',
                                     command: () => {
                                         dispatch(pause());
-                                        history.push('/new/zmac');
+                                        navigate('/new/zmac');
                                     }
                                 }
                             ]
@@ -85,14 +85,14 @@ export default function Nav() {
                                 //     label: 'Boriel ZX',
                                 //     command: () => {
                                 //         dispatch(pause());
-                                //         history.push('/new/zxbasic');
+                                //         navigate('/new/zxbasic');
                                 //     }
                                 // },
                                 {
                                     label: 'Sinclair (zmakebas)',
                                     command: () => {
                                         dispatch(pause());
-                                        history.push('/new/basic');
+                                        navigate('/new/basic');
                                     }
                                 }
                             ]
@@ -104,14 +104,14 @@ export default function Nav() {
                                 //     label: 'z88dk zcc',
                                 //     command: () => {
                                 //         dispatch(pause());
-                                //         history.push('/new/c');
+                                //         navigate('/new/c');
                                 //     }
                                 // },
                                 {
                                     label: 'SDCC',
                                     command: () => {
                                         dispatch(pause());
-                                        history.push('/new/sdcc');
+                                        navigate('/new/sdcc');
                                     }
                                 }
                             ]
@@ -123,7 +123,7 @@ export default function Nav() {
                     icon: 'pi pi-fw pi-folder-open',
                     disabled: !userId,
                     command: () => {
-                        history.push(`/u/${userId}/projects`);
+                        navigate(`/u/${userId}/projects`);
                     }
                 },
                 {
@@ -134,7 +134,7 @@ export default function Nav() {
                     icon: 'pi pi-fw pi-upload',
                     command: () => {
                         dispatch(showOpenFileDialog());
-                        history.push('/');
+                        navigate('/');
                     }
                 },
                 {
@@ -167,7 +167,7 @@ export default function Nav() {
                     icon: 'pi pi-fw pi-user',
                     disabled: !userId,
                     command: () => {
-                        history.push(`/u/${userId}`);
+                        navigate(`/u/${userId}`);
                     }
                 },
                 {
@@ -175,7 +175,7 @@ export default function Nav() {
                     icon: 'pi pi-fw pi-folder',
                     disabled: !userId,
                     command: () => {
-                        history.push(`/u/${userId}/projects`);
+                        navigate(`/u/${userId}/projects`);
                     }
                 }
             ]
@@ -188,28 +188,28 @@ export default function Nav() {
                     label: 'About This Site',
                     icon: 'pi pi-fw pi-question-circle',
                     command: () => {
-                        history.push('/about');
+                        navigate('/about');
                     }
                 },
                 {
                     label: 'Linking To ZX Play',
                     icon: 'pi pi-fw pi-link',
                     command: () => {
-                        history.push('/info/linking');
+                        navigate('/info/linking');
                     }
                 },
                 {
                     label: 'Privacy Policy',
                     icon: 'pi pi-fw pi-eye',
                     command: () => {
-                        history.push('/legal/privacy-policy');
+                        navigate('/legal/privacy-policy');
                     }
                 },
                 {
                     label: 'Terms of Use',
                     icon: 'pi pi-fw pi-info-circle',
                     command: () => {
-                        history.push('/legal/terms-of-use');
+                        navigate('/legal/terms-of-use');
                     }
                 }
             ]

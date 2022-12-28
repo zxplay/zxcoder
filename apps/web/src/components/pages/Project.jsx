@@ -1,12 +1,14 @@
 import React, {Fragment, useEffect} from "react";
-import PropTypes from "prop-types";
+import {useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {TabPanel, TabView} from "primereact/tabview";
 import {Emulator} from "../Emulator";
 import {loadProject, setSelectedTabIndex} from "../../redux/actions/project";
 import {ProjectEditor} from "../ProjectEditor";
 
-export default function Project(props) {
+export default function Project() {
+    const {id} = useParams();
+
     const dispatch = useDispatch();
 
     const userId = useSelector(state => state?.identity.userId);
@@ -15,11 +17,11 @@ export default function Project(props) {
     let title = useSelector(state => state?.project.title);
 
     useEffect(() => {
-        dispatch(loadProject(props.id));
+        dispatch(loadProject(id));
         return () => {}
-    }, [props.id, userId]);
+    }, [id, userId]);
 
-    if (!props.id || !lang) {
+    if (!id || !lang) {
         return <Fragment/>;
     }
 
@@ -62,7 +64,7 @@ export default function Project(props) {
                         activeIndex={tab}
                         onTabChange={(e) => dispatch(setSelectedTabIndex(e.index))}>
                         <TabPanel header={editorTitle}>
-                            <ProjectEditor id={props.id}/>
+                            <ProjectEditor id={id}/>
                         </TabPanel>
                     </TabView>
                 </div>
@@ -75,8 +77,4 @@ export default function Project(props) {
             </div>
         </div>
     )
-}
-
-Project.propTypes = {
-    id: PropTypes.string.isRequired,
 }

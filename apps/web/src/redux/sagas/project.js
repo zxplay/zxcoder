@@ -1,6 +1,6 @@
 import {takeLatest, put, select, call} from "redux-saga/effects";
-import {push} from "connected-react-router";
 import gql from "graphql-tag";
+import {history} from "../store";
 import {gqlFetch} from "../../graphql_fetch";
 import {actionTypes, reset, receiveLoadedProject, setSavedCode} from "../actions/project";
 import {pause, reset as resetMachine} from "../actions/jsspeccy";
@@ -69,7 +69,7 @@ function* handleCreateNewProjectActions(action) {
         const id = response?.data?.insert_project_one?.project_id;
 
         yield put(receiveLoadedProject(id, action.title, action.lang, ''));
-        yield put(push(`/projects/${id}`));
+        history.push(`/projects/${id}`);
     } catch (e) {
         console.error(e);
     }
@@ -169,7 +169,7 @@ function* handleDeleteProjectActions(_) {
 
         yield put(reset());
         yield put(resetMachine());
-        yield put(push(`/u/${userId}/projects`));
+        history.push(`/u/${userId}/projects`);
     } catch (e) {
         console.error(e);
     }

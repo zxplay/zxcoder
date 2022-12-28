@@ -1,6 +1,6 @@
 import {select, takeLatest, put, call} from "redux-saga/effects";
-import {push} from "connected-react-router";
 import gql from "graphql-tag";
+import {history} from "../store";
 import {gqlFetch} from "../../graphql_fetch";
 import {
     actionTypes,
@@ -44,10 +44,10 @@ function* handleShowActiveEmulatorActions(_) {
         const isProject = typeof projectId !== 'undefined';
 
         if (isProject) {
-            yield put(push(`/projects/${projectId}`));
+            history.push(`/projects/${projectId}`);
         } else {
             yield put(setDemoTabIndex(0));
-            yield put(push('/'));
+            history.push('/');
         }
     } catch (e) {
         console.error(e);
@@ -60,11 +60,11 @@ function* handleResetEmulatorActions(_) {
         const isProject = typeof projectId !== 'undefined';
 
         if (isProject) {
-            yield put(push(`/projects/${projectId}`));
+            history.push(`/projects/${projectId}`);
             yield put(reset());
         } else {
             yield put(setDemoTabIndex(0));
-            yield put(push('/'));
+            history.push('/');
             yield put(reset());
         }
     } catch (e) {

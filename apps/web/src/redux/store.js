@@ -1,7 +1,7 @@
 import {createStore, combineReducers, applyMiddleware} from "redux";
 import createSagaMiddleware from "redux-saga";
 import {all} from "redux-saga/effects";
-import {connectRouter, routerMiddleware} from "connected-react-router";
+import {createRouterReducer, createRouterMiddleware} from "@lagunovsky/redux-react-router";
 import {createBrowserHistory} from "history";
 import Constants from "../constants";
 
@@ -55,7 +55,7 @@ export const history = createBrowserHistory();
 const sagaMiddleware = createSagaMiddleware();
 
 const rootReducer = combineReducers({
-    router: connectRouter(history),
+    router: createRouterReducer(history),
     app: appReducer,
     demo: demoReducer,
     eightbit: eightbitReducer,
@@ -69,7 +69,7 @@ const rootReducer = combineReducers({
 export const store = createStore(
     rootReducer,
     applyMiddleware(
-        routerMiddleware(history),
+        createRouterMiddleware(history),
         loggingMiddleware,
         sagaMiddleware));
 

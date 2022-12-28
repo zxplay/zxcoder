@@ -1,23 +1,21 @@
 import React, {useEffect} from "react";
-import PropTypes from "prop-types";
 import {useDispatch} from "react-redux";
+import {useParams} from "react-router-dom";
 import {Card} from "primereact/card";
 
-export default function YourProfile(props) {
+export default function YourProfile() {
+    const {id} = useParams();
+
     const dispatch = useDispatch();
 
     useEffect(() => {
-        // dispatch(loadProfile(props.id));
+        // dispatch(loadProfile(id));
         // return () => {}
-    }, [props.id]);
+    }, [id]);
 
     return (
         <Card className="m-2">
             <h1>Your Profile</h1>
         </Card>
     )
-}
-
-YourProfile.propTypes = {
-    id: PropTypes.string.isRequired,
 }
