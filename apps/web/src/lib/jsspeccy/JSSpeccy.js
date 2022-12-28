@@ -24,7 +24,7 @@ export const JSSpeccy = (container, opts) => {
     // canvas.style.imageRendering = 'pixelated';
 
     const emu = new Emulator(canvas, {
-        machine: opts.machine || 128,
+        machine: opts.machine || 48,
         autoStart: opts.autoStart || false,
         autoLoadTapes: opts.autoLoadTapes || false,
         tapeAutoLoadMode: opts.tapeAutoLoadMode || 'default',

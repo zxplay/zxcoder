@@ -105,9 +105,9 @@ function* handleRenderEmulatorActions(action) {
 
         const emuParams = {
             zoom,
-            sandbox: false,
+            machine: 48, // or 128
             autoLoadTapes: true,
-            tapeAutoLoadMode: 'usr0'
+            tapeAutoLoadMode: 'default' // or usr0
         };
 
         let doFilter = false;
@@ -124,6 +124,10 @@ function* handleRenderEmulatorActions(action) {
 
         if (parsed.f && parsed.f !== '0') {
             doFilter = true;
+        }
+
+        if (parsed.a && parsed.a === '0') {
+            emuParams.autoLoadTapes = false;
         }
 
         console.assert(jsspeccy === undefined);
