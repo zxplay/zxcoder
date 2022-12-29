@@ -1,11 +1,11 @@
-import {actionTypes} from "../eightbit/actions";
+import {actionTypes} from "./actions";
 
 // -----------------------------------------------------------------------------
 // Initial state
 // -----------------------------------------------------------------------------
 
 const initialState = {
-    followTapAction: undefined
+    projectList: undefined
 };
 
 // -----------------------------------------------------------------------------
@@ -13,13 +13,13 @@ const initialState = {
 // -----------------------------------------------------------------------------
 
 function reset() {
-    return {...initialState};
+    return {...initialState}
 }
 
-function setFollowTapAction(state, action) {
+function receiveprojectListQueryResult(state, action) {
     return {
         ...state,
-        followTapAction: action.followTapAction
+        projectList: action.result.project
     }
 }
 
@@ -29,7 +29,7 @@ function setFollowTapAction(state, action) {
 
 const actionsMap = {
     [actionTypes.reset]: reset,
-    [actionTypes.setFollowTapAction]: setFollowTapAction,
+    [actionTypes.receiveprojectListQueryResult]: receiveprojectListQueryResult,
 };
 
 export default function reducer(state = initialState, action) {

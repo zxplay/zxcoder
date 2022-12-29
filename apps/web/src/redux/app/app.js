@@ -1,25 +1,29 @@
-import {actionTypes} from "../projectList/actions";
+import {actionTypes} from "./actions";
 
 // -----------------------------------------------------------------------------
 // Initial state
 // -----------------------------------------------------------------------------
 
 const initialState = {
-    projectList: undefined
+    privacyPolicy: undefined,
+    termsOfUse: undefined
 };
 
 // -----------------------------------------------------------------------------
 // Actions
 // -----------------------------------------------------------------------------
 
-function reset() {
-    return {...initialState}
-}
-
-function receiveprojectListQueryResult(state, action) {
+function receivePrivacyPolicy(state, action) {
     return {
         ...state,
-        projectList: action.result.project
+        privacyPolicy: action.text
+    }
+}
+
+function receiveTermsOfUse(state, action) {
+    return {
+        ...state,
+        termsOfUse: action.text
     }
 }
 
@@ -28,8 +32,8 @@ function receiveprojectListQueryResult(state, action) {
 // -----------------------------------------------------------------------------
 
 const actionsMap = {
-    [actionTypes.reset]: reset,
-    [actionTypes.receiveprojectListQueryResult]: receiveprojectListQueryResult,
+    [actionTypes.receivePrivacyPolicy]: receivePrivacyPolicy,
+    [actionTypes.receiveTermsOfUse]: receiveTermsOfUse,
 };
 
 export default function reducer(state = initialState, action) {

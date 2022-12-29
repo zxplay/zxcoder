@@ -1,29 +1,25 @@
-import {actionTypes} from "../app/actions";
+import {actionTypes} from "./actions";
 
 // -----------------------------------------------------------------------------
 // Initial state
 // -----------------------------------------------------------------------------
 
 const initialState = {
-    privacyPolicy: undefined,
-    termsOfUse: undefined
+    followTapAction: undefined
 };
 
 // -----------------------------------------------------------------------------
 // Actions
 // -----------------------------------------------------------------------------
 
-function receivePrivacyPolicy(state, action) {
-    return {
-        ...state,
-        privacyPolicy: action.text
-    }
+function reset() {
+    return {...initialState};
 }
 
-function receiveTermsOfUse(state, action) {
+function setFollowTapAction(state, action) {
     return {
         ...state,
-        termsOfUse: action.text
+        followTapAction: action.followTapAction
     }
 }
 
@@ -32,8 +28,8 @@ function receiveTermsOfUse(state, action) {
 // -----------------------------------------------------------------------------
 
 const actionsMap = {
-    [actionTypes.receivePrivacyPolicy]: receivePrivacyPolicy,
-    [actionTypes.receiveTermsOfUse]: receiveTermsOfUse,
+    [actionTypes.reset]: reset,
+    [actionTypes.setFollowTapAction]: setFollowTapAction,
 };
 
 export default function reducer(state = initialState, action) {
