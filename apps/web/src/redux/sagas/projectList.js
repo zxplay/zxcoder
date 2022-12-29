@@ -11,7 +11,7 @@ import {
     subscribeAction,
     unsubscribeAction
 } from "../actions/subscriber";
-import {showError} from "../../errors";
+import {handleError} from "../../errors";
 
 // -----------------------------------------------------------------------------
 // Action watchers
@@ -68,7 +68,7 @@ function* handleSubscribeToProjectListCallback(action) {
         }
 
         if (error) {
-            showError('Websocket Callback Error', error);
+            handleError('Websocket Callback Error', error);
             return;
         }
 

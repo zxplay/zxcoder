@@ -1,6 +1,6 @@
 import axios from "axios";
 import {getAuthToken, isExpired, refreshToken} from "./auth";
-import {showError} from "./errors";
+import {handleError} from "./errors";
 import Constants from "./constants";
 import {print} from "graphql";
 import {dashboardLock, dashboardUnlock} from "./dashboard_lock";
@@ -37,14 +37,14 @@ function fetchWithToken(jwt, query, variables, lock) {
 
         console.assert(response && response.data, response);
         if (response.data.errors) {
-            showError('GraphQL Query Errors', response.data.errors);
+            handleError('GraphQL Query Errors', response.data.errors);
             return;
         }
 
         return response.data;
     }).catch(e => {
         if (lock) dashboardUnlock();
-        showError('GraphQL Query Exception', e);
+        handleError('GraphQL Query Exception', e);
     }).finally(() => lock ? dashboardUnlock() : false);
 }
 

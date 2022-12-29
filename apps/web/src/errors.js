@@ -2,7 +2,7 @@ import StackTrace from "stacktrace-js";
 import {error} from "./redux/actions/error";
 import {store} from "./redux/store";
 
-export function showError(title, description) {
+export function handleError(title, description) {
     store.dispatch(error(title, description));
 
     const callback = (stackframes) => {
@@ -21,7 +21,7 @@ function isObject(value) {
 
 export function handleRequestException(e) {
     const {title, description} = getRequestError(e);
-    showError(title, description);
+    handleError(title, description);
 }
 
 function getRequestError(e) {

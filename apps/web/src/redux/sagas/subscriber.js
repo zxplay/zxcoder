@@ -4,7 +4,7 @@ import {print} from "graphql";
 import {actionTypes as userActions} from "../actions/identity";
 import {actionTypes, connectClient, notifySubscribeFunctionReceived} from "../actions/subscriber";
 import {SubscriptionClient, EventError, GraphQLError} from "../../graphql_subscription_client";
-import {handleRequestException, showError} from "../../errors";
+import {handleRequestException, handleError} from "../../errors";
 import {login, getAuthToken, isExpired, refreshToken} from "../../auth";
 import Constants from "../../constants";
 
@@ -122,13 +122,13 @@ function* handleConnectClient() {
                         // we called an action that is received by this handler?
                         return;
                     case 'eventError':
-                        showError('Subscriber Event Error', msg.data);
+                        handleError('Subscriber Event Error', msg.data);
                         break;
                     case 'graphqlError':
-                        showError('GraphQL Error', msg.data);
+                        handleError('GraphQL Error', msg.data);
                         break;
                     case 'error':
-                        showError('Error', msg.data);
+                        handleError('Error', msg.data);
                         break;
                     default:
                         console.warn('unknown msg type', msg);
