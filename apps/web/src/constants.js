@@ -5,7 +5,7 @@ const hostname = HOSTNAME;
 const httpProtocol = HTTP_PROTO;
 
 const isDev = stagingEnv !== 'prod';
-const devLogging = true;
+const devLogging = false;
 
 const hasuraBase = `${hostname}/api`;
 

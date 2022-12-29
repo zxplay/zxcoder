@@ -157,9 +157,21 @@ function* handleGetProjectTapActions(_) {
                 yield put(setFollowTapAction(undefined));
                 break;
             case 'basic':
-                tap = yield call(getZmakebasTap, code);
-                yield put(followTapAction(tap));
-                yield put(setFollowTapAction(undefined));
+                try {
+                    tap = yield call(getZmakebasTap, code);
+                    yield put(followTapAction(tap));
+                    yield put(setFollowTapAction(undefined));
+                } catch (errorItems) {
+                    for (let i = 0; i < errorItems.length; i++) {
+                        const item = errorItems[i];
+                        if (item.type === 'out') {
+                            alert(`[stdout] ${item.text}`);
+                        } else {
+                            console.assert(item.type === 'err');
+                            alert(`[stderr] ${item.text}`);
+                        }
+                    }
+                }
                 break;
             case 'c':
                 tap = yield call(getZ88dkTap, code, userId);
@@ -184,7 +196,7 @@ function* handleGetProjectTapActions(_) {
                 throw `unexpected case: ${lang}`;
         }
     } catch (e) {
-        console.error(e);
+        console.error('error on making tap', e);
     }
 }
 
