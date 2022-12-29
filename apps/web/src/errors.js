@@ -15,7 +15,9 @@ export function handleError(title, description) {
     StackTrace.get().then(callback).catch((err) => console.error(err.message));
 }
 
-export function handleWasmErrorItems(errorItems) {
+export function handleWasmCommandCompileErrorItems(errorItems) {
+    console.assert(Array.isArray(errorItems), errorItems);
+
     for (let i = 0; i < errorItems.length; i++) {
         const item = errorItems[i];
         if (item.type === 'out') {
@@ -25,6 +27,30 @@ export function handleWasmErrorItems(errorItems) {
             alert(`[stderr] ${item.text}`);
         }
     }
+}
+
+export function handleWorkerCompileErrorItems(errorItems) {
+    console.assert(Array.isArray(errorItems), errorItems);
+
+    for (let i = 0; i < errorItems.length; i++) {
+        const item = errorItems[i];
+        alert(`${item.msg} (line: ${item.line})`);
+    }
+}
+
+export function handleHasuraActionCompileErrorItems(errorItems) {
+    // TODO
+/*
+    for (let i = 0; i < errorItems.length; i++) {
+        const item = errorItems[i];
+        if (item.type === 'out') {
+            alert(`[stdout] ${item.text}`);
+        } else {
+            console.assert(item.type === 'err');
+            alert(`[stderr] ${item.text}`);
+        }
+    }
+*/
 }
 
 function isObject(value) {

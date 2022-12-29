@@ -4,7 +4,7 @@ import getPasmoTap from "pasmo";
 import {actionTypes} from "./actions";
 import {store} from "../store";
 import {loadTap, pause} from "../jsspeccy/actions";
-import {handleWasmErrorItems} from "../../errors";
+import {handleWasmCommandCompileErrorItems} from "../../errors";
 
 // -----------------------------------------------------------------------------
 // Action watchers
@@ -40,7 +40,7 @@ function* handleRunAssemblyActions(_) {
             const tap = yield call(getPasmoTap, code);
             store.dispatch(loadTap(tap));
         } catch (errorItems) {
-            handleWasmErrorItems(errorItems);
+            handleWasmCommandCompileErrorItems(errorItems);
         }
     } catch (e) {
         console.error(e);
@@ -54,7 +54,7 @@ function* handleRunSinclairBasicActions(_) {
             const tap = yield call(getZmakebasTap, code);
             store.dispatch(loadTap(tap));
         } catch (errorItems) {
-            handleWasmErrorItems(errorItems);
+            handleWasmCommandCompileErrorItems(errorItems);
         }
     } catch (e) {
         console.error(e);

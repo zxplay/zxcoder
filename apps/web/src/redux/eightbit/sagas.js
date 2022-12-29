@@ -16,7 +16,11 @@ import {
     setFollowTapAction
 } from "./actions";
 import {loadTap} from "../jsspeccy/actions";
-import {handleWasmErrorItems} from "../../errors";
+import {
+    handleHasuraActionCompileErrorItems,
+    handleWasmCommandCompileErrorItems,
+    handleWorkerCompileErrorItems
+} from "../../errors";
 
 // -----------------------------------------------------------------------------
 // Action watchers
@@ -89,12 +93,19 @@ function* handleWorkerMessageActions(action) {
         console.log('handleWorkerMessageActions', data);
 
         if (data.errors) {
+            handleWorkerCompileErrorItems(data.errors);
+
+            /*
             const errors = data.errors;
             console.assert(Array.isArray(errors), errors);
             for (let i = 0; i < errors.length; i++) {
                 const error = errors[i];
                 console.error(`${error.msg} (line: ${error.line})`, error);
             }
+            */
+
+            // Don't continue on errors.
+            return;
         }
 
         /*
@@ -159,7 +170,7 @@ function* handleGetProjectTapActions(_) {
                     yield put(followTapAction(tap));
                     yield put(setFollowTapAction(undefined));
                 } catch (errorItems) {
-                    handleWasmErrorItems(errorItems);
+                    handleWasmCommandCompileErrorItems(errorItems);
                 }
                 break;
             case 'basic':
@@ -169,30 +180,38 @@ function* handleGetProjectTapActions(_) {
                     yield put(followTapAction(tap));
                     yield put(setFollowTapAction(undefined));
                 } catch (errorItems) {
-                    handleWasmErrorItems(errorItems);
+                    handleWasmCommandCompileErrorItems(errorItems);
+                }
+                break;
+            case 'zxbasic':
+                // Boriel ZX BASIC
+                try {
+                    tap = yield call(getZXBasicTap, code, userId);
+                    yield put(followTapAction(tap));
+                    yield put(setFollowTapAction(undefined));
+                } catch (errorItems) {
+                    handleHasuraActionCompileErrorItems(errorItems);
                 }
                 break;
             case 'c':
                 // Z88DK
-                tap = yield call(getZ88dkTap, code, userId);
-                yield put(followTapAction(tap));
-                yield put(setFollowTapAction(undefined));
+                try {
+                    tap = yield call(getZ88dkTap, code, userId);
+                    yield put(followTapAction(tap));
+                    yield put(setFollowTapAction(undefined));
+                } catch (errorItems) {
+                    handleHasuraActionCompileErrorItems(errorItems);
+                }
+                break;
+            case 'zmac':
+                // Z-80 Macro Cross-Assembler
+                // NOTE: Call another action to get the tap using worker.
+                yield put(getZmacTap());
                 break;
             case 'sdcc':
                 // SDCC - Small Device C Compiler
                 // NOTE: Call another action to get the tap using worker.
                 yield put(getSdccTap());
-                break;
-            case 'zmac':
-                // Z-80 Macro Cross Assembler
-                // NOTE: Call another action to get the tap using worker.
-                yield put(getZmacTap());
-                break;
-            case 'zxbasic':
-                // Boriel ZX BASIC
-                tap = yield call(getZXBasicTap, code, userId);
-                yield put(followTapAction(tap));
-                yield put(setFollowTapAction(undefined));
                 break;
             default:
                 // noinspection ExceptionCaughtLocallyJS
@@ -247,7 +266,7 @@ function* handleGetZmacTapActions(_) {
         // postMessage({reset: true});
         postMessage(msg);
     } catch (e) {
-        console.error(e);
+        console.error('handleGetZmacTapActions', e);
     }
 }
 
