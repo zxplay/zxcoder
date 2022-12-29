@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import ReactMarkdown from "react-markdown";
 import {Card} from "primereact/card";
-import {requestPrivacyPolicy} from "../../redux/actions/app";
+import {requestPrivacyPolicy} from "../redux/actions/app";
 
 export default function LegalPrivacy() {
     const dispatch = useDispatch();

@@ -1,7 +1,7 @@
 import React, {Fragment, useEffect, useRef} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Button} from "primereact/button";
-import CodeMirror from "./common/CodeMirror";
+import CodeMirror from "./CodeMirror";
 import {setSelectedTabIndex} from "../redux/actions/demo";
 import {setCCode, runC} from "../redux/actions/demo";
 import "../lib/syntax/z88dk-c";

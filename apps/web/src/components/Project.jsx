@@ -2,9 +2,9 @@ import React, {Fragment, useEffect} from "react";
 import {useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {TabPanel, TabView} from "primereact/tabview";
-import {Emulator} from "../Emulator";
-import {loadProject, setSelectedTabIndex} from "../../redux/actions/project";
-import {ProjectEditor} from "../ProjectEditor";
+import {Emulator} from "./Emulator";
+import {loadProject, setSelectedTabIndex} from "../redux/actions/project";
+import {ProjectEditor} from "./ProjectEditor";
 
 export default function Project() {
     const {id} = useParams();

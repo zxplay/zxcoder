@@ -4,7 +4,7 @@ import {useDispatch} from "react-redux";
 import {Card} from "primereact/card";
 import {InputText} from "primereact/inputtext";
 import {Button} from "primereact/button";
-import {createNewProject} from "../../redux/actions/project";
+import {createNewProject} from "../redux/actions/project";
 
 export default function ProjectNew(props) {
     const dispatch = useDispatch();

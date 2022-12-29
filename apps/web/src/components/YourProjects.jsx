@@ -1,8 +1,8 @@
 import React from "react";
 import {useParams} from "react-router-dom";
 import {Card} from "primereact/card";
-import ProjectList from "../ProjectList";
-import RequireSubscriber from "../common/RequireSubscriber";
+import ProjectList from "./ProjectList";
+import RequireSubscriber from "./RequireSubscriber";
 
 export default function YourProjects() {
     const {id} = useParams();

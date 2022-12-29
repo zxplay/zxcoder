@@ -6,23 +6,23 @@ import "primereact/resources/themes/md-dark-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import "primeflex/primeflex.css";
-import ErrorBoundary from "./common/ErrorBoundary";
+import ErrorBoundary from "./ErrorBoundary";
 import RenderEmulator from "./RenderEmulator";
-import LoadingScreen from "./common/LoadingScreen";
-import LockScreen from "./common/LockScreen";
+import LoadingScreen from "./LoadingScreen";
+import LockScreen from "./LockScreen";
 import Nav from "./Nav";
-import Demo from "./pages/Demo";
-import MaxWidth from "./common/MaxWidth";
-import About from "./pages/About";
-import Linking from "./pages/Linking";
-import LegalPrivacy from "./pages/LegalPrivacy";
-import LegalTerms from "./pages/LegalTerms";
-import ProjectNew from "./pages/ProjectNew";
-import Project from "./pages/Project";
-import Search from "./pages/Search";
-import YourProfile from "./pages/YourProfile";
-import YourProjects from "./pages/YourProjects";
-import ErrorNotFound from "./pages/ErrorNotFound";
+import Demo from "./Demo";
+import MaxWidth from "./MaxWidth";
+import About from "./About";
+import Linking from "./Linking";
+import LegalPrivacy from "./LegalPrivacy";
+import LegalTerms from "./LegalTerms";
+import ProjectNew from "./ProjectNew";
+import Project from "./Project";
+import Search from "./Search";
+import YourProfile from "./YourProfile";
+import YourProjects from "./YourProjects";
+import ErrorNotFound from "./ErrorNotFound";
 
 export default function App() {
 
