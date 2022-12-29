@@ -1,6 +1,6 @@
 import React from "react";
 
-function LockScreen() {
+export default function LockScreen() {
     return (
         <React.Fragment>
             <div className="dashboard-lock-screen" style={styles.fullPage}/>
@@ -52,5 +52,3 @@ const styles = {
         display: 'none'
     }
 };
-
-export default LockScreen;

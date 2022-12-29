@@ -1,7 +1,7 @@
 import React from "react";
 import {useSelector} from "react-redux";
 
-function RequireSubscriber({children}) {
+export default function RequireSubscriber({children}) {
     const received = useSelector(state => state?.subscriber.subscribeFunctionReceived);
 
     if (received) {
@@ -10,5 +10,3 @@ function RequireSubscriber({children}) {
 
     return <></>
 }
-
-export default RequireSubscriber;

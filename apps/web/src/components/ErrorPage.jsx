@@ -5,6 +5,11 @@ import {Card} from "primereact/card";
 import {Button} from "primereact/button";
 import {sep} from "../constants";
 
+ErrorPage.propTypes = {
+    statusCode: PropTypes.number,
+    msg: PropTypes.string
+}
+
 export default function ErrorPage(props) {
     let msg;
     if (props.msg) {
@@ -30,9 +35,4 @@ export default function ErrorPage(props) {
             </Card>
         </Titled>
     )
-}
-
-ErrorPage.propTypes = {
-    statusCode: PropTypes.number,
-    msg: PropTypes.string
 }

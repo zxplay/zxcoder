@@ -11,7 +11,7 @@ import "codemirror/addon/selection/active-line";
 import "../codemirror.css";
 import "codemirror/addon/dialog/dialog.css";
 
-class CodeMirror extends React.Component {
+export default class CodeMirror extends React.Component {
 
     static propTypes = {
         className: PropTypes.string,
@@ -141,5 +141,3 @@ class CodeMirror extends React.Component {
         }
     }
 }
-
-export default CodeMirror;

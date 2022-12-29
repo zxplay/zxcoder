@@ -2,6 +2,10 @@ import React, {useEffect} from "react";
 import PropTypes from "prop-types";
 import {ImageButton, SingleWindow} from "../lib/canvasgui";
 
+Keyboard.propTypes = {
+    width: PropTypes.number
+}
+
 export function Keyboard(props) {
     const width = props.width || 960;
 
@@ -23,10 +27,6 @@ export function Keyboard(props) {
             />
         </div>
     )
-}
-
-Keyboard.propTypes = {
-    width: PropTypes.number
 }
 
 // _: [space]        space

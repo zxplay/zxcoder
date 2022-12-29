@@ -4,6 +4,11 @@ import {useDispatch} from "react-redux";
 import {Keyboard} from "./Keyboard";
 import {loadEmulator} from "../redux/jsspeccy/actions";
 
+Emulator.propTypes = {
+    zoom: PropTypes.number,
+    width: PropTypes.number
+}
+
 export function Emulator(props) {
     const dispatch = useDispatch();
 
@@ -21,9 +26,4 @@ export function Emulator(props) {
             <Keyboard width={width}/>
         </>
     )
-}
-
-Emulator.propTypes = {
-    zoom: PropTypes.number,
-    width: PropTypes.number
 }
