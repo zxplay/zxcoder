@@ -45,11 +45,11 @@ export default function Demo() {
                         <TabPanel header="Emulator">
                             <Emulator zoom={zoom} width={width}/>
                         </TabPanel>
-                        <TabPanel header="Z80 Assembly">
-                            <DemoAssemblyEditor/>
-                        </TabPanel>
                         <TabPanel header="Sinclair BASIC">
                             <DemoSinclairBasicEditor/>
+                        </TabPanel>
+                        <TabPanel header="Z80 Assembly">
+                            <DemoAssemblyEditor/>
                         </TabPanel>
                     </TabView>
                 }
