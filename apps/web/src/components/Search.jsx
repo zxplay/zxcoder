@@ -5,7 +5,7 @@ import {DataTable} from "primereact/datatable";
 import {Column} from "primereact/column";
 import queryString from "query-string";
 import axios from "axios";
-import {loadUrl} from "../redux/actions/jsspeccy";
+import {loadUrl} from "../redux/jsspeccy/jsspeccy";
 import {showLoading, hideLoading} from "../dashboard_loading";
 
 export default function Search() {

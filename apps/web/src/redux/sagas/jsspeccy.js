@@ -7,9 +7,9 @@ import {
     handleClick,
     reset,
     start
-} from "../actions/jsspeccy";
-import {reset as resetProject} from "../actions/project";
-import {showActiveEmulator} from "../actions/app";
+} from "../jsspeccy/jsspeccy";
+import {reset as resetProject} from "../project/project";
+import {showActiveEmulator} from "../app/app";
 
 // -----------------------------------------------------------------------------
 // Action watchers

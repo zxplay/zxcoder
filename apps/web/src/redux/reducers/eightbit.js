@@ -1,4 +1,4 @@
-import {actionTypes} from "../actions/eightbit";
+import {actionTypes} from "../eightbit/eightbit";
 
 // -----------------------------------------------------------------------------
 // Initial state

@@ -1,6 +1,6 @@
 import React, {Fragment, useEffect} from "react";
 import {useDispatch} from "react-redux";
-import {exit, renderEmulator} from "../redux/actions/jsspeccy";
+import {exit, renderEmulator} from "../redux/jsspeccy/jsspeccy";
 
 export default function RenderEmulator() {
     const dispatch = useDispatch();

@@ -1,4 +1,4 @@
-import {actionTypes} from "../actions/subscriber";
+import {actionTypes} from "../subscriber/subscriber";
 
 // -----------------------------------------------------------------------------
 // Initial state

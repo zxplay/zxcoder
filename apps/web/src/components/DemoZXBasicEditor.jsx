@@ -2,8 +2,8 @@ import React, {Fragment, useEffect, useRef} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Button} from "primereact/button";
 import CodeMirror from "./CodeMirror";
-import {setSelectedTabIndex} from "../redux/actions/demo";
-import {setZXBasicCode, runZXBasic} from "../redux/actions/demo";
+import {setSelectedTabIndex} from "../redux/demo/demo";
+import {setZXBasicCode, runZXBasic} from "../redux/demo/demo";
 import "../lib/syntax/zxbasic";
 
 export function DemoZXBasicEditor() {

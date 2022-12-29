@@ -1,7 +1,7 @@
 import axios from "axios";
 import {put, takeLatest} from "redux-saga/effects";
 import {handleRequestException} from "../../errors";
-import {actionTypes, setUserInfo} from "../actions/identity";
+import {actionTypes, setUserInfo} from "../identity/identity";
 import Constants from "../../constants";
 
 // -----------------------------------------------------------------------------

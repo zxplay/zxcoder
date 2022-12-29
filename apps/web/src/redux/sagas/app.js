@@ -6,9 +6,9 @@ import {
     actionTypes,
     receivePrivacyPolicy,
     receiveTermsOfUse
-} from "../actions/app";
-import {setSelectedTabIndex as setDemoTabIndex} from "../actions/demo";
-import {reset} from "../actions/jsspeccy";
+} from "../app/app";
+import {setSelectedTabIndex as setDemoTabIndex} from "../demo/demo";
+import {reset} from "../jsspeccy/jsspeccy";
 
 // -----------------------------------------------------------------------------
 // Action watchers

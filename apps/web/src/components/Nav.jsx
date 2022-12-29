@@ -7,11 +7,11 @@ import {
     pause,
     showOpenFileDialog,
     viewFullScreen
-} from "../redux/actions/jsspeccy";
-import {downloadProjectTap} from "../redux/actions/eightbit";
-import {getUserInfo} from "../redux/actions/identity";
+} from "../redux/jsspeccy/jsspeccy";
+import {downloadProjectTap} from "../redux/eightbit/eightbit";
+import {getUserInfo} from "../redux/identity/identity";
 import {login, logout} from "../auth";
-import {resetEmulator} from "../redux/actions/app";
+import {resetEmulator} from "../redux/app/app";
 
 export default function Nav() {
     const dispatch = useDispatch();

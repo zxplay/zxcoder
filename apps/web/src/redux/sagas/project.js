@@ -2,8 +2,8 @@ import {takeLatest, put, select, call} from "redux-saga/effects";
 import gql from "graphql-tag";
 import {history} from "../store";
 import {gqlFetch} from "../../graphql_fetch";
-import {actionTypes, reset, receiveLoadedProject, setSavedCode} from "../actions/project";
-import {pause, reset as resetMachine} from "../actions/jsspeccy";
+import {actionTypes, reset, receiveLoadedProject, setSavedCode} from "../project/project";
+import {pause, reset as resetMachine} from "../jsspeccy/jsspeccy";
 
 // -----------------------------------------------------------------------------
 // Action watchers

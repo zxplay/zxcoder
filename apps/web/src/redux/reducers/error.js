@@ -1,4 +1,4 @@
-import {actionTypes} from "../actions/error";
+import {actionTypes} from "../error/error";
 
 // -----------------------------------------------------------------------------
 // Initial state

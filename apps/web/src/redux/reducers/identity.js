@@ -1,4 +1,4 @@
-import {actionTypes} from "../actions/identity";
+import {actionTypes} from "../identity/identity";
 
 // -----------------------------------------------------------------------------
 // Initial state

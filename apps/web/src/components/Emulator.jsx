@@ -2,7 +2,7 @@ import React, {Fragment, useEffect} from "react";
 import PropTypes from "prop-types";
 import {useDispatch} from "react-redux";
 import {Keyboard} from "./Keyboard";
-import {loadEmulator} from "../redux/actions/jsspeccy";
+import {loadEmulator} from "../redux/jsspeccy/jsspeccy";
 
 export function Emulator(props) {
     const dispatch = useDispatch();
