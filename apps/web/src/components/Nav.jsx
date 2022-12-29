@@ -62,6 +62,10 @@ export default function Nav() {
 }
 
 function getMenuItems(navigate, userId, dispatch, lang, emuVisible) {
+    const sep = {
+        separator: true
+    };
+
     const homeButton = {
         label: 'ZX Play',
         command: () => {
@@ -189,39 +193,46 @@ function getMenuItems(navigate, userId, dispatch, lang, emuVisible) {
         ]
     };
 
+    const viewFullScreenMenuItem = {
+        label: 'Full Screen',
+        icon: 'pi pi-fw pi-window-maximize',
+        disabled: !emuVisible,
+        command: () => {
+            dispatch(viewFullScreen());
+        }
+    };
+
+    const viewProfileMenuItem = {
+        label: 'Your Profile',
+        icon: 'pi pi-fw pi-user',
+        disabled: !userId,
+        command: () => {
+            navigate(`/u/${userId}`);
+        }
+    };
+
+    const viewProjectsMenuItem = {
+        label: 'Your Projects',
+        icon: 'pi pi-fw pi-folder',
+        disabled: !userId,
+        command: () => {
+            navigate(`/u/${userId}/projects`);
+        }
+    };
+
     const viewMenu = {
         label: 'View',
         icon: 'pi pi-fw pi-eye',
-        items: [
-            {
-                label: 'Full Screen',
-                icon: 'pi pi-fw pi-window-maximize',
-                disabled: !emuVisible,
-                command: () => {
-                    dispatch(viewFullScreen());
-                }
-            },
-            {
-                separator: true
-            },
-            {
-                label: 'Your Profile',
-                icon: 'pi pi-fw pi-user',
-                disabled: !userId,
-                command: () => {
-                    navigate(`/u/${userId}`);
-                }
-            },
-            {
-                label: 'Your Projects',
-                icon: 'pi pi-fw pi-folder',
-                disabled: !userId,
-                command: () => {
-                    navigate(`/u/${userId}/projects`);
-                }
-            }
-        ]
+        items: []
     };
+
+    viewMenu.items.push(viewFullScreenMenuItem);
+    viewMenu.items.push(sep);
+
+    // NOTE: Projects not implemented so menu item is only shown in development.
+    if (Constants.isDev) viewMenu.items.push(viewProfileMenuItem);
+    
+    viewMenu.items.push(viewProjectsMenuItem);
 
     const infoMenu = {
         label: 'Info',
