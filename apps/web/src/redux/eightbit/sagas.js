@@ -153,9 +153,13 @@ function* handleGetProjectTapActions(_) {
         let tap;
         switch (lang) {
             case 'asm':
-                tap = yield call(getPasmoTap, code);
-                yield put(followTapAction(tap));
-                yield put(setFollowTapAction(undefined));
+                try {
+                    tap = yield call(getPasmoTap, code);
+                    yield put(followTapAction(tap));
+                    yield put(setFollowTapAction(undefined));
+                } catch (errorItems) {
+                    handleWasmErrorItems(errorItems);
+                }
                 break;
             case 'basic':
                 try {

@@ -48,8 +48,12 @@ function* handleSetSelectedTabIndexActions(_) {
 function* handleRunAssemblyActions(_) {
     try {
         const code = yield select((state) => state.demo.asmCode);
-        const tap = yield call(getPasmoTap, code);
-        store.dispatch(loadTap(tap));
+        try {
+            const tap = yield call(getPasmoTap, code);
+            store.dispatch(loadTap(tap));
+        } catch (errorItems) {
+            handleWasmErrorItems(errorItems);
+        }
     } catch (e) {
         console.error(e);
     }

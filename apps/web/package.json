@@ -42,7 +42,7 @@
     "jszip": "^3.10.1",
     "lodash.debounce": "^4.0.8",
     "pako": "^2.1.0",
-    "pasmo": "0.0.1-alpha.5",
+    "pasmo": "0.0.1-alpha.6",
     "primeflex": "^3.3.0",
     "primeicons": "^6.0.1",
     "primereact": "^8.7.3",
