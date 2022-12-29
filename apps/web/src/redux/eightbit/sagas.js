@@ -92,7 +92,7 @@ function* handleWorkerMessageActions(action) {
         const data = action.msg.data;
         console.log('handleWorkerMessageActions', data);
 
-        if (data.errors) {
+        if (data.errors && data.errors.length > 0) {
             handleWorkerCompileErrorItems(data.errors);
 
             /*
