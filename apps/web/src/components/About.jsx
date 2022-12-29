@@ -1,6 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import {Card} from "primereact/card";
+import Constants from "../constants";
 
 export default function About() {
     return (
@@ -41,13 +42,6 @@ export default function About() {
                     Licensed under terms of the GPL version 3 - see{' '}
                     <a href="https://github.com/stever/emscripten-pasmo/blob/main/COPYING" target="_blank">COPYING</a>.
                 </li>
-{/*
-                <li>
-                    <a href="https://github.com/boriel/zxbasic" target="_blank">Boriel ZX BASIC</a> by Jose Rodriguez.
-                    Licensed under terms of the GPL version 3 - see{' '}
-                    <a href="https://github.com/boriel/zxbasic/blob/master/LICENSE.txt" target="_blank">LICENSE</a>.
-                </li>
-*/}
                 <li>
                     <a href="https://github.com/stever/emscripten-zmakebas" target="_blank">zmakebas</a> by Russell Marks.
                     This tool is public domain.
@@ -57,6 +51,20 @@ export default function About() {
                     Steven Hugg. Licensed under terms of the GPL version 3 - see{' '}
                     <a href="https://github.com/sehugg/8bitworkshop/blob/master/LICENSE" target="_blank">LICENSE</a>.
                 </li>
+                {Constants.isDev &&
+                    <>
+                        <li>
+                            <a href="https://github.com/boriel/zxbasic" target="_blank">Boriel ZX BASIC</a> by Jose Rodriguez.
+                            Licensed under terms of the GPL version 3 - see{' '}
+                            <a href="https://github.com/boriel/zxbasic/blob/master/LICENSE.txt" target="_blank">LICENSE</a>.
+                        </li>
+                        <li>
+                            <a href="https://z88dk.org/" target="_blank">Z88DK</a> by various.
+                            Licensed under terms of The Clarified Artistic License - see{' '}
+                            <a href="https://github.com/z88dk/z88dk/wiki/license" target="_blank">LICENSE</a>.
+                        </li>
+                    </>
+                }
             </ul>
             <h2>Sinclair ROM Copyright Permission</h2>
             <blockquote>
