@@ -153,6 +153,7 @@ function* handleGetProjectTapActions(_) {
         let tap;
         switch (lang) {
             case 'asm':
+                // Pasmo
                 try {
                     tap = yield call(getPasmoTap, code);
                     yield put(followTapAction(tap));
@@ -162,6 +163,7 @@ function* handleGetProjectTapActions(_) {
                 }
                 break;
             case 'basic':
+                // Sinclair BASIC
                 try {
                     tap = yield call(getZmakebasTap, code);
                     yield put(followTapAction(tap));
@@ -171,19 +173,23 @@ function* handleGetProjectTapActions(_) {
                 }
                 break;
             case 'c':
+                // Z88DK
                 tap = yield call(getZ88dkTap, code, userId);
                 yield put(followTapAction(tap));
                 yield put(setFollowTapAction(undefined));
                 break;
             case 'sdcc':
+                // SDCC - Small Device C Compiler
                 // NOTE: Call another action to get the tap using worker.
                 yield put(getSdccTap());
                 break;
             case 'zmac':
+                // Z-80 Macro Cross Assembler
                 // NOTE: Call another action to get the tap using worker.
                 yield put(getZmacTap());
                 break;
             case 'zxbasic':
+                // Boriel ZX BASIC
                 tap = yield call(getZXBasicTap, code, userId);
                 yield put(followTapAction(tap));
                 yield put(setFollowTapAction(undefined));
