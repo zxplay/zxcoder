@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect} from "react";
+import React, {useEffect} from "react";
 import PropTypes from "prop-types";
 import {useDispatch} from "react-redux";
 import {Keyboard} from "./Keyboard";
@@ -16,10 +16,10 @@ export function Emulator(props) {
     }, []);
 
     return (
-        <Fragment>
+        <>
             <div id="jsspeccy-screen"/>
             <Keyboard width={width}/>
-        </Fragment>
+        </>
     )
 }
 

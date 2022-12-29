@@ -1,14 +1,14 @@
-import React, {Fragment} from "react";
+import React from "react";
 import {useSelector} from "react-redux";
 
 function RequireSubscriber({children}) {
     const received = useSelector(state => state?.subscriber.subscribeFunctionReceived);
 
     if (received) {
-        return <Fragment>{children}</Fragment>
+        return <>{children}</>
     }
 
-    return <Fragment/>
+    return <></>
 }
 
 export default RequireSubscriber;

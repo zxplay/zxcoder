@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect, useRef} from "react";
+import React, {useEffect, useRef} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Button} from "primereact/button";
 import {ConfirmPopup, confirmPopup} from "primereact/confirmpopup";
@@ -73,7 +73,7 @@ export function ProjectEditor() {
     }
 
     return (
-        <Fragment>
+        <>
             <CodeMirror
                 ref={cmRef}
                 options={options}
@@ -99,6 +99,6 @@ export function ProjectEditor() {
                 onClick={(e) => deleteConfirm(e)}
             />
             <ConfirmPopup/>
-        </Fragment>
+        </>
     )
 }
