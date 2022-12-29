@@ -4,8 +4,6 @@ import queryString from "query-string";
 import {TabPanel, TabView} from "primereact/tabview";
 import {DemoSinclairBasicEditor} from "./DemoSinclairBasicEditor";
 import {DemoAssemblyEditor} from "./DemoAssemblyEditor";
-import {DemoZXBasicEditor} from "./DemoZXBasicEditor";
-import {DemoCEditor} from "./DemoCEditor";
 import {Emulator} from "./Emulator";
 import {setSelectedTabIndex} from "../redux/demo/actions";
 import {reset as resetProject} from "../redux/project/actions";
@@ -53,14 +51,6 @@ export default function Demo() {
                         <TabPanel header="Sinclair BASIC">
                             <DemoSinclairBasicEditor/>
                         </TabPanel>
-{/*
-                        <TabPanel header="Boriel ZX BASIC">
-                            <DemoZXBasicEditor/>
-                        </TabPanel>
-                        <TabPanel header="C">
-                            <DemoCEditor/>
-                        </TabPanel>
-*/}
                     </TabView>
                 }
             </div>
