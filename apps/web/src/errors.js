@@ -1,6 +1,7 @@
 import StackTrace from "stacktrace-js";
 import {error} from "./redux/error/actions";
 import {store} from "./redux/store";
+import React from "react";
 
 export function handleError(title, description) {
     store.dispatch(error(title, description));
@@ -13,44 +14,6 @@ export function handleError(title, description) {
     };
 
     StackTrace.get().then(callback).catch((err) => console.error(err.message));
-}
-
-export function handleWasmCommandCompileErrorItems(errorItems) {
-    console.assert(Array.isArray(errorItems), errorItems);
-
-    for (let i = 0; i < errorItems.length; i++) {
-        const item = errorItems[i];
-        if (item.type === 'out') {
-            alert(`[stdout] ${item.text}`);
-        } else {
-            console.assert(item.type === 'err');
-            alert(`[stderr] ${item.text}`);
-        }
-    }
-}
-
-export function handleWorkerCompileErrorItems(errorItems) {
-    console.assert(Array.isArray(errorItems), errorItems);
-
-    for (let i = 0; i < errorItems.length; i++) {
-        const item = errorItems[i];
-        alert(`${item.msg} (line: ${item.line})`);
-    }
-}
-
-export function handleHasuraActionCompileErrorItems(errorItems) {
-    // TODO
-/*
-    for (let i = 0; i < errorItems.length; i++) {
-        const item = errorItems[i];
-        if (item.type === 'out') {
-            alert(`[stdout] ${item.text}`);
-        } else {
-            console.assert(item.type === 'err');
-            alert(`[stderr] ${item.text}`);
-        }
-    }
-*/
 }
 
 function isObject(value) {
@@ -96,4 +59,67 @@ function getRequestError(e) {
         title: 'Server Request Failed',
         description: 'Unexpected exception error when making the request.'
     }
+}
+
+export function getBuildErrorToast(item) {
+    if (item.type) {
+        return getBuildErrorWasmCommandToast(item);
+    } else if (item.line) {
+        return getBuildErrorWorkerToast(item);
+    }
+}
+
+function getBuildErrorWasmCommandToast(item) {
+    let isError = false;
+    let msg = item.text;
+
+    const errorPrefix = 'ERROR: ';
+
+    if (msg.startsWith(errorPrefix)) {
+        isError = true;
+        msg = msg.substr(errorPrefix.length);
+    }
+
+    if (item.type === 'err') {
+        isError = true;
+    }
+
+    return {
+        severity: isError ? 'error' : 'info',
+        sticky: true,
+        content: getBuildErrorToastContent(msg, isError)
+    };
+}
+
+function getBuildErrorWorkerToast(item) {
+    let isError = false;
+    let msg = item.msg;
+
+    const errorPrefix = 'error: ';
+
+    if (msg.startsWith(errorPrefix)) {
+        isError = true;
+        msg = msg.substr(errorPrefix.length);
+    }
+
+    msg = `Line ${item.line}: ${msg}`;
+
+    return {
+        severity: isError ? 'error' : 'info',
+        sticky: true,
+        content: getBuildErrorToastContent(msg, isError)
+    };
+}
+
+function getBuildErrorToastContent(msg, isError) {
+    return (
+        <div className="p-toast-message-text">
+            <span className="p-toast-summary">
+                Project Run - {isError ? 'Error' : 'Message'}
+            </span>
+            <div className="p-toast-detail">
+                {msg}
+            </div>
+        </div>
+    )
 }

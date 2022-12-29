@@ -8,6 +8,7 @@ export const actionTypes = {
     setSavedCode: 'project/setSavedCode',
     saveCodeChanges: 'project/saveCodeChanges',
     deleteProject: 'project/deleteProject',
+    setErrorItems: 'project/setErrorItems',
 };
 
 export const reset = () => ({
@@ -50,4 +51,9 @@ export const saveCodeChanges = () => ({
 
 export const deleteProject = () => ({
     type: actionTypes.deleteProject
+});
+
+export const setErrorItems = (errorItems) => ({
+    type: actionTypes.setErrorItems,
+    errorItems
 });

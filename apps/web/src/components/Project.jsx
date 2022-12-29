@@ -1,10 +1,12 @@
-import React, {Fragment, useEffect} from "react";
+import React, {Fragment, useEffect, useRef} from "react";
 import {useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {TabPanel, TabView} from "primereact/tabview";
+import {Toast} from "primereact/toast";
 import {Emulator} from "./Emulator";
-import {loadProject, setSelectedTabIndex} from "../redux/project/actions";
 import {ProjectEditor} from "./ProjectEditor";
+import {loadProject, setSelectedTabIndex, setErrorItems} from "../redux/project/actions";
+import {getBuildErrorToast} from "../errors";
 
 export default function Project() {
     const {id} = useParams();
@@ -15,11 +17,31 @@ export default function Project() {
     const tab = useSelector(state => state?.project.selectedTabIndex);
     const lang = useSelector(state => state?.project.lang);
     let title = useSelector(state => state?.project.title);
+    const errorItems = useSelector(state => state?.project.errorItems);
+
+    const toast = useRef(null);
 
     useEffect(() => {
         dispatch(loadProject(id));
-        return () => {}
+        return () => {};
     }, [id, userId]);
+
+    useEffect(() => {
+        if (errorItems && errorItems.length > 0 && toast.current) {
+            const toasts = [];
+
+            for (let i = 0; i < errorItems.length; i++) {
+                const item = errorItems[i];
+                toasts.push(getBuildErrorToast(item));
+            }
+
+            toast.current.show(toasts);
+
+            dispatch(setErrorItems(undefined));
+        }
+
+        return () => {};
+    }, [errorItems, toast.current]);
 
     if (!id || !lang) {
         return <Fragment/>;
@@ -57,24 +79,27 @@ export default function Project() {
     }
 
     return (
-        <div className="mx-2 my-1">
-            <div className="grid" style={{width: "100%", padding: 0, margin: 0}}>
-                <div className="col p-0 mr-2" style={{maxWidth: `calc(100vw - ${width + 41}px`}}>
-                    <TabView
-                        activeIndex={tab}
-                        onTabChange={(e) => dispatch(setSelectedTabIndex(e.index))}>
-                        <TabPanel header={editorTitle}>
-                            <ProjectEditor id={id}/>
-                        </TabPanel>
-                    </TabView>
-                </div>
-                <div className="col-fixed p-0 pt-1" style={{width: `${width}px`}}>
-                    <div style={{height: '53px'}} className="pt-3 pl-1">
-                        <h3>{title}</h3>
+        <>
+            <Toast ref={toast}/>
+            <div className="mx-2 my-1">
+                <div className="grid" style={{width: "100%", padding: 0, margin: 0}}>
+                    <div className="col p-0 mr-2" style={{maxWidth: `calc(100vw - ${width + 41}px`}}>
+                        <TabView
+                            activeIndex={tab}
+                            onTabChange={(e) => dispatch(setSelectedTabIndex(e.index))}>
+                            <TabPanel header={editorTitle}>
+                                <ProjectEditor id={id}/>
+                            </TabPanel>
+                        </TabView>
                     </div>
-                    <Emulator zoom={zoom} width={width}/>
+                    <div className="col-fixed p-0 pt-1" style={{width: `${width}px`}}>
+                        <div style={{height: '53px'}} className="pt-3 pl-1">
+                            <h3>{title}</h3>
+                        </div>
+                        <Emulator zoom={zoom} width={width}/>
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }

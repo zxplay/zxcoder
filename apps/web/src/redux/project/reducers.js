@@ -10,7 +10,8 @@ const initialState = {
     id: undefined,
     title: undefined,
     code: '',
-    savedCode: ''
+    savedCode: '',
+    errorItems: undefined
 };
 
 // -----------------------------------------------------------------------------
@@ -62,6 +63,13 @@ function setSavedCode(state, action) {
     };
 }
 
+function setErrorItems(state, action) {
+    return {
+        ...state,
+        errorItems: action.errorItems,
+    };
+}
+
 // -----------------------------------------------------------------------------
 // Reducer
 // -----------------------------------------------------------------------------
@@ -74,6 +82,7 @@ const actionsMap = {
     [actionTypes.receiveLoadedProject]: receiveLoadedProject,
     [actionTypes.setCode]: setCode,
     [actionTypes.setSavedCode]: setSavedCode,
+    [actionTypes.setErrorItems]: setErrorItems,
 };
 
 export default function reducer(state = initialState, action) {

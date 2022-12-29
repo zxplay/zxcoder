@@ -16,11 +16,7 @@ import {
     setFollowTapAction
 } from "./actions";
 import {loadTap} from "../jsspeccy/actions";
-import {
-    handleHasuraActionCompileErrorItems,
-    handleWasmCommandCompileErrorItems,
-    handleWorkerCompileErrorItems
-} from "../../errors";
+import {setErrorItems} from "../project/actions";
 
 // -----------------------------------------------------------------------------
 // Action watchers
@@ -90,22 +86,10 @@ function* handleWorkerMessageActions(action) {
         console.assert(action?.msg?.data, action);
 
         const data = action.msg.data;
-        console.log('handleWorkerMessageActions', data);
 
         if (data.errors && data.errors.length > 0) {
-            handleWorkerCompileErrorItems(data.errors);
-
-            /*
-            const errors = data.errors;
-            console.assert(Array.isArray(errors), errors);
-            for (let i = 0; i < errors.length; i++) {
-                const error = errors[i];
-                console.error(`${error.msg} (line: ${error.line})`, error);
-            }
-            */
-
-            // Don't continue on errors.
-            return;
+            yield put(setErrorItems(data.errors));
+            return; // Don't continue on errors.
         }
 
         /*
@@ -170,7 +154,7 @@ function* handleGetProjectTapActions(_) {
                     yield put(followTapAction(tap));
                     yield put(setFollowTapAction(undefined));
                 } catch (errorItems) {
-                    handleWasmCommandCompileErrorItems(errorItems);
+                    yield put(setErrorItems(errorItems));
                 }
                 break;
             case 'basic':
@@ -180,7 +164,7 @@ function* handleGetProjectTapActions(_) {
                     yield put(followTapAction(tap));
                     yield put(setFollowTapAction(undefined));
                 } catch (errorItems) {
-                    handleWasmCommandCompileErrorItems(errorItems);
+                    yield put(setErrorItems(errorItems));
                 }
                 break;
             case 'zxbasic':
@@ -190,7 +174,7 @@ function* handleGetProjectTapActions(_) {
                     yield put(followTapAction(tap));
                     yield put(setFollowTapAction(undefined));
                 } catch (errorItems) {
-                    handleHasuraActionCompileErrorItems(errorItems);
+                    yield put(setErrorItems(errorItems));
                 }
                 break;
             case 'c':
@@ -200,7 +184,7 @@ function* handleGetProjectTapActions(_) {
                     yield put(followTapAction(tap));
                     yield put(setFollowTapAction(undefined));
                 } catch (errorItems) {
-                    handleHasuraActionCompileErrorItems(errorItems);
+                    yield put(setErrorItems(errorItems));
                 }
                 break;
             case 'zmac':
