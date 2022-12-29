@@ -6,32 +6,55 @@ import {Button} from "primereact/button";
 import {sep} from "../constants";
 
 ErrorPage.propTypes = {
-    statusCode: PropTypes.number,
-    msg: PropTypes.string
+    msg: PropTypes.string.isRequired
 }
 
-export default function ErrorPage(props) {
-    let msg;
-    if (props.msg) {
-        msg = props.msg;
-    } else if (props.statusCode) {
-        msg = `An error ${props.statusCode} occurred on server`;
-    } else {
-        msg = 'An error occurred on client';
+export default function ErrorPage({msg}) {
+
+    function handleReload() {
+        window.location.reload();
+    }
+
+    function handleGoHome() {
+        window.location.href = '/';
+    }
+
+    function handleGoBack() {
+        history.back();
     }
 
     return (
         <Titled title={(s) => `Error ${sep} ${s}`}>
             <Card className="m-2" style={{textAlign: 'center'}}>
                 <div className="m-4">
-                    {msg}
+                    <p>Sorry, an unexpected error occurred.</p>
+                    <p>Error message is:</p>
+                    <div className="font-italic">{msg}</div>
                 </div>
-                <Button
-                    type="button"
-                    className="p-button-text"
-                    label="GO BACK TO DASHBOARD"
-                    onClick={() => window.location = '/'}
-                />
+                <div>
+                    <p>Press one of the following buttons:</p>
+                    <Button
+                        type="button"
+                        className="p-button-outlined mr-3"
+                        label="Reload"
+                        title="Reload this page"
+                        onClick={handleReload}
+                    />
+                    <Button
+                        type="button"
+                        className="p-button-outlined mr-3"
+                        label="Restart"
+                        title="Return to home page"
+                        onClick={handleGoHome}
+                    />
+                    <Button
+                        type="button"
+                        className="p-button-outlined"
+                        label="Go Back"
+                        title="Go back to previous page"
+                        onClick={handleGoBack}
+                    />
+                </div>
             </Card>
         </Titled>
     )

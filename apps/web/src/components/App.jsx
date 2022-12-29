@@ -24,26 +24,15 @@ import SearchPage from "./SearchPage";
 import YourProfilePage from "./YourProfilePage";
 import YourProjectsPage from "./YourProjectsPage";
 import ErrorNotFoundPage from "./ErrorNotFoundPage";
+import ErrorPage from "./ErrorPage";
 
 export default function App() {
-    // const err = useSelector(state => state?.error.msg);
+    const err = useSelector(state => state?.error.msg);
 
     // Hide tabs when loading external tape files.
     const search = useSelector(state => state?.router.location.search);
     const parsed = queryString.parse(search);
     const externalLoad = typeof parsed.u !== 'undefined';
-
-    /* TODO
-    if (err) {
-        return (
-            <>
-                <div className="pb-1">
-                    <Nav/>
-                </div>
-            </>
-        )
-    }
-    */
 
     return (
         <Titled title={() => 'ZX Play'}>
@@ -54,26 +43,31 @@ export default function App() {
                 {!externalLoad &&
                     <Nav/>
                 }
-                <ErrorBoundary>
-                    <Routes>
-                        <Route exact path="/" element={<HomePage/>}/>
-                        <Route exact path="/about" element={<MaxWidth><AboutPage/></MaxWidth>}/>
-                        <Route exact path="/info/linking" element={<MaxWidth><LinkingPage/></MaxWidth>}/>
-                        <Route exact path="/legal/privacy-policy" element={<MaxWidth><PrivacyPolicyPage/></MaxWidth>}/>
-                        <Route exact path="/legal/terms-of-use" element={<MaxWidth><TermsOfUsePage/></MaxWidth>}/>
-                        <Route exact path="/new/asm" element={<MaxWidth><NewProjectPage type="asm"/></MaxWidth>}/>
-                        <Route exact path="/new/basic" element={<MaxWidth><NewProjectPage type="basic"/></MaxWidth>}/>
-                        <Route exact path="/new/c" element={<MaxWidth><NewProjectPage type="c"/></MaxWidth>}/>
-                        <Route exact path="/new/sdcc" element={<MaxWidth><NewProjectPage type="sdcc"/></MaxWidth>}/>
-                        <Route exact path="/new/zmac" element={<MaxWidth><NewProjectPage type="zmac"/></MaxWidth>}/>
-                        <Route exact path="/new/zxbasic" element={<MaxWidth><NewProjectPage type="zxbasic"/></MaxWidth>}/>
-                        <Route exact path="/projects/:id" element={<ProjectPage/>}/>
-                        <Route path="/search" element={<SearchPage/>}/>
-                        <Route exact path="/u/:id" element={<YourProfilePage/>}/>
-                        <Route exact path="/u/:id/projects" element={<YourProjectsPage/>}/>
-                        <Route path="*" element={<ErrorNotFoundPage/>}/>
-                    </Routes>
-                </ErrorBoundary>
+                {err &&
+                    <ErrorPage msg={err}/>
+                }
+                {!err &&
+                    <ErrorBoundary>
+                        <Routes>
+                            <Route exact path="/" element={<HomePage/>}/>
+                            <Route exact path="/about" element={<MaxWidth><AboutPage/></MaxWidth>}/>
+                            <Route exact path="/info/linking" element={<MaxWidth><LinkingPage/></MaxWidth>}/>
+                            <Route exact path="/legal/privacy-policy" element={<MaxWidth><PrivacyPolicyPage/></MaxWidth>}/>
+                            <Route exact path="/legal/terms-of-use" element={<MaxWidth><TermsOfUsePage/></MaxWidth>}/>
+                            <Route exact path="/new/asm" element={<MaxWidth><NewProjectPage type="asm"/></MaxWidth>}/>
+                            <Route exact path="/new/basic" element={<MaxWidth><NewProjectPage type="basic"/></MaxWidth>}/>
+                            <Route exact path="/new/c" element={<MaxWidth><NewProjectPage type="c"/></MaxWidth>}/>
+                            <Route exact path="/new/sdcc" element={<MaxWidth><NewProjectPage type="sdcc"/></MaxWidth>}/>
+                            <Route exact path="/new/zmac" element={<MaxWidth><NewProjectPage type="zmac"/></MaxWidth>}/>
+                            <Route exact path="/new/zxbasic" element={<MaxWidth><NewProjectPage type="zxbasic"/></MaxWidth>}/>
+                            <Route exact path="/projects/:id" element={<ProjectPage/>}/>
+                            <Route path="/search" element={<SearchPage/>}/>
+                            <Route exact path="/u/:id" element={<YourProfilePage/>}/>
+                            <Route exact path="/u/:id/projects" element={<YourProjectsPage/>}/>
+                            <Route path="*" element={<ErrorNotFoundPage/>}/>
+                        </Routes>
+                    </ErrorBoundary>
+                }
             </div>
         </Titled>
     )
