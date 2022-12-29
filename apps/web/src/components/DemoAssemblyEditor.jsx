@@ -39,10 +39,7 @@ export function DemoAssemblyEditor() {
                 label="Run"
                 icon="pi pi-play"
                 style={{marginTop: "8px"}}
-                onClick={() => {
-                    dispatch(setSelectedTabIndex(0));
-                    dispatch(runAssembly());
-                }}
+                onClick={() => dispatch(runAssembly())}
             />
         </Fragment>
     )

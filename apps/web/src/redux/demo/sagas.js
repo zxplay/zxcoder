@@ -1,8 +1,7 @@
 import {takeLatest, select, put, call} from "redux-saga/effects";
 import getZmakebasTap from "zmakebas";
 import getPasmoTap from "pasmo";
-import {actionTypes} from "./actions";
-import {store} from "../store";
+import {actionTypes, setSelectedTabIndex} from "./actions";
 import {loadTap, pause} from "../jsspeccy/actions";
 import {setErrorItems} from "../project/actions";
 
@@ -38,7 +37,8 @@ function* handleRunAssemblyActions(_) {
         const code = yield select((state) => state.demo.asmCode);
         try {
             const tap = yield call(getPasmoTap, code);
-            store.dispatch(loadTap(tap));
+            yield put(loadTap(tap));
+            yield put(setSelectedTabIndex(0));
         } catch (errorItems) {
             yield put(setErrorItems(errorItems));
         }
@@ -52,7 +52,8 @@ function* handleRunSinclairBasicActions(_) {
         const code = yield select((state) => state.demo.sinclairBasicCode);
         try {
             const tap = yield call(getZmakebasTap, code);
-            store.dispatch(loadTap(tap));
+            yield put(loadTap(tap));
+            yield put(setSelectedTabIndex(0));
         } catch (errorItems) {
             yield put(setErrorItems(errorItems));
         }
