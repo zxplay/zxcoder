@@ -26,7 +26,7 @@ export default function Nav() {
 
     const emuVisible = (pathname === '/' && selectedDemoTab === 0) || pathname.startsWith('/projects/');
 
-    const start = <img alt="logo" src="/logo.png" height="40" className="mr-2"/>;
+    const start = <img alt="logo" src="/logo.png" height={"40"} className="mr-2"/>;
     const end = (
         <InputText
             placeholder="Search"
