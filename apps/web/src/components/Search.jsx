@@ -43,7 +43,7 @@ export default function Search() {
     function itemTemplate(rowData) {
         const id = rowData.identifier;
         return (
-            <a href="pages#" onClick={() => {
+            <a href="#" onClick={() => {
                 const url = `https://archive.org/metadata/${id}`;
 
                 axios.get(url).then((response) => {
