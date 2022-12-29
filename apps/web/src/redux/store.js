@@ -6,14 +6,14 @@ import {createBrowserHistory} from "history";
 import Constants from "../constants";
 
 // Reducers
-import appReducer from "./app/app";
-import demoReducer from "./demo/demo";
-import eightbitReducer from "./eightbit/eightbit";
-import errorReducer from "./error/error";
-import identityReducer from "./identity/identity";
-import projectReducer from "./project/project";
-import projectListReducer from "./projectList/projectList";
-import subscriberReducer from "./subscriber/subscriber";
+import appReducer from "./app/reducers";
+import demoReducer from "./demo/reducers";
+import eightbitReducer from "./eightbit/reducers";
+import errorReducer from "./error/reducers";
+import identityReducer from "./identity/reducers";
+import projectReducer from "./project/reducers";
+import projectListReducer from "./projectList/reducers";
+import subscriberReducer from "./subscriber/reducers";
 
 // Sagas
 import * as appSagas from "./sagas/app";
