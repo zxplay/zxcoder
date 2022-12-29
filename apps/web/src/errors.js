@@ -1,19 +1,10 @@
-import StackTrace from "stacktrace-js";
 import {error} from "./redux/error/actions";
 import {store} from "./redux/store";
 import React from "react";
 
-export function handleError(title, description) {
-    store.dispatch(error(title, description));
-
-    const callback = (stackframes) => {
-        stackframes.shift(); // Removes first item showing this function.
-        const str = stackframes.map((sf) => sf.toString()).join('\n');
-        if (isObject(description)) description = JSON.stringify(description);
-        console.error(`${title}\n${description}\nStack trace:\n${str}`);
-    };
-
-    StackTrace.get().then(callback).catch((err) => console.error(err.message));
+export function handleError(title, data) {
+    console.error(title, data);
+    store.dispatch(actions(title));
 }
 
 function isObject(value) {
