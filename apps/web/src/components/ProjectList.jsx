@@ -7,7 +7,7 @@ import {Column} from "primereact/column";
 import {
     subscribeToProjectList,
     unsubscribeFromProjectList
-} from "../redux/projectList/projectList";
+} from "../redux/projectList/actions";
 
 export default function ProjectList() {
     const dispatch = useDispatch();

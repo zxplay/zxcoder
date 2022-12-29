@@ -1,4 +1,4 @@
-import {actionTypes} from "../demo/demo";
+import {actionTypes} from "../demo/actions";
 
 // -----------------------------------------------------------------------------
 // Initial state

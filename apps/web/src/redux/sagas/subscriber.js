@@ -1,8 +1,8 @@
 import {put, take, takeLatest, takeEvery, select} from "redux-saga/effects";
 import {eventChannel} from "redux-saga";
 import {print} from "graphql";
-import {actionTypes as userActions} from "../identity/identity";
-import {actionTypes, connectClient, notifySubscribeFunctionReceived} from "../subscriber/subscriber";
+import {actionTypes as userActions} from "../identity/actions";
+import {actionTypes, connectClient, notifySubscribeFunctionReceived} from "../subscriber/actions";
 import {SubscriptionClient, EventError, GraphQLError} from "../../graphql_subscription_client";
 import {handleRequestException, handleError} from "../../errors";
 import {login, getAuthToken, isExpired, refreshToken} from "../../auth";

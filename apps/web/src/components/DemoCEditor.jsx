@@ -2,8 +2,8 @@ import React, {Fragment, useEffect, useRef} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Button} from "primereact/button";
 import CodeMirror from "./CodeMirror";
-import {setSelectedTabIndex} from "../redux/demo/demo";
-import {setCCode, runC} from "../redux/demo/demo";
+import {setSelectedTabIndex} from "../redux/demo/actions";
+import {setCCode, runC} from "../redux/demo/actions";
 import "../lib/syntax/z88dk-c";
 
 export function DemoCEditor() {

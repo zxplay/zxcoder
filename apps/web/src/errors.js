@@ -1,5 +1,5 @@
 import StackTrace from "stacktrace-js";
-import {error} from "./redux/error/error";
+import {error} from "./redux/error/actions";
 import {store} from "./redux/store";
 
 export function handleError(title, description) {

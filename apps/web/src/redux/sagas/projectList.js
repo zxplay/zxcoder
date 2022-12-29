@@ -5,12 +5,12 @@ import {
     receiveprojectListQueryResult,
     subscribeToProjectList,
     subscribeToProjectListCallback,
-} from "../projectList/projectList";
+} from "../projectList/actions";
 import {
     subscribe,
     subscribeAction,
     unsubscribeAction
-} from "../subscriber/subscriber";
+} from "../subscriber/actions";
 import {handleError} from "../../errors";
 
 // -----------------------------------------------------------------------------

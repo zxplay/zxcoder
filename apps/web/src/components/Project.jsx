@@ -3,7 +3,7 @@ import {useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {TabPanel, TabView} from "primereact/tabview";
 import {Emulator} from "./Emulator";
-import {loadProject, setSelectedTabIndex} from "../redux/project/project";
+import {loadProject, setSelectedTabIndex} from "../redux/project/actions";
 import {ProjectEditor} from "./ProjectEditor";
 
 export default function Project() {

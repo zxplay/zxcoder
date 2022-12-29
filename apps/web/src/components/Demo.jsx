@@ -7,9 +7,9 @@ import {DemoAssemblyEditor} from "./DemoAssemblyEditor";
 import {DemoZXBasicEditor} from "./DemoZXBasicEditor";
 import {DemoCEditor} from "./DemoCEditor";
 import {Emulator} from "./Emulator";
-import {setSelectedTabIndex} from "../redux/demo/demo";
-import {reset as resetProject} from "../redux/project/project";
-import {reset} from "../redux/jsspeccy/jsspeccy";
+import {setSelectedTabIndex} from "../redux/demo/actions";
+import {reset as resetProject} from "../redux/project/actions";
+import {reset} from "../redux/jsspeccy/actions";
 
 export default function Demo() {
     const dispatch = useDispatch();

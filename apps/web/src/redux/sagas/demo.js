@@ -1,7 +1,7 @@
 import {takeLatest, select, put, call} from "redux-saga/effects";
-import {actionTypes} from "../demo/demo";
+import {actionTypes} from "../demo/actions";
 import {store} from "../store";
-import {loadTap, pause} from "../jsspeccy/jsspeccy";
+import {loadTap, pause} from "../jsspeccy/actions";
 import pasmo from "pasmo";
 import zmakebas from "zmakebas";
 import gql from "graphql-tag";

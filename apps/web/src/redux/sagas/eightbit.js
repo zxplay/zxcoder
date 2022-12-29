@@ -12,8 +12,8 @@ import {
     handleWorkerMessage,
     runTap,
     setFollowTapAction
-} from "../eightbit/eightbit";
-import {loadTap} from "../jsspeccy/jsspeccy";
+} from "../eightbit/actions";
+import {loadTap} from "../jsspeccy/actions";
 import getZmakebasTap from "zmakebas";
 import getPasmoTap, {bin2tap} from "pasmo";
 

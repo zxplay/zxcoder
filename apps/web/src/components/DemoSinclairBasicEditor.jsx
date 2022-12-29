@@ -2,8 +2,8 @@ import React, {Fragment, useEffect, useRef} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Button} from "primereact/button";
 import CodeMirror from "./CodeMirror";
-import {setSelectedTabIndex} from "../redux/demo/demo";
-import {setSinclairBasicCode, runSinclairBasic} from "../redux/demo/demo";
+import {setSelectedTabIndex} from "../redux/demo/actions";
+import {setSinclairBasicCode, runSinclairBasic} from "../redux/demo/actions";
 import "../lib/syntax/zmakebas";
 
 export function DemoSinclairBasicEditor() {

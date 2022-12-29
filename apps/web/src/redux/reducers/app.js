@@ -1,4 +1,4 @@
-import {actionTypes} from "../app/app";
+import {actionTypes} from "../app/actions";
 
 // -----------------------------------------------------------------------------
 // Initial state
