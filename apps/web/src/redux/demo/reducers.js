@@ -173,20 +173,6 @@ function setSinclairBasicCode(state, action) {
     }
 }
 
-function setZXBasicCode(state, action) {
-    return {
-        ...state,
-        zxBasicCode: action.code
-    }
-}
-
-function setCCode(state, action) {
-    return {
-        ...state,
-        cCode: action.code
-    }
-}
-
 // -----------------------------------------------------------------------------
 // Reducer
 // -----------------------------------------------------------------------------
@@ -195,8 +181,6 @@ const actionsMap = {
     [actionTypes.setSelectedTabIndex]: setSelectedTabIndex,
     [actionTypes.setAssemblyCode]: setAssemblyCode,
     [actionTypes.setSinclairBasicCode]: setSinclairBasicCode,
-    [actionTypes.setZXBasicCode]: setZXBasicCode,
-    [actionTypes.setCCode]: setCCode,
 };
 
 export default function reducer(state = initialState, action) {
