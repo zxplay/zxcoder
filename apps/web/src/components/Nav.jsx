@@ -12,6 +12,7 @@ import {downloadProjectTap} from "../redux/eightbit/actions";
 import {getUserInfo} from "../redux/identity/actions";
 import {login, logout} from "../auth";
 import {resetEmulator} from "../redux/app/actions";
+import Constants from "../constants";
 
 export default function Nav() {
     const dispatch = useDispatch();
@@ -43,192 +44,7 @@ export default function Nav() {
         dispatch(getUserInfo());
     }, []);
 
-    const items = [
-        {
-            label: 'ZX Play',
-            command: () => {
-                navigate('/');
-            }
-        },
-        {
-            label: 'Project',
-            icon: 'pi pi-fw pi-file',
-            items: [
-                {
-                    label: 'New Project',
-                    icon: 'pi pi-fw pi-plus',
-                    disabled: !userId,
-                    items: [
-                        {
-                            label: 'Z80 Assembly',
-                            items: [
-                                {
-                                    label: 'Pasmo',
-                                    command: () => {
-                                        dispatch(pause());
-                                        navigate('/new/asm');
-                                    }
-                                },
-                                {
-                                    label: 'zmac',
-                                    command: () => {
-                                        dispatch(pause());
-                                        navigate('/new/zmac');
-                                    }
-                                }
-                            ]
-                        },
-                        {
-                            label: 'BASIC',
-                            items: [
-                                // {
-                                //     label: 'Boriel ZX',
-                                //     command: () => {
-                                //         dispatch(pause());
-                                //         navigate('/new/zxbasic');
-                                //     }
-                                // },
-                                {
-                                    label: 'Sinclair (zmakebas)',
-                                    command: () => {
-                                        dispatch(pause());
-                                        navigate('/new/basic');
-                                    }
-                                }
-                            ]
-                        },
-                        {
-                            label: 'C',
-                            items: [
-                                // {
-                                //     label: 'z88dk zcc',
-                                //     command: () => {
-                                //         dispatch(pause());
-                                //         navigate('/new/c');
-                                //     }
-                                // },
-                                {
-                                    label: 'SDCC',
-                                    command: () => {
-                                        dispatch(pause());
-                                        navigate('/new/sdcc');
-                                    }
-                                }
-                            ]
-                        },
-                    ]
-                },
-                {
-                    label: 'Open Project',
-                    icon: 'pi pi-fw pi-folder-open',
-                    disabled: !userId,
-                    command: () => {
-                        navigate(`/u/${userId}/projects`);
-                    }
-                },
-                {
-                    separator: true
-                },
-                {
-                    label: 'Upload TAP',
-                    icon: 'pi pi-fw pi-upload',
-                    command: () => {
-                        dispatch(showOpenFileDialog());
-                        navigate('/');
-                    }
-                },
-                {
-                    label: 'Download TAP',
-                    icon: 'pi pi-fw pi-download',
-                    disabled: typeof lang === 'undefined',
-                    command: () => {
-                        dispatch(downloadProjectTap());
-                    }
-                }
-            ]
-        },
-        {
-            label: 'View',
-            icon: 'pi pi-fw pi-eye',
-            items: [
-                {
-                    label: 'Full Screen',
-                    icon: 'pi pi-fw pi-window-maximize',
-                    disabled: !emuVisible,
-                    command: () => {
-                        dispatch(viewFullScreen());
-                    }
-                },
-                {
-                    separator: true
-                },
-                {
-                    label: 'Your Profile',
-                    icon: 'pi pi-fw pi-user',
-                    disabled: !userId,
-                    command: () => {
-                        navigate(`/u/${userId}`);
-                    }
-                },
-                {
-                    label: 'Your Projects',
-                    icon: 'pi pi-fw pi-folder',
-                    disabled: !userId,
-                    command: () => {
-                        navigate(`/u/${userId}/projects`);
-                    }
-                }
-            ]
-        },
-        {
-            label: 'Info',
-            icon: 'pi pi-fw pi-info-circle',
-            items: [
-                {
-                    label: 'About This Site',
-                    icon: 'pi pi-fw pi-question-circle',
-                    command: () => {
-                        navigate('/about');
-                    }
-                },
-                {
-                    label: 'Linking To ZX Play',
-                    icon: 'pi pi-fw pi-link',
-                    command: () => {
-                        navigate('/info/linking');
-                    }
-                },
-                {
-                    label: 'Privacy Policy',
-                    icon: 'pi pi-fw pi-eye',
-                    command: () => {
-                        navigate('/legal/privacy-policy');
-                    }
-                },
-                {
-                    label: 'Terms of Use',
-                    icon: 'pi pi-fw pi-info-circle',
-                    command: () => {
-                        navigate('/legal/terms-of-use');
-                    }
-                }
-            ]
-        },
-        {
-            label: 'Reset',
-            icon: 'pi pi-fw pi-power-off',
-            command: () => {
-                dispatch(resetEmulator());
-            }
-        },
-        {
-            label: userId ? 'Sign-out' : 'Sign-in',
-            icon: userId ? 'pi pi-fw pi-sign-out' : 'pi pi-fw pi-sign-in',
-            command: () => {
-                userId ? logout() : login()
-            }
-        }
-    ];
+    const items = getMenuItems(navigate, userId, dispatch, lang, emuVisible);
 
     return (
         <div className="px-2 pt-2">
@@ -243,4 +59,227 @@ export default function Nav() {
             />
         </div>
     );
+}
+
+function getMenuItems(navigate, userId, dispatch, lang, emuVisible) {
+    const homeButton = {
+        label: 'ZX Play',
+        command: () => {
+            navigate('/');
+        }
+    };
+
+    const newPasmo = {
+        label: 'Pasmo',
+        command: () => {
+            dispatch(pause());
+            navigate('/new/asm');
+        }
+    };
+
+    const newZmac = {
+        label: 'zmac',
+        command: () => {
+            dispatch(pause());
+            navigate('/new/zmac');
+        }
+    };
+
+    const newBoriel = {
+        label: 'Boriel ZX',
+        command: () => {
+            dispatch(pause());
+            navigate('/new/zxbasic');
+        }
+    };
+
+    const newBasic = {
+        label: 'Sinclair (zmakebas)',
+        command: () => {
+            dispatch(pause());
+            navigate('/new/basic');
+        }
+    };
+
+    const newZ88dk = {
+        label: 'z88dk zcc',
+        command: () => {
+            dispatch(pause());
+            navigate('/new/c');
+        }
+    };
+
+    const newSdcc = {
+        label: 'SDCC',
+        command: () => {
+            dispatch(pause());
+            navigate('/new/sdcc');
+        }
+    };
+
+    const z80Menu = {
+        label: 'Z80 Assembly',
+        items: []
+    };
+
+    z80Menu.items.push(newPasmo);
+    z80Menu.items.push(newZmac);
+
+    const basicMenu = {
+        label: 'BASIC',
+        items: []
+    };
+
+    basicMenu.items.push(newBasic);
+
+    // NOTE: Boriel ZX Basic projects are supported by an API which is not currently provided in production.
+    if (Constants.isDev) basicMenu.items.push(newBoriel);
+
+    const cMenu = {
+        label: 'C',
+        items: []
+    };
+
+    cMenu.items.push(newSdcc);
+
+    // NOTE: Z88DK projects are supported by an API which is not currently provided in production.
+    if (Constants.isDev) cMenu.items.push(newZ88dk);
+
+    const projectMenu = {
+        label: 'Project',
+        icon: 'pi pi-fw pi-file',
+        items: [
+            {
+                label: 'New Project',
+                icon: 'pi pi-fw pi-plus',
+                disabled: !userId,
+                items: [
+                    z80Menu,
+                    basicMenu,
+                    cMenu,
+                ]
+            },
+            {
+                label: 'Open Project',
+                icon: 'pi pi-fw pi-folder-open',
+                disabled: !userId,
+                command: () => {
+                    navigate(`/u/${userId}/projects`);
+                }
+            },
+            {
+                separator: true
+            },
+            {
+                label: 'Upload TAP',
+                icon: 'pi pi-fw pi-upload',
+                command: () => {
+                    dispatch(showOpenFileDialog());
+                    navigate('/');
+                }
+            },
+            {
+                label: 'Download TAP',
+                icon: 'pi pi-fw pi-download',
+                disabled: typeof lang === 'undefined',
+                command: () => {
+                    dispatch(downloadProjectTap());
+                }
+            }
+        ]
+    };
+
+    const viewMenu = {
+        label: 'View',
+        icon: 'pi pi-fw pi-eye',
+        items: [
+            {
+                label: 'Full Screen',
+                icon: 'pi pi-fw pi-window-maximize',
+                disabled: !emuVisible,
+                command: () => {
+                    dispatch(viewFullScreen());
+                }
+            },
+            {
+                separator: true
+            },
+            {
+                label: 'Your Profile',
+                icon: 'pi pi-fw pi-user',
+                disabled: !userId,
+                command: () => {
+                    navigate(`/u/${userId}`);
+                }
+            },
+            {
+                label: 'Your Projects',
+                icon: 'pi pi-fw pi-folder',
+                disabled: !userId,
+                command: () => {
+                    navigate(`/u/${userId}/projects`);
+                }
+            }
+        ]
+    };
+
+    const infoMenu = {
+        label: 'Info',
+        icon: 'pi pi-fw pi-info-circle',
+        items: [
+            {
+                label: 'About This Site',
+                icon: 'pi pi-fw pi-question-circle',
+                command: () => {
+                    navigate('/about');
+                }
+            },
+            {
+                label: 'Linking To ZX Play',
+                icon: 'pi pi-fw pi-link',
+                command: () => {
+                    navigate('/info/linking');
+                }
+            },
+            {
+                label: 'Privacy Policy',
+                icon: 'pi pi-fw pi-eye',
+                command: () => {
+                    navigate('/legal/privacy-policy');
+                }
+            },
+            {
+                label: 'Terms of Use',
+                icon: 'pi pi-fw pi-info-circle',
+                command: () => {
+                    navigate('/legal/terms-of-use');
+                }
+            }
+        ]
+    };
+
+    const resetButton = {
+        label: 'Reset',
+        icon: 'pi pi-fw pi-power-off',
+        command: () => {
+            dispatch(resetEmulator());
+        }
+    };
+
+    const loginButton = {
+        label: userId ? 'Sign-out' : 'Sign-in',
+        icon: userId ? 'pi pi-fw pi-sign-out' : 'pi pi-fw pi-sign-in',
+        command: () => {
+            userId ? logout() : login()
+        }
+    };
+
+    return [
+        homeButton,
+        projectMenu,
+        viewMenu,
+        infoMenu,
+        resetButton,
+        loginButton
+    ];
 }
