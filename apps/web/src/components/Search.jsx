@@ -7,6 +7,8 @@ import queryString from "query-string";
 import axios from "axios";
 import {loadUrl} from "../redux/jsspeccy/actions";
 import {showLoading, hideLoading} from "../dashboard_loading";
+import {Titled} from "react-titled";
+import {sep} from "../constants";
 
 export default function Search() {
     const dispatch = useDispatch();
@@ -73,18 +75,20 @@ export default function Search() {
     }
 
     return (
-        <Card className="m-2">
-            <h1>Search Results</h1>
-            <DataTable value={results} responsiveLayout="scroll">
-                <Column field="title" header="Title" body={itemTemplate}/>
-                <Column field="creator" header="Creator"/>
-            </DataTable>
-            <p className="mt-5 mb-0">
-                Search powered by <a href="https://archive.org/" target="_blank">
+        <Titled title={(s) => `Search ${sep} ${s}`}>
+            <Card className="m-2">
+                <h1>Search Results</h1>
+                <DataTable value={results} responsiveLayout="scroll">
+                    <Column field="title" header="Title" body={itemTemplate}/>
+                    <Column field="creator" header="Creator"/>
+                </DataTable>
+                <p className="mt-5 mb-0">
+                    Search powered by <a href="https://archive.org/" target="_blank">
                     Internet Archive
                 </a>
-            </p>
-        </Card>
+                </p>
+            </Card>
+        </Titled>
     )
 }
 

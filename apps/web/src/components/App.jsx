@@ -1,6 +1,7 @@
 import React from "react";
 import {useSelector} from "react-redux";
 import {Route, Routes} from "react-router-dom";
+import {Titled} from "react-titled";
 import queryString from "query-string";
 import "primereact/resources/themes/md-dark-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
@@ -45,7 +46,7 @@ export default function App() {
     */
 
     return (
-        <>
+        <Titled title={() => 'ZX Play'}>
             <RenderEmulator/>
             <LoadingScreen/>
             <LockScreen/>
@@ -74,6 +75,6 @@ export default function App() {
                     </Routes>
                 </ErrorBoundary>
             </div>
-        </>
+        </Titled>
     )
 }

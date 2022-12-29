@@ -1,12 +1,14 @@
 import React, {useEffect, useRef} from "react";
 import {useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
+import {Titled} from "react-titled";
 import {TabPanel, TabView} from "primereact/tabview";
 import {Toast} from "primereact/toast";
 import {Emulator} from "./Emulator";
 import {ProjectEditor} from "./ProjectEditor";
 import {loadProject, setSelectedTabIndex, setErrorItems} from "../redux/project/actions";
 import {showToastsForErrorItems} from "../errors";
+import {sep} from "../constants";
 
 export default function Project() {
     const {id} = useParams();
@@ -71,7 +73,7 @@ export default function Project() {
     }
 
     return (
-        <>
+        <Titled title={(s) => `Project ${sep} ${s}`}>
             <Toast ref={toast}/>
             <div className="mx-2 my-1">
                 <div className="grid" style={{width: "100%", padding: 0, margin: 0}}>
@@ -92,6 +94,6 @@ export default function Project() {
                     </div>
                 </div>
             </div>
-        </>
+        </Titled>
     )
 }

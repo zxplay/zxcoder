@@ -18,3 +18,5 @@ export default {
     logSubs: isDev && devLogging,
     stagingEnv,
 }
+
+export const sep = '|';
