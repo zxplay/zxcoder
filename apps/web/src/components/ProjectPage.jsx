@@ -10,7 +10,7 @@ import {loadProject, setSelectedTabIndex, setErrorItems} from "../redux/project/
 import {showToastsForErrorItems} from "../errors";
 import {sep} from "../constants";
 
-export default function Project() {
+export default function ProjectPage() {
     const {id} = useParams();
 
     const dispatch = useDispatch();

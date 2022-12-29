@@ -8,7 +8,7 @@ import {Button} from "primereact/button";
 import {createNewProject} from "../redux/project/actions";
 import {sep} from "../constants";
 
-export default function ProjectNew(props) {
+export default function NewProjectPage(props) {
     const dispatch = useDispatch();
     const [title, setTitle] = useState('');
 
@@ -63,6 +63,6 @@ export default function ProjectNew(props) {
     )
 }
 
-ProjectNew.propTypes = {
+NewProjectPage.propTypes = {
     type: PropTypes.string.isRequired,
 }

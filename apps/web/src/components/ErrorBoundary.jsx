@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {hideLoading} from "../dashboard_loading";
 import {error} from "../redux/error/actions";
-import Error from "./Error";
+import ErrorPage from "./ErrorPage";
 
 class ErrorBoundary extends React.Component {
 
@@ -21,7 +21,7 @@ class ErrorBoundary extends React.Component {
     render() {
         if (this.state.hasError) {
             hideLoading();
-            return <Error msg="There was a problem in rendering this content."/>
+            return <ErrorPage msg="There was a problem in rendering this content."/>
         }
 
         return this.props.children;

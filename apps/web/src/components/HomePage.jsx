@@ -11,7 +11,7 @@ import {reset as resetProject, setErrorItems} from "../redux/project/actions";
 import {reset} from "../redux/jsspeccy/actions";
 import {showToastsForErrorItems} from "../errors";
 
-export default function Demo() {
+export default function HomePage() {
     const dispatch = useDispatch();
 
     const activeIndex = useSelector(state => state?.demo.selectedTabIndex);

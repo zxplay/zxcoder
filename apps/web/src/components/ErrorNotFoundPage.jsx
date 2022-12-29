@@ -3,7 +3,7 @@ import {Card} from "primereact/card";
 import {Titled} from "react-titled";
 import {sep} from "../constants";
 
-export default function ErrorNotFound() {
+export default function ErrorNotFoundPage() {
     return (
         <Titled title={(s) => `Not Found ${sep} ${s}`}>
             <Card className="m-2">

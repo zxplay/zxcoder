@@ -5,7 +5,7 @@ import {Card} from "primereact/card";
 import {Titled} from "react-titled";
 import {sep} from "../constants";
 
-export default function YourProfile() {
+export default function YourProfilePage() {
     const {id} = useParams();
 
     const dispatch = useDispatch();

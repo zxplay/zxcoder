@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {Card} from "primereact/card";
 import {Button} from "primereact/button";
 
-export default function Error(props) {
+export default function ErrorPage(props) {
     let msg;
     if (props.msg) {
         msg = props.msg;
@@ -28,7 +28,7 @@ export default function Error(props) {
     )
 }
 
-Error.propTypes = {
+ErrorPage.propTypes = {
     statusCode: PropTypes.number,
     msg: PropTypes.string
 }

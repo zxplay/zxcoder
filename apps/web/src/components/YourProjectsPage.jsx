@@ -6,7 +6,7 @@ import RequireSubscriber from "./RequireSubscriber";
 import {Titled} from "react-titled";
 import {sep} from "../constants";
 
-export default function YourProjects() {
+export default function YourProjectsPage() {
     const {id} = useParams();
 
     return (

@@ -6,7 +6,7 @@ import {Card} from "primereact/card";
 import {requestPrivacyPolicy} from "../redux/app/actions";
 import {sep} from "../constants";
 
-export default function LegalPrivacy() {
+export default function PrivacyPolicyPage() {
     const dispatch = useDispatch();
 
     const text = useSelector(state => state?.app.privacyPolicy);

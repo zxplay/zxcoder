@@ -4,7 +4,7 @@ import {Titled} from "react-titled";
 import {Card} from "primereact/card";
 import Constants, {sep} from "../constants";
 
-export default function About() {
+export default function AboutPage() {
     return (
         <Titled title={(s) => `About ${sep} ${s}`}>
             <Card className="m-2">

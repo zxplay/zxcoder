@@ -10,7 +10,7 @@ import {showLoading, hideLoading} from "../dashboard_loading";
 import {Titled} from "react-titled";
 import {sep} from "../constants";
 
-export default function Search() {
+export default function SearchPage() {
     const dispatch = useDispatch();
     const [results, setResults] = useState([]);
     const search = useSelector(state => state?.router.location.search);

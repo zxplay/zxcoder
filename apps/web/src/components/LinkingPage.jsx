@@ -3,7 +3,7 @@ import {Titled} from "react-titled";
 import {Card} from "primereact/card";
 import {sep} from "../constants";
 
-export default function Linking() {
+export default function LinkingPage() {
     const domain = `${window.location.protocol}//${window.location.host}/`;
     const k = '-W-P,ASDe,123456789M';
     const m = '48';
