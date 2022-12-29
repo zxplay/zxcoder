@@ -5,7 +5,7 @@ import {
     receiveprojectListQueryResult,
     subscribeToProjectList,
     subscribeToProjectListCallback,
-} from "../projectList/actions";
+} from "./actions";
 import {
     subscribe,
     subscribeAction,

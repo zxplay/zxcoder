@@ -2,7 +2,7 @@ import {takeLatest, put, select, call} from "redux-saga/effects";
 import gql from "graphql-tag";
 import {history} from "../store";
 import {gqlFetch} from "../../graphql_fetch";
-import {actionTypes, reset, receiveLoadedProject, setSavedCode} from "../project/actions";
+import {actionTypes, reset, receiveLoadedProject, setSavedCode} from "./actions";
 import {pause, reset as resetMachine} from "../jsspeccy/actions";
 
 // -----------------------------------------------------------------------------

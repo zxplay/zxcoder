@@ -16,14 +16,14 @@ import projectListReducer from "./projectList/reducers";
 import subscriberReducer from "./subscriber/reducers";
 
 // Sagas
-import * as appSagas from "./sagas/app";
-import * as demoSagas from "./sagas/demo";
-import * as eightbitSagas from "./sagas/eightbit";
-import * as identitySagas from "./sagas/identity";
-import * as jsspeccySagas from "./sagas/jsspeccy";
-import * as projectSagas from "./sagas/project";
-import * as projectListSagas from "./sagas/projectList";
-import * as subscriberSagas from "./sagas/subscriber";
+import * as appSagas from "./app/app";
+import * as demoSagas from "./demo/demo";
+import * as eightbitSagas from "./eightbit/eightbit";
+import * as identitySagas from "./identity/identity";
+import * as jsspeccySagas from "./jsspeccy/jsspeccy";
+import * as projectSagas from "./project/project";
+import * as projectListSagas from "./projectList/projectList";
+import * as subscriberSagas from "./subscriber/subscriber";
 
 const loggingMiddleware = (store) => {
     return (next) => {

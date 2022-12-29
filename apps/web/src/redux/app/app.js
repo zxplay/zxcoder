@@ -6,7 +6,7 @@ import {
     actionTypes,
     receivePrivacyPolicy,
     receiveTermsOfUse
-} from "../app/actions";
+} from "./actions";
 import {setSelectedTabIndex as setDemoTabIndex} from "../demo/actions";
 import {reset} from "../jsspeccy/actions";
 

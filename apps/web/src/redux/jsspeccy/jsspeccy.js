@@ -7,7 +7,7 @@ import {
     handleClick,
     reset,
     start
-} from "../jsspeccy/actions";
+} from "./actions";
 import {reset as resetProject} from "../project/actions";
 import {showActiveEmulator} from "../app/actions";
 

@@ -1,5 +1,5 @@
 import {takeLatest, select, put, call} from "redux-saga/effects";
-import {actionTypes} from "../demo/actions";
+import {actionTypes} from "./actions";
 import {store} from "../store";
 import {loadTap, pause} from "../jsspeccy/actions";
 import pasmo from "pasmo";
