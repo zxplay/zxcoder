@@ -85,7 +85,7 @@ export function* watchForViewFullScreenActions() {
 
 // noinspection JSUnusedGlobalSymbols
 export function* watchForLocationChanges() {
-    yield takeLatest('@@router/LOCATION_CHANGE', handleLocationChanges);
+    yield takeLatest('@@router/ON_LOCATION_CHANGED', handleLocationChanges);
 }
 
 // -----------------------------------------------------------------------------
