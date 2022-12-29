@@ -6,7 +6,7 @@ import {Toast} from "primereact/toast";
 import {Emulator} from "./Emulator";
 import {ProjectEditor} from "./ProjectEditor";
 import {loadProject, setSelectedTabIndex, setErrorItems} from "../redux/project/actions";
-import {getBuildErrorToast} from "../errors";
+import {showToastsForErrorItems} from "../errors";
 
 export default function Project() {
     const {id} = useParams();
@@ -28,15 +28,7 @@ export default function Project() {
 
     useEffect(() => {
         if (errorItems && errorItems.length > 0 && toast.current) {
-            const toasts = [];
-
-            for (let i = 0; i < errorItems.length; i++) {
-                const item = errorItems[i];
-                toasts.push(getBuildErrorToast(item));
-            }
-
-            toast.current.show(toasts);
-
+            showToastsForErrorItems(errorItems, toast);
             dispatch(setErrorItems(undefined));
         }
 

@@ -61,7 +61,20 @@ function getRequestError(e) {
     }
 }
 
-export function getBuildErrorToast(item) {
+export function showToastsForErrorItems(errorItems, toast) {
+    if (errorItems && errorItems.length > 0 && toast.current) {
+        const toasts = [];
+
+        for (let i = 0; i < errorItems.length; i++) {
+            const item = errorItems[i];
+            toasts.push(getBuildErrorToast(item));
+        }
+
+        toast.current.show(toasts);
+    }
+}
+
+function getBuildErrorToast(item) {
     if (item.type) {
         return getBuildErrorWasmCommandToast(item);
     } else if (item.line) {

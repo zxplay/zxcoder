@@ -9,7 +9,7 @@ import {Emulator} from "./Emulator";
 import {setSelectedTabIndex} from "../redux/demo/actions";
 import {reset as resetProject, setErrorItems} from "../redux/project/actions";
 import {reset} from "../redux/jsspeccy/actions";
-import {getBuildErrorToast} from "../errors";
+import {showToastsForErrorItems} from "../errors";
 
 export default function Demo() {
     const dispatch = useDispatch();
@@ -36,15 +36,7 @@ export default function Demo() {
 
     useEffect(() => {
         if (errorItems && errorItems.length > 0 && toast.current) {
-            const toasts = [];
-
-            for (let i = 0; i < errorItems.length; i++) {
-                const item = errorItems[i];
-                toasts.push(getBuildErrorToast(item));
-            }
-
-            toast.current.show(toasts);
-
+            showToastsForErrorItems(errorItems, toast);
             dispatch(setErrorItems(undefined));
         }
 
