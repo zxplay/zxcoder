@@ -258,7 +258,11 @@ function* handleLocationChanges(action) {
         const match = typeof previousPath === 'undefined' || path === previousPath;
 
         if (!match || (path !== '/' && !path.startsWith('/projects/'))) {
-            jsspeccy?.pause();
+            // NOTE: Using a timeout to pause to work around an issue where the emulator is
+            // un-paused while on the new project screen entering the project.
+            // TODO: There might be a better way to resolve this issue.
+            // For example, avoiding start the emulator on clicking the menu/submenus.
+            setTimeout(() => jsspeccy?.pause(), 100);
         }
 
         previousPath = path;
