@@ -39,10 +39,7 @@ export function DemoSinclairBasicEditor() {
                 label="Run"
                 icon="pi pi-play"
                 style={{marginTop: "8px"}}
-                onClick={() => {
-                    dispatch(setSelectedTabIndex(0));
-                    dispatch(runSinclairBasic());
-                }}
+                onClick={() => dispatch(runSinclairBasic())}
             />
         </Fragment>
     )
