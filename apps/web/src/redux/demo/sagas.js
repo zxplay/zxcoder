@@ -1,11 +1,12 @@
 import {takeLatest, select, put, call} from "redux-saga/effects";
+import gql from "graphql-tag";
+import getZmakebasTap from "zmakebas";
+import getPasmoTap from "pasmo";
 import {actionTypes} from "./actions";
 import {store} from "../store";
 import {loadTap, pause} from "../jsspeccy/actions";
-import pasmo from "pasmo";
-import zmakebas from "zmakebas";
-import gql from "graphql-tag";
 import {gqlFetch} from "../../graphql_fetch";
+import {handleWasmErrorItems} from "../../errors";
 
 // -----------------------------------------------------------------------------
 // Action watchers
@@ -47,7 +48,7 @@ function* handleSetSelectedTabIndexActions(_) {
 function* handleRunAssemblyActions(_) {
     try {
         const code = yield select((state) => state.demo.asmCode);
-        const tap = yield call(pasmo, code);
+        const tap = yield call(getPasmoTap, code);
         store.dispatch(loadTap(tap));
     } catch (e) {
         console.error(e);
@@ -57,8 +58,12 @@ function* handleRunAssemblyActions(_) {
 function* handleRunSinclairBasicActions(_) {
     try {
         const code = yield select((state) => state.demo.sinclairBasicCode);
-        const tap = yield zmakebas(code);
-        store.dispatch(loadTap(tap));
+        try {
+            const tap = yield call(getZmakebasTap, code);
+            store.dispatch(loadTap(tap));
+        } catch (errorItems) {
+            handleWasmErrorItems(errorItems);
+        }
     } catch (e) {
         console.error(e);
     }

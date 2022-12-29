@@ -1,6 +1,8 @@
 import {takeLatest, select, call, put, take} from "redux-saga/effects";
 import {eventChannel} from "redux-saga";
 import gql from "graphql-tag";
+import getZmakebasTap from "zmakebas";
+import getPasmoTap, {bin2tap} from "pasmo";
 import {gqlFetch} from "../../graphql_fetch";
 import {store} from "../store";
 import {
@@ -14,8 +16,7 @@ import {
     setFollowTapAction
 } from "./actions";
 import {loadTap} from "../jsspeccy/actions";
-import getZmakebasTap from "zmakebas";
-import getPasmoTap, {bin2tap} from "pasmo";
+import {handleWasmErrorItems} from "../../errors";
 
 // -----------------------------------------------------------------------------
 // Action watchers
@@ -162,15 +163,7 @@ function* handleGetProjectTapActions(_) {
                     yield put(followTapAction(tap));
                     yield put(setFollowTapAction(undefined));
                 } catch (errorItems) {
-                    for (let i = 0; i < errorItems.length; i++) {
-                        const item = errorItems[i];
-                        if (item.type === 'out') {
-                            alert(`[stdout] ${item.text}`);
-                        } else {
-                            console.assert(item.type === 'err');
-                            alert(`[stderr] ${item.text}`);
-                        }
-                    }
+                    handleWasmErrorItems(errorItems);
                 }
                 break;
             case 'c':

@@ -15,6 +15,18 @@ export function handleError(title, description) {
     StackTrace.get().then(callback).catch((err) => console.error(err.message));
 }
 
+export function handleWasmErrorItems(errorItems) {
+    for (let i = 0; i < errorItems.length; i++) {
+        const item = errorItems[i];
+        if (item.type === 'out') {
+            alert(`[stdout] ${item.text}`);
+        } else {
+            console.assert(item.type === 'err');
+            alert(`[stderr] ${item.text}`);
+        }
+    }
+}
+
 function isObject(value) {
     return typeof value === 'object' && value !== null;
 }
