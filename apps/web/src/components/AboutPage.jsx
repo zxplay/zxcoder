@@ -36,12 +36,12 @@ export default function AboutPage() {
                     <li>
                         <a href="https://github.com/gasman/jsspeccy3" target="_blank">JSSpeccy3</a>{' '}
                         <a href="https://github.com/dcrespo3d/jsspeccy3-mobile" target="_blank">JSSpeccy3-mobile</a>.
-                        These are licensed under terms of the GPL version 3 - see{' '}
+                        These are licensed under terms of The GPL version 3 - see{' '}
                         <a href="https://github.com/gasman/jsspeccy3/blob/main/COPYING" target="_blank">COPYING</a>.
                     </li>
                     <li>
                         <a href="https://pasmo.speccy.org/" target="_blank">Pasmo</a> by Julián Albo García, alias "NotFound".
-                        Licensed under terms of the GPL version 3 - see{' '}
+                        Licensed under terms of The GPL version 3 - see{' '}
                         <a href="https://github.com/stever/emscripten-pasmo/blob/main/COPYING" target="_blank">COPYING</a>.
                     </li>
                     <li>
@@ -50,14 +50,14 @@ export default function AboutPage() {
                     </li>
                     <li>
                         <a href="https://github.com/sehugg/8bitworkshop" target="_blank">8bitworkshop</a> by
-                        Steven Hugg. Licensed under terms of the GPL version 3 - see{' '}
+                        Steven Hugg. Licensed under terms of The GPL version 3 - see{' '}
                         <a href="https://github.com/sehugg/8bitworkshop/blob/master/LICENSE" target="_blank">LICENSE</a>.
                     </li>
                     {Constants.isDev &&
                         <>
                             <li>
                                 <a href="https://github.com/boriel/zxbasic" target="_blank">Boriel ZX BASIC</a> by Jose Rodriguez.
-                                Licensed under terms of the GPL version 3 - see{' '}
+                                Licensed under terms of The GPL version 3 - see{' '}
                                 <a href="https://github.com/boriel/zxbasic/blob/master/LICENSE.txt" target="_blank">LICENSE</a>.
                             </li>
                             <li>
@@ -67,6 +67,11 @@ export default function AboutPage() {
                             </li>
                         </>
                     }
+                    <li>
+                        <a href="https://github.com/primefaces/primereact" target="_blank">PrimeReact</a> by
+                        PrimeTek. Licensed under terms of The MIT License - see{' '}
+                        <a href="https://github.com/primefaces/primereact/blob/master/LICENSE.md" target="_blank">LICENSE</a>.
+                    </li>
                 </ul>
                 <h2>Sinclair ROM Copyright Permission</h2>
                 <blockquote>
