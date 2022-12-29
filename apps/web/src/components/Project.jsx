@@ -41,10 +41,6 @@ export default function Project() {
         return <></>;
     }
 
-    if (title) {
-        title = `Project: ${title}`;
-    }
-
     const zoom = 2;
     const width = zoom * 320;
 
@@ -73,7 +69,7 @@ export default function Project() {
     }
 
     return (
-        <Titled title={(s) => `Project ${sep} ${s}`}>
+        <Titled title={(s) => `${title} ${sep} Project ${sep} ${s}`}>
             <Toast ref={toast}/>
             <div className="mx-2 my-1">
                 <div className="grid" style={{width: "100%", padding: 0, margin: 0}}>
@@ -88,7 +84,7 @@ export default function Project() {
                     </div>
                     <div className="col-fixed p-0 pt-1" style={{width: `${width}px`}}>
                         <div style={{height: '53px'}} className="pt-3 pl-1">
-                            <h3>{title}</h3>
+                            <h3>{title ? `Project: ${title}` : ''}</h3>
                         </div>
                         <Emulator zoom={zoom} width={width}/>
                     </div>
