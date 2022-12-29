@@ -17,7 +17,7 @@ export default function Nav() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const [searchInput, setSearchInput] = useState([]);
+    const [searchInput, setSearchInput] = useState('');
 
     const pathname = useSelector(state => state?.router.location.pathname);
     const selectedDemoTab = useSelector(state => state?.demo.selectedTabIndex);
