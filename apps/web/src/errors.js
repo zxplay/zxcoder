@@ -1,6 +1,5 @@
 import {error} from "./redux/error/actions";
 import {store} from "./redux/store";
-import React from "react";
 import {dashboardUnlock} from "./dashboard_lock";
 
 export function handleError(title, data) {
