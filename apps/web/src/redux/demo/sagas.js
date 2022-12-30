@@ -5,6 +5,7 @@ import {actionTypes, setSelectedTabIndex} from "./actions";
 import {loadTap, pause} from "../jsspeccy/actions";
 import {setErrorItems} from "../project/actions";
 import {handleException} from "../../errors";
+import {dashboardUnlock} from "../../dashboard_lock";
 
 // -----------------------------------------------------------------------------
 // Action watchers
@@ -36,29 +37,27 @@ function* handleSetSelectedTabIndexActions(_) {
 function* handleRunAssemblyActions(_) {
     try {
         const code = yield select((state) => state.demo.asmCode);
-        try {
-            const tap = yield call(getPasmoTap, code);
-            yield put(loadTap(tap));
-            yield put(setSelectedTabIndex(0));
-        } catch (errorItems) {
-            yield put(setErrorItems(errorItems));
-        }
+        const tap = yield call(getPasmoTap, code);
+        yield put(loadTap(tap));
+        yield put(setSelectedTabIndex(0));
     } catch (e) {
-        handleException(e);
+        if (e.type) yield put(setErrorItems(e));
+        else handleException(e);
+    } finally {
+        dashboardUnlock();
     }
 }
 
 function* handleRunSinclairBasicActions(_) {
     try {
         const code = yield select((state) => state.demo.sinclairBasicCode);
-        try {
-            const tap = yield call(getZmakebasTap, code);
-            yield put(loadTap(tap));
-            yield put(setSelectedTabIndex(0));
-        } catch (errorItems) {
-            yield put(setErrorItems(errorItems));
-        }
+        const tap = yield call(getZmakebasTap, code);
+        yield put(loadTap(tap));
+        yield put(setSelectedTabIndex(0));
     } catch (e) {
-        handleException(e);
+        if (e.type) yield put(setErrorItems(e));
+        else handleException(e);
+    } finally {
+        dashboardUnlock();
     }
 }

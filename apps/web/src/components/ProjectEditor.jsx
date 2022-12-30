@@ -13,6 +13,7 @@ import "../lib/syntax/zmakebas";
 import "../lib/syntax/z88dk-c";
 import "../lib/syntax/sdcc";
 import "../lib/syntax/zxbasic";
+import {dashboardLock} from "../dashboard_lock";
 
 export function ProjectEditor() {
     const dispatch = useDispatch();
@@ -83,7 +84,10 @@ export function ProjectEditor() {
                 label="Run"
                 icon="pi pi-play"
                 className="mt-2 mr-2"
-                onClick={() => dispatch(runProjectCode())}
+                onClick={() => {
+                    dashboardLock();
+                    dispatch(runProjectCode());
+                }}
             />
             <Button
                 label="Save"

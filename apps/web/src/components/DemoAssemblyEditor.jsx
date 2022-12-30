@@ -4,6 +4,7 @@ import {Button} from "primereact/button";
 import CodeMirror from "./CodeMirror";
 import {setAssemblyCode, runAssembly} from "../redux/demo/actions";
 import "../lib/syntax/pasmo";
+import {dashboardLock} from "../dashboard_lock";
 
 export function DemoAssemblyEditor() {
     const dispatch = useDispatch();
@@ -38,7 +39,10 @@ export function DemoAssemblyEditor() {
                 label="Run"
                 icon="pi pi-play"
                 style={{marginTop: "8px"}}
-                onClick={() => dispatch(runAssembly())}
+                onClick={() => {
+                    dashboardLock();
+                    dispatch(runAssembly());
+                }}
             />
         </>
     )

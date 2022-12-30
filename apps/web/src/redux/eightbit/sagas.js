@@ -18,6 +18,7 @@ import {
 import {loadTap} from "../jsspeccy/actions";
 import {setErrorItems} from "../project/actions";
 import {handleException} from "../../errors";
+import {dashboardUnlock} from "../../dashboard_lock";
 
 // -----------------------------------------------------------------------------
 // Action watchers
@@ -127,6 +128,8 @@ function* handleWorkerMessageActions(action) {
         yield put(setFollowTapAction(undefined));
     } catch (e) {
         handleException(e);
+    } finally {
+        dashboardUnlock();
     }
 }
 
@@ -156,6 +159,8 @@ function* handleGetProjectTapActions(_) {
                     yield put(setFollowTapAction(undefined));
                 } catch (errorItems) {
                     yield put(setErrorItems(errorItems));
+                } finally {
+                    dashboardUnlock();
                 }
                 break;
             case 'basic':
@@ -166,6 +171,8 @@ function* handleGetProjectTapActions(_) {
                     yield put(setFollowTapAction(undefined));
                 } catch (errorItems) {
                     yield put(setErrorItems(errorItems));
+                } finally {
+                    dashboardUnlock();
                 }
                 break;
             case 'zxbasic':
@@ -176,6 +183,8 @@ function* handleGetProjectTapActions(_) {
                     yield put(setFollowTapAction(undefined));
                 } catch (errorItems) {
                     yield put(setErrorItems(errorItems));
+                } finally {
+                    dashboardUnlock();
                 }
                 break;
             case 'c':
@@ -186,6 +195,8 @@ function* handleGetProjectTapActions(_) {
                     yield put(setFollowTapAction(undefined));
                 } catch (errorItems) {
                     yield put(setErrorItems(errorItems));
+                } finally {
+                    dashboardUnlock();
                 }
                 break;
             case 'zmac':

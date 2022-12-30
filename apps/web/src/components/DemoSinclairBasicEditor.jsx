@@ -4,6 +4,7 @@ import {Button} from "primereact/button";
 import CodeMirror from "./CodeMirror";
 import {setSinclairBasicCode, runSinclairBasic} from "../redux/demo/actions";
 import "../lib/syntax/zmakebas";
+import {dashboardLock} from "../dashboard_lock";
 
 export function DemoSinclairBasicEditor() {
     const dispatch = useDispatch();
@@ -38,7 +39,10 @@ export function DemoSinclairBasicEditor() {
                 label="Run"
                 icon="pi pi-play"
                 style={{marginTop: "8px"}}
-                onClick={() => dispatch(runSinclairBasic())}
+                onClick={() => {
+                    dashboardLock();
+                    dispatch(runSinclairBasic());
+                }}
             />
         </>
     )

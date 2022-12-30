@@ -24,8 +24,8 @@ const styles = {
         zIndex: 99999,
         width: '100%',
         height: '100vh',
-        opacity: 0.5,
-        display: 'none'
+        display: 'none',
+        userSelect: 'none'
     },
     contentBlanker: {
         position: 'fixed',
@@ -37,8 +37,9 @@ const styles = {
         width: '100%',
         height: '100vh',
         backgroundColor: 'black',
-        opacity: 0.4,
-        display: 'none'
+        opacity: 0.05,
+        display: 'none',
+        userSelect: 'none'
     },
     container: {
         position: 'absolute',
@@ -49,6 +50,7 @@ const styles = {
         zIndex: 99999,
         width: '100%',
         height: '100vh',
-        display: 'none'
+        display: 'none',
+        userSelect: 'none'
     }
 };

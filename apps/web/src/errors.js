@@ -1,18 +1,22 @@
 import {error} from "./redux/error/actions";
 import {store} from "./redux/store";
 import React from "react";
+import {dashboardUnlock} from "./dashboard_lock";
 
 export function handleError(title, data) {
+    dashboardUnlock();
     console.error(title, data);
     store.dispatch(error(title));
 }
 
 export function handleException(e) {
+    dashboardUnlock();
     console.error(e);
     store.dispatch(error(`[Exception] ${e}`));
 }
 
 export function handleRequestException(e) {
+    dashboardUnlock();
     console.error(e);
     const {title, description} = getRequestError(e);
     store.dispatch(error(`${title}. ${description}`));
