@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
+import {Titled} from "react-titled";
 import {Card} from "primereact/card";
 import {DataTable} from "primereact/datatable";
 import {Column} from "primereact/column";
@@ -7,7 +8,6 @@ import queryString from "query-string";
 import axios from "axios";
 import {loadUrl} from "../redux/jsspeccy/actions";
 import {showLoading, hideLoading} from "../dashboard_loading";
-import {Titled} from "react-titled";
 import {sep} from "../constants";
 
 export default function SearchPage() {
