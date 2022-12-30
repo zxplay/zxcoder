@@ -5,6 +5,9 @@ import {JSSpeccy} from "../../lib/jsspeccy/JSSpeccy";
 import {
     actionTypes,
     handleClick,
+    openTAPFile,
+    openUrl,
+    pause,
     reset,
     start
 } from "./actions";
@@ -85,6 +88,16 @@ export function* watchForViewFullScreenActions() {
 }
 
 // noinspection JSUnusedGlobalSymbols
+export function* watchForOpenTAPFileActions() {
+    yield takeLatest(actionTypes.openTAPFile, handleOpenTAPFileActions);
+}
+
+// noinspection JSUnusedGlobalSymbols
+export function* watchForOpenUrlActions() {
+    yield takeLatest(actionTypes.openUrl, handleOpenUrlActions);
+}
+
+// noinspection JSUnusedGlobalSymbols
 export function* watchForLocationChanges() {
     yield takeLatest('@@router/ON_LOCATION_CHANGED', handleLocationChanges);
 }
@@ -161,7 +174,7 @@ function* handleLoadTapActions(action) {
         yield put(showActiveEmulator());
         yield put(reset());
         yield put(start());
-        jsspeccy.openTAPFile(action.tap.buffer);
+        yield put(openTAPFile(action.tap.buffer));
     } catch (e) {
         handleException(e);
     }
@@ -173,7 +186,7 @@ function* handleLoadUrlActions(action) {
         yield put(showActiveEmulator());
         yield put(reset());
         yield put(start());
-        jsspeccy.openUrl(action.url);
+        yield put(openUrl(action.url));
         yield put(start()); // NOTE: Extra call to start was required here.
     } catch (e) {
         handleException(e);
@@ -195,7 +208,7 @@ function* handleClickActions(action) {
         }
 
         // Clicks anywhere except screen or keys to pause emulator.
-        jsspeccy.pause();
+        yield put(pause());
     } catch (e) {
         handleException(e);
     }
@@ -204,7 +217,7 @@ function* handleClickActions(action) {
 function* handleResetActions(_) {
     try {
         jsspeccy.reset();
-        setTimeout(() => jsspeccy.start(), 1);
+        setTimeout(() => jsspeccy.start(), 100);
     } catch (e) {
         handleException(e);
     }
@@ -248,6 +261,24 @@ function* handleViewFullScreenActions(_) {
     try {
         jsspeccy.start();
         jsspeccy.enterFullscreen();
+    } catch (e) {
+        handleException(e);
+    }
+}
+
+function* handleOpenTAPFileActions(action) {
+    try {
+        jsspeccy.openTAPFile(action.buffer);
+    } catch (e) {
+        handleException(e);
+    }
+}
+
+function* handleOpenUrlActions(action) {
+    try {
+        jsspeccy.reset();
+        setTimeout(() => jsspeccy.start(), 100);
+        setTimeout(() => jsspeccy.openUrl(action.url), 100);
     } catch (e) {
         handleException(e);
     }

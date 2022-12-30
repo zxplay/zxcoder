@@ -10,6 +10,8 @@ export const actionTypes = {
     exit: 'jsspeccy/exit',
     showOpenFileDialog: 'jsspeccy/openFileDialog',
     viewFullScreen: 'jsspeccy/viewFullScreen',
+    openTAPFile: 'jsspeccy/openTAPFile',
+    openUrl: 'jsspeccy/openUrl',
 };
 
 export const renderEmulator = (zoom) => ({
@@ -59,4 +61,14 @@ export const showOpenFileDialog = () => ({
 
 export const viewFullScreen = () => ({
     type: actionTypes.viewFullScreen
+});
+
+export const openTAPFile = (buffer) => ({
+    type: actionTypes.openTAPFile,
+    buffer
+});
+
+export const openUrl = (url) => ({
+    type: actionTypes.openUrl,
+    url
 });
