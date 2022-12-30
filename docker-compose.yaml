@@ -42,5 +42,13 @@ services:
       - graphql-engine
       - serve
 
+  z88dk:
+    image: ghcr.io/stever/zxplay-api-z88dk
+    restart: always
+
+  zxbasic:
+    image: ghcr.io/stever/zxplay-api-zxbasic
+    restart: always
+
 volumes:
   pg_data:
