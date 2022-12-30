@@ -4,6 +4,7 @@ import {history} from "../store";
 import {gqlFetch} from "../../graphql_fetch";
 import {actionTypes, reset, receiveLoadedProject, setSavedCode} from "./actions";
 import {pause, reset as resetMachine} from "../jsspeccy/actions";
+import {handleException} from "../../errors";
 
 // -----------------------------------------------------------------------------
 // Action watchers
@@ -71,7 +72,7 @@ function* handleCreateNewProjectActions(action) {
         yield put(receiveLoadedProject(id, action.title, action.lang, ''));
         history.push(`/projects/${id}`);
     } catch (e) {
-        console.error(e);
+        handleException(e);
     }
 }
 
@@ -109,7 +110,7 @@ function* handleLoadProjectActions(action) {
 
         yield put(receiveLoadedProject(action.id, proj.title, proj.lang, proj.code));
     } catch (e) {
-        console.error(e);
+        handleException(e);
     }
 }
 
@@ -140,7 +141,7 @@ function* handleSaveCodeChangesActions(_) {
 
         yield put(setSavedCode(code));
     } catch (e) {
-        console.error(e);
+        handleException(e);
     }
 }
 
@@ -171,6 +172,6 @@ function* handleDeleteProjectActions(_) {
         yield put(resetMachine());
         history.push(`/u/${userId}/projects`);
     } catch (e) {
-        console.error(e);
+        handleException(e);
     }
 }

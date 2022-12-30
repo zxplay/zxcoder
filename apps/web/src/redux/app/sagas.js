@@ -9,6 +9,7 @@ import {
 } from "./actions";
 import {setSelectedTabIndex as setDemoTabIndex} from "../demo/actions";
 import {reset} from "../jsspeccy/actions";
+import {handleException} from "../../errors";
 
 // -----------------------------------------------------------------------------
 // Action watchers
@@ -50,7 +51,7 @@ function* handleShowActiveEmulatorActions(_) {
             history.push('/');
         }
     } catch (e) {
-        console.error(e);
+        handleException(e);
     }
 }
 
@@ -68,7 +69,7 @@ function* handleResetEmulatorActions(_) {
             yield put(reset());
         }
     } catch (e) {
-        console.error(e);
+        handleException(e);
     }
 }
 
@@ -90,7 +91,7 @@ function* handleRequestTermsOfUseActions(_) {
         console.assert(response?.data?.text[0].text, response);
         yield put(receiveTermsOfUse(response.data.text[0].text));
     } catch (e) {
-        console.error(e);
+        handleException(e);
     }
 }
 
@@ -112,6 +113,6 @@ function* handleRequestPrivacyPolicyActions(_) {
         console.assert(response?.data?.text[0].text, response);
         yield put(receivePrivacyPolicy(response.data.text[0].text));
     } catch (e) {
-        console.error(e);
+        handleException(e);
     }
 }

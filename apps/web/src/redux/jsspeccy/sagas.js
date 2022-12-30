@@ -10,6 +10,7 @@ import {
 } from "./actions";
 import {reset as resetProject} from "../project/actions";
 import {showActiveEmulator} from "../app/actions";
+import {handleException} from "../../errors";
 
 // -----------------------------------------------------------------------------
 // Action watchers
@@ -139,7 +140,7 @@ function* handleRenderEmulatorActions(action) {
             document.getElementsByTagName('canvas')[0].style.imageRendering = "auto";
         }
     } catch (e) {
-        console.error(e);
+        handleException(e);
     }
 }
 
@@ -151,7 +152,7 @@ function* handleLoadEmulatorActions(action) {
         fragment.appendChild(target);
         action.target.appendChild(fragment);
     } catch (e) {
-        console.error(e);
+        handleException(e);
     }
 }
 
@@ -162,7 +163,7 @@ function* handleLoadTapActions(action) {
         yield put(start());
         jsspeccy.openTAPFile(action.tap.buffer);
     } catch (e) {
-        console.error(e);
+        handleException(e);
     }
 }
 
@@ -175,7 +176,7 @@ function* handleLoadUrlActions(action) {
         jsspeccy.openUrl(action.url);
         yield put(start()); // NOTE: Extra call to start was required here.
     } catch (e) {
-        console.error(e);
+        handleException(e);
     }
 }
 
@@ -196,7 +197,7 @@ function* handleClickActions(action) {
         // Clicks anywhere except screen or keys to pause emulator.
         jsspeccy.pause();
     } catch (e) {
-        console.error(e);
+        handleException(e);
     }
 }
 
@@ -205,7 +206,7 @@ function* handleResetActions(_) {
         jsspeccy.reset();
         setTimeout(() => jsspeccy.start(), 1);
     } catch (e) {
-        console.error(e);
+        handleException(e);
     }
 }
 
@@ -213,7 +214,7 @@ function* handlePauseActions(_) {
     try {
         jsspeccy.pause();
     } catch (e) {
-        console.error(e);
+        handleException(e);
     }
 }
 
@@ -221,7 +222,7 @@ function* handleStartActions(_) {
     try {
         jsspeccy.start();
     } catch (e) {
-        console.error(e);
+        handleException(e);
     }
 }
 
@@ -229,7 +230,7 @@ function* handleExitActions(_) {
     try {
         jsspeccy.exit();
     } catch (e) {
-        console.error(e);
+        handleException(e);
     }
 }
 
@@ -239,7 +240,7 @@ function* handleOpenFileDialogActions(_) {
         yield put(showActiveEmulator());
         jsspeccy.openFileDialog();
     } catch (e) {
-        console.error(e);
+        handleException(e);
     }
 }
 
@@ -248,7 +249,7 @@ function* handleViewFullScreenActions(_) {
         jsspeccy.start();
         jsspeccy.enterFullscreen();
     } catch (e) {
-        console.error(e);
+        handleException(e);
     }
 }
 
@@ -267,7 +268,7 @@ function* handleLocationChanges(action) {
 
         previousPath = path;
     } catch (e) {
-        console.error(e);
+        handleException(e);
     }
 }
 

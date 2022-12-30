@@ -4,16 +4,18 @@ import React from "react";
 
 export function handleError(title, data) {
     console.error(title, data);
-    store.dispatch(actions(title));
+    store.dispatch(error(title));
 }
 
-function isObject(value) {
-    return typeof value === 'object' && value !== null;
+export function handleException(e) {
+    console.error(e);
+    store.dispatch(error(`[Exception] ${e}`));
 }
 
 export function handleRequestException(e) {
+    console.error(e);
     const {title, description} = getRequestError(e);
-    handleError(title, description);
+    store.dispatch(error(`${title}. ${description}`));
 }
 
 function getRequestError(e) {

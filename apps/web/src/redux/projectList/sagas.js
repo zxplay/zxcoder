@@ -11,7 +11,7 @@ import {
     subscribeAction,
     unsubscribeAction
 } from "../subscriber/actions";
-import {handleError} from "../../errors";
+import {handleError, handleException} from "../../errors";
 
 // -----------------------------------------------------------------------------
 // Action watchers
@@ -55,7 +55,7 @@ function* handleSubscribeToProjectList(action) {
         yield put(subscribe(action, query, variables, subscribeToProjectListCallback));
         yield put(subscribeAction(action));
     } catch (e) {
-        console.error(e);
+        handleException(e);
     }
 }
 
@@ -74,7 +74,7 @@ function* handleSubscribeToProjectListCallback(action) {
 
         yield put(receiveprojectListQueryResult(data));
     } catch (e) {
-        console.error(e);
+        handleException(e);
     }
 }
 

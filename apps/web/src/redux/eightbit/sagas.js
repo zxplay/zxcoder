@@ -17,6 +17,7 @@ import {
 } from "./actions";
 import {loadTap} from "../jsspeccy/actions";
 import {setErrorItems} from "../project/actions";
+import {handleException} from "../../errors";
 
 // -----------------------------------------------------------------------------
 // Action watchers
@@ -125,7 +126,7 @@ function* handleWorkerMessageActions(action) {
         yield put(followTapAction(tap));
         yield put(setFollowTapAction(undefined));
     } catch (e) {
-        console.error(e);
+        handleException(e);
     }
 }
 
@@ -202,7 +203,7 @@ function* handleGetProjectTapActions(_) {
                 throw `unexpected case: ${lang}`;
         }
     } catch (e) {
-        console.error('error on making tap', e);
+        handleException(e);
     }
 }
 
@@ -226,7 +227,7 @@ function* handleGetSdccTapActions(_) {
         // postMessage({reset: true});
         postMessage(msg);
     } catch (e) {
-        console.error(e);
+        handleException(e);
     }
 }
 
@@ -250,7 +251,7 @@ function* handleGetZmacTapActions(_) {
         // postMessage({reset: true});
         postMessage(msg);
     } catch (e) {
-        console.error('handleGetZmacTapActions', e);
+        handleException(e);
     }
 }
 
@@ -265,7 +266,7 @@ function* handleBrowserTapDownloadActions(action) {
         link.href = objURL;
         link.click();
     } catch (e) {
-        console.error(e);
+        handleException(e);
     }
 }
 

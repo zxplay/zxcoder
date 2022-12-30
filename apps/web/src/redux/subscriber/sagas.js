@@ -4,7 +4,7 @@ import {print} from "graphql";
 import {actionTypes as userActions} from "../identity/actions";
 import {actionTypes, connectClient, notifySubscribeFunctionReceived} from "./actions";
 import {SubscriptionClient, EventError, GraphQLError} from "../../graphql_subscription_client";
-import {handleRequestException, handleError} from "../../errors";
+import {handleRequestException, handleError, handleException} from "../../errors";
 import {login, getAuthToken, isExpired, refreshToken} from "../../auth";
 import Constants from "../../constants";
 
@@ -139,7 +139,7 @@ function* handleConnectClient() {
             chan.close();
         }
     } catch (e) {
-        console.error(e);
+        handleException(e);
     }
 }
 
@@ -180,7 +180,7 @@ function* handleSubscribe(action) {
             chan.close();
         }
     } catch (e) {
-        console.error(e);
+        handleException(e);
     }
 }
 
@@ -190,7 +190,7 @@ function* handleUnsubscribeAction(action) {
         delete subscriptionChannels[action.action.type];
         yield; // Generator function should have yield (eslint)
     } catch (e) {
-        console.error(e);
+        handleException(e);
     }
 }
 

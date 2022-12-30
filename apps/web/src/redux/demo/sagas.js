@@ -4,6 +4,7 @@ import getPasmoTap from "pasmo";
 import {actionTypes, setSelectedTabIndex} from "./actions";
 import {loadTap, pause} from "../jsspeccy/actions";
 import {setErrorItems} from "../project/actions";
+import {handleException} from "../../errors";
 
 // -----------------------------------------------------------------------------
 // Action watchers
@@ -43,7 +44,7 @@ function* handleRunAssemblyActions(_) {
             yield put(setErrorItems(errorItems));
         }
     } catch (e) {
-        console.error(e);
+        handleException(e);
     }
 }
 
@@ -58,6 +59,6 @@ function* handleRunSinclairBasicActions(_) {
             yield put(setErrorItems(errorItems));
         }
     } catch (e) {
-        console.error(e);
+        handleException(e);
     }
 }
